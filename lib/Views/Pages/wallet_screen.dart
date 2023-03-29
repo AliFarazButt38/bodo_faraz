@@ -1,0 +1,795 @@
+import 'package:flutter/material.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
+import '../Widgets/line_chart.dart';
+import 'notifications_Screen.dart';
+import 'others_taskScreen.dart';
+
+class Wallet extends StatefulWidget {
+  const Wallet({Key? key}) : super(key: key);
+
+  @override
+  State<Wallet> createState() => _Wallet();
+}
+
+class _Wallet extends State<Wallet> {
+  int _selectedIndex = 0;
+  final List<String> days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Column(
+              children: [
+                Container(
+                  height: 200,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: const BoxDecoration(
+                    // color: Colors.blueAccent,
+                    gradient: LinearGradient(
+                        colors: [Colors.blueAccent, Colors.greenAccent]),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 50),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Wallet",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25),
+                          ),
+                          InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Notifications()));
+                              },
+                              child: ImageIcon(
+                                AssetImage(
+                                  'assets/icons/notification.png',
+                                ),
+                                size: 25,
+                                color: Colors.white,
+                              )),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Positioned.fill(
+              top: 120,
+              child: SingleChildScrollView(
+                child: Container(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(20.0),
+                        topLeft: Radius.circular(20.0)),
+                    color: Colors.white,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 30),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      // mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 0),
+                          child: Container(
+                            width: 350,
+                            // height: 200,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border(
+                                top: BorderSide(color: Colors.grey, width: 1.0),
+                                bottom:
+                                    BorderSide(color: Colors.grey, width: 1.0),
+                                left:
+                                    BorderSide(color: Colors.grey, width: 1.0),
+                                right:
+                                    BorderSide(color: Colors.grey, width: 1.0),
+                              ),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Column(
+                              children: [
+                                Text(
+                                  "Available Points",
+                                  style: TextStyle(
+                                      color: Colors.grey, fontSize: 20),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(right: 8.0),
+                                      child: ImageIcon(
+                                        AssetImage(
+                                            "assets/icons/staryellow.png"),
+                                        size: 25,
+                                        color: Colors.yellowAccent,
+                                      ),
+                                    ),
+                                    Text(
+                                      "50,000",
+                                      style: TextStyle(
+                                          fontSize: 32,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Column(
+                                      children: [
+                                        Text(
+                                          "Todays Earning",
+                                          style: TextStyle(
+                                              color: Colors.grey, fontSize: 16),
+                                        ),
+                                        SizedBox(
+                                          height: 15,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "50,000",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 5),
+                                              child: Text(
+                                                "EGP",
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Column(
+                                      children: [
+                                        Text(
+                                          "Total Earning",
+                                          style: TextStyle(
+                                              color: Colors.grey, fontSize: 16),
+                                        ),
+                                        SizedBox(
+                                          height: 15,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "50,000",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 5),
+                                              child: Text(
+                                                "EGP",
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          height: 50,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            shrinkWrap: true,
+                            itemCount: days.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  LineChartWidget();
+                                  setState(() {
+                                    _selectedIndex = index;
+                                  });
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 20),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        days[index],
+                                        style: TextStyle(
+                                          color: _selectedIndex == index
+                                              ? Colors.greenAccent
+                                              : Colors.black,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Container(
+                                        height: 2,
+                                        width: 30,
+                                        decoration: BoxDecoration(
+                                          color: _selectedIndex == index
+                                              ? Colors.greenAccent
+                                              : Colors.transparent,
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+
+                        SizedBox(
+                          height: 10,
+                        ),
+
+                        Container(
+                          height: 200,
+                          width: MediaQuery.of(context).size.width,
+                          child: LineChartWidget(),
+                        ),
+
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15),
+                          child: Row(
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Postponed Reward",
+                                    style: TextStyle(
+                                        fontSize: 20, fontWeight: FontWeight.w600),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    "Reward from your network",
+                                    style:
+                                        TextStyle(fontSize: 18, color: Colors.grey),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15, top: 30),
+                          child: Row(
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Container(
+                                    width: 350,
+                                    height: 200,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border(
+                                        top: BorderSide(
+                                            color: Colors.grey, width: 1.0),
+                                        bottom: BorderSide(
+                                            color: Colors.grey, width: 1.0),
+                                        left: BorderSide(
+                                            color: Colors.grey, width: 1.0),
+                                        right: BorderSide(
+                                            color: Colors.grey, width: 1.0),
+                                      ),
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Text(
+                                          "Points From Network",
+                                          style: TextStyle(
+                                              color: Colors.grey, fontSize: 20),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.only(right: 8.0),
+                                              child: ImageIcon(
+                                                AssetImage(
+                                                    "assets/icons/staryellow.png"),
+                                                size: 25,
+                                                color: Colors.yellowAccent,
+                                              ),
+                                            ),
+                                            Text(
+                                              "50,000",
+                                              style: TextStyle(
+                                                  fontSize: 32,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 30,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Column(
+                                              children: [
+                                                Text(
+                                                  "Postponed Reward",
+                                                  style: TextStyle(
+                                                      color: Colors.grey,
+                                                      fontSize: 16),
+                                                ),
+                                                SizedBox(
+                                                  height: 15,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "20,000",
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 18),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 5),
+                                                      child: Text(
+                                                        "EGP",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight.bold),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Column(
+                                              children: [
+                                                Text(
+                                                  "Network Members",
+                                                  style: TextStyle(
+                                                      color: Colors.grey,
+                                                      fontSize: 16),
+                                                ),
+                                                SizedBox(
+                                                  height: 15,
+                                                ),
+                                                Text(
+                                                  "23",
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 18),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.only(left: 23,top: 30),
+                        //   child: Column(
+                        //     crossAxisAlignment: CrossAxisAlignment.start,
+                        //     children: [
+                        //       Text("Task Detail",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600),),
+                        //       SizedBox(height: 5,),
+                        //       Text("Statement of your each task",style: TextStyle(fontSize: 18, color:Colors.grey),),
+                        //       Column(
+                        //         children: [
+                        //           SizedBox(height: 10),
+                        //           Container(
+                        //             width: 390,
+                        //             height: 90,
+                        //             decoration: BoxDecoration(
+                        //               boxShadow: [
+                        //             BoxShadow(
+                        //               color: Colors.black.withOpacity(0.1),
+                        //               spreadRadius: 0,
+                        //               blurRadius: 9,
+                        //               offset: Offset(1, 3),
+                        //             ),
+                        //               ],
+                        //             ),
+                        //             child: Card(
+                        //               elevation: 2,
+                        //               shape: RoundedRectangleBorder(
+                        //             borderRadius: BorderRadius.circular(20),
+                        //               ),
+                        //               child: ListTile(
+                        //             title: Padding(
+                        //               padding: const EdgeInsets.only(bottom: 13),
+                        //               child: Row(
+                        //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //                 children: const [
+                        //                   Text("Watch Videos",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
+                        //                   Text("41/60"),
+                        //                 ],
+                        //               ),
+                        //             ),
+                        //             subtitle: LinearPercentIndicator(
+                        //               barRadius: Radius.circular(15.0),
+                        //               animation: true,
+                        //               lineHeight: 12,
+                        //               percent: 0.7,
+                        //               // progressColor: Colors.blueAccent,
+                        //               linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
+                        //               backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
+                        //
+                        //             ),
+                        //             leading: Padding(
+                        //               padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                        //               child: Column(
+                        //                 children: const [
+                        //                   ImageIcon(AssetImage('assets/icons/video.png',),size: 25,color: Colors.black,),
+                        //                 ],
+                        //               ),
+                        //             ),
+                        //
+                        //             trailing: Padding(
+                        //               padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                        //               child: Column(
+                        //                 children: const [
+                        //                   ImageIcon(AssetImage('assets/icons/next.png',),size: 22,color: Colors.black,),
+                        //                 ],
+                        //               ),
+                        //             ),
+                        //             onTap: () {
+                        //               Navigator.push(context, MaterialPageRoute(builder: (context)=>WatchVideo()));
+                        //             },
+                        //               ),
+                        //             ),
+                        //           ),
+                        //           SizedBox(height: 10),
+                        //           Container(
+                        //             width: 390,
+                        //             height: 90,
+                        //             decoration: BoxDecoration(
+                        //               boxShadow: [
+                        //             BoxShadow(
+                        //               color: Colors.black.withOpacity(0.1),
+                        //               spreadRadius: 0,
+                        //               blurRadius: 9,
+                        //               offset: Offset(1, 3),
+                        //             ),
+                        //               ],
+                        //             ),
+                        //             child: Card(
+                        //               elevation: 2,
+                        //               shape: RoundedRectangleBorder(
+                        //             borderRadius: BorderRadius.circular(20),
+                        //               ),
+                        //               child: ListTile(
+                        //             title: Padding(
+                        //               padding: const EdgeInsets.only(bottom: 13),
+                        //               child: Row(
+                        //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //                 children: const [
+                        //                   Text("Social Media Reacts",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
+                        //                   Text("41/60"),
+                        //                 ],
+                        //               ),
+                        //             ),
+                        //             subtitle: LinearPercentIndicator(
+                        //               barRadius: Radius.circular(15.0),
+                        //               animation: true,
+                        //               lineHeight: 12,
+                        //               percent: 0.7,
+                        //               // progressColor: Colors.blueAccent,
+                        //               linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
+                        //               backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
+                        //
+                        //
+                        //             ),
+                        //             leading: Padding(
+                        //               padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                        //               child: Column(
+                        //                 children: const [
+                        //                   ImageIcon(AssetImage('assets/icons/social.png',),size: 25,color: Colors.black,),
+                        //                 ],
+                        //               ),
+                        //             ),
+                        //
+                        //             trailing: Padding(
+                        //               padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                        //               child: Column(
+                        //                 children: const [
+                        //                   ImageIcon(AssetImage('assets/icons/next.png',),size: 22,color: Colors.black,),
+                        //                 ],
+                        //               ),
+                        //             ),
+                        //             onTap: () {
+                        //               Navigator.push(context, MaterialPageRoute(builder: (context)=>SocialMedia()));
+                        //             },
+                        //               ),
+                        //             ),
+                        //           ),
+                        //           SizedBox(height: 10),
+                        //           Container(
+                        //             width: 390,
+                        //             height: 90,
+                        //             decoration: BoxDecoration(
+                        //               boxShadow: [
+                        //             BoxShadow(
+                        //               color: Colors.black.withOpacity(0.1),
+                        //               spreadRadius: 0,
+                        //               blurRadius: 9,
+                        //               offset: Offset(1, 3),
+                        //             ),
+                        //               ],
+                        //             ),
+                        //             child: Card(
+                        //               elevation: 2,
+                        //               shape: RoundedRectangleBorder(
+                        //             borderRadius: BorderRadius.circular(20),
+                        //               ),
+                        //               child: ListTile(
+                        //             title: Padding(
+                        //               padding: const EdgeInsets.only(bottom: 13),
+                        //               child: Row(
+                        //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //                 children: const [
+                        //                   Text("Surveys",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
+                        //                   Text("41/60"),
+                        //                 ],
+                        //               ),
+                        //             ),
+                        //             subtitle: LinearPercentIndicator(
+                        //               barRadius: Radius.circular(15.0),
+                        //               animation: true,
+                        //               lineHeight: 12,
+                        //               percent: 0.7,
+                        //               // progressColor: Colors.blueAccent,
+                        //               linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
+                        //               backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
+                        //
+                        //             ),
+                        //             leading: Padding(
+                        //               padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                        //               child: Column(
+                        //                 children: const [
+                        //                   ImageIcon(AssetImage('assets/icons/survey.png',),size: 25,color: Colors.black,),
+                        //                 ],
+                        //               ),
+                        //             ),
+                        //
+                        //             trailing: Padding(
+                        //               padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                        //               child: Column(
+                        //                 children: const [
+                        //                   ImageIcon(AssetImage('assets/icons/next.png',),size: 22,color: Colors.black,),
+                        //                 ],
+                        //               ),
+                        //             ),
+                        //             onTap: () {
+                        //               Navigator.push(context, MaterialPageRoute(builder: (context)=>Surveys()));
+                        //             },
+                        //               ),
+                        //             ),
+                        //           ),
+                        //           SizedBox(height: 10),
+                        //           Container(
+                        //             width: 390,
+                        //             height: 90,
+                        //             decoration: BoxDecoration(
+                        //               boxShadow: [
+                        //             BoxShadow(
+                        //               color: Colors.black.withOpacity(0.1),
+                        //               spreadRadius: 0,
+                        //               blurRadius: 9,
+                        //               offset: Offset(1, 3),
+                        //             ),
+                        //               ],
+                        //             ),
+                        //             child: Card(
+                        //               elevation: 2,
+                        //               shape: RoundedRectangleBorder(
+                        //             borderRadius: BorderRadius.circular(20),
+                        //               ),
+                        //               child: ListTile(
+                        //             title: Padding(
+                        //               padding: const EdgeInsets.only(bottom: 13),
+                        //               child: Row(
+                        //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //                 children: const [
+                        //                   Text("Invite Friends",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
+                        //                   Text("41/60"),
+                        //                 ],
+                        //               ),
+                        //             ),
+                        //             subtitle: LinearPercentIndicator(
+                        //               barRadius: Radius.circular(15.0),
+                        //               animation: true,
+                        //               lineHeight: 12,
+                        //               percent: 0.7,
+                        //               // progressColor: Colors.blueAccent,
+                        //               linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
+                        //               backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
+                        //
+                        //             ),
+                        //             leading: Padding(
+                        //               padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                        //               child: Column(
+                        //                 children: const [
+                        //                   ImageIcon(AssetImage('assets/icons/invite.png',),size: 25,color: Colors.black,),
+                        //                 ],
+                        //               ),
+                        //             ),
+                        //
+                        //             trailing: Padding(
+                        //               padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                        //               child: Column(
+                        //                 children: const [
+                        //                   ImageIcon(AssetImage('assets/icons/next.png',),size: 22,color: Colors.black,),
+                        //                 ],
+                        //               ),
+                        //             ),
+                        //             onTap: () {
+                        //             },
+                        //               ),
+                        //             ),
+                        //           ),
+                        //           SizedBox(height: 10),
+                        //           Container(
+                        //             width: 390,
+                        //             height: 90,
+                        //             decoration: BoxDecoration(
+                        //               boxShadow: [
+                        //             BoxShadow(
+                        //               color: Colors.black.withOpacity(0.1),
+                        //               spreadRadius: 0,
+                        //               blurRadius: 9,
+                        //               offset: Offset(1, 3),
+                        //             ),
+                        //               ],
+                        //             ),
+                        //             child: Card(
+                        //               elevation: 2,
+                        //               shape: RoundedRectangleBorder(
+                        //             borderRadius: BorderRadius.circular(20),
+                        //               ),
+                        //               child: ListTile(
+                        //             title: Padding(
+                        //               padding: const EdgeInsets.only(bottom: 13),
+                        //               child: Row(
+                        //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //                 children: const [
+                        //                   Text("Others",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
+                        //                   Text("41/60"),
+                        //                 ],
+                        //               ),
+                        //             ),
+                        //             subtitle: LinearPercentIndicator(
+                        //               barRadius: Radius.circular(15.0),
+                        //               animation: true,
+                        //               lineHeight: 12,
+                        //               percent: 0.7,
+                        //               // progressColor: Colors.blueAccent,
+                        //               linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
+                        //               backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
+                        //             ),
+                        //             leading: Padding(
+                        //               padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                        //               child: Column(
+                        //                 children: const [
+                        //                   ImageIcon(AssetImage('assets/icons/others.png',),size: 25,color: Colors.black,),
+                        //                 ],
+                        //               ),
+                        //             ),
+                        //
+                        //             trailing: Padding(
+                        //               padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                        //               child: Column(
+                        //                 children: const [
+                        //                   ImageIcon(AssetImage('assets/icons/next.png',),size: 22,color: Colors.black,),
+                        //                 ],
+                        //               ),
+                        //             ),
+                        //             onTap: () {
+                        //               Navigator.push(context, MaterialPageRoute(builder: (context)=>OthersTask()));
+                        //             },
+                        //               ),
+                        //             ),
+                        //           ),
+                        //
+                        //
+                        //         ],
+                        //       ),
+                        //     ],
+                        //
+                        //   ),
+                        //
+                        // ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
