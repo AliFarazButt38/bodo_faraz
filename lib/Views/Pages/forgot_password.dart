@@ -3,6 +3,7 @@ import 'package:bodoo_flutter/Theme/style.dart';
 import 'package:bodoo_flutter/Views/Pages/dashboard.dart';
 import 'package:bodoo_flutter/Views/Pages/signup.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
@@ -39,6 +40,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, designSize: const Size(428, 926));
     ScreenConfig().init(context);
     return Scaffold(
       body: SingleChildScrollView(
@@ -50,27 +52,29 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(left:67.0,right: 67),
+                padding: EdgeInsets.only(left:67.0.w,right: 67.w,top: 10.h),
                 child: SvgPicture.asset(
-                    'assets/images/signin_pic.svg',
-                    semanticsLabel: 'A red up arrow'
+                  'assets/images/signin_pic.svg',
+                  semanticsLabel: 'A red up arrow',
+                  height: 294.h,
+                  width: 294.h,
                 ),
               ),
               //SizedBox(height: 18,),
               Padding(
-                padding: const EdgeInsets.only(left: 20.0),
+                padding:  EdgeInsets.only(left: 20.0.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Forgot Password',style: StyleSheet.heading,),
-                    SizedBox(height: 10,),
-                    Text('Enter your email',style: TextStyle(color: Palette.grey,fontSize: 12),),
+                    SizedBox(height: 10.h,),
+                    Text('Enter your email',style: TextStyle(color: Palette.grey,fontSize: 12.sp),),
                   ],
                 ),
               ),
-              SizedBox(height: 30,),
+              SizedBox(height: 30.h,),
               Padding(
-                padding: const EdgeInsets.only(left: 20.0,right: 20),
+                padding: EdgeInsets.only(left: 20.0.w,right: 20.w),
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -79,7 +83,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         controller: emailController,
                         style: TextStyle(
                           color: Palette.grey,
-                          fontSize: 14,
+                          fontSize: 14.sp,
                         ),
                         // onChanged: (value) {
                         //   setState(() {
@@ -130,7 +134,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           //make hint text
                           hintStyle: TextStyle(
                             color: Palette.grey,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                           ),
 
                           //create lable
@@ -138,7 +142,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           //lable style
                           labelStyle: TextStyle(
                             color: Palette.grey,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                           ),
                         ),
                         validator: validateEmail,
@@ -148,7 +152,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 20.0,right: 20,top: 30),
+                padding:  EdgeInsets.only(left: 20.0.w,right: 20.w,top: 30.h),
                 child: ElevatedButton(
                   onPressed: () async {
                     if(_formKey.currentState!.validate()){
@@ -166,13 +170,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         const LinearGradient(colors: [Palette.baseElementBlue, Palette.baseElementGreen]),
                         borderRadius: BorderRadius.circular(10)),
                     child: Container(
-                      // width: 300,
-                      height: 56,
+                      width: 388.w,
+                      height: 56.h,
                       alignment: Alignment.center,
-                      child: const Text(
+                      child:  Text(
                         'Send Email',
                         style:
-                        const TextStyle(fontSize: 18, ),
+                        TextStyle(fontSize: 18.sp, ),
                       ),
                     ),
                   ),

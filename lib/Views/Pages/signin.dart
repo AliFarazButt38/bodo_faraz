@@ -4,6 +4,7 @@ import 'package:bodoo_flutter/Views/Pages/dashboard.dart';
 import 'package:bodoo_flutter/Views/Pages/forgot_password.dart';
 import 'package:bodoo_flutter/Views/Pages/signup.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
@@ -41,6 +42,7 @@ class _SigninState extends State<Signin> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, designSize: const Size(428, 926));
     ScreenConfig().init(context);
     return Scaffold(
       body: SingleChildScrollView(
@@ -52,27 +54,29 @@ class _SigninState extends State<Signin> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(left:67.0,right: 67),
+                padding: EdgeInsets.only(left:67.0.w,right: 67.w,top: 10.h),
                 child: SvgPicture.asset(
                     'assets/images/signin_pic.svg',
-                    semanticsLabel: 'A red up arrow'
+                    semanticsLabel: 'A red up arrow',
+                  height: 294.h,
+                  width: 294.h,
                 ),
               ),
               //SizedBox(height: 18,),
               Padding(
-                padding: const EdgeInsets.only(left: 20.0),
+                padding:  EdgeInsets.only(left: 20.0.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Sign in',style: StyleSheet.heading,),
-                    SizedBox(height: 10,),
-                    Text('Welcome back to Bodo App',style: TextStyle(color: Palette.grey,fontSize: 12),),
+                    SizedBox(height: 10.h,),
+                    Text('Welcome back to Bodo App',style: TextStyle(color: Palette.grey,fontSize: 16.sp),),
                   ],
                 ),
               ),
               //SizedBox(height: 30,),
               Padding(
-                padding: const EdgeInsets.only(left: 20.0,right: 20),
+                padding: EdgeInsets.only(left: 20.0.w,right: 20.w),
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -81,7 +85,7 @@ class _SigninState extends State<Signin> {
                         controller: emailController,
                         style: TextStyle(
                           color: Palette.grey,
-                          fontSize: 14,
+                          fontSize: 14.sp,
                         ),
                         // onChanged: (value) {
                         //   setState(() {
@@ -92,10 +96,12 @@ class _SigninState extends State<Signin> {
                           focusColor: Colors.white,
                           //add prefix icon
                           prefixIcon: Padding(
-                            padding: const EdgeInsets.all(10.0),
+                            padding: EdgeInsets.all(10.0.w),
                             child: SvgPicture.asset(
                                 'assets/icons/email.svg',
                                 semanticsLabel: 'A red up arrow',
+                              height: 21.h,
+                              width: 28.w,
                             ),
                           ),
 
@@ -132,7 +138,7 @@ class _SigninState extends State<Signin> {
                           //make hint text
                           hintStyle: TextStyle(
                             color: Palette.grey,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                           ),
 
                           //create lable
@@ -140,18 +146,18 @@ class _SigninState extends State<Signin> {
                           //lable style
                           labelStyle: TextStyle(
                             color: Palette.grey,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                           ),
                         ),
                         validator: validateEmail,
                       ),
-                      SizedBox(height: 10,),
+                      SizedBox(height: 10.h,),
                       TextFormField(
                         controller: passwordController,
                         obscureText: true,
                         style: TextStyle(
                           color: Palette.grey,
-                          fontSize: 14,
+                          fontSize: 14.sp,
                         ),
                         // onChanged: (value) {
                         //   setState(() {
@@ -162,10 +168,12 @@ class _SigninState extends State<Signin> {
                           focusColor: Colors.white,
                           //add prefix icon
                           prefixIcon: Padding(
-                            padding: const EdgeInsets.all(10.0),
+                            padding:  EdgeInsets.all(10.0.w),
                             child: SvgPicture.asset(
                               'assets/icons/password.svg',
                               semanticsLabel: 'A red up arrow',
+                              height: 21.h,
+                              width: 28.w,
                             ),
                           ),
 
@@ -198,7 +206,7 @@ class _SigninState extends State<Signin> {
                           //make hint text
                           hintStyle: TextStyle(
                             color: Palette.grey,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                           ),
 
                           //create lable
@@ -206,7 +214,7 @@ class _SigninState extends State<Signin> {
                           //lable style
                           labelStyle: TextStyle(
                             color: Palette.grey,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                           ),
                         ),
                         validator: (text) {
@@ -219,58 +227,55 @@ class _SigninState extends State<Signin> {
                           return null;
                         },
                       ),
-                      SizedBox(height: 15,),
+                      SizedBox(height: 15.h,),
                       Align(
-                          alignment: Alignment.centerRight,
+                          alignment: Alignment.center,
                           child: TextButton(onPressed: (){
                             Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPassword()));
-                          }, child: Text('Forgot Password',style: TextStyle(color: Palette.grey,fontSize: 14),),))
+                          }, child: Text('Forgot Password?',style: TextStyle(color: Color(0xff252525),fontSize: 14.sp),),)),
 
-
+                      ElevatedButton(
+                        onPressed: () {
+                          if(_formKey.currentState!.validate()){
+                            Provider.of<AuthProvider>(context,listen: false).signin(emailController.text, passwordController.text, context);
+                            //  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Dashboard()));
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.zero,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20))),
+                        child: Ink(
+                          decoration: BoxDecoration(
+                              gradient:
+                              const LinearGradient(colors: [Palette.baseElementBlue, Palette.baseElementGreen]),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Container(
+                            width: 388.w,
+                            height: 56.h,
+                            alignment: Alignment.center,
+                            child:  Text(
+                              'Sign In',
+                              style:
+                              TextStyle(fontSize: 18.sp,fontWeight: FontWeight.w600 ),
+                            ),
+                          ),
+                        ),
+                      ),
+                       SizedBox(height: 10.h,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text('Don’t have an account?',style: TextStyle(color: Color(0xff000000),fontSize: 16.sp),),
+                          TextButton(onPressed: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => Signup()));
+                          }, child: Text('Sign Up',style: TextStyle(color: Color(0xff0179A3),fontSize: 16.sp),),)
+                        ],
+                      )
                     ],
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0,right: 20),
-                child: ElevatedButton(
-                  onPressed: () {
-                    if(_formKey.currentState!.validate()){
-                      Provider.of<AuthProvider>(context,listen: false).signin(emailController.text, passwordController.text, context);
-                    //  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Dashboard()));
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.zero,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20))),
-                  child: Ink(
-                    decoration: BoxDecoration(
-                        gradient:
-                        const LinearGradient(colors: [Palette.baseElementBlue, Palette.baseElementGreen]),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Container(
-                      // width: 300,
-                       height: 56,
-                      alignment: Alignment.center,
-                      child: const Text(
-                        'Sign In',
-                        style:
-                        const TextStyle(fontSize: 18, ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text('Don’t have an account?',style: TextStyle(color: Palette.grey,fontSize: 16),),
-                  TextButton(onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Signup()));
-                  }, child: Text('Sign Up',style: TextStyle(color: Palette.blue,fontSize: 16),),)
-                ],
-              )
             ],
           ),
         ),

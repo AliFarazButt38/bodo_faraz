@@ -1,6 +1,7 @@
 import 'package:bodoo_flutter/Providers/video_provider.dart';
 import 'package:bodoo_flutter/Theme/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
@@ -54,6 +55,7 @@ class _WatchVideoState extends State<WatchVideo> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, designSize: const Size(428, 926));
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -61,36 +63,37 @@ class _WatchVideoState extends State<WatchVideo> {
             Column(
               children: [
                 Container(
-                  height: 500,
-                  width:MediaQuery.of(context).size.width,
+                  height: 347.h,
+                  width:428.w,
                   decoration: const BoxDecoration(
                     // color: Colors.blueAccent,
                     gradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 10.0,right: 10.0),
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 50),
-                      child: Row(
-                        mainAxisAlignment:  MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children:  [
-                          GestureDetector(
-                            onTap: (){
-                              Navigator.pop(context);
-                            },
-                            child:ImageIcon(AssetImage("assets/icons/backward.png",),size: 30,color: Colors.white,),
-                          ),
+                    padding:  EdgeInsets.only(top: 50.h,right: 20.w,left: 20.w),
+                    child: Row(
+                      mainAxisAlignment:  MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children:  [
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.pop(context);
+                          },
+                          child:Image.asset("assets/icons/backward.png",height: 30.h,width: 30.w,),
+                        ),
 
-                          Text("Video Tasks",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
-                          InkWell
-                            (
-                              onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Notifications()));
-                              },
-                              child: ImageIcon(AssetImage('assets/icons/notification.png',),size: 25,color: Colors.white,)),
-                        ],
-                      ),
+                        Text("Video Tasks",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25.sp),),
+                        InkWell
+                          (
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Notifications()));
+                          },
+                          child: Padding(
+                            padding:  EdgeInsets.only(top: 6.h),
+                            child: Image.asset('assets/icons/notification.png',height: 20.h,width: 19.w,),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -99,14 +102,14 @@ class _WatchVideoState extends State<WatchVideo> {
        Positioned.fill(
          top: 140,
          child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
+           height: 735.h,
+           width: 428.w,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(topRight: Radius.circular(20.0),topLeft: Radius.circular(20.0)),
             color: Colors.white,
           ),
            child: Padding(
-             padding: const EdgeInsets.only(top: 70),
+             padding:  EdgeInsets.only(top: 90.h),
              child: Consumer<VideoProvider>(
 
                builder: (context, videoProvider,child) {
@@ -114,133 +117,130 @@ class _WatchVideoState extends State<WatchVideo> {
                    return Center(child: CircularProgressIndicator(color: Palette.baseElementBlue,));
                  }else if(videoProvider.videosList.isNotEmpty){
                    return SingleChildScrollView(
-                     child: Column(
-                       children: [
-                         Padding(
-                           padding: const EdgeInsets.all(8.0),
-                           child: Column(
-                             children: [
-                               ListView.separated(
-                                 physics: BouncingScrollPhysics(),
-                                 scrollDirection: Axis.vertical,
-                                 shrinkWrap: true,
-                                 itemCount: videoProvider.videosList.length,
-                                 separatorBuilder: (BuildContext context,int index){
-                                   return SizedBox(height: 20,);
-                                 },// Replace itemCount with the actual number of list items you want to display
-                                 itemBuilder: (context, index) {
-                                  // final item = videoProvider.videosList[index];
-                                   return InkWell(
-                                     onTap: () {
-                                       Navigator.push(context, MaterialPageRoute(builder: (context)=>PlayVideo(urlYoutube: videoProvider.videosList[index].url,)));
-                                     },
-                                     child: Container(
-                                       padding: EdgeInsets.only(top: 5,left: 8,right: 8,bottom: 8),
-                                       decoration: BoxDecoration(
-                                         color: Colors.white,
-                                         borderRadius: BorderRadius.circular(15),
-                                         boxShadow: [
-                                           BoxShadow(
-                                             color: Colors.grey.withOpacity(0.5),
-                                             spreadRadius: 2,
-                                             blurRadius: 5,
-                                             offset: Offset(0, 3),
-                                           ),
-                                         ],
-                                       ),
-                                       child: Column(
-                                         crossAxisAlignment: CrossAxisAlignment.start,
-                                         children: [
-                                           Stack(
-                                             children: [
-                                               ClipRRect(
-                                                 borderRadius: BorderRadius.only(topRight: Radius.circular(20.0),topLeft: Radius.circular(20.0)),
-                                                 child: Image.asset(
-                                                   "assets/images/camera2.png",
-                                                   height: 250,
-                                                   width: MediaQuery.of(context).size.width,
-                                                   fit: BoxFit.cover,
-
-                                                 ),
-                                               ),
-                                               Positioned
-                                                 (
-                                                 child: Center(child: Padding(
-                                                   padding: const EdgeInsets.only(top: 60),
-                                                   child: Image.asset("assets/images/videoIcon.png",height: 100,width: 100,),
-                                                 )),
-
-                                               ),
-                                             ],
-                                           ),
-                                           SizedBox(height: 16),
-                                           Padding(
-                                             padding: const EdgeInsets.only(left: 15),
-                                             child: Column(
-                                               crossAxisAlignment: CrossAxisAlignment.start,
-                                               children:[
-                                                 Text(
-                                                   'Title',
-                                                   maxLines: 2,
-                                                   overflow: TextOverflow.ellipsis,
-                                                   style: TextStyle(
-                                                     fontSize: 16,
-                                                     fontWeight: FontWeight.w600,
-                                                   ),
-                                                 ),
-                                                 SizedBox(height: 16),
-                                                 Text(
-                                                   'Description',
-                                                   maxLines: 3,
-                                                   overflow: TextOverflow.ellipsis,
-                                                   style: TextStyle(
-                                                     fontSize: 14,
-                                                     color: Colors.black,
-                                                   ),
-                                                 ),
-                                               ],
-                                             ),
-                                           ),
-                                           SizedBox(height: 16),
-                                           Padding(
-                                             padding: const EdgeInsets.only(left: 55),
-                                             child: ElevatedButton(
-                                               onPressed: () {
-                                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>PlayVideo(urlYoutube: videoProvider.videosList[index].url,)));
-                                               },
-                                               style: ElevatedButton.styleFrom(
-                                                   padding: EdgeInsets.zero,
-                                                   shape: RoundedRectangleBorder(
-                                                       borderRadius: BorderRadius.circular(20))),
-                                               child: Ink(
-                                                 decoration: BoxDecoration(
-                                                     gradient:
-                                                     const LinearGradient(colors: [Colors.blueAccent, Colors.greenAccent]),
-                                                     borderRadius: BorderRadius.circular(10)),
-                                                 child: Container(
-                                                   width: 250,
-                                                   height: 47,
-                                                   alignment: Alignment.center,
-                                                   child: const Text(
-                                                     'Watch Video',
-                                                     style:
-                                                     const TextStyle(fontSize: 18, ),
-                                                   ),
-                                                 ),
-                                               ),
-                                             ),
-                                           ),
-                                         ],
-                                       ),
-                                     ),
-                                   );
+                     child: Padding(
+                       padding:  EdgeInsets.only(left: 20.w,right: 20.w),
+                       child: Column(
+                         children: [
+                           ListView.separated(
+                             physics: BouncingScrollPhysics(),
+                             scrollDirection: Axis.vertical,
+                             shrinkWrap: true,
+                             itemCount: videoProvider.videosList.length,
+                             separatorBuilder: (BuildContext context,int index){
+                               return SizedBox(height: 20,);
+                             },// Replace itemCount with the actual number of list items you want to display
+                             itemBuilder: (context, index) {
+                              // final item = videoProvider.videosList[index];
+                               return InkWell(
+                                 onTap: () {
+                                   Navigator.push(context, MaterialPageRoute(builder: (context)=>PlayVideo(urlYoutube: videoProvider.videosList[index].url,)));
                                  },
-                               ),
-                             ],
-                           ),
-                         ),
+                                 child: Container(
+                                   height: 346.h,
+                                   width: 388.w,
+                                   padding: EdgeInsets.only(top: 5.h,left: 8.w,right: 8,bottom: 8.h),
+                                   decoration: BoxDecoration(
+                                     color: Colors.white,
+                                     borderRadius: BorderRadius.circular(15),
+                                     boxShadow: [
+                                       BoxShadow(
+                                         color: Colors.grey.withOpacity(0.5),
+                                         spreadRadius: 2,
+                                         blurRadius: 5,
+                                         offset: Offset(0, 3),
+                                       ),
+                                     ],
+                                   ),
+                                   child: Column(
+                                     crossAxisAlignment: CrossAxisAlignment.start,
+                                     children: [
+                                       Stack(
+                                         children: [
+                                           ClipRRect(
+                                             borderRadius: BorderRadius.only(topRight: Radius.circular(20.0),topLeft: Radius.circular(20.0)),
+                                             child: Image.asset(
+                                               "assets/images/camera2.png",
+                                               height: 164.h,
+                                               width:388.23.w,
+                                               fit: BoxFit.cover,
 
-                       ],
+                                             ),
+                                           ),
+                                           Positioned
+                                             (
+                                             child: Center(child: Padding(
+                                               padding:  EdgeInsets.only(top: 70.h),
+                                               child: Image.asset("assets/images/videoIcon.png",height: 70.h,width: 70.w,),
+                                             )),
+
+                                           ),
+                                         ],
+                                       ),
+                                       SizedBox(height: 10.h),
+                                       Padding(
+                                         padding:  EdgeInsets.only(left: 15.w),
+                                         child: Column(
+                                           crossAxisAlignment: CrossAxisAlignment.start,
+                                           children:[
+                                             Text(
+                                               'Title',
+                                               maxLines: 2,
+                                               overflow: TextOverflow.ellipsis,
+                                               style: TextStyle(
+                                                 fontSize: 14.31.sp,
+                                                 fontWeight: FontWeight.w600,
+                                               ),
+                                             ),
+                                             SizedBox(height: 10.h),
+                                             Text(
+                                               'Description',
+                                               maxLines: 3,
+                                               overflow: TextOverflow.ellipsis,
+                                               style: TextStyle(
+                                                 fontSize: 12.sp,
+                                                 color: Colors.black,
+                                               ),
+                                             ),
+                                           ],
+                                         ),
+                                       ),
+                                       SizedBox(height: 10.h),
+                                       Padding(
+                                         padding:  EdgeInsets.only(left: 55.w),
+                                         child: ElevatedButton(
+                                           onPressed: () {
+                                             Navigator.push(context, MaterialPageRoute(builder: (context)=>PlayVideo(urlYoutube: videoProvider.videosList[index].url,)));
+                                           },
+                                           style: ElevatedButton.styleFrom(
+                                               padding: EdgeInsets.zero,
+                                               shape: RoundedRectangleBorder(
+                                                   borderRadius: BorderRadius.circular(20))),
+                                           child: Ink(
+                                             decoration: BoxDecoration(
+                                                 gradient:
+                                                 const LinearGradient(colors: [Colors.blueAccent, Colors.greenAccent]),
+                                                 borderRadius: BorderRadius.circular(10)),
+                                             child: Container(
+                                               width: 274.w,
+                                               height: 42.h,
+                                               alignment: Alignment.center,
+                                               child:  Text(
+                                                 'Watch Video',
+                                                 style:
+                                                 TextStyle(fontSize: 16.sp, ),
+                                               ),
+                                             ),
+                                           ),
+                                         ),
+                                       ),
+                                     ],
+                                   ),
+                                 ),
+                               );
+                             },
+                           ),
+                         ],
+                       ),
                      ),
                    );
                  }else{
@@ -256,10 +256,10 @@ class _WatchVideoState extends State<WatchVideo> {
 
             Positioned(
               top: 90,
-              left: 13,
+              left: 18,
               child: Container(
-                width: 370,
-                height: 110,
+                width: 387.w,
+                height: 100.h,
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
@@ -277,19 +277,19 @@ class _WatchVideoState extends State<WatchVideo> {
                   ),
                   child: ListTile(
                     title: Padding(
-                      padding: const EdgeInsets.only(top: 20),
+                      padding:  EdgeInsets.only(top: 10.h),
                       child: Column(
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text("Watch Videos",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
-                              Text("41/60"),
+                            children: [
+                              Text("Watch Videos",style: TextStyle(color: Colors.black,fontSize: 16.sp,fontWeight: FontWeight.w600),),
+                              Text("41/60",style: TextStyle(color: Colors.black,fontSize: 14.sp,fontWeight: FontWeight.w600),),
                             ],
                           ),
 
                           Padding(
-                            padding: const EdgeInsets.only(top: 10),
+                            padding:  EdgeInsets.only(top: 10.h),
                             child: LinearPercentIndicator(
                               barRadius: Radius.circular(15.0),
                               animation: true,
@@ -300,8 +300,8 @@ class _WatchVideoState extends State<WatchVideo> {
                               backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
                             ),
                           ),
-                          SizedBox(height: 5,),
-                          Text("Watch Videos to Earn points",style: TextStyle(color: Colors.grey,fontSize: 15)),
+                          SizedBox(height: 5.h,),
+                          Text("Watch Videos to earn points",style: TextStyle(color: Colors.grey,fontSize: 12.sp)),
                         ],
                       ),
                     ),
@@ -325,10 +325,10 @@ class _WatchVideoState extends State<WatchVideo> {
                     // ),
 
                     leading: Padding(
-                      padding: const EdgeInsets.only(left: 8.0,top: 18.0),
+                      padding:  EdgeInsets.only(left: 8.0.w,top: 18.0.h),
                       child: Column(
-                        children: const [
-                          ImageIcon(AssetImage('assets/icons/video.png',),size: 25,color: Colors.black,),
+                        children:  [
+                          Image.asset("assets/icons/video.png",width: 14.w,height: 15.h,),
                         ],
 
                       ),

@@ -1,5 +1,6 @@
 import 'package:bodoo_flutter/Views/Pages/notifications_Screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class Community extends StatefulWidget {
   const Community({Key? key}) : super(key: key);
 
@@ -10,6 +11,7 @@ class Community extends StatefulWidget {
 class _CommunityState extends State<Community> {
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, designSize: const Size(428, 926));
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -17,28 +19,29 @@ class _CommunityState extends State<Community> {
             Column(
               children: [
                 Container(
-                  height: 500,
-                  width:MediaQuery.of(context).size.width,
+                  height: 347.h,
+                  width:428.w,
                   decoration: const BoxDecoration(
                     // color: Colors.blueAccent,
                     gradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 20.0,right: 20.0),
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 50),
-                      child: Row(
-                        mainAxisAlignment:  MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children:  [
-                          Text("Community",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
-                          InkWell(
-                              onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Notifications()));
-                              },
-                              child: ImageIcon(AssetImage('assets/icons/notification.png',),size: 25,color: Colors.white,)),
-                        ],
-                      ),
+                    padding: EdgeInsets.only(left: 20.0.w,right: 20.0.w,top: 50.h),
+                    child: Row(
+                      mainAxisAlignment:  MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children:  [
+                        Text("Community",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25.sp),),
+                        InkWell(
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Notifications()));
+                            },
+                          child: Padding(
+                            padding:  EdgeInsets.only(top: 6.h),
+                            child: Image.asset('assets/icons/notification.png',height: 20.h,width: 19.w,),
+                          ),
+                        ),
+                          ],
                     ),
                   ),
                 ),
@@ -47,8 +50,8 @@ class _CommunityState extends State<Community> {
             Positioned.fill(
               top: 120,
               child: Container(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
+                height: 780.h,
+                width: 428.w,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(topRight: Radius.circular(20.0),topLeft: Radius.circular(20.0)),
                   color: Colors.white,
@@ -57,20 +60,20 @@ class _CommunityState extends State<Community> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 20),
-                      child: Image.asset("assets/images/community.png"),
+                      padding: EdgeInsets.only(top: 20.h),
+                      child: Image.asset("assets/images/community.png",height: 352.h,width: 352.w,),
                     ),
                     Text("No one Join",style: TextStyle(
                         color: Colors.black,
                       fontWeight: FontWeight.w600,
-                      fontSize: 22,
+                      fontSize: 22.sp,
                     ),),
                     Text("Your Community yet",style: TextStyle(
                       color: Colors.black,
-                      fontSize: 22,
+                      fontSize: 22.sp,
                       fontWeight: FontWeight.w600,
                     ),),
-                    SizedBox(height: 30,),
+                    SizedBox(height: 30.h,),
                     ElevatedButton(
                       onPressed: () {
 
@@ -85,13 +88,13 @@ class _CommunityState extends State<Community> {
                             const LinearGradient(colors: [Colors.blueAccent, Colors.greenAccent]),
                             borderRadius: BorderRadius.circular(10)),
                         child: Container(
-                           width: 250,
-                          height: 56,
+                           width: 241.w,
+                          height: 42.w,
                           alignment: Alignment.center,
-                          child: const Text(
+                          child:  Text(
                             'Invite',
                             style:
-                            const TextStyle(fontSize: 18, ),
+                             TextStyle(fontSize: 16.sp, ),
                           ),
                         ),
                       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import 'notifications_Screen.dart';
@@ -42,6 +43,7 @@ class DownloadApp extends StatefulWidget {
 class _DownloadAppState extends State<DownloadApp> {
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, designSize: const Size(428, 926));
     return Scaffold(
 
       body: SafeArea(
@@ -50,36 +52,37 @@ class _DownloadAppState extends State<DownloadApp> {
             Column(
               children: [
                 Container(
-                  height: 500,
-                  width:MediaQuery.of(context).size.width,
+                  height: 347.h,
+                  width:428.w,
                   decoration: const BoxDecoration(
                     // color: Colors.blueAccent,
                     gradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 10.0,right: 10.0),
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 50),
-                      child: Row(
-                        mainAxisAlignment:  MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children:  [
-                          GestureDetector(
-                            onTap: (){
-                              Navigator.pop(context);
+                    padding: EdgeInsets.only(left: 20.0.w,right: 20.0.w,top: 50.h),
+                    child: Row(
+                      mainAxisAlignment:  MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children:  [
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.pop(context);
                     },
-                          child:ImageIcon(AssetImage("assets/icons/backward.png",),size: 30,color: Colors.white,),
-                          ),
+                          child:Image.asset("assets/icons/backward.png",height: 30.h,width: 30.w,),
+                        ),
 
-                          Text("Download App",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
-                          InkWell
-                            (
-                              onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Notifications()));
-                              },
-                              child: ImageIcon(AssetImage('assets/icons/notification.png',),size: 25,color: Colors.white,)),
-                        ],
-                      ),
+                        Text("Download App",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25.sp),),
+                        InkWell
+                          (
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Notifications()));
+                            },
+                          child: Padding(
+                            padding:  EdgeInsets.only(top: 6.h),
+                            child: Image.asset('assets/icons/notification.png',height: 20.h,width: 19.w,),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -91,8 +94,8 @@ class _DownloadAppState extends State<DownloadApp> {
       Positioned.fill(
         top: 150,
         child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
+          height: 735.h,
+          width: 428.w,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(topRight: Radius.circular(20.0),topLeft: Radius.circular(20.0)),
             color: Colors.white,
@@ -102,40 +105,103 @@ class _DownloadAppState extends State<DownloadApp> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 80,left: 25),
+                  padding:  EdgeInsets.only(top: 80.h,left: 25.w),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Download App",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600),),
-                      SizedBox(height: 5,),
-                      Text("Earn points on downloading Apps",style: TextStyle(fontSize: 18,color: Colors.grey),),
+                      Text("Download App",style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.w600),),
+                      SizedBox(height: 5.h,),
+                      Text("Earn points on downloading Apps",style: TextStyle(fontSize: 16.sp,color: Colors.grey),),
                     ],
                   ),
                 ),
 
-                Column(
-                      children:[
+                Padding(
+                  padding:  EdgeInsets.only(top: 30.h,right: 10.w,left: 10.w),
+                  child: Column(
+                    children: [
+                      GridView.count(
+                        physics: BouncingScrollPhysics(),
+                        mainAxisSpacing: 10,
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        crossAxisCount: 4,
+                        children: List.generate(items.length, (index) {
+                          return Center(
+                            child: Column(
+                              children: [
+                                Image.asset(
+                                  items[index].image,
+                                  height: 63.h,
+                                  width: 63.w,
+                                ),
+                                SizedBox(height: 8.h),
+                                Text(items[index].name,style: TextStyle(fontWeight: FontWeight.w600,fontSize: 12.sp),),
+                              ],
+                            ),
+                          );
+                        },
+                        ),
+                      ),
+
+                    ],
+                  ),
+                ),
+                 Padding(
+                   padding:  EdgeInsets.only(left: 20.w,right: 10.w,top:10.h),
+                   child: Container(
+                     height: 130.h,
+                     width: 388.w,
+                     decoration: BoxDecoration(
+                       borderRadius: BorderRadius.circular(15.0),
+                       gradient: LinearGradient(colors: [Colors.black,Colors.grey]),
+                     ),
+                     child: Row(
+                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                       children: [
+                         Padding(
+                           padding:  EdgeInsets.only(top: 40.h),
+                           child: Column(
+                             children: [
+                               Text("Uber",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize: 40.sp),),
+                             ],
+                           ),
+                         ),
+                         Padding(
+                           padding:  EdgeInsets.only(top: 40.h),
+                           child: Column(
+                             crossAxisAlignment: CrossAxisAlignment.start,
+                             children: [
+                               Text("Download the App\n Earn Points",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize:18.sp ),),
+
+                             ],
+                           ),
+                         ),
+                       ],
+                     ),
+                   ),
+                 ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 30,right: 10,left: 10),
+                      padding:  EdgeInsets.only(top: 30.h,right: 10.w,left: 10.w),
                       child: Column(
                         children: [
                           GridView.count(
                             physics: BouncingScrollPhysics(),
-                            mainAxisSpacing: 20,
+                            mainAxisSpacing: 10,
                             scrollDirection: Axis.vertical,
                             shrinkWrap: true,
                             crossAxisCount: 4,
-                            children: List.generate(items.length, (index) {
+                            children: List.generate(items2.length, (index) {
                               return Center(
                                 child: Column(
                                   children: [
                                     Image.asset(
-                                      items[index].image,
-                                      height: 63,
-                                      width: 63,
+                                      items2[index].image,
+                                      height: 63.h,
+                                      width: 63.w,
                                     ),
-                                    SizedBox(height: 8),
-                                    Text(items[index].name,style: TextStyle(fontWeight: FontWeight.w600,fontSize: 12),),
+                                    SizedBox(height: 8.h),
+                                    Text(items2[index].name,style: TextStyle(fontWeight: FontWeight.w600,fontSize: 12.sp),),
                                   ],
                                 ),
                               );
@@ -146,76 +212,6 @@ class _DownloadAppState extends State<DownloadApp> {
                         ],
                       ),
                     ),
-                     Padding(
-                       padding: const EdgeInsets.only(left: 10,right: 10,top:20),
-                       child: Container(
-                         height: 130,
-                         width: 388,
-                         decoration: BoxDecoration(
-                           borderRadius: BorderRadius.circular(15.0),
-                           gradient: LinearGradient(colors: [Colors.black,Colors.grey]),
-                         ),
-                         child: Row(
-                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                           children: [
-                             Padding(
-                               padding: const EdgeInsets.only(top: 30),
-                               child: Column(
-                                 children: [
-                                   Text("Uber",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize: 50),),
-                                 ],
-                               ),
-                             ),
-                             Padding(
-                               padding: const EdgeInsets.only(top: 30),
-                               child: Column(
-                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                 children: [
-                                   Text("Download the App",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize:18 ),),
-                                  SizedBox(height: 10,),
-                                   Text("Earn Points",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize:18 ),),
-                                 ],
-                               ),
-                             ),
-                           ],
-                         ),
-                       ),
-                     ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 30,right: 10,left: 10),
-                          child: Column(
-                            children: [
-                              GridView.count(
-                                physics: BouncingScrollPhysics(),
-                                mainAxisSpacing: 20,
-                                scrollDirection: Axis.vertical,
-                                shrinkWrap: true,
-                                crossAxisCount: 4,
-                                children: List.generate(items2.length, (index) {
-                                  return Center(
-                                    child: Column(
-                                      children: [
-                                        Image.asset(
-                                          items2[index].image,
-                                          height: 63,
-                                          width: 63,
-                                        ),
-                                        SizedBox(height: 8),
-                                        Text(items2[index].name,style: TextStyle(fontWeight: FontWeight.w600,fontSize: 12),),
-                                      ],
-                                    ),
-                                  );
-                                },
-                                ),
-                              ),
-
-                            ],
-                          ),
-                        ),
-
-
-    ],
-    ),
 
                   ],
             ),
@@ -224,10 +220,10 @@ class _DownloadAppState extends State<DownloadApp> {
       ),
             Positioned(
               top: 100,
-              left: 13,
+              left: 18,
               child: Container(
-                width: 370,
-                height: 90,
+                width: 388.w,
+                height: 90.h,
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
@@ -245,12 +241,12 @@ class _DownloadAppState extends State<DownloadApp> {
                   ),
                   child: ListTile(
                     title: Padding(
-                      padding: const EdgeInsets.only(bottom: 13),
+                      padding:  EdgeInsets.only(bottom: 10.h),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text("Download App",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
-                          Text("41/60",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w600),),
+                        children:  [
+                          Text("Download App",style: TextStyle(color: Colors.black,fontSize: 16.sp,fontWeight: FontWeight.w600),),
+                          Text("41/60",style: TextStyle(fontSize: 14.sp,fontWeight: FontWeight.w600),),
                         ],
                       ),
                     ),
@@ -265,10 +261,10 @@ class _DownloadAppState extends State<DownloadApp> {
 
                     ),
                     leading: Padding(
-                      padding: const EdgeInsets.only(left: 8.0,top: 18.0),
+                      padding:  EdgeInsets.only(left: 8.0.w,top: 18.0.h),
                       child: Column(
-                        children: const [
-                          ImageIcon(AssetImage('assets/icons/download.png',),size: 24,color: Colors.black,),
+                        children:  [
+                        Image.asset("assets/icons/download.png",height: 24.h,width: 24.w,),
                         ],
                       ),
                     ),

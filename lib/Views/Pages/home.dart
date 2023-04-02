@@ -1,5 +1,6 @@
 import 'package:bodoo_flutter/Views/Pages/notifications_Screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_stack/image_stack.dart';
 import 'package:pie_chart/pie_chart.dart';
@@ -21,12 +22,12 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-
+    ScreenUtil.init(context, designSize: const Size(428, 926));
     ScreenConfig().init(context);
     return Scaffold(
       body: SizedBox(
-        height: ScreenConfig.screenHeight,
-        width: ScreenConfig.screenWidth,
+        height:926.h,
+        width: 428.w,
         child: Column(
           children: [
             SizedBox(
@@ -37,8 +38,8 @@ class _HomeState extends State<Home> {
                   Column(
                     children: <Widget>[
                       Container(
-                        height: 347,
-                        width: ScreenConfig.screenWidth,
+                        height: 400.h,
+                        width: 428.w,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(
                             bottomRight: Radius.circular(14),
@@ -54,28 +55,30 @@ class _HomeState extends State<Home> {
                             )
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 50.0,left: 20,right: 20),
+                          padding: EdgeInsets.only(top: 50.0.h,left: 20.w,right: 20.w),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text('Home', style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.bold),),
+                                  Text('Home', style: TextStyle(color: Colors.white,fontSize: 25.sp,fontWeight: FontWeight.bold),),
 
                                   IconButton(onPressed: (){
                                     Navigator.push(context, MaterialPageRoute(builder: (context)=>Notifications()));
                                   }, icon:  SvgPicture.asset(
                                     'assets/icons/notification.svg',
                                     semanticsLabel: 'A red up arrow',
+                                    height: 20.h,
+                                    width: 19.w,
                                   ),)
 
                                 ],
                               ),
-                              SizedBox(height: 10,),
+                              SizedBox(height: 10.h,),
                               Container(
-                                height: 74,
-                                width: 74,
+                                height: 74.h,
+                                width: 74.w,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: Border.all(color: Colors.white),
@@ -86,12 +89,12 @@ class _HomeState extends State<Home> {
                                   )
                                 ),
                               ),
-                              SizedBox(height: 40,),
+                              SizedBox(height: 40.h,),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text("Level 1",style: TextStyle(color: Colors.white),),
-                                  Text("Level 2",style: TextStyle(color: Colors.white),),
+                                  Text("Level 1",style: TextStyle(color: Colors.white,fontSize: 14.sp),),
+                                  Text("Level 2",style: TextStyle(color: Colors.white,fontSize: 14.sp),),
                                 ],
                               ),
                               ClipRRect(
@@ -143,13 +146,13 @@ class _HomeState extends State<Home> {
                     left: 0,
                     right: 0,
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 20.0,right: 20),
+                      padding: EdgeInsets.only(left: 20.0.w,right: 20.w),
                       child: Container(
-                        height: 200,
-                        width: ScreenConfig.screenWidth,
+                        height: 236.h,
+                        width: 388.w,
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(20)
+                          borderRadius: BorderRadius.circular(10)
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -157,7 +160,7 @@ class _HomeState extends State<Home> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text('Tasks', style: TextStyle(color: Palette.black,fontSize: 18,fontWeight: FontWeight.bold),),
+                              child: Text('Tasks', style: TextStyle(color: Palette.black,fontSize: 18.sp,fontWeight: FontWeight.bold),),
                             ),
 
                             PieChart(
@@ -170,7 +173,7 @@ class _HomeState extends State<Home> {
                               },
                               animationDuration: Duration(milliseconds: 800),
                               chartLegendSpacing: 32,
-                              chartRadius: MediaQuery.of(context).size.width / 3.2,
+                              chartRadius: 98.57,
                               colorList: [
                                 Palette.orange,
                                 Palette.lightGreen,
@@ -180,7 +183,7 @@ class _HomeState extends State<Home> {
                               ],
                               initialAngleInDegree: 0,
                               chartType: ChartType.ring,
-                              ringStrokeWidth: 20,
+                              ringStrokeWidth: 15,
                               centerText: "145 \n level 2",
                               legendOptions: LegendOptions(
                                 showLegendsInRow: false,
@@ -188,7 +191,7 @@ class _HomeState extends State<Home> {
                                 showLegends: true,
                                 legendShape: BoxShape.circle,
                                 legendTextStyle: TextStyle(
-                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14.sp,
                                 ),
                               ),
                               chartValuesOptions: ChartValuesOptions(
@@ -209,33 +212,33 @@ class _HomeState extends State<Home> {
                 ],
               ),
             ),
-            SizedBox(height: 10,),
+            SizedBox(height: 10.h,),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 20.0, right: 20),
+                      padding:  EdgeInsets.only(left: 20.0.w, right: 20.w),
                       child: Container(
-                        height: 219,
-                        width: ScreenConfig.screenWidth,
+                        height: 219.h,
+                        width: 388.w,
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(20)
+                          borderRadius: BorderRadius.circular(10)
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: <Widget>[
                             Padding(
-                              padding: const EdgeInsets.only(left: 20.0,top: 13),
-                              child: Text('Balance', style: TextStyle(color: Palette.black,fontSize: 18,fontWeight: FontWeight.bold),),
+                              padding:  EdgeInsets.only(left: 20.0.w,top: 13.h),
+                              child: Text('Balance', style: TextStyle(color: Palette.black,fontSize: 18.sp,fontWeight: FontWeight.bold),),
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text('Available Points', style: TextStyle(color: Palette.grey74,fontSize: 16,),),
-                                SizedBox(height: 5,),
+                                Text('Available Points', style: TextStyle(color: Palette.grey74,fontSize: 16.sp,),),
+                                SizedBox(height: 5.h,),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
 
@@ -243,9 +246,11 @@ class _HomeState extends State<Home> {
                                     SvgPicture.asset(
                                       'assets/icons/star.svg',
                                       semanticsLabel: 'A red up arrow',
+                                      height: 20.h,
+                                      width: 20.w,
                                     ),
-                                    SizedBox(width: 5,),
-                                    Text('50,000', style: TextStyle(color: Palette.black25,fontSize: 32,fontWeight: FontWeight.bold),),
+                                    SizedBox(width: 5.h,),
+                                    Text('50,000', style: TextStyle(color: Palette.black25,fontSize: 32.sp,fontWeight: FontWeight.bold),),
                                   ],
                                 )
                               ],
@@ -255,15 +260,15 @@ class _HomeState extends State<Home> {
                               children: <Widget>[
                                 Column(
                                   children: <Widget>[
-                                    Text('Today Erning', style: TextStyle(color: Palette.grey74,fontSize: 14,),),
-                                    Text('50,000 EGP', style: TextStyle(color: Palette.black25,fontSize: 14,fontWeight: FontWeight.bold),),
+                                    Text('Today Erning', style: TextStyle(color: Palette.grey74,fontSize: 14.sp,),),
+                                    Text('50,000 EGP', style: TextStyle(color: Palette.black25,fontSize: 14.sp,fontWeight: FontWeight.bold),),
 
                                   ],
                                 ),
                                 Column(
                                   children: <Widget>[
-                                    Text('Today Erning', style: TextStyle(color: Palette.grey74,fontSize: 14,),),
-                                    Text('50,000 EGP', style: TextStyle(color: Palette.black25,fontSize: 14,fontWeight: FontWeight.bold),),
+                                    Text('Today Erning', style: TextStyle(color: Palette.grey74,fontSize: 14.sp,),),
+                                    Text('50,000 EGP', style: TextStyle(color: Palette.black25,fontSize: 14.sp,fontWeight: FontWeight.bold),),
 
                                   ],
                                 ),
@@ -276,9 +281,10 @@ class _HomeState extends State<Home> {
                     Padding(
                       padding: const EdgeInsets.only(left: 20.0,right: 20,top: 20),
                       child: Container(
-                        width: ScreenConfig.screenWidth,
+                        width: 388.w,
+                        height: 433.h,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(10),
                           color: Colors.white
                         ),
                         child: Padding(
@@ -286,17 +292,17 @@ class _HomeState extends State<Home> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text('Community', style: TextStyle(color: Palette.black,fontSize: 18,fontWeight: FontWeight.bold),),
-                              Text('Following are the Part of your Community', style: TextStyle(color: Palette.grey74,fontSize: 14,),),
+                              Text('Community', style: TextStyle(color: Palette.black,fontSize: 18.sp,fontWeight: FontWeight.bold),),
+                              Text('Following are the Part of your Community', style: TextStyle(color: Palette.grey74,fontSize: 14.sp,),),
                               Padding(
-                                padding: const EdgeInsets.only(top: 20.0),
+                                padding:  EdgeInsets.only(top: 20.0.h),
                                 child: Row(
                                   children: <Widget>[
                                     Stack(
                                       children: [
                                         Container(
-                                          height: 60,
-                                          width: 60,
+                                          height: 60.h,
+                                          width: 60.w,
                                           decoration: BoxDecoration(
                                               shape: BoxShape.circle,
                                               image: DecorationImage(
@@ -312,11 +318,13 @@ class _HomeState extends State<Home> {
                                           child: SvgPicture.asset(
                                             'assets/icons/fav.svg',
                                             semanticsLabel: 'A red up arrow',
+                                            height: 20.h,
+                                            width: 20.h,
                                           ),
                                         ),
                                       ],
                                     ),
-                                    SizedBox(width: 10,),
+                                    SizedBox(width: 10.w,),
                                     Column(
                                       children: [
                                         Row(
@@ -325,11 +333,11 @@ class _HomeState extends State<Home> {
                                               mainAxisAlignment: MainAxisAlignment.start,
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               children: <Widget>[
-                                                Text('John Doe', style: TextStyle(color: Palette.black,fontSize: 16,fontWeight: FontWeight.bold),),
-                                                Text('Level 1 - Grade 1', style: TextStyle(color: Palette.grey74,fontSize: 14,),),
+                                                Text('John Doe', style: TextStyle(color: Palette.black,fontSize: 16.sp,fontWeight: FontWeight.bold),),
+                                                Text('Level 1 - Grade 1', style: TextStyle(color: Palette.grey74,fontSize: 14.sp,),),
                                               ],
                                             ),
-                                            SizedBox(width: 20,),
+                                            SizedBox(width: 20.w,),
                                             ImageStack(
                                               imageList: images,
                                               totalCount: images.length, // If larger than images.length, will show extra empty circle
@@ -346,14 +354,14 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(top: 20.0),
+                                padding:  EdgeInsets.only(top: 20.0.h),
                                 child: Row(
                                   children: <Widget>[
                                     Stack(
                                       children: [
                                         Container(
-                                          height: 60,
-                                          width: 60,
+                                          height: 60.h,
+                                          width: 60.w,
                                           decoration: BoxDecoration(
                                               shape: BoxShape.circle,
                                               image: DecorationImage(
@@ -369,11 +377,13 @@ class _HomeState extends State<Home> {
                                           child: SvgPicture.asset(
                                             'assets/icons/fav.svg',
                                             semanticsLabel: 'A red up arrow',
+                                            height: 20.h,
+                                            width: 20.w,
                                           ),
                                         ),
                                       ],
                                     ),
-                                    SizedBox(width: 10,),
+                                    SizedBox(width: 10.w,),
                                     Column(
                                       children: [
                                         Row(
@@ -382,11 +392,11 @@ class _HomeState extends State<Home> {
                                               mainAxisAlignment: MainAxisAlignment.start,
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               children: <Widget>[
-                                                Text('John Doe', style: TextStyle(color: Palette.black,fontSize: 16,fontWeight: FontWeight.bold),),
-                                                Text('Level 1 - Grade 1', style: TextStyle(color: Palette.grey74,fontSize: 14,),),
+                                                Text('John Doe', style: TextStyle(color: Palette.black,fontSize: 16.sp,fontWeight: FontWeight.bold),),
+                                                Text('Level 1 - Grade 1', style: TextStyle(color: Palette.grey74,fontSize: 14.sp,),),
                                               ],
                                             ),
-                                            SizedBox(width: 20,),
+                                            SizedBox(width: 20.w,),
                                             ImageStack(
                                               imageList: images,
                                               totalCount: images.length, // If larger than images.length, will show extra empty circle
@@ -411,7 +421,7 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 20.h),
           ],
         ),
       ),

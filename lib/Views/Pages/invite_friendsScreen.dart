@@ -1,5 +1,6 @@
 import 'package:bodoo_flutter/Providers/auth_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
@@ -24,6 +25,7 @@ class _InviteFriendsState extends State<InviteFriends> {
   }
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, designSize: const Size(428, 926));
     return Scaffold(
       body: SafeArea(child:
       Stack(
@@ -31,36 +33,37 @@ class _InviteFriendsState extends State<InviteFriends> {
           Column(
             children: [
               Container(
-                height: 300,
-                width:MediaQuery.of(context).size.width,
+                height: 347.h,
+                width:428.w,
                 decoration: const BoxDecoration(
                   // color: Colors.blueAccent,
                   gradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 10.0,right: 10.0),
-                  child: Padding(
-                      padding: const EdgeInsets.only(top: 50),
-                      child: Row(
-                        mainAxisAlignment:  MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children:  [
-                          GestureDetector(
-                            onTap: (){
-                              Navigator.pop(context);
-                            },
-                            child:ImageIcon(AssetImage("assets/icons/backward.png",),size: 30,color: Colors.white,),
-                          ),
+                  padding:  EdgeInsets.only(left: 20.0.w,right: 20.0.w,top: 50.h),
+                  child: Row(
+                    mainAxisAlignment:  MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children:  [
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.pop(context);
+                        },
+                        child:Image.asset("assets/icons/backward.png",height: 30.h,width: 30.w,),
+                      ),
 
-                          Text("Invite Friends",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
-                          InkWell
-                            (
-                              onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Notifications()));
-                              },
-                              child: ImageIcon(AssetImage('assets/icons/notification.png',),size: 25,color: Colors.white,)),
+                      Text("Invite Friends",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25.sp),),
+                      InkWell
+                        (
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Notifications()));
+                          },
+                        child: Padding(
+                          padding:  EdgeInsets.only(top: 6.h),
+                          child: Image.asset('assets/icons/notification.png',height: 20.h,width: 19.w,),
+                        ),
+                      ),
                         ],
-                      )
                   ),
                 ),
               ),
@@ -69,25 +72,25 @@ class _InviteFriendsState extends State<InviteFriends> {
           Positioned.fill(
             top: 140,
             child: Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
+              height: 731.h,
+              width: 428.w,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(topRight: Radius.circular(20.0),topLeft: Radius.circular(20.0)),
                 color: Colors.white,
               ),
               child: Padding(
-                padding: const EdgeInsets.only(top: 80),
+                padding:  EdgeInsets.only(top: 80.h),
 
                 child:SingleChildScrollView(
                   child: Column(
                     children: [
-                      Text("Invite your Friends",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w600),),
-                      SizedBox(height: 5,),
-                      Text("Invite & earn points",style: TextStyle(fontSize: 18),),
-                      SizedBox(height: 10,),
-                      Image.asset("assets/images/gift.png",height: 250,width: 250,),
+                      Text("Invite your Friends",style: TextStyle(fontSize: 22.sp,fontWeight: FontWeight.w600),),
+                      SizedBox(height: 5.h,),
+                      Text("Invite & earn points",style: TextStyle(fontSize: 16.sp),),
+                      SizedBox(height: 10.h,),
+                      Image.asset("assets/images/gift.png",height:155.84.h,width: 179.93.w,),
                       Padding(
-                        padding: const EdgeInsets.only(left: 15,right: 15),
+                        padding:  EdgeInsets.only(left: 20.w,right: 20.w),
                         child: Column(
                           children: [
                             TextFormField(
@@ -103,15 +106,15 @@ class _InviteFriendsState extends State<InviteFriends> {
                                   borderSide: BorderSide(color: Colors.blueAccent),
                                 ),
                                 suffixIcon: Padding(
-                                  padding: const EdgeInsets.only(right: 15),
+                                  padding:  EdgeInsets.only(right: 15.w),
                                   child: Container(
-                                      height: 20,
-                                      width: 20,
+                                      height: 19.h,
+                                      width: 20.w,
                                       child: Image.asset("assets/icons/forward.png",)),
                                 ),
                               ),
                             ),
-                            SizedBox(height: 20),
+                            SizedBox(height: 20.h),
                             TextFormField(
                               controller: tokenController,
                               decoration: InputDecoration(
@@ -124,107 +127,102 @@ class _InviteFriendsState extends State<InviteFriends> {
                                   borderSide: BorderSide(color: Colors.blueAccent),
                                 ),
                                 suffixIcon: Padding(
-                                  padding: const EdgeInsets.only(right: 15),
+                                  padding:  EdgeInsets.only(right: 15.w),
                                   child: Container(
-                                    height: 10,
-                                    width: 10,
+                                    height: 20.h,
+                                    width: 20.h,
                                     child: Image.asset("assets/icons/copy.png"),
                                   ),
                                 ),
                               ),
                             ),
+                            SizedBox(height: 30.h,),
+                            Text("Share your referral code via",style: TextStyle(color: Colors.black,fontSize: 16.sp),),
                           ],
                         ),
                       ),
-                      SizedBox(height: 20,),
-                      Text("Share your referral code via",style: TextStyle(color: Colors.black,fontSize: 18),),
-                      SizedBox(height: 20,),
 
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                     SizedBox(height: 30.h,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Container(
-                                width: 110,
-                                height: 44,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.3),
-                                      spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 3),
-                                    ),
-                                  ],
+                          Container(
+                            width: 110.w,
+                            height: 44.h,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.3),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: Offset(0, 3),
                                 ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Image.asset("assets/icons/whatsApp.png",height: 30,width: 30,),
+                              ],
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Image.asset("assets/icons/whatsApp.png",height: 24.49.h,width: 24.39.w,),
 
-                                    Text("WhatsApp",),
-                                  ],
-                                ),
-                              ),
+                                Text("WhatsApp",style: TextStyle(fontSize: 12.sp),),
+                              ],
+                            ),
+                          ),
 
-                              Container(
-                                width: 110,
-                                height: 44,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.3),
-                                      spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 3),
-                                    ),
-                                  ],
+                          Container(
+                            width: 110.w,
+                            height: 44.h,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.3),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: Offset(0, 3),
                                 ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Image.asset("assets/icons/facebook.png",height: 30,width: 30,),
+                              ],
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Image.asset("assets/icons/facebook.png",height: 24.49.h,width: 24.39.w,),
 
-                                    Text("facebook",),
-                                  ],
-                                ),
-                              ),
+                                Text("facebook",style: TextStyle(fontSize: 12.sp)),
+                              ],
+                            ),
+                          ),
 
-                              Container(
-                                width: 110,
-                                height: 44,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.3),
-                                      spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 3),
-                                    ),
-                                  ],
+                          Container(
+                            width: 110.w,
+                            height: 44.h,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.3),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: Offset(0, 3),
                                 ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Image.asset("assets/icons/telegram.png",height: 30,width: 30,),
+                              ],
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Image.asset("assets/icons/telegram.png",height: 24.49.h,width: 24.39.w,),
 
-                                    Text("telegram",),
-                                  ],
-                                ),
-                              ),
-                            ],
+                                Text("telegram",style: TextStyle(fontSize: 12.sp)),
+                              ],
+                            ),
                           ),
                         ],
                       ),
-                      SizedBox(height: 30,),
+
                     ],
                   ),
                 ),
@@ -234,10 +232,10 @@ class _InviteFriendsState extends State<InviteFriends> {
           ),
           Positioned(
             top: 100,
-            left: 13,
+            left: 18,
             child: Container(
-              width: 370,
-              height: 90,
+              width: 388.w,
+              height: 90.h,
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
@@ -255,19 +253,19 @@ class _InviteFriendsState extends State<InviteFriends> {
                 ),
                 child: ListTile(
                   title: Padding(
-                    padding: const EdgeInsets.only(top: 15),
+                    padding: EdgeInsets.only(top: 10.h),
                     child: Column(
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Text("Invite Friends",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
-                            Text("41/60"),
+                          children: [
+                            Text("Invite Friends",style: TextStyle(color: Colors.black,fontSize: 16.sp,fontWeight: FontWeight.w600),),
+                            Text("41/60",style: TextStyle(color: Colors.black,fontSize: 14.sp,fontWeight: FontWeight.w600),),
                           ],
                         ),
 
                         Padding(
-                          padding: const EdgeInsets.only(top: 10),
+                          padding:  EdgeInsets.only(top: 10.h),
                           child: LinearPercentIndicator(
                             barRadius: Radius.circular(15.0),
                             animation: true,
@@ -301,10 +299,10 @@ class _InviteFriendsState extends State<InviteFriends> {
                   // ),
 
                   leading: Padding(
-                    padding: const EdgeInsets.only(left: 8.0,top: 12.0),
+                    padding:  EdgeInsets.only(left: 10.0.w,top: 12.0.h),
                     child: Column(
-                      children: const [
-                        ImageIcon(AssetImage('assets/icons/invite.png',),size: 30,color: Colors.black,),
+                      children:  [
+                    Image.asset("assets/icons/invite.png",width: 22.w,height: 16.h,),
                       ],
 
                     ),
