@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'notifications_Screen.dart';
 
@@ -62,6 +63,7 @@ class _DownloadAppState extends State<DownloadApp> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, designSize: const Size(428, 926));
     return Scaffold(
 
       body: SafeArea(
@@ -70,16 +72,16 @@ class _DownloadAppState extends State<DownloadApp> {
             Column(
               children: [
                 Container(
-                  height: 500,
-                  width:MediaQuery.of(context).size.width,
+                  height: 347.h,
+                  width:428.w,
                   decoration: const BoxDecoration(
                     // color: Colors.blueAccent,
                     gradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 10.0,right: 10.0),
+                    padding:  EdgeInsets.only(left: 10.0.w,right: 10.0.w),
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 50),
+                      padding: EdgeInsets.only(top: 50.h),
                       child: Row(
                         mainAxisAlignment:  MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,7 +93,7 @@ class _DownloadAppState extends State<DownloadApp> {
                           child:ImageIcon(AssetImage("assets/icons/backward.png",),size: 30,color: Colors.white,),
                           ),
 
-                          Text("Download App",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
+                          Text("Download App",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25.sp),),
                           InkWell
                             (
                               onTap: (){
