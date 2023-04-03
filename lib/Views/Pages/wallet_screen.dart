@@ -1,8 +1,12 @@
 import 'package:bodoo_flutter/Providers/wallet_provider.dart';
+import 'package:bodoo_flutter/Views/Pages/social_mediaScreen.dart';
+import 'package:bodoo_flutter/Views/Pages/surveys_screen.dart';
+import 'package:bodoo_flutter/Views/Pages/watch_videoScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import '../Widgets/line_chart.dart';
+import 'invite_friendsScreen.dart';
 import 'notifications_Screen.dart';
 import 'others_taskScreen.dart';
 
@@ -70,30 +74,30 @@ class _Wallet extends State<Wallet> {
             ),
             Positioned.fill(
               top: 120,
-              child: SingleChildScrollView(
-                child: Container(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(20.0),
-                        topLeft: Radius.circular(20.0)),
-                    color: Colors.white,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 30),
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(20.0),
+                      topLeft: Radius.circular(20.0)),
+                  color: Colors.white,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 30),
+                  child: SingleChildScrollView(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       // mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Consumer<WalletProvider>(
 
                           builder: (context, walletProvider,child) {
                             return Padding(
-                              padding: const EdgeInsets.only(left: 0),
+                              padding: const EdgeInsets.only(left: 23),
                               child: Container(
                                 width: 350,
-                                // height: 200,
+                                 height: 200,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   border: Border(
@@ -109,6 +113,7 @@ class _Wallet extends State<Wallet> {
                                 ),
                                 child: Column(
                                   children: [
+                                    SizedBox(height: 10,),
                                     Text(
                                       "Available Points",
                                       style: TextStyle(
@@ -204,9 +209,7 @@ class _Wallet extends State<Wallet> {
                             );
                           }
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
+                        SizedBox(height: 20,),
                         Container(
                           height: 50,
                           child: ListView.builder(
@@ -233,7 +236,7 @@ class _Wallet extends State<Wallet> {
                                               ? Colors.greenAccent
                                               : Colors.black,
                                           fontWeight: FontWeight.w600,
-                                          fontSize: 18,
+                                          fontSize: 12,
                                         ),
                                       ),
                                       SizedBox(
@@ -246,8 +249,7 @@ class _Wallet extends State<Wallet> {
                                           color: _selectedIndex == index
                                               ? Colors.greenAccent
                                               : Colors.transparent,
-                                          borderRadius:
-                                              BorderRadius.circular(5),
+                                          borderRadius: BorderRadius.circular(5),
                                         ),
                                       ),
                                     ],
@@ -258,13 +260,11 @@ class _Wallet extends State<Wallet> {
                           ),
                         ),
 
-                        SizedBox(
-                          height: 10,
-                        ),
+                        SizedBox(height: 10,),
 
                         Container(
                           height: 200,
-                          width: MediaQuery.of(context).size.width,
+                          width:370,
                           child: LineChartWidget(),
                         ),
 
@@ -272,7 +272,7 @@ class _Wallet extends State<Wallet> {
                           height: 15,
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 15),
+                          padding: const EdgeInsets.only(left: 20),
                           child: Row(
                             children: [
                               Column(
@@ -298,474 +298,410 @@ class _Wallet extends State<Wallet> {
                         ),
 
                         Padding(
-                          padding: const EdgeInsets.only(left: 15, top: 30),
-                          child: Row(
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Container(
-                                    width: 350,
-                                    height: 200,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border(
-                                        top: BorderSide(
-                                            color: Colors.grey, width: 1.0),
-                                        bottom: BorderSide(
-                                            color: Colors.grey, width: 1.0),
-                                        left: BorderSide(
-                                            color: Colors.grey, width: 1.0),
-                                        right: BorderSide(
-                                            color: Colors.grey, width: 1.0),
-                                      ),
-                                      borderRadius: BorderRadius.circular(20),
+                          padding: const EdgeInsets.only(left: 25,top: 20),
+                          child: Container(
+                            width: 350,
+                            height: 200,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border(
+                                top: BorderSide(color: Colors.grey, width: 1.0),
+                                bottom: BorderSide(color: Colors.grey, width: 1.0),
+                                left: BorderSide(color: Colors.grey, width: 1.0),
+                                right: BorderSide(color: Colors.grey, width: 1.0),
+                              ),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Column(
+                              children: [
+                                SizedBox(height: 10,),
+                                Text("Points From Network",style: TextStyle(color: Colors.grey,fontSize: 16),),
+                                SizedBox(height: 10,),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 8.0),
+                                      child: ImageIcon(AssetImage("assets/icons/staryellow.png"),size: 25,color: Colors.yellowAccent,),
                                     ),
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+                                    Text("50,000",style: TextStyle(fontSize: 32,fontWeight: FontWeight.bold),),
+                                  ],
+                                ),
+                                SizedBox(height: 30,),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Column(
                                       children: [
-                                        Text(
-                                          "Points From Network",
-                                          style: TextStyle(
-                                              color: Colors.grey, fontSize: 20),
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
+                                        Text("Postponed Reward",style: TextStyle(color: Colors.grey,fontSize:14 ),),
+                                        SizedBox(height: 15,),
                                         Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
                                           children: [
+                                            Text("20,000",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),),
                                             Padding(
-                                              padding:
-                                                  const EdgeInsets.only(right: 8.0),
-                                              child: ImageIcon(
-                                                AssetImage(
-                                                    "assets/icons/staryellow.png"),
-                                                size: 25,
-                                                color: Colors.yellowAccent,
-                                              ),
-                                            ),
-                                            Text(
-                                              "50,000",
-                                              style: TextStyle(
-                                                  fontSize: 32,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 30,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Column(
-                                              children: [
-                                                Text(
-                                                  "Postponed Reward",
-                                                  style: TextStyle(
-                                                      color: Colors.grey,
-                                                      fontSize: 16),
-                                                ),
-                                                SizedBox(
-                                                  height: 15,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                      "20,000",
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 18),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 5),
-                                                      child: Text(
-                                                        "EGP",
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize: 16,
-                                                            fontWeight:
-                                                                FontWeight.bold),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            Column(
-                                              children: [
-                                                Text(
-                                                  "Network Members",
-                                                  style: TextStyle(
-                                                      color: Colors.grey,
-                                                      fontSize: 16),
-                                                ),
-                                                SizedBox(
-                                                  height: 15,
-                                                ),
-                                                Text(
-                                                  "23",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.bold,
-                                                      fontSize: 18),
-                                                ),
-                                              ],
+                                              padding: const EdgeInsets.only(left: 5),
+                                              child: Text("EGP",style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),),
                                             ),
                                           ],
                                         ),
                                       ],
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                                    SizedBox(height: 20,),
+                                    Column(
+                                      children: [
+                                        Text("Network Members",style: TextStyle(color: Colors.grey,fontSize:14 ),),
+                                        SizedBox(height: 15,),
+                                        Text("23",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                        // Padding(
-                        //   padding: const EdgeInsets.only(left: 23,top: 30),
-                        //   child: Column(
-                        //     crossAxisAlignment: CrossAxisAlignment.start,
-                        //     children: [
-                        //       Text("Task Detail",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600),),
-                        //       SizedBox(height: 5,),
-                        //       Text("Statement of your each task",style: TextStyle(fontSize: 18, color:Colors.grey),),
-                        //       Column(
-                        //         children: [
-                        //           SizedBox(height: 10),
-                        //           Container(
-                        //             width: 390,
-                        //             height: 90,
-                        //             decoration: BoxDecoration(
-                        //               boxShadow: [
-                        //             BoxShadow(
-                        //               color: Colors.black.withOpacity(0.1),
-                        //               spreadRadius: 0,
-                        //               blurRadius: 9,
-                        //               offset: Offset(1, 3),
-                        //             ),
-                        //               ],
-                        //             ),
-                        //             child: Card(
-                        //               elevation: 2,
-                        //               shape: RoundedRectangleBorder(
-                        //             borderRadius: BorderRadius.circular(20),
-                        //               ),
-                        //               child: ListTile(
-                        //             title: Padding(
-                        //               padding: const EdgeInsets.only(bottom: 13),
-                        //               child: Row(
-                        //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //                 children: const [
-                        //                   Text("Watch Videos",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
-                        //                   Text("41/60"),
-                        //                 ],
-                        //               ),
-                        //             ),
-                        //             subtitle: LinearPercentIndicator(
-                        //               barRadius: Radius.circular(15.0),
-                        //               animation: true,
-                        //               lineHeight: 12,
-                        //               percent: 0.7,
-                        //               // progressColor: Colors.blueAccent,
-                        //               linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
-                        //               backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
-                        //
-                        //             ),
-                        //             leading: Padding(
-                        //               padding: const EdgeInsets.only(left: 10.0,top: 18.0),
-                        //               child: Column(
-                        //                 children: const [
-                        //                   ImageIcon(AssetImage('assets/icons/video.png',),size: 25,color: Colors.black,),
-                        //                 ],
-                        //               ),
-                        //             ),
-                        //
-                        //             trailing: Padding(
-                        //               padding: const EdgeInsets.only(left: 10.0,top: 18.0),
-                        //               child: Column(
-                        //                 children: const [
-                        //                   ImageIcon(AssetImage('assets/icons/next.png',),size: 22,color: Colors.black,),
-                        //                 ],
-                        //               ),
-                        //             ),
-                        //             onTap: () {
-                        //               Navigator.push(context, MaterialPageRoute(builder: (context)=>WatchVideo()));
-                        //             },
-                        //               ),
-                        //             ),
-                        //           ),
-                        //           SizedBox(height: 10),
-                        //           Container(
-                        //             width: 390,
-                        //             height: 90,
-                        //             decoration: BoxDecoration(
-                        //               boxShadow: [
-                        //             BoxShadow(
-                        //               color: Colors.black.withOpacity(0.1),
-                        //               spreadRadius: 0,
-                        //               blurRadius: 9,
-                        //               offset: Offset(1, 3),
-                        //             ),
-                        //               ],
-                        //             ),
-                        //             child: Card(
-                        //               elevation: 2,
-                        //               shape: RoundedRectangleBorder(
-                        //             borderRadius: BorderRadius.circular(20),
-                        //               ),
-                        //               child: ListTile(
-                        //             title: Padding(
-                        //               padding: const EdgeInsets.only(bottom: 13),
-                        //               child: Row(
-                        //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //                 children: const [
-                        //                   Text("Social Media Reacts",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
-                        //                   Text("41/60"),
-                        //                 ],
-                        //               ),
-                        //             ),
-                        //             subtitle: LinearPercentIndicator(
-                        //               barRadius: Radius.circular(15.0),
-                        //               animation: true,
-                        //               lineHeight: 12,
-                        //               percent: 0.7,
-                        //               // progressColor: Colors.blueAccent,
-                        //               linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
-                        //               backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
-                        //
-                        //
-                        //             ),
-                        //             leading: Padding(
-                        //               padding: const EdgeInsets.only(left: 10.0,top: 18.0),
-                        //               child: Column(
-                        //                 children: const [
-                        //                   ImageIcon(AssetImage('assets/icons/social.png',),size: 25,color: Colors.black,),
-                        //                 ],
-                        //               ),
-                        //             ),
-                        //
-                        //             trailing: Padding(
-                        //               padding: const EdgeInsets.only(left: 10.0,top: 18.0),
-                        //               child: Column(
-                        //                 children: const [
-                        //                   ImageIcon(AssetImage('assets/icons/next.png',),size: 22,color: Colors.black,),
-                        //                 ],
-                        //               ),
-                        //             ),
-                        //             onTap: () {
-                        //               Navigator.push(context, MaterialPageRoute(builder: (context)=>SocialMedia()));
-                        //             },
-                        //               ),
-                        //             ),
-                        //           ),
-                        //           SizedBox(height: 10),
-                        //           Container(
-                        //             width: 390,
-                        //             height: 90,
-                        //             decoration: BoxDecoration(
-                        //               boxShadow: [
-                        //             BoxShadow(
-                        //               color: Colors.black.withOpacity(0.1),
-                        //               spreadRadius: 0,
-                        //               blurRadius: 9,
-                        //               offset: Offset(1, 3),
-                        //             ),
-                        //               ],
-                        //             ),
-                        //             child: Card(
-                        //               elevation: 2,
-                        //               shape: RoundedRectangleBorder(
-                        //             borderRadius: BorderRadius.circular(20),
-                        //               ),
-                        //               child: ListTile(
-                        //             title: Padding(
-                        //               padding: const EdgeInsets.only(bottom: 13),
-                        //               child: Row(
-                        //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //                 children: const [
-                        //                   Text("Surveys",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
-                        //                   Text("41/60"),
-                        //                 ],
-                        //               ),
-                        //             ),
-                        //             subtitle: LinearPercentIndicator(
-                        //               barRadius: Radius.circular(15.0),
-                        //               animation: true,
-                        //               lineHeight: 12,
-                        //               percent: 0.7,
-                        //               // progressColor: Colors.blueAccent,
-                        //               linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
-                        //               backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
-                        //
-                        //             ),
-                        //             leading: Padding(
-                        //               padding: const EdgeInsets.only(left: 10.0,top: 18.0),
-                        //               child: Column(
-                        //                 children: const [
-                        //                   ImageIcon(AssetImage('assets/icons/survey.png',),size: 25,color: Colors.black,),
-                        //                 ],
-                        //               ),
-                        //             ),
-                        //
-                        //             trailing: Padding(
-                        //               padding: const EdgeInsets.only(left: 10.0,top: 18.0),
-                        //               child: Column(
-                        //                 children: const [
-                        //                   ImageIcon(AssetImage('assets/icons/next.png',),size: 22,color: Colors.black,),
-                        //                 ],
-                        //               ),
-                        //             ),
-                        //             onTap: () {
-                        //               Navigator.push(context, MaterialPageRoute(builder: (context)=>Surveys()));
-                        //             },
-                        //               ),
-                        //             ),
-                        //           ),
-                        //           SizedBox(height: 10),
-                        //           Container(
-                        //             width: 390,
-                        //             height: 90,
-                        //             decoration: BoxDecoration(
-                        //               boxShadow: [
-                        //             BoxShadow(
-                        //               color: Colors.black.withOpacity(0.1),
-                        //               spreadRadius: 0,
-                        //               blurRadius: 9,
-                        //               offset: Offset(1, 3),
-                        //             ),
-                        //               ],
-                        //             ),
-                        //             child: Card(
-                        //               elevation: 2,
-                        //               shape: RoundedRectangleBorder(
-                        //             borderRadius: BorderRadius.circular(20),
-                        //               ),
-                        //               child: ListTile(
-                        //             title: Padding(
-                        //               padding: const EdgeInsets.only(bottom: 13),
-                        //               child: Row(
-                        //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //                 children: const [
-                        //                   Text("Invite Friends",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
-                        //                   Text("41/60"),
-                        //                 ],
-                        //               ),
-                        //             ),
-                        //             subtitle: LinearPercentIndicator(
-                        //               barRadius: Radius.circular(15.0),
-                        //               animation: true,
-                        //               lineHeight: 12,
-                        //               percent: 0.7,
-                        //               // progressColor: Colors.blueAccent,
-                        //               linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
-                        //               backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
-                        //
-                        //             ),
-                        //             leading: Padding(
-                        //               padding: const EdgeInsets.only(left: 10.0,top: 18.0),
-                        //               child: Column(
-                        //                 children: const [
-                        //                   ImageIcon(AssetImage('assets/icons/invite.png',),size: 25,color: Colors.black,),
-                        //                 ],
-                        //               ),
-                        //             ),
-                        //
-                        //             trailing: Padding(
-                        //               padding: const EdgeInsets.only(left: 10.0,top: 18.0),
-                        //               child: Column(
-                        //                 children: const [
-                        //                   ImageIcon(AssetImage('assets/icons/next.png',),size: 22,color: Colors.black,),
-                        //                 ],
-                        //               ),
-                        //             ),
-                        //             onTap: () {
-                        //             },
-                        //               ),
-                        //             ),
-                        //           ),
-                        //           SizedBox(height: 10),
-                        //           Container(
-                        //             width: 390,
-                        //             height: 90,
-                        //             decoration: BoxDecoration(
-                        //               boxShadow: [
-                        //             BoxShadow(
-                        //               color: Colors.black.withOpacity(0.1),
-                        //               spreadRadius: 0,
-                        //               blurRadius: 9,
-                        //               offset: Offset(1, 3),
-                        //             ),
-                        //               ],
-                        //             ),
-                        //             child: Card(
-                        //               elevation: 2,
-                        //               shape: RoundedRectangleBorder(
-                        //             borderRadius: BorderRadius.circular(20),
-                        //               ),
-                        //               child: ListTile(
-                        //             title: Padding(
-                        //               padding: const EdgeInsets.only(bottom: 13),
-                        //               child: Row(
-                        //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //                 children: const [
-                        //                   Text("Others",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
-                        //                   Text("41/60"),
-                        //                 ],
-                        //               ),
-                        //             ),
-                        //             subtitle: LinearPercentIndicator(
-                        //               barRadius: Radius.circular(15.0),
-                        //               animation: true,
-                        //               lineHeight: 12,
-                        //               percent: 0.7,
-                        //               // progressColor: Colors.blueAccent,
-                        //               linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
-                        //               backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
-                        //             ),
-                        //             leading: Padding(
-                        //               padding: const EdgeInsets.only(left: 10.0,top: 18.0),
-                        //               child: Column(
-                        //                 children: const [
-                        //                   ImageIcon(AssetImage('assets/icons/others.png',),size: 25,color: Colors.black,),
-                        //                 ],
-                        //               ),
-                        //             ),
-                        //
-                        //             trailing: Padding(
-                        //               padding: const EdgeInsets.only(left: 10.0,top: 18.0),
-                        //               child: Column(
-                        //                 children: const [
-                        //                   ImageIcon(AssetImage('assets/icons/next.png',),size: 22,color: Colors.black,),
-                        //                 ],
-                        //               ),
-                        //             ),
-                        //             onTap: () {
-                        //               Navigator.push(context, MaterialPageRoute(builder: (context)=>OthersTask()));
-                        //             },
-                        //               ),
-                        //             ),
-                        //           ),
-                        //
-                        //
-                        //         ],
-                        //       ),
-                        //     ],
-                        //
-                        //   ),
-                        //
-                        // ),
+
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20,left: 20),
+                          child: Text("Task Detail",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600),),
+                        ),
+                        SizedBox(height: 5,),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20),
+                          child: Text("Statement of your each task",style: TextStyle(fontSize: 18, color:Colors.grey),),
+                        ),
+                        SizedBox(height: 10),
+
+
+
+
+
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15,top: 15,right: 15),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: 390,
+                                height: 90,
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      spreadRadius: 0,
+                                      blurRadius: 9,
+                                      offset: Offset(1, 3),
+                                    ),
+                                  ],
+                                ),
+                                child: Card(
+                                  elevation: 2,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: ListTile(
+                                    title: Padding(
+                                      padding: const EdgeInsets.only(bottom: 13),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: const [
+                                          Text("Watch Videos",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
+                                          Text("41/60"),
+                                        ],
+                                      ),
+                                    ),
+                                    subtitle: LinearPercentIndicator(
+                                      barRadius: Radius.circular(15.0),
+                                      animation: true,
+                                      lineHeight: 12,
+                                      percent: 0.7,
+                                      // progressColor: Colors.blueAccent,
+                                      linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
+                                      backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
+
+                                    ),
+                                    leading: Padding(
+                                      padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                                      child: Column(
+                                        children: const [
+                                          ImageIcon(AssetImage('assets/icons/video.png',),size: 25,color: Colors.black,),
+                                        ],
+                                      ),
+                                    ),
+
+                                    trailing: Padding(
+                                      padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                                      child: Column(
+                                        children: const [
+                                          ImageIcon(AssetImage('assets/icons/next.png',),size: 22,color: Colors.black,),
+                                        ],
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>WatchVideo()));
+                                    },
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              Container(
+                                width: 390,
+                                height: 90,
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      spreadRadius: 0,
+                                      blurRadius: 9,
+                                      offset: Offset(1, 3),
+                                    ),
+                                  ],
+                                ),
+                                child: Card(
+                                  elevation: 2,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: ListTile(
+                                    title: Padding(
+                                      padding: const EdgeInsets.only(bottom: 13),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: const [
+                                          Text("Social Media Reacts",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
+                                          Text("41/60"),
+                                        ],
+                                      ),
+                                    ),
+                                    subtitle: LinearPercentIndicator(
+                                      barRadius: Radius.circular(15.0),
+                                      animation: true,
+                                      lineHeight: 12,
+                                      percent: 0.7,
+                                      // progressColor: Colors.blueAccent,
+                                      linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
+                                      backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
+
+
+                                    ),
+                                    leading: Padding(
+                                      padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                                      child: Column(
+                                        children: const [
+                                          ImageIcon(AssetImage('assets/icons/social.png',),size: 25,color: Colors.black,),
+                                        ],
+                                      ),
+                                    ),
+
+                                    trailing: Padding(
+                                      padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                                      child: Column(
+                                        children: const [
+                                          ImageIcon(AssetImage('assets/icons/next.png',),size: 22,color: Colors.black,),
+                                        ],
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>SocialMedia()));
+                                    },
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              Container(
+                                width: 390,
+                                height: 90,
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      spreadRadius: 0,
+                                      blurRadius: 9,
+                                      offset: Offset(1, 3),
+                                    ),
+                                  ],
+                                ),
+                                child: Card(
+                                  elevation: 2,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: ListTile(
+                                    title: Padding(
+                                      padding: const EdgeInsets.only(bottom: 13),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: const [
+                                          Text("Surveys",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
+                                          Text("41/60"),
+                                        ],
+                                      ),
+                                    ),
+                                    subtitle: LinearPercentIndicator(
+                                      barRadius: Radius.circular(15.0),
+                                      animation: true,
+                                      lineHeight: 12,
+                                      percent: 0.7,
+                                      // progressColor: Colors.blueAccent,
+                                      linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
+                                      backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
+
+                                    ),
+                                    leading: Padding(
+                                      padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                                      child: Column(
+                                        children: const [
+                                          ImageIcon(AssetImage('assets/icons/survey.png',),size: 25,color: Colors.black,),
+                                        ],
+                                      ),
+                                    ),
+
+                                    trailing: Padding(
+                                      padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                                      child: Column(
+                                        children: const [
+                                          ImageIcon(AssetImage('assets/icons/next.png',),size: 22,color: Colors.black,),
+                                        ],
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Surveys()));
+                                    },
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              Container(
+                                width: 390,
+                                height: 90,
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      spreadRadius: 0,
+                                      blurRadius: 9,
+                                      offset: Offset(1, 3),
+                                    ),
+                                  ],
+                                ),
+                                child: Card(
+                                  elevation: 2,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: ListTile(
+                                    title: Padding(
+                                      padding: const EdgeInsets.only(bottom: 13),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: const [
+                                          Text("Invite Friends",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
+                                          Text("41/60"),
+                                        ],
+                                      ),
+                                    ),
+                                    subtitle: LinearPercentIndicator(
+                                      barRadius: Radius.circular(15.0),
+                                      animation: true,
+                                      lineHeight: 12,
+                                      percent: 0.7,
+                                      // progressColor: Colors.blueAccent,
+                                      linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
+                                      backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
+
+                                    ),
+                                    leading: Padding(
+                                      padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                                      child: Column(
+                                        children: const [
+                                          ImageIcon(AssetImage('assets/icons/invite.png',),size: 25,color: Colors.black,),
+                                        ],
+                                      ),
+                                    ),
+
+                                    trailing: Padding(
+                                      padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                                      child: Column(
+                                        children: const [
+                                          ImageIcon(AssetImage('assets/icons/next.png',),size: 22,color: Colors.black,),
+                                        ],
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>InviteFriends()));
+                                    },
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              Container(
+                                width: 390,
+                                height: 90,
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      spreadRadius: 0,
+                                      blurRadius: 9,
+                                      offset: Offset(1, 3),
+                                    ),
+                                  ],
+                                ),
+                                child: Card(
+                                  elevation: 2,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: ListTile(
+                                    title: Padding(
+                                      padding: const EdgeInsets.only(bottom: 13),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: const [
+                                          Text("Others",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
+                                          Text("41/60"),
+                                        ],
+                                      ),
+                                    ),
+                                    subtitle: LinearPercentIndicator(
+                                      barRadius: Radius.circular(15.0),
+                                      animation: true,
+                                      lineHeight: 12,
+                                      percent: 0.7,
+                                      // progressColor: Colors.blueAccent,
+                                      linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
+                                      backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
+                                    ),
+                                    leading: Padding(
+                                      padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                                      child: Column(
+                                        children: const [
+                                          ImageIcon(AssetImage('assets/icons/others.png',),size: 25,color: Colors.black,),
+                                        ],
+                                      ),
+                                    ),
+
+                                    trailing: Padding(
+                                      padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                                      child: Column(
+                                        children: const [
+                                          ImageIcon(AssetImage('assets/icons/next.png',),size: 22,color: Colors.black,),
+                                        ],
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>OthersTask()));
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
+
+                          ),
+
+                        ),
+
                       ],
                     ),
                   ),
