@@ -56,6 +56,7 @@ class _DownloadAppState extends State<DownloadApp> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
     Provider.of<DownloadAppsProvider>(context,listen: false).getDownloadAppUrls();
   }
 
