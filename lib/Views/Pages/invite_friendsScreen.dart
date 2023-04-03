@@ -1,5 +1,6 @@
 import 'package:bodoo_flutter/Providers/auth_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -25,6 +26,7 @@ class _InviteFriendsState extends State<InviteFriends> {
   }
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, designSize: const Size(428, 926));
     return Scaffold(
       body: SafeArea(child:
       Stack(
@@ -70,25 +72,25 @@ class _InviteFriendsState extends State<InviteFriends> {
           Positioned.fill(
             top: 140,
             child: Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
+              height: 731.h,
+              width: 428.w,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(topRight: Radius.circular(20.0),topLeft: Radius.circular(20.0)),
                 color: Colors.white,
               ),
               child: Padding(
-                padding: const EdgeInsets.only(top: 80),
+                padding:  EdgeInsets.only(top: 80.h),
 
                 child:SingleChildScrollView(
                   child: Column(
                     children: [
-                      Text("Invite your Friends",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w600),),
+                      Text("Invite your Friends",style: TextStyle(fontSize: 25.sp,fontWeight: FontWeight.w600),),
                       SizedBox(height: 5,),
-                      Text("Invite & earn points",style: TextStyle(fontSize: 18),),
+                      Text("Invite & earn points",style: TextStyle(fontSize: 18.sp),),
                       SizedBox(height: 10,),
-                      Image.asset("assets/images/gift.png",height: 250,width: 250,),
+                      Image.asset("assets/images/gift.png",height: 155.h,width: 179.w,),
                       Padding(
-                        padding: const EdgeInsets.only(left: 15,right: 15),
+                        padding:  EdgeInsets.only(left: 15.w,right: 15.w,top: 20.h),
                         child: Column(
                           children: [
                             TextFormField(
@@ -121,9 +123,9 @@ class _InviteFriendsState extends State<InviteFriends> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 20,),
-                      Text("Share your referral code via",style: TextStyle(color: Colors.black,fontSize: 18),),
-                      SizedBox(height: 20,),
+                      SizedBox(height: 25.h,),
+                      Text("Share your referral code via",style: TextStyle(color: Colors.black,fontSize: 18.sp),),
+                      SizedBox(height: 25.h,),
 
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -234,9 +236,10 @@ class _InviteFriendsState extends State<InviteFriends> {
           ),
           Positioned(
             top: 100,
-            left: 13,
+            left: 10,
+            right: 10,
             child: Container(
-              width: 370,
+              width: 388.w,
               height: 90,
               decoration: BoxDecoration(
                 boxShadow: [

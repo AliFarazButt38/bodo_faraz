@@ -2,6 +2,7 @@ import 'package:bodoo_flutter/Providers/home_provider.dart';
 import 'package:bodoo_flutter/Providers/wallet_provider.dart';
 import 'package:bodoo_flutter/Views/Pages/notifications_Screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_stack/image_stack.dart';
 import 'package:pie_chart/pie_chart.dart';
@@ -25,26 +26,27 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
 
-    ScreenConfig().init(context);
+    //ScreenConfig().init(context);
+    ScreenUtil.init(context, designSize: const Size(428, 1150));
     return Scaffold(
       body: SizedBox(
-        height: ScreenConfig.screenHeight,
-        width: ScreenConfig.screenWidth,
+        height: 1150.h,
+        width: 428.w,
         child: Column(
           children: [
             Consumer<HomeProvider>(
 
               builder: (context, homeProvider,child) {
                 return SizedBox(
-                  height: 500,
-                  width: ScreenConfig.screenWidth,
+                  height: 650.h,
+                  width: 428.w,
                   child: Stack(
                     children: [
                       Column(
                         children: <Widget>[
                           Container(
-                            height: 347,
-                            width: ScreenConfig.screenWidth,
+                            height: 380.h,
+                           // width: ScreenConfig.screenWidth,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.only(
                                 bottomRight: Radius.circular(14),
@@ -60,14 +62,14 @@ class _HomeState extends State<Home> {
                                 )
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.only(top: 50.0,left: 20,right: 20),
+                              padding:  EdgeInsets.only(top: 50.h,left: 20.w,right: 20.w),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text('Home', style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.bold),),
+                                      Text('Home', style: TextStyle(color: Colors.white,fontSize: 25.sp,fontWeight: FontWeight.bold),),
 
                                       IconButton(onPressed: (){
                                         Navigator.push(context, MaterialPageRoute(builder: (context)=>Notifications()));
@@ -78,10 +80,10 @@ class _HomeState extends State<Home> {
 
                                     ],
                                   ),
-                                  SizedBox(height: 10,),
+                                  SizedBox(height: 10.h,),
                                   Container(
-                                    height: 74,
-                                    width: 74,
+                                    height: 90.h,
+                                    width: 90.w,
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       border: Border.all(color: Colors.white),
@@ -92,7 +94,7 @@ class _HomeState extends State<Home> {
                                       )
                                     ),
                                   ),
-                                  SizedBox(height: 40,),
+                                  SizedBox(height: 20.h,),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
@@ -105,7 +107,7 @@ class _HomeState extends State<Home> {
                                     child: Stack(
                                       children: [
                                         LinearProgressIndicator(
-                                          minHeight: 20.0,
+                                          minHeight: 20.h,
                                           value: homeProvider.homeModel != null ? homeProvider.homeModel!.completedTasks/homeProvider.homeModel!.totalTasks : 0,
                                           color: Colors.greenAccent,
                                           backgroundColor: Colors.white,
@@ -145,14 +147,14 @@ class _HomeState extends State<Home> {
                         ],
                       ),
                       Positioned(
-                        top: 300,
+                        top: 340.h,
                         left: 0,
                         right: 0,
                         child: Padding(
                           padding: const EdgeInsets.only(left: 20.0,right: 20),
                           child: Container(
-                            height: 200,
-                            width: ScreenConfig.screenWidth,
+                            height: 300.h,
+                           // width: ScreenConfig.screenWidth,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(20)
@@ -162,7 +164,7 @@ class _HomeState extends State<Home> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding:  EdgeInsets.only(left: 8.w,top: 8.w,bottom: 8.h),
                                   child: Text('Tasks', style: TextStyle(color: Palette.black,fontSize: 18,fontWeight: FontWeight.bold),),
                                 ),
 
@@ -176,7 +178,7 @@ class _HomeState extends State<Home> {
                                   },
                                   animationDuration: Duration(milliseconds: 800),
                                   chartLegendSpacing: 32,
-                                  chartRadius: MediaQuery.of(context).size.width / 3.2,
+                                  chartRadius: 190.h,
                                   colorList: [
                                     Palette.orange,
                                     Palette.lightGreen,
@@ -217,7 +219,7 @@ class _HomeState extends State<Home> {
                 );
               }
             ),
-            SizedBox(height: 10,),
+            SizedBox(height: 10.h,),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
@@ -226,9 +228,9 @@ class _HomeState extends State<Home> {
 
                       builder: (context, walletProvider,child) {
                         return Padding(
-                          padding: const EdgeInsets.only(left: 20.0, right: 20),
+                          padding:  EdgeInsets.only(left: 20.w, right: 20.w),
                           child: Container(
-                            height: 219,
+                            height: 225.h,
                             width: ScreenConfig.screenWidth,
                             decoration: BoxDecoration(
                               color: Colors.white,
@@ -239,14 +241,14 @@ class _HomeState extends State<Home> {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: <Widget>[
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 20.0,top: 13),
-                                  child: Text('Balance', style: TextStyle(color: Palette.black,fontSize: 18,fontWeight: FontWeight.bold),),
+                                  padding:  EdgeInsets.only(left: 20.w,top: 13.h),
+                                  child: Text('Balance', style: TextStyle(color: Palette.black,fontSize: 18.sp,fontWeight: FontWeight.bold),),
                                 ),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Text('Available Points', style: TextStyle(color: Palette.grey74,fontSize: 16,),),
-                                    SizedBox(height: 5,),
+                                    Text('Available Points', style: TextStyle(color: Palette.grey74,fontSize: 16.sp,),),
+                                    SizedBox(height: 5.h,),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
 
@@ -255,8 +257,8 @@ class _HomeState extends State<Home> {
                                           'assets/icons/star.svg',
                                           semanticsLabel: 'A red up arrow',
                                         ),
-                                        SizedBox(width: 5,),
-                                        Text(walletProvider.walletModel != null ? walletProvider.walletModel!.availablePoint.toString() : '0', style: TextStyle(color: Palette.black25,fontSize: 32,fontWeight: FontWeight.bold),),
+                                        SizedBox(width: 5.w,),
+                                        Text(walletProvider.walletModel != null ? walletProvider.walletModel!.availablePoint.toString() : '0', style: TextStyle(color: Palette.black25,fontSize: 32.sp,fontWeight: FontWeight.bold),),
                                       ],
                                     )
                                   ],
@@ -266,15 +268,15 @@ class _HomeState extends State<Home> {
                                   children: <Widget>[
                                     Column(
                                       children: <Widget>[
-                                        Text('Today Erning', style: TextStyle(color: Palette.grey74,fontSize: 14,),),
-                                        Text(walletProvider.walletModel != null ? '${walletProvider.walletModel!.todayEarnings.toString()} EGP' : '0 EGP', style: TextStyle(color: Palette.black25,fontSize: 14,fontWeight: FontWeight.bold),),
+                                        Text('Today Erning', style: TextStyle(color: Palette.grey74,fontSize: 14.sp,),),
+                                        Text(walletProvider.walletModel != null ? '${walletProvider.walletModel!.todayEarnings.toString()} EGP' : '0 EGP', style: TextStyle(color: Palette.black25,fontSize: 14.sp,fontWeight: FontWeight.bold),),
 
                                       ],
                                     ),
                                     Column(
                                       children: <Widget>[
-                                        Text('Total Erning', style: TextStyle(color: Palette.grey74,fontSize: 14,),),
-                                        Text(walletProvider.walletModel != null ? '${walletProvider.walletModel!.todayEarnings.toString()} EGP' : '0 EGP', style: TextStyle(color: Palette.black25,fontSize: 14,fontWeight: FontWeight.bold),),
+                                        Text('Total Erning', style: TextStyle(color: Palette.grey74,fontSize: 14.sp,),),
+                                        Text(walletProvider.walletModel != null ? '${walletProvider.walletModel!.todayEarnings.toString()} EGP' : '0 EGP', style: TextStyle(color: Palette.black25,fontSize: 14.sp,fontWeight: FontWeight.bold),),
 
                                       ],
                                     ),
@@ -287,9 +289,9 @@ class _HomeState extends State<Home> {
                       }
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 20.0,right: 20,top: 20),
+                      padding:  EdgeInsets.only(left: 20.w,right: 20.w,top: 20.h),
                       child: Container(
-                        width: ScreenConfig.screenWidth,
+                        //width: ScreenConfig.screenWidth,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           color: Colors.white

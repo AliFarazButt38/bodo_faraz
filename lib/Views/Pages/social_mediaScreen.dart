@@ -54,7 +54,7 @@ class _SocialMediaState extends State<SocialMedia> {
               children: [
                 Container(
                   height: 347.h,
-                  width:428.w,
+                  width:429.w,
                   decoration: const BoxDecoration(
                     // color: Colors.blueAccent,
                     gradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
@@ -118,7 +118,7 @@ class _SocialMediaState extends State<SocialMedia> {
                                 Navigator.push(context, MaterialPageRoute(builder: (contex)=>StartTask()));
                               },
                               child: Container(
-                                height: 346.h,
+                                height: 353.h,
                                 width: 388.w,
                                 padding: EdgeInsets.only(top: 5.h,left: 8.w,right: 8,bottom: 8.h),
                                 decoration: BoxDecoration(
@@ -126,10 +126,10 @@ class _SocialMediaState extends State<SocialMedia> {
                                   borderRadius: BorderRadius.circular(15),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.grey.withOpacity(0.3),
+                                      color: Colors.grey.withOpacity(0.1),
                                       spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 3),
+                                      blurRadius: 1,
+                                      offset: Offset(0, 1),
                                     ),
                                   ],
                                 ),
