@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ContainerData {
   final String image;
@@ -71,6 +72,7 @@ class Notifications extends StatefulWidget {
 class _NotificationsState extends State<Notifications> {
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, designSize: const Size(428, 926));
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -78,30 +80,31 @@ class _NotificationsState extends State<Notifications> {
             Column(
               children: [
                 Container(
-                  height: 500,
-                  width:MediaQuery.of(context).size.width,
+                  height: 347.h,
+                  width:428.w,
                   decoration: const BoxDecoration(
                     // color: Colors.blueAccent,
                     gradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 10.0,right: 10.0),
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 50),
-                      child: Row(
-                        mainAxisAlignment:  MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children:  [
-                          InkWell(
-                              onTap: (){
-                                Navigator.pop(context);
-                              },
-                              child: ImageIcon(AssetImage("assets/icons/backward.png",),size: 30,color: Colors.white,)),
+                    padding: EdgeInsets.only(left: 20.0.w,right: 20.0.w,top: 50.h),
+                    child: Row(
+                      mainAxisAlignment:  MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children:  [
+                        InkWell(
+                            onTap: (){
+                              Navigator.pop(context);
+                            },
+                    child:Image.asset("assets/icons/backward.png",height: 30.h,width: 30.w,),
+                        ),
 
-                          Text("Notifications",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
-                          ImageIcon(AssetImage('assets/icons/settings.png',),size: 30,color: Colors.white,),
-                        ],
-                      ),
+                        Text("Notifications",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25.sp),),
+                        Padding(
+                          padding:  EdgeInsets.only(top: 6.h),
+                          child: Image.asset('assets/icons/settings.png',height: 21.h,width: 19.25.w,),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -110,8 +113,8 @@ class _NotificationsState extends State<Notifications> {
             Positioned.fill(
               top: 120,
               child: Container(
-                height: MediaQuery.of(context).size.width,
-                width: MediaQuery.of(context).size.height,
+                height: 790.h,
+                width: 428.w,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(topLeft:Radius.circular(20.0),topRight: Radius.circular(20.0),
                   ),
@@ -121,129 +124,112 @@ class _NotificationsState extends State<Notifications> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20,top: 30),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                        Padding(
+                          padding:  EdgeInsets.only(left: 20.w,top: 30.h),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Today",style: TextStyle(color: Colors.black,fontSize: 18.sp,fontWeight: FontWeight.bold),),
+                              SizedBox(height: 10.h,),
+                              Row(
                                 children: [
-                                  Text("Today",style: TextStyle(color: Colors.black,fontSize: 25,fontWeight: FontWeight.w600),),
-                                  SizedBox(height: 10,),
-                                  Row(
-                                    children: [
-                                      Text("You have",style: TextStyle(color: Colors.black,fontSize: 20),),
-                                      Padding(
-                                        padding: const EdgeInsets.only(right: 5.0,left: 5.0),
-                                        child: Text("3 Notifications",style: TextStyle(color: Colors.blueAccent,fontSize: 20),),
-                                      ),
-                                      Text("today",style: TextStyle(color: Colors.black,fontSize: 20),),
-                                    ],
+                                  Text("You have",style: TextStyle(color: Colors.black,fontSize: 16.sp),),
+                                  Padding(
+                                    padding:  EdgeInsets.only(right: 5.0.w,left: 5.0.w),
+                                    child: Text("3 Notifications",style: TextStyle(color: Colors.blueAccent,fontSize: 16.sp),),
                                   ),
+                                  Text("today",style: TextStyle(color: Colors.black,fontSize: 16.sp),),
                                 ],
                               ),
+                            ],
+                          ),
 
-                            ),
-                            SizedBox(height: 30,),
+                        ),
+                        SizedBox(height: 30.h,),
 
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ListView.builder(
-                                    physics: BouncingScrollPhysics(),
-                                    scrollDirection: Axis.vertical,
-                                    shrinkWrap: true,
-                                    itemCount: containerDataList.length,
-                                    itemBuilder: (BuildContext context, int index) {
-                                      return Container(
-                                        height: 100,
-                                        width: 90,
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: Image.asset(
-                                                    containerDataList[index].image,
-                                                    height: 70,
-                                                    width: 70,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(left: 10,top: 10),
-                                                  child: Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      Column(
-                                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                                        children: [
-                                                          Row(
-                                                            children: [
-                                                              Text(
-
-                                                                containerDataList[index].text,
-                                                                style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),
-                                                                maxLines: 2,
-                                                                overflow: TextOverflow.ellipsis,
-                                                              ),
-
-                                                              Padding(
-                                                                padding: const EdgeInsets.only(left: 5),
-                                                                child: Text(
-
-                                                                  containerDataList[index].refrel,style: TextStyle(fontSize: 18),
-                                                                maxLines: 2,
-                                                                  overflow: TextOverflow.ellipsis,
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          SizedBox(height: 10,),
-                                                          Text(
-                                                            containerDataList[index].time,
-                                                            style: TextStyle(color: Colors.grey,fontSize: 18)),
-
-                                                        ],
-                                                      ),
-
-                                                    ],
-                                                  ),
-                                                ),
-
-                                              ],
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(left: 10,right: 10),
-                                              child: Divider(thickness: 1,height: 1,),
-                                            ),
-                                          ],
+                        Padding(
+                          padding:  EdgeInsets.only(left: 10.w),
+                          child: ListView.builder(
+                            physics: BouncingScrollPhysics(),
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemCount: containerDataList.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Container(
+                                height: 100.h,
+                                width: 90.w,
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding:  EdgeInsets.all(8.0),
+                                          child: Image.asset(
+                                            containerDataList[index].image,
+                                            height: 56.h,
+                                            width: 56.w,
+                                          ),
                                         ),
-                                      );
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 10.w,top: 10.w),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
 
-                          ],
+                                                    containerDataList[index].text,
+                                                    style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.w600),
+                                                    maxLines: 2,
+                                                    overflow: TextOverflow.ellipsis,
+                                                  ),
+
+                                                  Padding(
+                                                    padding:  EdgeInsets.only(left: 5.w),
+                                                    child: Text(
+
+                                                      containerDataList[index].refrel,style: TextStyle(fontSize: 16.sp),
+                                                    maxLines: 2,
+                                                      overflow: TextOverflow.ellipsis,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(height: 10.h,),
+                                              Text(
+                                                containerDataList[index].time,
+                                                style: TextStyle(color: Colors.grey,fontSize: 12.sp)),
+
+                                            ],
+                                          ),
+                                        ),
+
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding:  EdgeInsets.only(left: 20.w,right: 20.w),
+                                      child: Divider(thickness: 1,height: 1.h,),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
                         ),
 
-                        SizedBox(height: 10,),
+                        SizedBox(height: 10.h,),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 20),
-                              child: Text("Yesterday",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                              padding:  EdgeInsets.only(left: 20.w),
+                              child: Text("Yesterday",style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.bold),),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 10),
+                              padding:  EdgeInsets.only(left: 10.w),
                               child: ListView.builder(
                                 physics: BouncingScrollPhysics(),
                                 scrollDirection: Axis.vertical,
@@ -251,8 +237,8 @@ class _NotificationsState extends State<Notifications> {
                                 itemCount: containerDataList2.length,
                                 itemBuilder: (BuildContext context, int index) {
                                   return Container(
-                                    height: 80,
-                                    width: 90,
+                                    height: 100.h,
+                                    width: 90.w,
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.start,
                                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -261,38 +247,32 @@ class _NotificationsState extends State<Notifications> {
                                           padding: const EdgeInsets.all(8.0),
                                           child: Image.asset(
                                             containerDataList2[index].image,
-                                            height: 70,
-                                            width: 70,
+                                            height: 56.h,
+                                            width: 56.w,
                                           ),
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 10,top: 10),
+                                          padding: EdgeInsets.only(left: 10.w,top: 10.h),
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                              Row(
                                                 children: [
-                                                  Row(
-                                                    children: [
-                                                      Text(
-                                                        containerDataList2[index].text,
-                                                        style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),
-                                                      ),
-
-                                                      Padding(
-                                                        padding: const EdgeInsets.only(left: 5),
-                                                        child: Text(containerDataList2[index].refrel,style: TextStyle(fontSize: 18),),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  SizedBox(height: 10,),
                                                   Text(
-                                                    containerDataList2[index].time,
-                                                    style: TextStyle(color: Colors.grey,fontSize: 18),
+                                                    containerDataList2[index].text,
+                                                    style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.w600),
                                                   ),
 
+                                                  Padding(
+                                                    padding:  EdgeInsets.only(left: 5.w),
+                                                    child: Text(containerDataList2[index].refrel,style: TextStyle(fontSize: 16.sp),),
+                                                  ),
                                                 ],
+                                              ),
+                                              SizedBox(height: 10.h,),
+                                              Text(
+                                                containerDataList2[index].time,
+                                                style: TextStyle(color: Colors.grey,fontSize: 12.sp),
                                               ),
 
                                             ],

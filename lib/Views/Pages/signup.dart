@@ -1,6 +1,7 @@
 import 'package:bodoo_flutter/Providers/auth_provider.dart';
 import 'package:bodoo_flutter/Views/Pages/signin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
@@ -43,6 +44,7 @@ class _SignupState extends State<Signup> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, designSize: const Size(428, 926));
     ScreenConfig().init(context);
     return Scaffold(
       body: SizedBox(
@@ -54,27 +56,29 @@ class _SignupState extends State<Signup> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(top: 30,left:67.0,right: 67),
+                padding:  EdgeInsets.only(top: 40.h,left:100.0.w,right: 67.w),
                 child: SvgPicture.asset(
                     'assets/images/signup_pic.svg',
-                    semanticsLabel: 'A red up arrow'
+                    semanticsLabel: 'A red up arrow',
+                  height: 219.h,
+                  width: 219.w,
                 ),
               ),
               //SizedBox(height: 18,),
               Padding(
-                padding: const EdgeInsets.only(left: 20.0,bottom: 20),
+                padding:  EdgeInsets.only(left: 20.0.w,bottom: 20.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Sign Up',style: StyleSheet.heading,),
-                    SizedBox(height: 10,),
-                    Text('Create your Bodo App now',style: TextStyle(color: Palette.grey,fontSize: 12),),
+                    Text('Sign Up',style: TextStyle(fontSize: 25.sp,fontWeight: FontWeight.bold),),
+                    SizedBox(height: 10.h,),
+                    Text('Create your Bodo App now',style: TextStyle(color: Palette.grey,fontSize: 16.sp),),
                   ],
                 ),
               ),
               //SizedBox(height: 30,),
               Padding(
-                padding: const EdgeInsets.only(left: 20.0,right: 20),
+                padding:  EdgeInsets.only(left: 20.0.w,right: 20.w,top: 20.h),
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -84,7 +88,7 @@ class _SignupState extends State<Signup> {
                         controller: nameController,
                         style: TextStyle(
                           color: Palette.grey,
-                          fontSize: 14,
+                          fontSize: 14.sp,
                         ),
                         // onChanged: (value) {
                         //   setState(() {
@@ -95,7 +99,7 @@ class _SignupState extends State<Signup> {
                           focusColor: Colors.white,
                           //add prefix icon
                           prefixIcon: Padding(
-                            padding: const EdgeInsets.all(10.0),
+                            padding:  EdgeInsets.all(10.0),
                             child: SvgPicture.asset(
                               'assets/icons/email.svg',
                               semanticsLabel: 'A red up arrow',
@@ -135,7 +139,7 @@ class _SignupState extends State<Signup> {
                           //make hint text
                           hintStyle: TextStyle(
                             color: Palette.grey,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                           ),
 
                           //create lable
@@ -143,7 +147,7 @@ class _SignupState extends State<Signup> {
                           //lable style
                           labelStyle: TextStyle(
                             color: Palette.grey,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                           ),
                         ),
                         validator:(text) {
@@ -153,12 +157,12 @@ class _SignupState extends State<Signup> {
                           return null;
                         },
                       ),
-                      SizedBox(height: 10,),
+                      SizedBox(height: 15.h,),
                       TextFormField(
                         controller: emailController,
                         style: TextStyle(
                           color: Palette.grey,
-                          fontSize: 14,
+                          fontSize: 14.sp,
                         ),
                         // onChanged: (value) {
                         //   setState(() {
@@ -169,7 +173,7 @@ class _SignupState extends State<Signup> {
                           focusColor: Colors.white,
                           //add prefix icon
                           prefixIcon: Padding(
-                            padding: const EdgeInsets.all(10.0),
+                            padding:  EdgeInsets.all(10.0),
                             child: SvgPicture.asset(
                               'assets/icons/email.svg',
                               semanticsLabel: 'A red up arrow',
@@ -209,7 +213,7 @@ class _SignupState extends State<Signup> {
                           //make hint text
                           hintStyle: TextStyle(
                             color: Palette.grey,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                           ),
 
                           //create lable
@@ -217,19 +221,19 @@ class _SignupState extends State<Signup> {
                           //lable style
                           labelStyle: TextStyle(
                             color: Palette.grey,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                           ),
                         ),
                         validator: validateEmail,
                       ),
                      // SizedBox(height: 30,),
-                      SizedBox(height: 10,),
+                      SizedBox(height: 15.h,),
                       TextFormField(
                         controller: passwordController,
                         obscureText: true,
                         style: TextStyle(
                           color: Palette.grey,
-                          fontSize: 14,
+                          fontSize: 14.sp,
                         ),
                         // onChanged: (value) {
                         //   setState(() {
@@ -276,7 +280,7 @@ class _SignupState extends State<Signup> {
                           //make hint text
                           hintStyle: TextStyle(
                             color: Palette.grey,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                           ),
 
                           //create lable
@@ -284,7 +288,7 @@ class _SignupState extends State<Signup> {
                           //lable style
                           labelStyle: TextStyle(
                             color: Palette.grey,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                           ),
                         ),
                         validator: (text) {
@@ -297,13 +301,13 @@ class _SignupState extends State<Signup> {
                           return null;
                         },
                       ),
-                      SizedBox(height: 10,),
+                      SizedBox(height: 15.h,),
                       TextFormField(
                         controller: confirmPasswordController,
                         obscureText: true,
                         style: TextStyle(
                           color: Palette.grey,
-                          fontSize: 14,
+                          fontSize: 14.sp,
                         ),
                         // onChanged: (value) {
                         //   setState(() {
@@ -350,7 +354,7 @@ class _SignupState extends State<Signup> {
                           //make hint text
                           hintStyle: TextStyle(
                             color: Palette.grey,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                           ),
 
                           //create lable
@@ -358,7 +362,7 @@ class _SignupState extends State<Signup> {
                           //lable style
                           labelStyle: TextStyle(
                             color: Palette.grey,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                           ),
                         ),
                         validator: (text) {
@@ -373,12 +377,12 @@ class _SignupState extends State<Signup> {
                           return null;
                         },
                       ),
-                      SizedBox(height: 10,),
+                      SizedBox(height: 15.h,),
                       TextFormField(
                         controller: phoneController,
                         style: TextStyle(
                           color: Palette.grey,
-                          fontSize: 14,
+                          fontSize: 14.sp,
                         ),
                         // onChanged: (value) {
                         //   setState(() {
@@ -506,7 +510,7 @@ class _SignupState extends State<Signup> {
                           //make hint text
                           hintStyle: TextStyle(
                             color: Palette.grey,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                           ),
 
                           //create lable
@@ -514,7 +518,7 @@ class _SignupState extends State<Signup> {
                           //lable style
                           labelStyle: TextStyle(
                             color: Palette.grey,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                           ),
                         ),
                         validator: (text) {
@@ -532,7 +536,7 @@ class _SignupState extends State<Signup> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 20,left: 20.0,right: 20),
+                padding: EdgeInsets.only(top: 30.h,left: 20.0.w,right: 20.w),
                 child: ElevatedButton(
                   onPressed: () {
                     if(_formKey.currentState!.validate()){
@@ -549,25 +553,26 @@ class _SignupState extends State<Signup> {
                         const LinearGradient(colors: [Palette.baseElementBlue, Palette.baseElementGreen]),
                         borderRadius: BorderRadius.circular(10)),
                     child: Container(
-                      // width: 300,
-                      height: 56,
+                       width: 388.w,
+                      height: 56.h,
                       alignment: Alignment.center,
-                      child: const Text(
+                      child:  Text(
                         'Sign Up',
                         style:
-                        const TextStyle(fontSize: 18, ),
+                         TextStyle(fontSize: 18.sp,fontWeight: FontWeight.w600 ),
                       ),
                     ),
                   ),
                 ),
               ),
+              SizedBox(height: 15.h,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text('Already have an account?',style: TextStyle(color: Palette.grey,fontSize: 16),),
+                  Text('Already have an account?',style: TextStyle(color: Color(0xff000000),fontSize: 16.sp),),
                   TextButton(onPressed: (){
                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Signin()));
-                  }, child: Text('Sign In',style: TextStyle(color: Palette.blue,fontSize: 16),),)
+                  }, child: Text('Sign In',style: TextStyle(color: Color(0xff0179A3),fontSize: 16.sp),),)
                 ],
               )
             ],
