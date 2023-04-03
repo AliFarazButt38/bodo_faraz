@@ -1,5 +1,5 @@
 class Api{
-  static  var baseUrlApi = "http://9c53-119-152-148-44.ngrok.io/api/";
-  static  var baseUrlAccount = "http://9c53-119-152-148-44.ngrok.io/accounts/";
+  static  var baseUrlApi = "http://164.90.234.251/api/";
+  static  var baseUrlAccount = "http://164.90.234.251/accounts/";
 
 }

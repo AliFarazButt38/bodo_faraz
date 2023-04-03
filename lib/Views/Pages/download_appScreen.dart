@@ -265,7 +265,8 @@ class _DownloadAppState extends State<DownloadApp> {
       ),
             Positioned(
               top: 100,
-              left: 13,
+              left: 10,
+              right: 10,
               child: Container(
                 width: 388.w,
                 height: 90,
