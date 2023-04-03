@@ -1,5 +1,7 @@
+import 'package:bodoo_flutter/Providers/auth_provider.dart';
 import 'package:bodoo_flutter/Views/Pages/notifications_Screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -9,13 +11,13 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  TextEditingController textField1Controller = TextEditingController();
-  TextEditingController textField2Controller = TextEditingController();
+  TextEditingController referralController = TextEditingController();
 
 final _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController contactController=TextEditingController();
+
   String? validateEmail(String? value) {
     String pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
@@ -28,6 +30,20 @@ final _formKey = GlobalKey<FormState>();
     }else {
       return null;
     }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    var user = Provider.of<AuthProvider>(context,listen: false).user;
+    if(user != null){
+      emailController = TextEditingController(text:  user.email);
+      nameController = TextEditingController(text: user.name);
+      contactController = TextEditingController(text: user.number);
+      referralController = TextEditingController(text: user.referralLink);
+    }
+
   }
 
 
@@ -83,284 +99,276 @@ final _formKey = GlobalKey<FormState>();
                 color: Colors.white,
               ),
             child: SingleChildScrollView(
-              child: Column(
+              child: Consumer<AuthProvider>(
 
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 70),
-                    child: Column(
-                      children: [
-                        Text("James Thomas",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 22),),
-                        Text("Level 2 - Grade 3",style: TextStyle(fontSize: 16),),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15,right: 15,top: 20),
-                          child: Column(
-                            children: [
-                              TextFormField(
-                                controller: textField1Controller,
-                                decoration: InputDecoration(
-                                  labelText: 'Reference Link',
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.blueAccent),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.blueAccent),
-                                  ),
-                                  suffixIcon: Padding(
-                                    padding: const EdgeInsets.only(right: 15),
-                                    child: Container(
-                                        height: 20,
-                                        width: 20,
-                                        child: Image.asset("assets/icons/forward.png",)),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 20),
-                              TextFormField(
-                                controller: textField2Controller,
-                                decoration: InputDecoration(
-                                  labelText: 'Token No',
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.blueAccent),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.blueAccent),
-                                  ),
-                                  suffixIcon: Padding(
-                                    padding: const EdgeInsets.only(right: 15),
-                                    child: Container(
-                                      height: 10,
-                                      width: 10,
-                                      child: Image.asset("assets/icons/copy.png"),
+                builder: (context, authProvider, child) {
+                  return Column(
+
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 70),
+                        child: Column(
+                          children: [
+                            Text(authProvider.user != null ? authProvider.user!.name : '',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 22),),
+                            Text("Level 2 - Grade 3",style: TextStyle(fontSize: 16),),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 15,right: 15,top: 20),
+                              child: Column(
+                                children: [
+                                  TextFormField(
+                                    readOnly: true,
+                                    controller: referralController,
+                                    decoration: InputDecoration(
+                                      labelText: 'Reference Link',
+                                      hintText:authProvider.user != null ? authProvider.user!.referralLink : '',
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(color: Colors.blueAccent),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(color: Colors.blueAccent),
+                                      ),
+                                      suffixIcon: Padding(
+                                        padding: const EdgeInsets.only(right: 15),
+                                        child: Container(
+                                            height: 20,
+                                            width: 20,
+                                            child: Image.asset("assets/icons/forward.png",)),
+                                      ),
                                     ),
                                   ),
-                                ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+
+
+                          ],
                         ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20,top: 30),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Personal Information",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+                            Form
+                              (
+                              key: _formKey,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 20,right: 10),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  TextFormField(
+                                    readOnly: true,
+                                    controller: nameController,
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 14,
+                                    ),
+                                    // onChanged: (value) {
+                                    //   setState(() {
+                                    //     emailController.text = value.toString();
+                                    //   });
+                                    // },
+                                    decoration: InputDecoration(
+                                     // hintText:authProvider.user != null ? authProvider.user!.name : '',
+
+                                      focusColor: Colors.white,
+                                      //add prefix icon
+
+                                      // errorText: _errorMsg,
+                                      //  disabledBorder: OutlineInputBorder(
+                                      //    borderSide: const BorderSide(color: Palette.grey),
+                                      //    borderRadius: BorderRadius.circular(10),
+                                      //  ),
+                                      border:  OutlineInputBorder(
+                                        borderSide: const BorderSide(color: Colors.blueAccent),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(color: Colors.blueAccent),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(color:  Colors.blueAccent),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(color: Colors.red),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(color: Colors.red),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      fillColor: Colors.grey,
+
+                                    //  hintText: "Name",
+
+                                      //make hint text
+                                      hintStyle: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 14,
+                                      ),
+
+                                      //create lable
+                                      labelText: 'Name',
+                                      //lable style
+                                      labelStyle: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                    validator:(text) {
+                                      if(text!.isEmpty){
+                                        return 'enter name';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                  SizedBox(height: 10,),
+                                  TextFormField(
+                                    controller: emailController,
+                                    readOnly: true,
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 14,
+                                    ),
+                                    // onChanged: (value) {
+                                    //   setState(() {
+                                    //     emailController.text = value.toString();
+                                    //   });
+                                    // },
+                                    decoration: InputDecoration(
+                                      focusColor: Colors.white,
+                                      //add prefix icon
 
 
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20,top: 30),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Personal Information",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
-                        Form
-                          (
-                          key: _formKey,
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 20,right: 10),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              TextFormField(
-                                controller: nameController,
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 14,
-                                ),
-                                // onChanged: (value) {
-                                //   setState(() {
-                                //     emailController.text = value.toString();
-                                //   });
-                                // },
-                                decoration: InputDecoration(
-                                  focusColor: Colors.white,
-                                  //add prefix icon
+                                      // errorText: _errorMsg,
+                                      //  disabledBorder: OutlineInputBorder(
+                                      //    borderSide: const BorderSide(color: Palette.grey),
+                                      //    borderRadius: BorderRadius.circular(10),
+                                      //  ),
+                                      border:  OutlineInputBorder(
+                                        borderSide: const BorderSide(color: Colors.blueAccent),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
 
-                                  // errorText: _errorMsg,
-                                  //  disabledBorder: OutlineInputBorder(
-                                  //    borderSide: const BorderSide(color: Palette.grey),
-                                  //    borderRadius: BorderRadius.circular(10),
-                                  //  ),
-                                  border:  OutlineInputBorder(
-                                    borderSide: const BorderSide(color: Colors.blueAccent),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(color: Colors.blueAccent),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(color: Colors.blueAccent),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(color: Colors.red),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(color: Colors.red),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      fillColor: Colors.grey,
 
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(color: Colors.blueAccent),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(color:  Colors.blueAccent),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(color: Colors.red),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(color: Colors.red),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  fillColor: Colors.grey,
+                                     // hintText:authProvider.user != null ? authProvider.user!.email : '',
 
-                                  hintText: "Name",
 
-                                  //make hint text
-                                  hintStyle: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 14,
-                                  ),
+                                      //make hint text
+                                      hintStyle: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 14,
+                                      ),
 
-                                  //create lable
-                                  labelText: 'Name',
-                                  //lable style
-                                  labelStyle: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 14,
+                                      //create lable
+                                      labelText: 'Email',
+                                      //lable style
+                                      labelStyle: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                    validator: validateEmail,
                                   ),
-                                ),
-                                validator:(text) {
-                                  if(text!.isEmpty){
-                                    return 'enter name';
-                                  }
-                                  return null;
-                                },
+                                  SizedBox(height: 10,),
+                                  TextFormField(
+                                    readOnly: true,
+                                    controller: contactController,
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 14,
+                                    ),
+                                    // onChanged: (value) {
+                                    //   setState(() {
+                                    //     emailController.text = value.toString();
+                                    //   });
+                                    // },
+                                    decoration: InputDecoration(
+                                      focusColor: Colors.white,
+                                      //add prefix icon
+
+
+                                      // errorText: _errorMsg,
+                                      //  disabledBorder: OutlineInputBorder(
+                                      //    borderSide: const BorderSide(color: Palette.grey),
+                                      //    borderRadius: BorderRadius.circular(10),
+                                      //  ),
+                                      border:  OutlineInputBorder(
+                                        borderSide: const BorderSide(color: Colors.blueAccent),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(color: Colors.blueAccent),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(color: Colors.blueAccent),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(color: Colors.red),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(color: Colors.red),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      fillColor: Colors.grey,
+
+                                     // hintText:authProvider.user != null ? authProvider.user!.number : '',
+
+
+                                      //make hint text
+                                      hintStyle: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 14,
+                                      ),
+
+                                      //create lable
+                                      labelText: 'Contact No',
+                                      //lable style
+                                      labelStyle: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                            ),
                               ),
-                              SizedBox(height: 10,),
-                              TextFormField(
-                                controller: emailController,
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 14,
-                                ),
-                                // onChanged: (value) {
-                                //   setState(() {
-                                //     emailController.text = value.toString();
-                                //   });
-                                // },
-                                decoration: InputDecoration(
-                                  focusColor: Colors.white,
-                                  //add prefix icon
-
-
-                                  // errorText: _errorMsg,
-                                  //  disabledBorder: OutlineInputBorder(
-                                  //    borderSide: const BorderSide(color: Palette.grey),
-                                  //    borderRadius: BorderRadius.circular(10),
-                                  //  ),
-                                  border:  OutlineInputBorder(
-                                    borderSide: const BorderSide(color: Colors.blueAccent),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(color: Colors.blueAccent),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(color: Colors.blueAccent),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(color: Colors.red),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(color: Colors.red),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  fillColor: Colors.grey,
-
-                                  hintText: "Email",
-
-                                  //make hint text
-                                  hintStyle: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 14,
-                                  ),
-
-                                  //create lable
-                                  labelText: 'Email',
-                                  //lable style
-                                  labelStyle: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                validator: validateEmail,
-                              ),
-                              SizedBox(height: 10,),
-                              TextFormField(
-                                controller: contactController,
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 14,
-                                ),
-                                // onChanged: (value) {
-                                //   setState(() {
-                                //     emailController.text = value.toString();
-                                //   });
-                                // },
-                                decoration: InputDecoration(
-                                  focusColor: Colors.white,
-                                  //add prefix icon
-
-
-                                  // errorText: _errorMsg,
-                                  //  disabledBorder: OutlineInputBorder(
-                                  //    borderSide: const BorderSide(color: Palette.grey),
-                                  //    borderRadius: BorderRadius.circular(10),
-                                  //  ),
-                                  border:  OutlineInputBorder(
-                                    borderSide: const BorderSide(color: Colors.blueAccent),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(color: Colors.blueAccent),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(color: Colors.blueAccent),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(color: Colors.red),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(color: Colors.red),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  fillColor: Colors.grey,
-
-                                  hintText: "Contact No",
-
-                                  //make hint text
-                                  hintStyle: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 14,
-                                  ),
-
-                                  //create lable
-                                  labelText: 'Contact No',
-                                  //lable style
-                                  labelStyle: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ),
-                            ],
+                            ),
+                          ],
                         ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                      ),
+                    ],
+                  );
+                }
               ),
             ),
 

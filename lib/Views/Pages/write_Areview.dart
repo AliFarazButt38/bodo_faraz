@@ -1,5 +1,9 @@
+import 'package:bodoo_flutter/Providers/write_review_provider.dart';
+import 'package:bodoo_flutter/Theme/palette.dart';
+import 'package:bodoo_flutter/Views/Pages/review_details.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:provider/provider.dart';
 
 import 'notifications_Screen.dart';
 
@@ -43,6 +47,14 @@ class WriteReview extends StatefulWidget {
 }
 
 class _WriteReviewState extends State<WriteReview> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<WriteReviewProvider>(context,listen: false).getReviewsList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,115 +105,131 @@ class _WriteReviewState extends State<WriteReview> {
 
       Positioned.fill(
         top: 150,
-        child: SingleChildScrollView(
-          child: Container(
-            height: MediaQuery.of(context).size.height,
-            width: 428,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(topRight: Radius.circular(20.0),topLeft: Radius.circular(20.0)),
-              color: Colors.white,
-            ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 80,left: 25),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Write a review",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 20),),
-                        SizedBox(height: 5,),
-                        Text("Earn points on giving review",style: TextStyle(fontSize: 18,color: Colors.grey),),
-                      ],
-                    ),
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: 428,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(topRight: Radius.circular(20.0),topLeft: Radius.circular(20.0)),
+            color: Colors.white,
+          ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 80,left: 25),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Write a review",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 20),),
+                      SizedBox(height: 5,),
+                      Text("Earn points on giving review",style: TextStyle(fontSize: 18,color: Colors.grey),),
+                    ],
                   ),
-                  SizedBox(height: 15,),
-                  SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ListView.builder(
-                          physics: BouncingScrollPhysics(),
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: containerDataList.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Container(
-                              margin: EdgeInsets.all(10),
-                              height: 100,
-                              width: 388,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    spreadRadius: 2,
-                                    blurRadius: 5,
-                                    offset: Offset(0, 3),
-                                  ),
-                                ],
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Image.asset(
-                                      containerDataList[index].image,
-                                      height: 80,
-                                      width: 80,
+                ),
+                SizedBox(height: 15,),
+                SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Consumer<WriteReviewProvider>(
+                        builder: (context, reviewProvider,child) {
+                          if(reviewProvider.reviewsLoading){
+                            return Center(child: CircularProgressIndicator(color: Palette.baseElementGreen,));
+                          }else if(reviewProvider.reviewsList.isNotEmpty){
+                            return ListView.builder(
+                             // physics: NeverScrollableScrollPhysics(),
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              itemCount: reviewProvider.reviewsList.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return InkWell(
+                                  onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => ReviewDetails(reviewModel: reviewProvider.reviewsList[index])));
+
+
+                                  },
+                                  child: Container(
+                                    margin: EdgeInsets.all(10),
+                                    height: 100,
+                                    width: 388,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.5),
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: Offset(0, 3),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10,top: 10),
-                                    child: Column(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          containerDataList[index].text,
-                                          style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),
-                                        ),
-                                        SizedBox(height: 5,),
-                                          Text(
-                                            containerDataList[index].description,
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(fontSize: 12,),
-
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Image.network(
+                                            reviewProvider.reviewsList[index].appIcon,
+                                            height: 80,
+                                            width: 80,
                                           ),
-
-                                        SizedBox(height: 5,),
-                                        Row(
-                                          children: [
-                                            ImageIcon(AssetImage("assets/icons/star.png",),color: Colors.grey,),
-                                            Padding(
-                                              padding: const EdgeInsets.only(left: 5,top: 5),
-                                              child: Text("Give Review to earn Points",style: TextStyle(
-                                                color: Colors.grey,
-                                                fontSize: 12,
-                                              ),),
-                                            ),
-                                          ],
                                         ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 10,top: 10),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                reviewProvider.reviewsList[index].appTitle,
+                                                style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),
+                                              ),
+                                              SizedBox(height: 5,),
+                                              Text(
+                                                reviewProvider.reviewsList[index].appComment,
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(fontSize: 12,),
 
+                                              ),
+
+                                              SizedBox(height: 5,),
+                                              Row(
+                                                children: [
+                                                  ImageIcon(AssetImage("assets/icons/star.png",),color: Colors.grey,),
+                                                  Padding(
+                                                    padding: const EdgeInsets.only(left: 5,top: 5),
+                                                    child: Text("Give Review to earn Points",style: TextStyle(
+                                                      color: Colors.grey,
+                                                      fontSize: 12,
+                                                    ),),
+                                                  ),
+                                                ],
+                                              ),
+
+                                            ],
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ),
-                                ],
-                              ),
+                                );
+                              },
                             );
-                          },
-                        ),
-                      ],
-                    ),
+                          }else{
+                            return SizedBox();
+                          }
+
+                        }
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-        ),
+          ),
         
       ),
 

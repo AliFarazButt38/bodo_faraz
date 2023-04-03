@@ -52,6 +52,13 @@ class _SurveysState extends State<Surveys> {
       throw Exception('Could not launch $_url');
     }
   }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<SurveyProvider>(context,listen: false).getCompletedSurveys();
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -120,12 +127,12 @@ class _SurveysState extends State<Surveys> {
                                 builder: (context, surveyProvider,child) {
                                   if(surveyProvider.surveyLoading){
                                     return CircularProgressIndicator(color: Palette.baseElementGreen,);
-                                  }else if(surveyProvider.surveysList!.googleForms.isNotEmpty){
+                                  }else if(surveyProvider.surveysList.isNotEmpty){
                                     return ListView.separated(
                                       physics: BouncingScrollPhysics(),
                                       scrollDirection: Axis.vertical,
                                       shrinkWrap: true,
-                                      itemCount: surveyProvider.surveysList!.googleForms.length,
+                                      itemCount: surveyProvider.surveysList.length,
                                       separatorBuilder: (BuildContext context,int index){
                                         return SizedBox(height: 20,);
                                       },// Replace itemCount with the actual number of list items you want to display
@@ -191,13 +198,11 @@ class _SurveysState extends State<Surveys> {
                                                   ),
                                                 ),
                                                 SizedBox(height: 16),
+                                                surveyProvider.postSurveysList.contains(surveyProvider.surveysList[index].id) ?
                                                 Padding(
                                                   padding: const EdgeInsets.only(left: 55),
                                                   child: ElevatedButton(
-                                                    onPressed: () {
-                                                      //  Uri _url = Uri.parse(surveyProvider.surveysList!.googleForms[index]);
-                                                      _launchUrl(Uri.parse(surveyProvider.surveysList!.googleForms[index]));
-                                                    },
+                                                    onPressed: null,
                                                     style: ElevatedButton.styleFrom(
                                                         padding: EdgeInsets.zero,
                                                         shape: RoundedRectangleBorder(
@@ -212,13 +217,79 @@ class _SurveysState extends State<Surveys> {
                                                         height: 47,
                                                         alignment: Alignment.center,
                                                         child: const Text(
-                                                          'Attempt the survey',
+                                                          'Completed',
                                                           style:
                                                           const TextStyle(fontSize: 18, ),
                                                         ),
                                                       ),
                                                     ),
                                                   ),
+                                                ):
+                                                Column(
+                                                  children: [
+                                                    surveyProvider.checkList[index] == false ?
+                                                    Padding(
+                                                      padding: const EdgeInsets.only(left: 55),
+                                                      child: ElevatedButton(
+                                                        onPressed: () {
+                                                          //  Uri _url = Uri.parse(surveyProvider.surveysList!.googleForms[index]);
+                                                          surveyProvider.setCheckTrue(index);
+                                                          _launchUrl(Uri.parse(surveyProvider.surveysList[index].googleFormurl));
+                                                        },
+                                                        style: ElevatedButton.styleFrom(
+                                                            padding: EdgeInsets.zero,
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius: BorderRadius.circular(20))),
+                                                        child: Ink(
+                                                          decoration: BoxDecoration(
+                                                              gradient:
+                                                              const LinearGradient(colors: [Colors.blueAccent, Colors.greenAccent]),
+                                                              borderRadius: BorderRadius.circular(10)),
+                                                          child: Container(
+                                                            width: 250,
+                                                            height: 47,
+                                                            alignment: Alignment.center,
+                                                            child: const Text(
+                                                              'Attempt the survey',
+                                                              style:
+                                                              const TextStyle(fontSize: 18, ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    )
+                                                        :  Padding(
+                                                      padding: const EdgeInsets.only(left: 55),
+                                                      child: ElevatedButton(
+                                                        onPressed: () {
+                                                          //  Uri _url = Uri.parse(surveyProvider.surveysList!.googleForms[index]);
+                                                          // surveyProvider.setCheckTrue(index);
+                                                          // _launchUrl(Uri.parse(surveyProvider.surveysList!.googleForms[index]));
+                                                          surveyProvider.postSurvey(surveyProvider.surveysList[index].googleFormId)
+;                                                    },
+                                                        style: ElevatedButton.styleFrom(
+                                                            padding: EdgeInsets.zero,
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius: BorderRadius.circular(20))),
+                                                        child: Ink(
+                                                          decoration: BoxDecoration(
+                                                              gradient:
+                                                              const LinearGradient(colors: [Colors.blueAccent, Colors.greenAccent]),
+                                                              borderRadius: BorderRadius.circular(10)),
+                                                          child: Container(
+                                                            width: 250,
+                                                            height: 47,
+                                                            alignment: Alignment.center,
+                                                            child: const Text(
+                                                              'Mark as Done',
+                                                              style:
+                                                              const TextStyle(fontSize: 18, ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ],
                                             ),

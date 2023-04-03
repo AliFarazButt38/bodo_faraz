@@ -23,6 +23,7 @@ class _SignupState extends State<Signup> {
   TextEditingController referalController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
 
 
   String? validateEmail(String? value) {
@@ -374,7 +375,7 @@ class _SignupState extends State<Signup> {
                       ),
                       SizedBox(height: 10,),
                       TextFormField(
-                        controller: referalController,
+                        controller: phoneController,
                         style: TextStyle(
                           color: Palette.grey,
                           fontSize: 14,
@@ -391,6 +392,83 @@ class _SignupState extends State<Signup> {
                             padding: const EdgeInsets.all(10.0),
                             child: SvgPicture.asset(
                               'assets/icons/email.svg',
+                              semanticsLabel: 'A red up arrow',
+                            ),
+                          ),
+
+                          // errorText: _errorMsg,
+                          //  disabledBorder: OutlineInputBorder(
+                          //    borderSide: const BorderSide(color: Palette.grey),
+                          //    borderRadius: BorderRadius.circular(10),
+                          //  ),
+                          border:  OutlineInputBorder(
+                            borderSide: const BorderSide(color: Palette.black),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Palette.grey),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Palette.grey),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.red),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.red),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          fillColor: Palette.grey,
+
+                          hintText: "Phone Number",
+
+                          //make hint text
+                          hintStyle: TextStyle(
+                            color: Palette.grey,
+                            fontSize: 14,
+                          ),
+
+                          //create lable
+                          labelText: 'Phone Number',
+                          //lable style
+                          labelStyle: TextStyle(
+                            color: Palette.grey,
+                            fontSize: 14,
+                          ),
+                        ),
+                        validator: (text) {
+                          if(text!.isEmpty){
+                            return 'Enter Referal code';
+                          }
+                          else if (text.length != 11) {
+                            return 'number should be 11 digits';
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 10,),
+                      TextFormField(
+                        controller: referalController,
+                        style: TextStyle(
+                          color: Palette.grey,
+                          fontSize: 14,
+                        ),
+                        // onChanged: (value) {
+                        //   setState(() {
+                        //     emailController.text = value.toString();
+                        //   });
+                        // },
+                        decoration: InputDecoration(
+                          focusColor: Colors.white,
+                          //add prefix icon
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: SvgPicture.asset(
+                              'assets/icons/File.svg',
                               semanticsLabel: 'A red up arrow',
                             ),
                           ),
@@ -458,7 +536,7 @@ class _SignupState extends State<Signup> {
                 child: ElevatedButton(
                   onPressed: () {
                     if(_formKey.currentState!.validate()){
-                      Provider.of<AuthProvider>(context,listen: false).signup(nameController.text, emailController.text, passwordController.text, referalController.text,context);
+                      Provider.of<AuthProvider>(context,listen: false).signup(nameController.text, emailController.text, passwordController.text, referalController.text,phoneController.text,context);
                     }
                   },
                   style: ElevatedButton.styleFrom(

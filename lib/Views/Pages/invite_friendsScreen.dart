@@ -2,6 +2,7 @@ import 'package:bodoo_flutter/Providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 import 'notifications_Screen.dart';
 
@@ -102,37 +103,21 @@ class _InviteFriendsState extends State<InviteFriends> {
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.blueAccent),
                                 ),
-                                suffixIcon: Padding(
-                                  padding: const EdgeInsets.only(right: 15),
-                                  child: Container(
-                                      height: 20,
-                                      width: 20,
-                                      child: Image.asset("assets/icons/forward.png",)),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 20),
-                            TextFormField(
-                              controller: tokenController,
-                              decoration: InputDecoration(
-                                labelText: 'Token No',
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.blueAccent),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.blueAccent),
-                                ),
-                                suffixIcon: Padding(
-                                  padding: const EdgeInsets.only(right: 15),
-                                  child: Container(
-                                    height: 10,
-                                    width: 10,
-                                    child: Image.asset("assets/icons/copy.png"),
+                                suffixIcon: InkWell(
+                                  onTap: () async {
+                                    await Share.share(refrenceController.text);
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 15),
+                                    child: Container(
+                                        height: 20,
+                                        width: 20,
+                                        child: Image.asset("assets/icons/forward.png",)),
                                   ),
                                 ),
                               ),
                             ),
+
                           ],
                         ),
                       ),
@@ -146,78 +131,93 @@ class _InviteFriendsState extends State<InviteFriends> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Container(
-                                width: 110,
-                                height: 44,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.3),
-                                      spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 3),
-                                    ),
-                                  ],
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Image.asset("assets/icons/whatsApp.png",height: 30,width: 30,),
+                              InkWell(
+                                onTap: () async {
+                                  await Share.share(refrenceController.text);
+                                },
+                                child: Container(
+                                  width: 110,
+                                  height: 44,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.3),
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: Offset(0, 3),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Image.asset("assets/icons/whatsApp.png",height: 30,width: 30,),
 
-                                    Text("WhatsApp",),
-                                  ],
-                                ),
-                              ),
-
-                              Container(
-                                width: 110,
-                                height: 44,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.3),
-                                      spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 3),
-                                    ),
-                                  ],
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Image.asset("assets/icons/facebook.png",height: 30,width: 30,),
-
-                                    Text("facebook",),
-                                  ],
+                                      Text("WhatsApp",),
+                                    ],
+                                  ),
                                 ),
                               ),
 
-                              Container(
-                                width: 110,
-                                height: 44,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.3),
-                                      spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 3),
-                                    ),
-                                  ],
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Image.asset("assets/icons/telegram.png",height: 30,width: 30,),
+                              InkWell(
+                                onTap: () async {
+                                  await Share.share(refrenceController.text);
+                                },
+                                child: Container(
+                                  width: 110,
+                                  height: 44,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.3),
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: Offset(0, 3),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Image.asset("assets/icons/facebook.png",height: 30,width: 30,),
 
-                                    Text("telegram",),
-                                  ],
+                                      Text("facebook",),
+                                    ],
+                                  ),
+                                ),
+                              ),
+
+                              InkWell(
+                                onTap: () async {
+                                  await Share.share(refrenceController.text);
+                                },
+                                child: Container(
+                                  width: 110,
+                                  height: 44,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.3),
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: Offset(0, 3),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Image.asset("assets/icons/telegram.png",height: 30,width: 30,),
+
+                                      Text("telegram",),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],

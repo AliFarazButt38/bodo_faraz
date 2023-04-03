@@ -132,7 +132,7 @@ class _WatchVideoState extends State<WatchVideo> {
                                   // final item = videoProvider.videosList[index];
                                    return InkWell(
                                      onTap: () {
-                                       Navigator.push(context, MaterialPageRoute(builder: (context)=>PlayVideo(urlYoutube: videoProvider.videosList[index].url,)));
+                                       Navigator.push(context, MaterialPageRoute(builder: (context)=>PlayVideo(videoModel: videoProvider.videosList[index],)));
                                      },
                                      child: Container(
                                        padding: EdgeInsets.only(top: 5,left: 8,right: 8,bottom: 8),
@@ -206,7 +206,7 @@ class _WatchVideoState extends State<WatchVideo> {
                                              padding: const EdgeInsets.only(left: 55),
                                              child: ElevatedButton(
                                                onPressed: () {
-                                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>PlayVideo(urlYoutube: videoProvider.videosList[index].url,)));
+                                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>PlayVideo(videoModel: videoProvider.videosList[index],)));
                                                },
                                                style: ElevatedButton.styleFrom(
                                                    padding: EdgeInsets.zero,

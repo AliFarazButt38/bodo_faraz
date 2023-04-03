@@ -1,5 +1,7 @@
+import 'package:bodoo_flutter/Providers/wallet_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:provider/provider.dart';
 import '../Widgets/line_chart.dart';
 import 'notifications_Screen.dart';
 import 'others_taskScreen.dart';
@@ -84,130 +86,113 @@ class _Wallet extends State<Wallet> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       // mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 0),
-                          child: Container(
-                            width: 350,
-                            // height: 200,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border(
-                                top: BorderSide(color: Colors.grey, width: 1.0),
-                                bottom:
-                                    BorderSide(color: Colors.grey, width: 1.0),
-                                left:
-                                    BorderSide(color: Colors.grey, width: 1.0),
-                                right:
-                                    BorderSide(color: Colors.grey, width: 1.0),
-                              ),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Column(
-                              children: [
-                                Text(
-                                  "Available Points",
-                                  style: TextStyle(
-                                      color: Colors.grey, fontSize: 20),
+                        Consumer<WalletProvider>(
+
+                          builder: (context, walletProvider,child) {
+                            return Padding(
+                              padding: const EdgeInsets.only(left: 0),
+                              child: Container(
+                                width: 350,
+                                // height: 200,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border(
+                                    top: BorderSide(color: Colors.grey, width: 1.0),
+                                    bottom:
+                                        BorderSide(color: Colors.grey, width: 1.0),
+                                    left:
+                                        BorderSide(color: Colors.grey, width: 1.0),
+                                    right:
+                                        BorderSide(color: Colors.grey, width: 1.0),
+                                  ),
+                                  borderRadius: BorderRadius.circular(20),
                                 ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                child: Column(
                                   children: [
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 8.0),
-                                      child: ImageIcon(
-                                        AssetImage(
-                                            "assets/icons/staryellow.png"),
-                                        size: 25,
-                                        color: Colors.yellowAccent,
-                                      ),
-                                    ),
                                     Text(
-                                      "50,000",
+                                      "Available Points",
                                       style: TextStyle(
-                                          fontSize: 32,
-                                          fontWeight: FontWeight.bold),
+                                          color: Colors.grey, fontSize: 20),
                                     ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 30,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Column(
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 8.0),
+                                          child: ImageIcon(
+                                            AssetImage(
+                                                "assets/icons/staryellow.png"),
+                                            size: 25,
+                                            color: Colors.yellowAccent,
+                                          ),
+                                        ),
                                         Text(
-                                          "Todays Earning",
+                                          walletProvider.walletModel != null ? walletProvider.walletModel!.availablePoint.toString() : '0',
                                           style: TextStyle(
-                                              color: Colors.grey, fontSize: 16),
-                                        ),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              "50,000",
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 18),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 5),
-                                              child: Text(
-                                                "EGP",
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                          ],
+                                              fontSize: 32,
+                                              fontWeight: FontWeight.bold),
                                         ),
                                       ],
                                     ),
                                     SizedBox(
-                                      height: 20,
+                                      height: 30,
                                     ),
-                                    Column(
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
                                       children: [
-                                        Text(
-                                          "Total Earning",
-                                          style: TextStyle(
-                                              color: Colors.grey, fontSize: 16),
-                                        ),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
-                                        Row(
+                                        Column(
                                           children: [
                                             Text(
-                                              "50,000",
+                                              "Todays Earning",
                                               style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 18),
+                                                  color: Colors.grey, fontSize: 16),
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 5),
-                                              child: Text(
-                                                "EGP",
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
+                                            SizedBox(
+                                              height: 15,
+                                            ),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  walletProvider.walletModel != null ? '${walletProvider.walletModel!.todayEarnings.toString()} EGP' : '0 EGP',
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 18),
+                                                ),
+
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Column(
+                                          children: [
+                                            Text(
+                                              "Total Earning",
+                                              style: TextStyle(
+                                                  color: Colors.grey, fontSize: 16),
+                                            ),
+                                            SizedBox(
+                                              height: 15,
+                                            ),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  walletProvider.walletModel != null ? '${walletProvider.walletModel!.todayEarnings.toString()} EGP' : '0 EGP',
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 18),
+                                                ),
+
+                                              ],
                                             ),
                                           ],
                                         ),
@@ -215,9 +200,9 @@ class _Wallet extends State<Wallet> {
                                     ),
                                   ],
                                 ),
-                              ],
-                            ),
-                          ),
+                              ),
+                            );
+                          }
                         ),
                         SizedBox(
                           height: 20,

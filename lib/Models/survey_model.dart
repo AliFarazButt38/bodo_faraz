@@ -1,14 +1,17 @@
 class SurveyModel{
-int totalForms;
-List<dynamic> googleForms = [];
+int id;
+String googleFormurl,googleFormId;
 
 SurveyModel({
-  required this.googleForms,
-  required this.totalForms
+  required this.id,
+  required this.googleFormurl,
+  required this.googleFormId
 });
 
 
 factory SurveyModel.fromJson(Map<String,dynamic> data){
-  return SurveyModel(googleForms: data['google_form_url'], totalForms: data['total_forms']);
+  return SurveyModel(googleFormurl: data['google_form_url'], id: data['id'],googleFormId: data['google_form_id']);
 }
 }
+
+

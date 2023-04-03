@@ -1,13 +1,20 @@
 import 'dart:io';
 
 import 'package:bodoo_flutter/Providers/auth_provider.dart';
+import 'package:bodoo_flutter/Providers/home_provider.dart';
+import 'package:bodoo_flutter/Providers/level_provider.dart';
 import 'package:bodoo_flutter/Providers/survey_provider.dart';
 import 'package:bodoo_flutter/Providers/video_provider.dart';
+import 'package:bodoo_flutter/Providers/wallet_provider.dart';
+import 'package:bodoo_flutter/Providers/write_review_provider.dart';
+import 'package:bodoo_flutter/Views/Pages/app_detail.dart';
+import 'package:bodoo_flutter/Views/Pages/download_appScreen.dart';
 import 'package:bodoo_flutter/Views/Pages/forgot_password.dart';
 import 'package:bodoo_flutter/Views/Pages/splash_screen.dart';
 import 'package:bodoo_flutter/Views/Pages/video_player_examole.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'Providers/download_apps_provider.dart';
 import 'Utils/navigator.dart';
 
 void main() {
@@ -17,6 +24,11 @@ void main() {
       ChangeNotifierProvider(create: (_) => AuthProvider()),
       ChangeNotifierProvider(create: (_) => SurveyProvider()),
       ChangeNotifierProvider(create: (_) => VideoProvider()),
+      ChangeNotifierProvider(create: (_) => DownloadAppsProvider()),
+      ChangeNotifierProvider(create: (_) => LevelProvider()),
+      ChangeNotifierProvider(create: (_) => WriteReviewProvider()),
+      ChangeNotifierProvider(create: (_) => WalletProvider()),
+      ChangeNotifierProvider(create: (_) => HomeProvider()),
     ],
     child: const MyApp(),
   ),);

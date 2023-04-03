@@ -1,10 +1,13 @@
+import 'package:bodoo_flutter/Models/video_model.dart';
+import 'package:bodoo_flutter/Providers/video_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
 
 class PlayVideo extends StatefulWidget {
-  String urlYoutube;
-   PlayVideo({Key? key,required this.urlYoutube}) : super(key: key);
+  VideoModel videoModel;
+   PlayVideo({Key? key,required this.videoModel}) : super(key: key);
 
   @override
   State<PlayVideo> createState() => _PlayVideoState();
@@ -17,14 +20,14 @@ class _PlayVideoState extends State<PlayVideo> {
   @override
   void initState() {
     super.initState();
-    print('url youtube ${widget.urlYoutube}');
+    print('url youtube ${widget.videoModel.url}');
     _controller = VideoPlayerController.network(
-        widget.urlYoutube)
+        widget.videoModel.url)
       ..initialize().then((_) {
         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
         setState(() {});
       });
-    print('url youtube 1 ${widget.urlYoutube}');
+    print('url youtube 1 ${widget.videoModel}');
   }
 
   @override
@@ -136,7 +139,7 @@ class _PlayVideoState extends State<PlayVideo> {
                           padding: const EdgeInsets.only(left: 55),
                           child: ElevatedButton(
                             onPressed: () {
-
+                              Provider.of<VideoProvider>(context,listen: false).postWatchVideos(widget.videoModel.id.toString(), context);
                             },
                             style: ElevatedButton.styleFrom(
                                 padding: EdgeInsets.zero,

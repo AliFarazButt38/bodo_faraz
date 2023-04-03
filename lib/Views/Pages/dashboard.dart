@@ -1,5 +1,9 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:bodoo_flutter/Providers/auth_provider.dart';
+import 'package:bodoo_flutter/Providers/home_provider.dart';
+import 'package:bodoo_flutter/Providers/level_provider.dart';
+import 'package:bodoo_flutter/Providers/wallet_provider.dart';
 import 'package:bodoo_flutter/Views/Pages/community_screen.dart';
 
 import 'package:bodoo_flutter/Views/Pages/profile_screen.dart';
@@ -7,6 +11,7 @@ import 'package:bodoo_flutter/Views/Pages/task_screen.dart';
 import 'package:bodoo_flutter/Views/Pages/wallet_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import '../../Theme/palette.dart';
 import 'home.dart';
 
@@ -42,7 +47,10 @@ class _DashboardState extends State<Dashboard> {
     // TODO: implement initState
     super.initState();
     _selectedIndex = widget.index ?? 0;
-
+    Provider.of<HomeProvider>(context,listen: false).getHomeData();
+    Provider.of<LevelProvider>(context,listen: false).getLevels();
+    Provider.of<AuthProvider>(context,listen: false).userProfile(context);
+    Provider.of<WalletProvider>(context,listen: false).getWallet();
   }
 
   @override

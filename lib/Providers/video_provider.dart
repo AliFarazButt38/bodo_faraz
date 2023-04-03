@@ -17,7 +17,7 @@ class VideoProvider extends ChangeNotifier{
       //  authProvider.loading();
       _videoLoading = true;
       _videosList = [];
-      var response = await http.get(Uri.parse('${Api.baseUrl}videos/'),
+      var response = await http.get(Uri.parse('${Api.baseUrlApi}videos/'),
 
       );
       print('status code ${response.statusCode}');
@@ -40,6 +40,34 @@ class VideoProvider extends ChangeNotifier{
       notifyListeners();
     }
   }
+
+  postWatchVideos(String id,BuildContext context)async{
+    try{
+      await  authProvider.getToken();
+
+
+      var response = await http.post(Uri.parse('${Api.baseUrlApi}videos/$id/'),
+        headers: {
+          'Authorization':'Token ${authProvider.token}'
+        },
+      );
+      print('status code ${response.statusCode}');
+      print('response postWatchVideos ${response.body}');
+      var parsedJson = json.decode(response.body);
+      if(response.statusCode == 200){
+
+      }else{
+      }
+    }catch(error, st){
+      //Navigator.of(context).pop();
+      print('catch error in videoProvider postWatchVideos $error $st');
+    }finally{
+      _videoLoading = false;
+      notifyListeners();
+    }
+  }
+
+
 
   bool get videoLoading => _videoLoading;
   List<VideoModel> get videosList => _videosList;

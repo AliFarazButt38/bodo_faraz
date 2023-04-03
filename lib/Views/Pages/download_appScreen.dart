@@ -1,5 +1,10 @@
+import 'package:bodoo_flutter/Providers/download_apps_provider.dart';
+import 'package:bodoo_flutter/Theme/palette.dart';
+import 'package:bodoo_flutter/Views/Pages/app_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'notifications_Screen.dart';
 
@@ -40,6 +45,20 @@ class DownloadApp extends StatefulWidget {
 
 
 class _DownloadAppState extends State<DownloadApp> {
+
+  Future<void> _launchUrl(Uri _url) async {
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<DownloadAppsProvider>(context,listen: false).getDownloadAppUrls();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,109 +132,128 @@ class _DownloadAppState extends State<DownloadApp> {
                   ),
                 ),
 
-                Column(
-                      children:[
-                    Padding(
-                      padding: const EdgeInsets.only(top: 30,right: 10,left: 10),
-                      child: Column(
-                        children: [
-                          GridView.count(
-                            physics: BouncingScrollPhysics(),
-                            mainAxisSpacing: 20,
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            crossAxisCount: 4,
-                            children: List.generate(items.length, (index) {
-                              return Center(
-                                child: Column(
-                                  children: [
-                                    Image.asset(
-                                      items[index].image,
-                                      height: 63,
-                                      width: 63,
-                                    ),
-                                    SizedBox(height: 8),
-                                    Text(items[index].name,style: TextStyle(fontWeight: FontWeight.w600,fontSize: 12),),
-                                  ],
+                Consumer<DownloadAppsProvider>(
+
+                  builder: (context, downloadAppProvider,child) {
+                    if(downloadAppProvider.appsLoading){
+                      return Center(child: CircularProgressIndicator(color: Palette.baseElementGreen,));
+                    }else if(downloadAppProvider.appsList.isNotEmpty){
+                      return Column(
+                        children:[
+                          Padding(
+                            padding: const EdgeInsets.only(top: 30,right: 10,left: 10),
+                            child: Column(
+                              children: [
+                                GridView.count(
+                                  physics: BouncingScrollPhysics(),
+                                  mainAxisSpacing: 20,
+                                  scrollDirection: Axis.vertical,
+                                  shrinkWrap: true,
+                                  crossAxisCount: 4,
+                                  children: List.generate(downloadAppProvider.appsList.length, (index) {
+                                    return InkWell(
+                                      onTap: (){
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => AppDetails(appModel: downloadAppProvider.appsList[index])));
+
+                                       // _launchUrl(Uri.parse(downloadAppProvider.appsList[index].url));
+                                      },
+                                      child: Center(
+                                        child: Column(
+                                          children: [
+                                            Image.network(
+                                              downloadAppProvider.appsList[index].image,
+                                              height: 63,
+                                              width: 63,
+                                            ),
+                                            SizedBox(height: 8),
+                                            Text(downloadAppProvider.appsList[index].title,style: TextStyle(fontWeight: FontWeight.w600,fontSize: 12),),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  ),
                                 ),
-                              );
-                            },
+
+                              ],
                             ),
                           ),
-
-                        ],
-                      ),
-                    ),
-                     Padding(
-                       padding: const EdgeInsets.only(left: 10,right: 10,top:20),
-                       child: Container(
-                         height: 130,
-                         width: 388,
-                         decoration: BoxDecoration(
-                           borderRadius: BorderRadius.circular(15.0),
-                           gradient: LinearGradient(colors: [Colors.black,Colors.grey]),
-                         ),
-                         child: Row(
-                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                           children: [
-                             Padding(
-                               padding: const EdgeInsets.only(top: 30),
-                               child: Column(
-                                 children: [
-                                   Text("Uber",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize: 50),),
-                                 ],
-                               ),
-                             ),
-                             Padding(
-                               padding: const EdgeInsets.only(top: 30),
-                               child: Column(
-                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                 children: [
-                                   Text("Download the App",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize:18 ),),
-                                  SizedBox(height: 10,),
-                                   Text("Earn Points",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize:18 ),),
-                                 ],
-                               ),
-                             ),
-                           ],
-                         ),
-                       ),
-                     ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 30,right: 10,left: 10),
-                          child: Column(
-                            children: [
-                              GridView.count(
-                                physics: BouncingScrollPhysics(),
-                                mainAxisSpacing: 20,
-                                scrollDirection: Axis.vertical,
-                                shrinkWrap: true,
-                                crossAxisCount: 4,
-                                children: List.generate(items2.length, (index) {
-                                  return Center(
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10,right: 10,top:20),
+                            child: Container(
+                              height: 130,
+                              width: 388,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                gradient: LinearGradient(colors: [Colors.black,Colors.grey]),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 30),
                                     child: Column(
                                       children: [
-                                        Image.asset(
-                                          items2[index].image,
-                                          height: 63,
-                                          width: 63,
-                                        ),
-                                        SizedBox(height: 8),
-                                        Text(items2[index].name,style: TextStyle(fontWeight: FontWeight.w600,fontSize: 12),),
+                                        Text("Uber",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize: 50),),
                                       ],
                                     ),
-                                  );
-                                },
-                                ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 30),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text("Download the App",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize:18 ),),
+                                        SizedBox(height: 10,),
+                                        Text("Earn Points",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize:18 ),),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
-
-                            ],
+                            ),
                           ),
-                        ),
+                          // Padding(
+                          //   padding: const EdgeInsets.only(top: 30,right: 10,left: 10),
+                          //   child: Column(
+                          //     children: [
+                          //       GridView.count(
+                          //         physics: BouncingScrollPhysics(),
+                          //         mainAxisSpacing: 20,
+                          //         scrollDirection: Axis.vertical,
+                          //         shrinkWrap: true,
+                          //         crossAxisCount: 4,
+                          //         children: List.generate(items2.length, (index) {
+                          //           return Center(
+                          //             child: Column(
+                          //               children: [
+                          //                 Image.asset(
+                          //                   items2[index].image,
+                          //                   height: 63,
+                          //                   width: 63,
+                          //                 ),
+                          //                 SizedBox(height: 8),
+                          //                 Text(items2[index].name,style: TextStyle(fontWeight: FontWeight.w600,fontSize: 12),),
+                          //               ],
+                          //             ),
+                          //           );
+                          //         },
+                          //         ),
+                          //       ),
+                          //
+                          //     ],
+                          //   ),
+                          // ),
 
 
-    ],
-    ),
+                        ],
+                      );
+                    }else{
+                      return Center(child: Text('No Apps'));
+                    }
+
+                  }
+                ),
 
                   ],
             ),
