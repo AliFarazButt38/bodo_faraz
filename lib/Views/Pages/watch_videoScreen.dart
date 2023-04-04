@@ -261,7 +261,7 @@ class _WatchVideoState extends State<WatchVideo> {
               right: 10,
               child: Container(
                 width: 388.w,
-                height: 90,
+                height: 100,
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
@@ -279,7 +279,7 @@ class _WatchVideoState extends State<WatchVideo> {
                   ),
                   child: ListTile(
                     title: Padding(
-                      padding: const EdgeInsets.only(top: 20),
+                      padding: const EdgeInsets.only(top: 15),
                       child: Column(
                         children: [
                           Row(
