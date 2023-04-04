@@ -26,37 +26,36 @@ class _CategoryVideosState extends State<CategoryVideos> {
             Column(
               children: [
                 Container(
-                  height: 347.h,
-                  width:428.w,
+                  height: 500,
+                  width:MediaQuery.of(context).size.width,
                   decoration: const BoxDecoration(
                     // color: Colors.blueAccent,
                     gradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.only(top: 50.h,left: 20.w,right: 20.w),
-                    child: Row(
-                      mainAxisAlignment:  MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children:  [
-                        InkWell(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child:
-                          Image.asset("assets/icons/backward.png",height: 25.h,width: 25.w,),
+                    padding: const EdgeInsets.only(left: 10.0,right: 10.0),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 50),
+                      child: Row(
+                        mainAxisAlignment:  MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children:  [
+                          GestureDetector(
+                            onTap: (){
+                              Navigator.pop(context);
+                            },
+                            child:ImageIcon(AssetImage("assets/icons/backward.png",),size: 30,color: Colors.white,),
+                          ),
 
-                        ),
-                        Text("Watch Videos",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25.sp),),
-                        InkWell
-                          (
-                          onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Notifications()));
-                          },
-                          child: Image.asset("assets/icons/notification.png",height: 20.h,width: 19.w,),
-
-                        ),
-
-                      ],
+                          Text("Video Tasks",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
+                          InkWell
+                            (
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Notifications()));
+                              },
+                              child: ImageIcon(AssetImage('assets/icons/notification.png',),size: 25,color: Colors.white,)),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -93,8 +92,8 @@ class _CategoryVideosState extends State<CategoryVideos> {
                         children: [
                           SizedBox(height: 10.h),
                           Container(
-                            width: 388.w,
-                            height: 90.h,
+                            width: 390,
+                            height: 90,
                             decoration: BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
@@ -112,49 +111,40 @@ class _CategoryVideosState extends State<CategoryVideos> {
                               ),
                               child: ListTile(
                                 title: Padding(
-                                  padding:  EdgeInsets.only(bottom: 10.h),
-                                  child: Column(
-                                    children: [
-                                      SizedBox(height: 10.h,),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children:  [
-                                          Text("Watch Videos",style: TextStyle(color: Colors.black,fontSize: 16.sp,fontWeight: FontWeight.w600),),
-                                          Text("41/60",style: TextStyle(color: Colors.black,fontSize: 14.sp,fontWeight: FontWeight.w600),),
-                                        ],
-                                      ),
-                                      SizedBox(height: 15.h,),
-                                      LinearPercentIndicator(
-                                        barRadius: Radius.circular(15.0),
-                                        animation: true,
-                                        lineHeight: 12,
-                                        percent: 0.7,
-                                        // progressColor: Colors.blueAccent,
-                                        linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
-                                        backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
-
-                                      ),
+                                  padding: const EdgeInsets.only(bottom: 13),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: const [
+                                      Text("Watch Videos",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
+                                      Text("41/60"),
                                     ],
                                   ),
                                 ),
+                                subtitle: LinearPercentIndicator(
+                                  barRadius: Radius.circular(15.0),
+                                  animation: true,
+                                  lineHeight: 12,
+                                  percent: 0.7,
+                                  // progressColor: Colors.blueAccent,
+                                  linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
+                                  backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
+
+
+                                ),
                                 leading: Padding(
-                                  padding:  EdgeInsets.only(left: 10.0.w,top: 18.0.h),
+                                  padding: const EdgeInsets.only(left: 10.0,top: 18.0),
                                   child: Column(
-                                    children:  [
-                                      Image.asset("assets/icons/video.png",height:15.h ,width: 14.w,color: Colors.black,),
+                                    children: const [
+                                      ImageIcon(AssetImage('assets/icons/video.png',),size: 25,color: Colors.black,),
                                     ],
                                   ),
                                 ),
 
                                 trailing: Padding(
-                                  padding:  EdgeInsets.only(left: 10.0.w,top: 18.0.h),
+                                  padding: const EdgeInsets.only(left: 10.0,top: 18.0),
                                   child: Column(
-                                    children:  [
-
-                                      Padding(
-                                        padding:  EdgeInsets.only(left: 20.w),
-                                        child: Image.asset("assets/icons/next.png",height:15.h ,width: 14.w,color: Colors.black,),
-                                      ),
+                                    children: const [
+                                      ImageIcon(AssetImage('assets/icons/next.png',),size: 22,color: Colors.black,),
                                     ],
                                   ),
                                 ),
@@ -164,10 +154,11 @@ class _CategoryVideosState extends State<CategoryVideos> {
                               ),
                             ),
                           ),
+                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>WatchVideo()));
                           SizedBox(height: 10.h),
                           Container(
-                            width: 388.w,
-                            height: 90.h,
+                            width: 390,
+                            height: 90,
                             decoration: BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
@@ -185,58 +176,50 @@ class _CategoryVideosState extends State<CategoryVideos> {
                               ),
                               child: ListTile(
                                 title: Padding(
-                                  padding:  EdgeInsets.only(bottom: 10.h),
-                                  child: Column(
-                                    children: [
-                                      SizedBox(height: 10.h,),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children:  [
-                                          Text("Watch add",style: TextStyle(color: Colors.black,fontSize: 16.sp,fontWeight: FontWeight.w600),),
-                                          Text("41/60",style: TextStyle(color: Colors.black,fontSize: 14.sp,fontWeight: FontWeight.w600),),
-                                        ],
-                                      ),
-                                      SizedBox(height: 15.h,),
-                                      LinearPercentIndicator(
-                                        barRadius: Radius.circular(15.0),
-                                        animation: true,
-                                        lineHeight: 12,
-                                        percent: 0.7,
-                                        // progressColor: Colors.blueAccent,
-                                        linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
-                                        backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
-
-                                      ),
+                                  padding: const EdgeInsets.only(bottom: 13),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: const [
+                                      Text("Watch add",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
+                                      Text("41/60"),
                                     ],
                                   ),
                                 ),
+                                subtitle: LinearPercentIndicator(
+                                  barRadius: Radius.circular(15.0),
+                                  animation: true,
+                                  lineHeight: 12,
+                                  percent: 0.7,
+                                  // progressColor: Colors.blueAccent,
+                                  linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
+                                  backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
+
+
+                                ),
                                 leading: Padding(
-                                  padding:  EdgeInsets.only(left: 10.0.w,top: 15.0.h),
+                                  padding: const EdgeInsets.only(left: 10.0,top: 18.0),
                                   child: Column(
-                                    children:  [
-                                      Image.asset("assets/icons/review.png",height:21.h ,width: 21.w,color: Colors.black,),
+                                    children: const [
+                                      ImageIcon(AssetImage('assets/icons/review.png',),size: 21,color: Colors.black,),
                                     ],
                                   ),
                                 ),
 
                                 trailing: Padding(
-                                  padding:  EdgeInsets.only(left: 10.0.w,top: 18.0.h),
+                                  padding: const EdgeInsets.only(left: 10.0,top: 18.0),
                                   child: Column(
-                                    children:  [
-
-                                      Padding(
-                                        padding:  EdgeInsets.only(left: 20.w),
-                                        child: Image.asset("assets/icons/next.png",height:15.h ,width: 14.w,color: Colors.black,),
-                                      ),
+                                    children: const [
+                                      ImageIcon(AssetImage('assets/icons/next.png',),size: 22,color: Colors.black,),
                                     ],
                                   ),
                                 ),
                                 onTap: () {
-                                   Navigator.push(context, MaterialPageRoute(builder: (context)=>WriteReview()));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>WatchVideo()));
                                 },
                               ),
                             ),
                           ),
+                      // Navigator.push(context, MaterialPageRoute(builder: (context)=>WriteReview()));
 
                         ],
                       ),

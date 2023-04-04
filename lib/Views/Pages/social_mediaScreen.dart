@@ -53,37 +53,36 @@ class _SocialMediaState extends State<SocialMedia> {
             Column(
               children: [
                 Container(
-                  height: 347.h,
-                  width:429.w,
+                  height: 500,
+                  width:MediaQuery.of(context).size.width,
                   decoration: const BoxDecoration(
                     // color: Colors.blueAccent,
                     gradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
                   ),
                   child: Padding(
-                    padding:  EdgeInsets.only(top: 50.h,right: 20.w,left: 20.w),
-                    child: Row(
-                      mainAxisAlignment:  MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children:  [
-                        GestureDetector(
-                          onTap: (){
-                            Navigator.pop(context);
-                          },
-                          child:Image.asset("assets/icons/backward.png",height: 30.h,width: 30.w,),
-                        ),
-
-                        Text("Social Media Tasks",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25.sp),),
-                        InkWell
-                          (
+                    padding: const EdgeInsets.only(left: 10.0,right: 10.0),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 35),
+                      child: Row(
+                        mainAxisAlignment:  MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children:  [
+                          GestureDetector(
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Notifications()));
+                              Navigator.pop(context);
                             },
-                            child: Padding(
-                              padding:  EdgeInsets.only(top: 6.h),
-                              child: Image.asset('assets/icons/notification.png',height: 20.h,width: 19.w,),
-                            ),
-                        ),
-                      ],
+                            child:ImageIcon(AssetImage("assets/icons/backward.png",),size: 30,color: Colors.white,),
+                          ),
+
+                          Text("Social Media Tasks",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
+                          InkWell
+                            (
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Notifications()));
+                              },
+                              child: ImageIcon(AssetImage('assets/icons/notification.png',),size: 25,color: Colors.white,)),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -220,11 +219,12 @@ class _SocialMediaState extends State<SocialMedia> {
 
 
             Positioned(
-              top: 90,
-              left: 18,
+              top: 100,
+              left: 10,
+              right: 10,
               child: Container(
-                width: 387.w,
-                height: 100.h,
+                width: 388.w,
+                height: 90,
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
@@ -242,19 +242,19 @@ class _SocialMediaState extends State<SocialMedia> {
                   ),
                   child: ListTile(
                     title: Padding(
-                      padding:  EdgeInsets.only(top: 10.h),
+                      padding: const EdgeInsets.only(top: 15),
                       child: Column(
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children:  [
-                              Text("Social Media Reacts",style: TextStyle(color: Colors.black,fontSize: 16.sp,fontWeight: FontWeight.w600),),
-                              Text("41/60",style: TextStyle(color: Colors.black,fontSize: 14.sp,fontWeight: FontWeight.w600),),
+                            children: const [
+                              Text("Social Media Reacts",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
+                              Text("41/60"),
                             ],
                           ),
 
                           Padding(
-                            padding:  EdgeInsets.only(top: 10.h),
+                            padding: const EdgeInsets.only(top: 5),
                             child: LinearPercentIndicator(
                               barRadius: Radius.circular(15.0),
                               animation: true,
@@ -265,17 +265,35 @@ class _SocialMediaState extends State<SocialMedia> {
                               backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
                             ),
                           ),
-                          SizedBox(height: 5.h,),
-                          Text("Complete Tasks to earn points",style: TextStyle(color: Colors.grey,fontSize: 12.sp)),
+                          SizedBox(height: 5,),
+                          Text("Complete task to earn points",style: TextStyle(color: Colors.grey,fontSize: 15)),
                         ],
                       ),
                     ),
+                    // subtitle: Padding(
+                    //   padding: const EdgeInsets.only(top: 20),
+                    //   child: Column(
+                    //     children: [
+                    //       LinearPercentIndicator(
+                    //         barRadius: Radius.circular(15.0),
+                    //         animation: true,
+                    //         lineHeight: 12,
+                    //         percent: 0.7,
+                    //         // progressColor: Colors.blueAccent,
+                    //         linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
+                    //         backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
+                    //       ),
+                    //       SizedBox(height: 5,),
+                    //       Text("Watch Videos to Earn points",style: TextStyle(color: Colors.grey,fontSize: 15)),
+                    //     ],
+                    //   ),
+                    // ),
 
                     leading: Padding(
-                      padding:  EdgeInsets.only(left: 10.w,top: 10.h),
+                      padding: const EdgeInsets.only(left: 8.0,top: 12.0),
                       child: Column(
-                        children:  [
-                         Image.asset("assets/icons/social.png",height: 18.h,width: 20.w,),
+                        children: const [
+                          ImageIcon(AssetImage('assets/icons/social.png',),size: 25,color: Colors.black,),
                         ],
 
                       ),

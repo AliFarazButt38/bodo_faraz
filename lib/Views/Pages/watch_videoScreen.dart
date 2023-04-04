@@ -1,6 +1,7 @@
 import 'package:bodoo_flutter/Providers/video_provider.dart';
 import 'package:bodoo_flutter/Theme/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
@@ -256,10 +257,11 @@ class _WatchVideoState extends State<WatchVideo> {
 
             Positioned(
               top: 90,
-              left: 13,
+              left: 10,
+              right: 10,
               child: Container(
-                width: 370,
-                height: 110,
+                width: 388.w,
+                height: 90,
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
@@ -289,7 +291,7 @@ class _WatchVideoState extends State<WatchVideo> {
                           ),
 
                           Padding(
-                            padding: const EdgeInsets.only(top: 10),
+                            padding: const EdgeInsets.only(top: 5),
                             child: LinearPercentIndicator(
                               barRadius: Radius.circular(15.0),
                               animation: true,
