@@ -42,7 +42,7 @@ class _SigninState extends State<Signin> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, designSize: const Size(428, 926));
+
     ScreenConfig().init(context);
     return Scaffold(
       body: SingleChildScrollView(

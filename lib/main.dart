@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'Providers/download_apps_provider.dart';
 import 'Utils/navigator.dart';
+import 'Views/Pages/task_screen.dart';
 
 void main() {
   runApp(

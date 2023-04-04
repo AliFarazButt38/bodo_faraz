@@ -36,8 +36,8 @@ class _TaskState extends State<Task> {
               Column(
                 children: [
                   Container(
-                    height: 500,
-                    width:MediaQuery.of(context).size.width,
+                    height: 347,
+                    width:428,
                     decoration: const BoxDecoration(
                       // color: Colors.blueAccent,
                       gradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
