@@ -7,6 +7,7 @@ import 'package:bodoo_flutter/Providers/survey_provider.dart';
 import 'package:bodoo_flutter/Providers/video_provider.dart';
 import 'package:bodoo_flutter/Providers/wallet_provider.dart';
 import 'package:bodoo_flutter/Providers/write_review_provider.dart';
+import 'package:bodoo_flutter/Views/Pages/SubscriptionScreen.dart';
 import 'package:bodoo_flutter/Views/Pages/app_detail.dart';
 import 'package:bodoo_flutter/Views/Pages/download_appScreen.dart';
 import 'package:bodoo_flutter/Views/Pages/forgot_password.dart';
@@ -16,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'Providers/download_apps_provider.dart';
 import 'Utils/navigator.dart';
+import 'Views/Pages/SubscriptionPlan.dart';
 import 'Views/Pages/task_screen.dart';
 
 void main() {

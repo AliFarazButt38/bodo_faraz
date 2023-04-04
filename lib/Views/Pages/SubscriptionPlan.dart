@@ -88,11 +88,12 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
       decoration: BoxDecoration(
         color: Colors.transparent,
 
+
       ),
       child: Stack(
         children: [
           Positioned(
-            top: 30,
+            top: 40,
             child: Container(
               height: 134.6,
               width: 292,
@@ -101,7 +102,9 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
                   topRight: Radius.circular(10),
                   topLeft: Radius.circular(10),
                 ),
-                color: Color(0xffEAB705),
+              
+                gradient: LinearGradient(colors: [Color(0xffEAB705),Color(0xffDC8A03)]),
+
               ),
               child: Padding(
                 padding:  EdgeInsets.only(top: 70),
@@ -239,12 +242,6 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
         ],
       ),
     ),
-
-
-
-
-
-
     Container(
       width: 292,
       height: 537,
@@ -264,7 +261,7 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
                   topRight: Radius.circular(10),
                   topLeft: Radius.circular(10),
                 ),
-                color: Color(0xff407BFF),
+                gradient: LinearGradient(colors: [Color(0xff407BFF),Color(0xff1737AF)]),
               ),
               child: Padding(
                 padding:  EdgeInsets.only(top: 70),
@@ -291,8 +288,8 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
                 Positioned(
                   child:
                   Padding(
-                    padding:  EdgeInsets.only(left: 25,top: 20,),
-                    child: Image.asset("assets/icons/BlueStar.png",height:50,width:50,),
+                    padding:  EdgeInsets.only(left: 25,top: 25,),
+                    child: Image.asset("assets/icons/2star.png",height:50,width:50,),
                   ),
                 ),
               ],
@@ -421,7 +418,7 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
                   topRight: Radius.circular(10),
                   topLeft: Radius.circular(10),
                 ),
-                color: Color(0xffE10049),
+                gradient: LinearGradient(colors: [Color(0xffE10049),Color(0xffB9003C)]),
               ),
               child: Padding(
                 padding:  EdgeInsets.only(top: 70),
@@ -448,8 +445,8 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
                 Positioned(
                   child:
                   Padding(
-                    padding:  EdgeInsets.only(left: 25,top: 20,),
-                    child: Image.asset("assets/icons/PinkStar.png",height:50,width:50,),
+                    padding:  EdgeInsets.only(left: 18,top: 15,),
+                    child: Image.asset("assets/icons/premiumStar.png",height:70,width:70,),
                   ),
                 ),
               ],
