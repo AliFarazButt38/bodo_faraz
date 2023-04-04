@@ -90,7 +90,7 @@ class _DownloadAppState extends State<DownloadApp> {
                             onTap: (){
                               Navigator.pop(context);
                     },
-                          child:ImageIcon(AssetImage("assets/icons/backward.png",),size: 30,color: Colors.white,),
+                          child:ImageIcon(AssetImage("assets/icons/backward.png",),size: 30.sp,color: Colors.white,),
                           ),
 
                           Text("Download App",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25.sp),),
@@ -99,7 +99,7 @@ class _DownloadAppState extends State<DownloadApp> {
                               onTap: (){
                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>Notifications()));
                               },
-                              child: ImageIcon(AssetImage('assets/icons/notification.png',),size: 25,color: Colors.white,)),
+                              child: ImageIcon(AssetImage('assets/icons/notification.png',),size: 25.sp,color: Colors.white,)),
                         ],
                       ),
                     ),
@@ -113,7 +113,7 @@ class _DownloadAppState extends State<DownloadApp> {
       Positioned.fill(
         top: 150,
         child: Container(
-          height: MediaQuery.of(context).size.height,
+          height: 735.h,
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(topRight: Radius.circular(20.0),topLeft: Radius.circular(20.0)),
@@ -124,13 +124,13 @@ class _DownloadAppState extends State<DownloadApp> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 80,left: 25),
+                  padding:  EdgeInsets.only(top: 80.h,left: 25.w),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Download App",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600),),
+                      Text("Download App",style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.w600),),
                       SizedBox(height: 5,),
-                      Text("Earn points on downloading Apps",style: TextStyle(fontSize: 18,color: Colors.grey),),
+                      Text("Earn points on downloading Apps",style: TextStyle(fontSize: 16.sp,color: Colors.grey),),
                     ],
                   ),
                 ),
@@ -144,7 +144,7 @@ class _DownloadAppState extends State<DownloadApp> {
                       return Column(
                         children:[
                           Padding(
-                            padding: const EdgeInsets.only(top: 30,right: 10,left: 10),
+                            padding:  EdgeInsets.only(top: 30.h,right: 10.w,left: 10.w),
                             child: Column(
                               children: [
                                 GridView.count(
@@ -165,11 +165,11 @@ class _DownloadAppState extends State<DownloadApp> {
                                           children: [
                                             Image.network(
                                               downloadAppProvider.appsList[index].image,
-                                              height: 63,
-                                              width: 63,
+                                              height: 63.h,
+                                              width: 63.w,
                                             ),
-                                            SizedBox(height: 8),
-                                            Text(downloadAppProvider.appsList[index].title,style: TextStyle(fontWeight: FontWeight.w600,fontSize: 12),),
+                                            SizedBox(height: 10.h),
+                                            Text(downloadAppProvider.appsList[index].title,style: TextStyle(fontWeight: FontWeight.w600,fontSize: 12.sp),),
                                           ],
                                         ),
                                       ),
@@ -184,8 +184,8 @@ class _DownloadAppState extends State<DownloadApp> {
                           Padding(
                             padding: const EdgeInsets.only(left: 10,right: 10,top:20),
                             child: Container(
-                              height: 130,
-                              width: 388,
+                              height: 130.h,
+                              width: 388.w,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15.0),
                                 gradient: LinearGradient(colors: [Colors.black,Colors.grey]),
@@ -194,21 +194,21 @@ class _DownloadAppState extends State<DownloadApp> {
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 30),
+                                    padding:  EdgeInsets.only(top: 30.h),
                                     child: Column(
                                       children: [
-                                        Text("Uber",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize: 50),),
+                                        Text("Uber",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize: 50.sp),),
                                       ],
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 30),
+                                    padding:  EdgeInsets.only(top: 30.h),
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text("Download the App",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize:18 ),),
-                                        SizedBox(height: 10,),
-                                        Text("Earn Points",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize:18 ),),
+                                        Text("Download the App",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize:18.sp ),),
+                                        SizedBox(height: 10.h,),
+                                        Text("Earn Points",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize:18.sp ),),
                                       ],
                                     ),
                                   ),
@@ -267,7 +267,7 @@ class _DownloadAppState extends State<DownloadApp> {
               top: 100,
               left: 13,
               child: Container(
-                width: 370,
+                width: 388.w,
                 height: 90,
                 decoration: BoxDecoration(
                   boxShadow: [
@@ -289,9 +289,9 @@ class _DownloadAppState extends State<DownloadApp> {
                       padding: const EdgeInsets.only(bottom: 13),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text("Download App",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
-                          Text("41/60",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w600),),
+                        children:  [
+                          Text("Download App",style: TextStyle(color: Colors.black,fontSize: 16.sp,fontWeight: FontWeight.w600),),
+                          Text("41/60",style: TextStyle(fontSize: 14.sp,fontWeight: FontWeight.w600),),
                         ],
                       ),
                     ),
