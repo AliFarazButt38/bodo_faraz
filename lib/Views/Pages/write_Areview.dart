@@ -2,6 +2,7 @@ import 'package:bodoo_flutter/Providers/write_review_provider.dart';
 import 'package:bodoo_flutter/Theme/palette.dart';
 import 'package:bodoo_flutter/Views/Pages/review_details.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
@@ -57,6 +58,7 @@ class _WriteReviewState extends State<WriteReview> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, designSize: const Size(428, 926));
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -235,9 +237,10 @@ class _WriteReviewState extends State<WriteReview> {
 
             Positioned(
               top: 100,
-              left: 13,
+              left: 10,
+              right: 10,
               child: Container(
-                width: 370,
+                width: 388.w,
                 height: 90,
                 decoration: BoxDecoration(
                   boxShadow: [

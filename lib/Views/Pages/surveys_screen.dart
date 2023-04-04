@@ -2,6 +2,7 @@
 import 'package:bodoo_flutter/Providers/survey_provider.dart';
 import 'package:bodoo_flutter/Theme/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -62,6 +63,7 @@ class _SurveysState extends State<Surveys> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, designSize: const Size(428, 926));
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -317,9 +319,10 @@ class _SurveysState extends State<Surveys> {
 
             Positioned(
               top: 100,
-              left: 13,
+              left: 10,
+              right: 10,
               child: Container(
-                width: 370,
+                width: 388.w,
                 height: 90,
                 decoration: BoxDecoration(
                   boxShadow: [
