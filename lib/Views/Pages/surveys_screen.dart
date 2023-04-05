@@ -230,8 +230,7 @@ class _SurveysState extends State<Surveys> {
                                                 Column(
                                                   children: [
                                                     surveyProvider.checkList[index] == false ?
-                                                    Padding(
-                                                      padding: const EdgeInsets.only(left: 55),
+                                                    Center(
                                                       child: ElevatedButton(
                                                         onPressed: () {
                                                           //  Uri _url = Uri.parse(surveyProvider.surveysList!.googleForms[index]);
@@ -260,37 +259,36 @@ class _SurveysState extends State<Surveys> {
                                                         ),
                                                       ),
                                                     )
-                                                        :  Padding(
-                                                      padding: const EdgeInsets.only(left: 55),
-                                                      child: ElevatedButton(
-                                                        onPressed: () {
-                                                          //  Uri _url = Uri.parse(surveyProvider.surveysList!.googleForms[index]);
-                                                          // surveyProvider.setCheckTrue(index);
-                                                          // _launchUrl(Uri.parse(surveyProvider.surveysList!.googleForms[index]));
-                                                          surveyProvider.postSurvey(surveyProvider.surveysList[index].googleFormId)
+                                                        :  Center(
+                                                          child: ElevatedButton(
+                                                            onPressed: () {
+                                                              //  Uri _url = Uri.parse(surveyProvider.surveysList!.googleForms[index]);
+                                                              // surveyProvider.setCheckTrue(index);
+                                                              // _launchUrl(Uri.parse(surveyProvider.surveysList!.googleForms[index]));
+                                                              surveyProvider.postSurvey(surveyProvider.surveysList[index].googleFormId)
 ;                                                    },
-                                                        style: ElevatedButton.styleFrom(
-                                                            padding: EdgeInsets.zero,
-                                                            shape: RoundedRectangleBorder(
-                                                                borderRadius: BorderRadius.circular(20))),
-                                                        child: Ink(
-                                                          decoration: BoxDecoration(
-                                                              gradient:
-                                                              const LinearGradient(colors: [Colors.blueAccent, Colors.greenAccent]),
-                                                              borderRadius: BorderRadius.circular(10)),
-                                                          child: Container(
-                                                            width: 250,
-                                                            height: 47,
-                                                            alignment: Alignment.center,
-                                                            child: const Text(
-                                                              'Mark as Done',
-                                                              style:
-                                                              const TextStyle(fontSize: 18, ),
+                                                            style: ElevatedButton.styleFrom(
+                                                                padding: EdgeInsets.zero,
+                                                                shape: RoundedRectangleBorder(
+                                                                    borderRadius: BorderRadius.circular(20))),
+                                                            child: Ink(
+                                                              decoration: BoxDecoration(
+                                                                  gradient:
+                                                                  const LinearGradient(colors: [Colors.blueAccent, Colors.greenAccent]),
+                                                                  borderRadius: BorderRadius.circular(10)),
+                                                              child: Container(
+                                                                width: 250,
+                                                                height: 47,
+                                                                alignment: Alignment.center,
+                                                                child: const Text(
+                                                                  'Mark as Done',
+                                                                  style:
+                                                                  const TextStyle(fontSize: 18, ),
+                                                                ),
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ),
                                                   ],
                                                 ),
                                               ],
