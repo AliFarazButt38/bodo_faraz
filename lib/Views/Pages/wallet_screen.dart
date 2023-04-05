@@ -1,3 +1,4 @@
+import 'package:bodoo_flutter/Providers/level_provider.dart';
 import 'package:bodoo_flutter/Providers/wallet_provider.dart';
 import 'package:bodoo_flutter/Views/Pages/social_mediaScreen.dart';
 import 'package:bodoo_flutter/Views/Pages/surveys_screen.dart';
@@ -20,6 +21,15 @@ class Wallet extends StatefulWidget {
 class _Wallet extends State<Wallet> {
   int _selectedIndex = 0;
   final List<String> days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<WalletProvider>(context,listen: false).getPostpondReward();
+    Provider.of<WalletProvider>(context,listen: false).getGraphValues();
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -312,52 +322,57 @@ class _Wallet extends State<Wallet> {
                               ),
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: Column(
-                              children: [
-                                SizedBox(height: 10,),
-                                Text("Points From Network",style: TextStyle(color: Colors.grey,fontSize: 16),),
-                                SizedBox(height: 10,),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 8.0),
-                                      child: ImageIcon(AssetImage("assets/icons/staryellow.png"),size: 25,color: Colors.yellowAccent,),
-                                    ),
+                            child: Consumer<WalletProvider>(
 
-                                    Text("50,000",style: TextStyle(fontSize: 32,fontWeight: FontWeight.bold),),
-                                  ],
-                                ),
-                                SizedBox(height: 30,),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              builder: (context, walletProvider,child) {
+                                return Column(
                                   children: [
-                                    Column(
+                                    SizedBox(height: 10,),
+                                    Text("Points From Network",style: TextStyle(color: Colors.grey,fontSize: 16),),
+                                    SizedBox(height: 10,),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        Text("Postponed Reward",style: TextStyle(color: Colors.grey,fontSize:14 ),),
-                                        SizedBox(height: 15,),
-                                        Row(
+                                        Padding(
+                                          padding: const EdgeInsets.only(right: 8.0),
+                                          child: ImageIcon(AssetImage("assets/icons/staryellow.png"),size: 25,color: Colors.yellowAccent,),
+                                        ),
+
+                                        Text(walletProvider.referralModel != null ? '${walletProvider.referralModel!.totalEarning}' : '0',style: TextStyle(fontSize: 32,fontWeight: FontWeight.bold),),
+                                      ],
+                                    ),
+                                    SizedBox(height: 30,),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Column(
                                           children: [
-                                            Text("20,000",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),),
-                                            Padding(
-                                              padding: const EdgeInsets.only(left: 5),
-                                              child: Text("EGP",style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),),
+                                            Text("Postponed Reward",style: TextStyle(color: Colors.grey,fontSize:14 ),),
+                                            SizedBox(height: 15,),
+                                            Row(
+                                              children: [
+                                                Text(walletProvider.referralModel != null ? '${walletProvider.referralModel!.todayEarning}' : '0',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(left: 5),
+                                                  child: Text("EGP",style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),),
+                                                ),
+                                              ],
                                             ),
+                                          ],
+                                        ),
+                                        SizedBox(height: 20,),
+                                        Column(
+                                          children: [
+                                            Text("Network Members",style: TextStyle(color: Colors.grey,fontSize:14 ),),
+                                            SizedBox(height: 15,),
+                                            Text(walletProvider.referralModel != null ? '${walletProvider.referralModel!.accounts}' : '0',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),),
                                           ],
                                         ),
                                       ],
                                     ),
-                                    SizedBox(height: 20,),
-                                    Column(
-                                      children: [
-                                        Text("Network Members",style: TextStyle(color: Colors.grey,fontSize:14 ),),
-                                        SizedBox(height: 15,),
-                                        Text("23",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),),
-                                      ],
-                                    ),
                                   ],
-                                ),
-                              ],
+                                );
+                              }
                             ),
                           ),
                         ),
@@ -377,329 +392,338 @@ class _Wallet extends State<Wallet> {
 
 
 
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15,top: 15,right: 15),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: 390,
-                                height: 90,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.1),
-                                      spreadRadius: 0,
-                                      blurRadius: 9,
-                                      offset: Offset(1, 3),
-                                    ),
-                                  ],
-                                ),
-                                child: Card(
-                                  elevation: 2,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: ListTile(
-                                    title: Padding(
-                                      padding: const EdgeInsets.only(bottom: 13),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: const [
-                                          Text("Watch Videos",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
-                                          Text("41/60"),
-                                        ],
-                                      ),
-                                    ),
-                                    subtitle: LinearPercentIndicator(
-                                      barRadius: Radius.circular(15.0),
-                                      animation: true,
-                                      lineHeight: 12,
-                                      percent: 0.7,
-                                      // progressColor: Colors.blueAccent,
-                                      linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
-                                      backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
+                        Consumer<LevelProvider>(
 
+                          builder: (context, levelProvider, child) {
+                            return Padding(
+                              padding: const EdgeInsets.only(left: 15,top: 15,right: 15),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: 390,
+                                    height: 90,
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.1),
+                                          spreadRadius: 0,
+                                          blurRadius: 9,
+                                          offset: Offset(1, 3),
+                                        ),
+                                      ],
                                     ),
-                                    leading: Padding(
-                                      padding: const EdgeInsets.only(left: 10.0,top: 18.0),
-                                      child: Column(
-                                        children: const [
-                                          ImageIcon(AssetImage('assets/icons/video.png',),size: 25,color: Colors.black,),
-                                        ],
+                                    child: Card(
+                                      elevation: 2,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
                                       ),
-                                    ),
+                                      child: ListTile(
+                                        title: Padding(
+                                          padding: const EdgeInsets.only(bottom: 13),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children:  [
+                                              Text("Watch Videos",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
+                                              Text("${levelProvider.completedVideos}/${levelProvider.totalVideos}"),
+                                            ],
+                                          ),
+                                        ),
+                                        subtitle: LinearPercentIndicator(
+                                          barRadius: Radius.circular(15.0),
+                                          animation: true,
+                                          lineHeight: 12,
+                                          percent: levelProvider.totalVideos == 0 ?  levelProvider.completedVideos/1 : levelProvider.completedVideos/levelProvider.totalVideos,
 
-                                    trailing: Padding(
-                                      padding: const EdgeInsets.only(left: 10.0,top: 18.0),
-                                      child: Column(
-                                        children: const [
-                                          ImageIcon(AssetImage('assets/icons/next.png',),size: 22,color: Colors.black,),
-                                        ],
+                                          // progressColor: Colors.blueAccent,
+                                          linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
+                                          backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
+
+                                        ),
+                                        leading: Padding(
+                                          padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                                          child: Column(
+                                            children: const [
+                                              ImageIcon(AssetImage('assets/icons/video.png',),size: 25,color: Colors.black,),
+                                            ],
+                                          ),
+                                        ),
+
+                                        trailing: Padding(
+                                          padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                                          child: Column(
+                                            children: const [
+                                              ImageIcon(AssetImage('assets/icons/next.png',),size: 22,color: Colors.black,),
+                                            ],
+                                          ),
+                                        ),
+                                        onTap: () {
+                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>WatchVideo()));
+                                        },
                                       ),
                                     ),
-                                    onTap: () {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>WatchVideo()));
-                                    },
                                   ),
-                                ),
+                                  SizedBox(height: 10),
+                                  Container(
+                                    width: 390,
+                                    height: 90,
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.1),
+                                          spreadRadius: 0,
+                                          blurRadius: 9,
+                                          offset: Offset(1, 3),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Card(
+                                      elevation: 2,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      child: ListTile(
+                                        title: Padding(
+                                          padding: const EdgeInsets.only(bottom: 13),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: const [
+                                              Text("Social Media Reacts",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
+                                              Text("41/60"),
+                                            ],
+                                          ),
+                                        ),
+                                        subtitle: LinearPercentIndicator(
+                                          barRadius: Radius.circular(15.0),
+                                          animation: true,
+                                          lineHeight: 12,
+                                          percent: 0.7,
+                                          // progressColor: Colors.blueAccent,
+                                          linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
+                                          backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
+
+
+                                        ),
+                                        leading: Padding(
+                                          padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                                          child: Column(
+                                            children: const [
+                                              ImageIcon(AssetImage('assets/icons/social.png',),size: 25,color: Colors.black,),
+                                            ],
+                                          ),
+                                        ),
+
+                                        trailing: Padding(
+                                          padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                                          child: Column(
+                                            children: const [
+                                              ImageIcon(AssetImage('assets/icons/next.png',),size: 22,color: Colors.black,),
+                                            ],
+                                          ),
+                                        ),
+                                        onTap: () {
+                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>SocialMedia()));
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 10),
+                                  Container(
+                                    width: 390,
+                                    height: 90,
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.1),
+                                          spreadRadius: 0,
+                                          blurRadius: 9,
+                                          offset: Offset(1, 3),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Card(
+                                      elevation: 2,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      child: ListTile(
+                                        title: Padding(
+                                          padding: const EdgeInsets.only(bottom: 13),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children:  [
+                                              Text("Surveys",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
+                                              Text("${levelProvider.completedForms}/${levelProvider.totalForms}"),
+                                            ],
+                                          ),
+                                        ),
+                                        subtitle: LinearPercentIndicator(
+                                          barRadius: Radius.circular(15.0),
+                                          animation: true,
+                                          lineHeight: 12,
+                                          percent: levelProvider.totalForms == 0 ?  levelProvider.completedForms/1 : levelProvider.completedForms/levelProvider.totalForms,
+
+                                          // progressColor: Colors.blueAccent,
+                                          linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
+                                          backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
+
+                                        ),
+                                        leading: Padding(
+                                          padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                                          child: Column(
+                                            children: const [
+                                              ImageIcon(AssetImage('assets/icons/survey.png',),size: 25,color: Colors.black,),
+                                            ],
+                                          ),
+                                        ),
+
+                                        trailing: Padding(
+                                          padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                                          child: Column(
+                                            children: const [
+                                              ImageIcon(AssetImage('assets/icons/next.png',),size: 22,color: Colors.black,),
+                                            ],
+                                          ),
+                                        ),
+                                        onTap: () {
+                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Surveys()));
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 10),
+                                  Container(
+                                    width: 390,
+                                    height: 90,
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.1),
+                                          spreadRadius: 0,
+                                          blurRadius: 9,
+                                          offset: Offset(1, 3),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Card(
+                                      elevation: 2,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      child: ListTile(
+                                        title: Padding(
+                                          padding: const EdgeInsets.only(bottom: 13),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children:  [
+                                              Text("Invite Friends",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
+                                              Text("${levelProvider.invites}/${levelProvider.maxInvites}"),
+                                            ],
+                                          ),
+                                        ),
+                                        subtitle: LinearPercentIndicator(
+                                          barRadius: Radius.circular(15.0),
+                                          animation: true,
+                                          lineHeight: 12,
+                                          percent: levelProvider.maxInvites == 0 ?  levelProvider.invites/1 : levelProvider.invites/levelProvider.maxInvites,
+
+                                          // progressColor: Colors.blueAccent,
+                                          linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
+                                          backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
+
+                                        ),
+                                        leading: Padding(
+                                          padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                                          child: Column(
+                                            children: const [
+                                              ImageIcon(AssetImage('assets/icons/invite.png',),size: 25,color: Colors.black,),
+                                            ],
+                                          ),
+                                        ),
+
+                                        trailing: Padding(
+                                          padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                                          child: Column(
+                                            children: const [
+                                              ImageIcon(AssetImage('assets/icons/next.png',),size: 22,color: Colors.black,),
+                                            ],
+                                          ),
+                                        ),
+                                        onTap: () {
+                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>InviteFriends()));
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 10),
+                                  Container(
+                                    width: 390,
+                                    height: 90,
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.1),
+                                          spreadRadius: 0,
+                                          blurRadius: 9,
+                                          offset: Offset(1, 3),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Card(
+                                      elevation: 2,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      child: ListTile(
+                                        title: Padding(
+                                          padding: const EdgeInsets.only(bottom: 13),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children:  [
+                                              Text("Others",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
+                                              Text("${levelProvider.completedOther}/${levelProvider.totalOther}"),
+                                            ],
+                                          ),
+                                        ),
+                                        subtitle: LinearPercentIndicator(
+                                          barRadius: Radius.circular(15.0),
+                                          animation: true,
+                                          lineHeight: 12,
+                                          percent: levelProvider.totalOther == 0 ?  levelProvider.completedOther/1 : levelProvider.completedOther/levelProvider.totalOther,
+
+                                          // progressColor: Colors.blueAccent,
+                                          linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
+                                          backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
+                                        ),
+                                        leading: Padding(
+                                          padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                                          child: Column(
+                                            children: const [
+                                              ImageIcon(AssetImage('assets/icons/others.png',),size: 25,color: Colors.black,),
+                                            ],
+                                          ),
+                                        ),
+
+                                        trailing: Padding(
+                                          padding: const EdgeInsets.only(left: 10.0,top: 18.0),
+                                          child: Column(
+                                            children: const [
+                                              ImageIcon(AssetImage('assets/icons/next.png',),size: 22,color: Colors.black,),
+                                            ],
+                                          ),
+                                        ),
+                                        onTap: () {
+                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>OthersTask()));
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ],
+
                               ),
-                              SizedBox(height: 10),
-                              Container(
-                                width: 390,
-                                height: 90,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.1),
-                                      spreadRadius: 0,
-                                      blurRadius: 9,
-                                      offset: Offset(1, 3),
-                                    ),
-                                  ],
-                                ),
-                                child: Card(
-                                  elevation: 2,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: ListTile(
-                                    title: Padding(
-                                      padding: const EdgeInsets.only(bottom: 13),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: const [
-                                          Text("Social Media Reacts",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
-                                          Text("41/60"),
-                                        ],
-                                      ),
-                                    ),
-                                    subtitle: LinearPercentIndicator(
-                                      barRadius: Radius.circular(15.0),
-                                      animation: true,
-                                      lineHeight: 12,
-                                      percent: 0.7,
-                                      // progressColor: Colors.blueAccent,
-                                      linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
-                                      backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
 
-
-                                    ),
-                                    leading: Padding(
-                                      padding: const EdgeInsets.only(left: 10.0,top: 18.0),
-                                      child: Column(
-                                        children: const [
-                                          ImageIcon(AssetImage('assets/icons/social.png',),size: 25,color: Colors.black,),
-                                        ],
-                                      ),
-                                    ),
-
-                                    trailing: Padding(
-                                      padding: const EdgeInsets.only(left: 10.0,top: 18.0),
-                                      child: Column(
-                                        children: const [
-                                          ImageIcon(AssetImage('assets/icons/next.png',),size: 22,color: Colors.black,),
-                                        ],
-                                      ),
-                                    ),
-                                    onTap: () {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>SocialMedia()));
-                                    },
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 10),
-                              Container(
-                                width: 390,
-                                height: 90,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.1),
-                                      spreadRadius: 0,
-                                      blurRadius: 9,
-                                      offset: Offset(1, 3),
-                                    ),
-                                  ],
-                                ),
-                                child: Card(
-                                  elevation: 2,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: ListTile(
-                                    title: Padding(
-                                      padding: const EdgeInsets.only(bottom: 13),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: const [
-                                          Text("Surveys",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
-                                          Text("41/60"),
-                                        ],
-                                      ),
-                                    ),
-                                    subtitle: LinearPercentIndicator(
-                                      barRadius: Radius.circular(15.0),
-                                      animation: true,
-                                      lineHeight: 12,
-                                      percent: 0.7,
-                                      // progressColor: Colors.blueAccent,
-                                      linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
-                                      backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
-
-                                    ),
-                                    leading: Padding(
-                                      padding: const EdgeInsets.only(left: 10.0,top: 18.0),
-                                      child: Column(
-                                        children: const [
-                                          ImageIcon(AssetImage('assets/icons/survey.png',),size: 25,color: Colors.black,),
-                                        ],
-                                      ),
-                                    ),
-
-                                    trailing: Padding(
-                                      padding: const EdgeInsets.only(left: 10.0,top: 18.0),
-                                      child: Column(
-                                        children: const [
-                                          ImageIcon(AssetImage('assets/icons/next.png',),size: 22,color: Colors.black,),
-                                        ],
-                                      ),
-                                    ),
-                                    onTap: () {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Surveys()));
-                                    },
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 10),
-                              Container(
-                                width: 390,
-                                height: 90,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.1),
-                                      spreadRadius: 0,
-                                      blurRadius: 9,
-                                      offset: Offset(1, 3),
-                                    ),
-                                  ],
-                                ),
-                                child: Card(
-                                  elevation: 2,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: ListTile(
-                                    title: Padding(
-                                      padding: const EdgeInsets.only(bottom: 13),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: const [
-                                          Text("Invite Friends",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
-                                          Text("41/60"),
-                                        ],
-                                      ),
-                                    ),
-                                    subtitle: LinearPercentIndicator(
-                                      barRadius: Radius.circular(15.0),
-                                      animation: true,
-                                      lineHeight: 12,
-                                      percent: 0.7,
-                                      // progressColor: Colors.blueAccent,
-                                      linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
-                                      backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
-
-                                    ),
-                                    leading: Padding(
-                                      padding: const EdgeInsets.only(left: 10.0,top: 18.0),
-                                      child: Column(
-                                        children: const [
-                                          ImageIcon(AssetImage('assets/icons/invite.png',),size: 25,color: Colors.black,),
-                                        ],
-                                      ),
-                                    ),
-
-                                    trailing: Padding(
-                                      padding: const EdgeInsets.only(left: 10.0,top: 18.0),
-                                      child: Column(
-                                        children: const [
-                                          ImageIcon(AssetImage('assets/icons/next.png',),size: 22,color: Colors.black,),
-                                        ],
-                                      ),
-                                    ),
-                                    onTap: () {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>InviteFriends()));
-                                    },
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 10),
-                              Container(
-                                width: 390,
-                                height: 90,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.1),
-                                      spreadRadius: 0,
-                                      blurRadius: 9,
-                                      offset: Offset(1, 3),
-                                    ),
-                                  ],
-                                ),
-                                child: Card(
-                                  elevation: 2,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: ListTile(
-                                    title: Padding(
-                                      padding: const EdgeInsets.only(bottom: 13),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: const [
-                                          Text("Others",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
-                                          Text("41/60"),
-                                        ],
-                                      ),
-                                    ),
-                                    subtitle: LinearPercentIndicator(
-                                      barRadius: Radius.circular(15.0),
-                                      animation: true,
-                                      lineHeight: 12,
-                                      percent: 0.7,
-                                      // progressColor: Colors.blueAccent,
-                                      linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
-                                      backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
-                                    ),
-                                    leading: Padding(
-                                      padding: const EdgeInsets.only(left: 10.0,top: 18.0),
-                                      child: Column(
-                                        children: const [
-                                          ImageIcon(AssetImage('assets/icons/others.png',),size: 25,color: Colors.black,),
-                                        ],
-                                      ),
-                                    ),
-
-                                    trailing: Padding(
-                                      padding: const EdgeInsets.only(left: 10.0,top: 18.0),
-                                      child: Column(
-                                        children: const [
-                                          ImageIcon(AssetImage('assets/icons/next.png',),size: 22,color: Colors.black,),
-                                        ],
-                                      ),
-                                    ),
-                                    onTap: () {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>OthersTask()));
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ],
-
-                          ),
-
+                            );
+                          }
                         ),
 
                       ],

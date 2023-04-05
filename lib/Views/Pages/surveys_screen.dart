@@ -265,7 +265,7 @@ class _SurveysState extends State<Surveys> {
                                                               //  Uri _url = Uri.parse(surveyProvider.surveysList!.googleForms[index]);
                                                               // surveyProvider.setCheckTrue(index);
                                                               // _launchUrl(Uri.parse(surveyProvider.surveysList!.googleForms[index]));
-                                                              surveyProvider.postSurvey(surveyProvider.surveysList[index].googleFormId)
+                                                              surveyProvider.postSurvey(surveyProvider.surveysList[index].googleFormId,context)
 ;                                                    },
                                                             style: ElevatedButton.styleFrom(
                                                                 padding: EdgeInsets.zero,

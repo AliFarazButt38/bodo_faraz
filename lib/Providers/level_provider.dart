@@ -12,17 +12,18 @@ class LevelProvider extends ChangeNotifier{
 
   AuthProvider authProvider = AuthProvider();
   TaskLevelModel? _taskLevelModel;
-  String _totalForms='0';
-  String _completedForms = '0';
-  String _max_invite='0';
-  String _invite = '0';
-  String _totalApps='0';
-  String _completedApps = '0';
-  String _totalReviews='0';
-  String _completedReviews = '0';
-
-  String _totalVideos='0';
-  String _completedVideos = '0';
+  int _totalForms=0;
+  int _completedForms = 0;
+  int _max_invite=0;
+  int _invite = 0;
+  int _totalApps=0;
+  int _completedApps = 0;
+  int _totalReviews=0;
+  int _completedReviews = 0;
+  int _totalOther=0;
+  int _completedOther = 0;
+  int _totalVideos=0;
+  int _completedVideos = 0;
   String _totalVariables='0';
   String _completedVariables = '0';
 
@@ -65,18 +66,21 @@ class LevelProvider extends ChangeNotifier{
       print('response getCompletedTasks ${response.body}');
       var parsedJson = json.decode(response.body);
       if(response.statusCode == 200){
-        _completedForms =  parsedJson['completed_forms'].toString();
-        _totalForms = parsedJson['total_forms'].toString();
-        _max_invite = parsedJson['max_invite_allow'].toString();
-        _invite = parsedJson['invited_friends'].toString();
+        _completedForms =  parsedJson['completed_forms'];
+        _totalForms = parsedJson['total_forms'];
+        _max_invite = parsedJson['max_invite_allow'];
+        _invite = parsedJson['invited_friends'];
 
-        _totalApps =  parsedJson['total_apps'].toString();
-        _completedApps = parsedJson['download_app'].toString();
-        _totalReviews = parsedJson['total_review'].toString();
-        _completedReviews = parsedJson['given_review'].toString();
+        _totalApps =  parsedJson['total_apps'];
+        _completedApps = parsedJson['download_app'];
+        _totalReviews = parsedJson['total_review'];
+        _completedReviews = parsedJson['given_review'];
 
-        _totalVideos =  parsedJson['total_videos'].toString();
-        _completedVideos = parsedJson['completed_videos'].toString();
+        _totalOther = parsedJson['total_other'];
+        _completedOther = parsedJson['completed_other'];
+
+        _totalVideos =  parsedJson['total_videos'];
+        _completedVideos = parsedJson['completed_videos'];
         _totalVariables = parsedJson['total_variable'].toString();
         _completedVariables = parsedJson['given_variable'].toString();
       }else{
@@ -85,25 +89,28 @@ class LevelProvider extends ChangeNotifier{
       //Navigator.of(context).pop();
       print('catch error in LevelProvider getCompletedTasks $error $st');
     }finally{
-
       notifyListeners();
     }
   }
 
   TaskLevelModel? get taskLevel => _taskLevelModel;
-  String get totalForms => _totalForms;
-  String get completedForms => _completedForms;
-  String get maxInvites => _max_invite;
-  String get invites => _invite;
+  int get totalForms => _totalForms;
+  int get completedForms => _completedForms;
+  int get maxInvites => _max_invite;
+  int get invites => _invite;
 
-  String get totalApps => _totalApps;
-  String get completedApps => _completedApps;
-  String get totalReviews => _totalReviews;
-  String get completedReviews => _completedReviews;
+  int get totalApps => _totalApps;
+  int get completedApps => _completedApps;
+  int get totalReviews => _totalReviews;
+  int get completedReviews => _completedReviews;
 
-  String get totalVideos => _totalVideos;
-  String get completedVideos => _completedVideos;
+  int get totalVideos => _totalVideos;
+  int get completedVideos => _completedVideos;
+
+  int get totalOther => _totalOther;
+  int get completedOther => _completedOther;
+
   String get totalVariables => _totalVariables;
-  String get completedVariables => _completedVideos;
+  String get completedVariables => _completedVariables;
 
 }

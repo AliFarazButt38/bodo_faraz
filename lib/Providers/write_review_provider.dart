@@ -4,9 +4,12 @@ import 'package:bodoo_flutter/Models/write_review_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import '../Services/api.dart';
 import '../Theme/palette.dart';
 import 'auth_provider.dart';
+import 'home_provider.dart';
+import 'level_provider.dart';
 
 
 class WriteReviewProvider extends ChangeNotifier{
@@ -58,7 +61,10 @@ class WriteReviewProvider extends ChangeNotifier{
       var parsedJson = json.decode(response.body);
       if(response.statusCode == 200){
         Navigator.of(context).pop();
+        Navigator.of(context).pop();
         authProvider.toast('Review has been submitted successfully', Palette.baseElementGreen);
+        Provider.of<LevelProvider>(context,listen: false).getCompletedTasks();
+        Provider.of<HomeProvider>(context,listen: false).getHomeData();
       }else{
         if(parsedJson.containsKey('error')){
           Navigator.of(context).pop();

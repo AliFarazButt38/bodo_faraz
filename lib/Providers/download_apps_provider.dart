@@ -6,10 +6,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 import '../Services/api.dart';
+import 'home_provider.dart';
+import 'level_provider.dart';
 
 class DownloadAppsProvider extends ChangeNotifier{
   AuthProvider authProvider = AuthProvider();
   List<DownloadAppModel> _downloadAppList = [];
+  LevelProvider levelProvider = LevelProvider();
+  HomeProvider homeProvider = HomeProvider();
   bool _downloadAppLoading = false;
 
   getDownloadAppUrls()async{
@@ -65,8 +69,11 @@ class DownloadAppsProvider extends ChangeNotifier{
       print('status code ${response.statusCode}');
       print('response postDownloadApp ${response.body}');
       var parsedJson = json.decode(response.body);
-      if(response.statusCode == 200){
-
+      if(response.statusCode == 201){
+        levelProvider.getCompletedTasks();
+        homeProvider.getHomeData();
+        Navigator.of(context).pop();
+        Navigator.of(context).pop();
       }else{
       }
     }catch(error, st){

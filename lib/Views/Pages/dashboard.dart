@@ -47,10 +47,7 @@ class _DashboardState extends State<Dashboard> {
     // TODO: implement initState
     super.initState();
     _selectedIndex = widget.index ?? 0;
-    Provider.of<HomeProvider>(context,listen: false).getHomeData();
-    Provider.of<LevelProvider>(context,listen: false).getLevels();
-    Provider.of<AuthProvider>(context,listen: false).userProfile(context);
-    Provider.of<WalletProvider>(context,listen: false).getWallet();
+
   }
 
   @override

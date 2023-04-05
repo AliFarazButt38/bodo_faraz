@@ -148,7 +148,7 @@ class _ReviewDetailsState extends State<ReviewDetails> {
                                   height: 42,
                                   alignment: Alignment.center,
                                   child: const Text(
-                                    'Download',
+                                    'Start Task',
                                     style:
                                     const TextStyle(fontSize: 18, ),
                                   ),

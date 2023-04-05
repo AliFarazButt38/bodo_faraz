@@ -1,3 +1,4 @@
+import 'package:bodoo_flutter/Providers/community_provider.dart';
 import 'package:bodoo_flutter/Providers/home_provider.dart';
 import 'package:bodoo_flutter/Providers/wallet_provider.dart';
 import 'package:bodoo_flutter/Views/Pages/notifications_Screen.dart';
@@ -7,6 +8,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:image_stack/image_stack.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:provider/provider.dart';
+import '../../Providers/auth_provider.dart';
+import '../../Providers/level_provider.dart';
 import '../../Theme/palette.dart';
 import '../../Utils/screen_config.dart';
 
@@ -22,6 +25,16 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
 
   List<String> images = ["https://img.freepik.com/free-photo/full-shot-travel-concept-with-landmarks_23-2149153258.jpg?3&w=1800&t=st=1678861722~exp=1678862322~hmac=64db2cad4d20ee07362021ab8c800a48daafd8ccaf741206c82d8c8a01566620", 'https://img.freepik.com/free-photo/full-shot-travel-concept-with-landmarks_23-2149153258.jpg?3&w=1800&t=st=1678861722~exp=1678862322~hmac=64db2cad4d20ee07362021ab8c800a48daafd8ccaf741206c82d8c8a01566620','https://img.freepik.com/free-photo/full-shot-travel-concept-with-landmarks_23-2149153258.jpg?3&w=1800&t=st=1678861722~exp=1678862322~hmac=64db2cad4d20ee07362021ab8c800a48daafd8ccaf741206c82d8c8a01566620',"https://img.freepik.com/free-photo/full-shot-travel-concept-with-landmarks_23-2149153258.jpg?3&w=1800&t=st=1678861722~exp=1678862322~hmac=64db2cad4d20ee07362021ab8c800a48daafd8ccaf741206c82d8c8a01566620", 'https://img.freepik.com/free-photo/full-shot-travel-concept-with-landmarks_23-2149153258.jpg?3&w=1800&t=st=1678861722~exp=1678862322~hmac=64db2cad4d20ee07362021ab8c800a48daafd8ccaf741206c82d8c8a01566620','https://img.freepik.com/free-photo/full-shot-travel-concept-with-landmarks_23-2149153258.jpg?3&w=1800&t=st=1678861722~exp=1678862322~hmac=64db2cad4d20ee07362021ab8c800a48daafd8ccaf741206c82d8c8a01566620'];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<HomeProvider>(context,listen: false).getHomeData();
+    Provider.of<LevelProvider>(context,listen: false).getLevels();
+    Provider.of<AuthProvider>(context,listen: false).userProfile(context);
+    Provider.of<WalletProvider>(context,listen: false).getWallet();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -303,130 +316,87 @@ class _HomeState extends State<Home> {
                             children: <Widget>[
                               Text('Community', style: TextStyle(color: Palette.black,fontSize: 18,fontWeight: FontWeight.bold),),
                               Text('Following are the Part of your Community', style: TextStyle(color: Palette.grey74,fontSize: 14,),),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 20.0),
-                                child: Row(
-                                  children: <Widget>[
-                                    Stack(
-                                      children: [
-                                        Container(
-                                          height: 60,
-                                          width: 60,
-                                          decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              image: DecorationImage(
-                                                  image: AssetImage('assets/images/profile.png'),
-                                                  fit: BoxFit.fill,
-                                                  filterQuality: FilterQuality.high
-                                              )
-                                          ),
-                                        ),
-                                        Positioned(
-                                          bottom: 0,
-                                          right: 0,
-                                          child: SvgPicture.asset(
-                                            'assets/icons/fav.svg',
-                                            semanticsLabel: 'A red up arrow',
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(width: 10,),
-                                    Column(
-                                      children: [
-                                        Row(
-                                          children: <Widget>[
-                                            Column(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: <Widget>[
-                                                Text('John Doe', style: TextStyle(color: Palette.black,fontSize: 16,fontWeight: FontWeight.bold),),
-                                                Text('Level 1 - Grade 1', style: TextStyle(color: Palette.grey74,fontSize: 14,),),
-                                              ],
-                                            ),
-                                            SizedBox(width: 20,),
-                                            ImageStack(
-                                              imageList: images,
-                                              totalCount: images.length, // If larger than images.length, will show extra empty circle
-                                              imageRadius: 32, // Radius of each images
-                                              imageCount: 3, // Maximum number of images to be shown in stack
-                                              imageBorderWidth: 3, // Border width around the images
-                                            )
-                                          ],
-                                        ),
 
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 20.0),
-                                child: Row(
-                                  children: <Widget>[
-                                    Stack(
-                                      children: [
-                                        Container(
-                                          height: 60,
-                                          width: 60,
-                                          decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              image: DecorationImage(
-                                                  image: AssetImage('assets/images/profile.png'),
-                                                  fit: BoxFit.fill,
-                                                  filterQuality: FilterQuality.high
-                                              )
-                                          ),
-                                        ),
-                                        Positioned(
-                                          bottom: 0,
-                                          right: 0,
-                                          child: SvgPicture.asset(
-                                            'assets/icons/fav.svg',
-                                            semanticsLabel: 'A red up arrow',
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(width: 10,),
-                                    Column(
-                                      children: [
-                                        Row(
-                                          children: <Widget>[
-                                            Column(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: <Widget>[
-                                                Text('John Doe', style: TextStyle(color: Palette.black,fontSize: 16,fontWeight: FontWeight.bold),),
-                                                Text('Level 1 - Grade 1', style: TextStyle(color: Palette.grey74,fontSize: 14,),),
-                                              ],
-                                            ),
-                                            SizedBox(width: 20,),
-                                            ImageStack(
-                                              imageList: images,
-                                              totalCount: images.length, // If larger than images.length, will show extra empty circle
-                                              imageRadius: 32, // Radius of each images
-                                              imageCount: 3, // Maximum number of images to be shown in stack
-                                              imageBorderWidth: 3, // Border width around the images
-                                            )
-                                          ],
-                                        ),
+                              Consumer<CommunityProvider>(
+                                builder: (context, communityProvider,child) {
+                                  return ListView.builder(
+                                    itemCount: 4,
+                                      shrinkWrap: true,
+                                      physics: NeverScrollableScrollPhysics(),
+                                      itemBuilder: (context,index){
+                                        return Padding(
+                                          padding: const EdgeInsets.only(top: 10.0),
+                                          child: Row(
+                                            children: <Widget>[
+                                              Stack(
+                                                children: [
+                                                  Container(
+                                                    height: 60,
+                                                    width: 60,
+                                                    decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                        image: DecorationImage(
+                                                            image: AssetImage('assets/images/profile.png'),
+                                                            fit: BoxFit.fill,
+                                                            filterQuality: FilterQuality.high
+                                                        )
+                                                    ),
+                                                  ),
+                                                  Positioned(
+                                                    bottom: 0,
+                                                    right: 0,
+                                                    child: SvgPicture.asset(
+                                                      'assets/icons/fav.svg',
+                                                      semanticsLabel: 'A red up arrow',
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(width: 10,),
+                                              Column(
+                                                children: [
+                                                  Row(
+                                                    children: <Widget>[
+                                                      Column(
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        children: <Widget>[
+                                                          Text('John Doe', style: TextStyle(color: Palette.black,fontSize: 16,fontWeight: FontWeight.bold),),
+                                                          Text('Level 1 - Grade 1', style: TextStyle(color: Palette.grey74,fontSize: 14,),),
+                                                        ],
+                                                      ),
+                                                      SizedBox(width: 20,),
+                                                      ImageStack(
+                                                        imageList: images,
+                                                        totalCount: images.length, // If larger than images.length, will show extra empty circle
+                                                        imageRadius: 32, // Radius of each images
+                                                        imageCount: 3, // Maximum number of images to be shown in stack
+                                                        imageBorderWidth: 3, // Border width around the images
+                                                      )
+                                                    ],
+                                                  ),
 
-                                      ],
-                                    )
-                                  ],
-                                ),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        );
+                                      }
+                                  );
+                                }
                               )
+
                             ],
                           ),
                         ),
                       ),
                     ),
+                    SizedBox(height: 20),
                   ],
                 ),
               ),
             ),
-            SizedBox(height: 20),
+
           ],
         ),
       ),

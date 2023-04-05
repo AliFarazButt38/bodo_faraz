@@ -3,8 +3,11 @@ import 'dart:convert';
 import 'package:bodoo_flutter/Models/post_survey_model.dart';
 import 'package:bodoo_flutter/Models/survey_model.dart';
 import 'package:bodoo_flutter/Providers/auth_provider.dart';
+import 'package:bodoo_flutter/Providers/home_provider.dart';
+import 'package:bodoo_flutter/Providers/level_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 import '../Services/api.dart';
 
@@ -13,6 +16,7 @@ class SurveyProvider extends ChangeNotifier{
 
 
   AuthProvider authProvider = AuthProvider();
+
   List<SurveyModel> _surveyList = [];
   List<PostSurveyModel> _postSurveyList = [];
   bool _surveyLoading = false;
@@ -62,7 +66,7 @@ class SurveyProvider extends ChangeNotifier{
   }
 
 
-  postSurvey(String id)async{
+  postSurvey(String id,BuildContext context)async{
     try{
       await  authProvider.getToken();
       _postSurveyList = [];
@@ -81,6 +85,8 @@ class SurveyProvider extends ChangeNotifier{
         var data = parsedJson['status'] as List;
         _postSurveyList = data.map((e) => PostSurveyModel.fromJson(e)).toList();
         print('idssssssss ${_postSurveyList.length} value  ${_postSurveyList[0].surveyId}');
+        Provider.of<LevelProvider>(context,listen: false).getCompletedTasks();
+        Provider.of<HomeProvider>(context,listen: false).getHomeData();
       }else{
       }
     }catch(error, st){

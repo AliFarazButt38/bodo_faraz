@@ -1,6 +1,8 @@
+import 'package:bodoo_flutter/Providers/community_provider.dart';
 import 'package:bodoo_flutter/Views/Pages/notifications_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 class Community extends StatefulWidget {
   const Community({Key? key}) : super(key: key);
 
@@ -9,6 +11,12 @@ class Community extends StatefulWidget {
 }
 
 class _CommunityState extends State<Community> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<CommunityProvider>(context, listen: false).getUserCommunity(context);
+  }
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context, designSize: const Size(428, 926));
