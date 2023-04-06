@@ -48,13 +48,21 @@ class _PlayVideoState extends State<PlayVideo> {
   double stopWatchTime = 0;
   var roundedWatchedTime = 0;
 
-  YoutubePlayerController _controller = YoutubePlayerController(
-    initialVideoId: 'iLnmTe5Q2Qw',
-    flags: YoutubePlayerFlags(
-      autoPlay: true,
-      mute: true,
-    ),
-  );
+  late YoutubePlayerController _controller;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    String? id = YoutubePlayer.convertUrlToId("${widget.videoModel.url}");
+    _controller = YoutubePlayerController(
+      initialVideoId: '$id',
+      flags: YoutubePlayerFlags(
+        autoPlay: true,
+        mute: true,
+      ),
+    );
+  }
 
   void listener() {
     var totalDuration = 0;
@@ -62,7 +70,10 @@ class _PlayVideoState extends State<PlayVideo> {
       roundedWatchedTime = 0;
       stopwatch.start();
       stopWatchTime = stopwatch.elapsedMilliseconds / 1000;
-      roundedWatchedTime = stopWatchTime.round();
+      setState(() {
+        roundedWatchedTime = stopWatchTime.round();
+      });
+
     }
     else if (mounted && !_controller.value.isPlaying){
       stopwatch.stop();
@@ -212,6 +223,7 @@ class _PlayVideoState extends State<PlayVideo> {
                       SizedBox(
                         height: 20,
                       ),
+                      roundedWatchedTime > 5 ?
                       Padding(
                         padding: const EdgeInsets.only(left: 55),
                         child: ElevatedButton(
@@ -219,7 +231,7 @@ class _PlayVideoState extends State<PlayVideo> {
                             Provider.of<VideoProvider>(context, listen: false)
                                 .postWatchVideos(
                                     widget.videoModel.id.toString(),
-                                    roundedWatchedTime,
+                                    roundedWatchedTime.toString(),
                                     context);
                           },
                           style: ElevatedButton.styleFrom(
@@ -246,7 +258,8 @@ class _PlayVideoState extends State<PlayVideo> {
                             ),
                           ),
                         ),
-                      ),
+                      )
+                          : SizedBox()
                     ],
                   ),
                 ),

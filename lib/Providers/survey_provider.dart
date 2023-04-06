@@ -26,10 +26,14 @@ class SurveyProvider extends ChangeNotifier{
   getSurveys(BuildContext context)async{
     try{
     //  authProvider.loading();
+
       _surveyLoading = true;
+      await  authProvider.getToken();
       _surveyList = [];
       var response = await http.get(Uri.parse('${Api.baseUrlApi}goole_form/'),
-
+        headers: {
+          'Authorization':'Token ${authProvider.token}'
+        },
       );
       print('status code ${response.statusCode}');
       print('response getSurveys ${response.body}');
@@ -86,6 +90,7 @@ class SurveyProvider extends ChangeNotifier{
         var data = parsedJson['status'] as List;
         _postSurveyList = data.map((e) => PostSurveyModel.fromJson(e)).toList();
         print('idssssssss ${_postSurveyList.length} value  ${_postSurveyList[0].surveyId}');
+        getSurveys(Values.navigatorKey.currentContext!);
         Provider.of<LevelProvider>(Values.navigatorKey.currentContext!,listen: false).getCompletedTasks();
         //Provider.of<HomeProvider>(context,listen: false).getHomeData();
         Provider.of<LevelProvider>(Values.navigatorKey.currentContext!,listen: false).getLevels();

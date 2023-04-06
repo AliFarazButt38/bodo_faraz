@@ -1,6 +1,10 @@
 import 'package:bodoo_flutter/Providers/auth_provider.dart';
+import 'package:bodoo_flutter/Theme/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+
+import 'notifications_Screen.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -72,8 +76,8 @@ final _formKey = GlobalKey<FormState>();
                         Text("Profile",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
                         InkWell(
                            onTap: (){
-                             Provider.of<AuthProvider>(context,listen: false).logout();
-                             //Navigator.push(context, MaterialPageRoute(builder: (context)=>Notifications()));
+                            // Provider.of<AuthProvider>(context,listen: false).logout();
+                             Navigator.push(context, MaterialPageRoute(builder: (context)=>Notifications()));
                            },
                             child:
                             ImageIcon
@@ -146,6 +150,18 @@ final _formKey = GlobalKey<FormState>();
                           ],
                         ),
                       ),
+                      // IconButton(
+                      //     onPressed: (){},
+                      //     icon: Row(
+                      //       children: <Widget>[
+                      //         SvgPicture.asset(
+                      //             'assets/icons/logout.svg',
+                      //             semanticsLabel: 'Acme Logo'
+                      //         ),
+                      //         Text('Log Out', style: TextStyle(fontSize: 18,color:Palette.redFF ),)
+                      //       ],
+                      //     )
+                      // ),
                       Padding(
                         padding: const EdgeInsets.only(left: 20,top: 30),
                         child: Column(
@@ -366,6 +382,7 @@ final _formKey = GlobalKey<FormState>();
                           ],
                         ),
                       ),
+
                     ],
                   );
                 }
@@ -382,6 +399,28 @@ final _formKey = GlobalKey<FormState>();
               Image(image:
               AssetImage("assets/images/Profile1.png"),height: 100,width: 100,)
 
+          ),
+
+          Positioned(
+            bottom: 20,
+            left: 163,
+           // right: 163,
+
+            child: InkWell(
+              onTap: (){
+                Provider.of<AuthProvider>(context,listen: false).logout();
+              },
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  SvgPicture.asset(
+                      'assets/icons/logout.svg',
+                      semanticsLabel: 'Acme Logo'
+                  ),
+                  Text('Log Out', style: TextStyle(fontSize: 18,color:Palette.redFF ),)
+                ],
+              ),
+            ),
           ),
         ],
       ),

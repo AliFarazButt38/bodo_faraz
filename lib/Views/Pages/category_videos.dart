@@ -220,7 +220,7 @@ class _CategoryVideosState extends State<CategoryVideos> {
                                       ),
                                     ),
                                     onTap: () {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>WatchVideo()));
+                                      //Navigator.push(context, MaterialPageRoute(builder: (context)=>WatchVideo()));
                                     },
                                   ),
                                 ),

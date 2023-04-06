@@ -34,6 +34,7 @@ class _HomeState extends State<Home> {
     Provider.of<LevelProvider>(context,listen: false).getLevels();
     Provider.of<AuthProvider>(context,listen: false).userProfile(context);
     Provider.of<WalletProvider>(context,listen: false).getWallet();
+    Provider.of<CommunityProvider>(context,listen: false).getUserCommunity(context);
   }
 
   @override
@@ -281,14 +282,14 @@ class _HomeState extends State<Home> {
                                   children: <Widget>[
                                     Column(
                                       children: <Widget>[
-                                        Text('Today Erning', style: TextStyle(color: Palette.grey74,fontSize: 14.sp,),),
+                                        Text('Today Earning', style: TextStyle(color: Palette.grey74,fontSize: 14.sp,),),
                                         Text(walletProvider.walletModel != null ? '${walletProvider.walletModel!.todayEarnings.toString()} EGP' : '0 EGP', style: TextStyle(color: Palette.black25,fontSize: 14.sp,fontWeight: FontWeight.bold),),
 
                                       ],
                                     ),
                                     Column(
                                       children: <Widget>[
-                                        Text('Total Erning', style: TextStyle(color: Palette.grey74,fontSize: 14.sp,),),
+                                        Text('Total Earning', style: TextStyle(color: Palette.grey74,fontSize: 14.sp,),),
                                         Text(walletProvider.walletModel != null ? '${walletProvider.walletModel!.todayEarnings.toString()} EGP' : '0 EGP', style: TextStyle(color: Palette.black25,fontSize: 14.sp,fontWeight: FontWeight.bold),),
 
                                       ],

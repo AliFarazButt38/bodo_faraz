@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import '../Services/api.dart';
+import '../Utils/navigator.dart';
 import 'auth_provider.dart';
 import 'home_provider.dart';
 import 'level_provider.dart';
@@ -20,8 +21,11 @@ class VideoProvider extends ChangeNotifier{
       //  authProvider.loading();
       _videoLoading = true;
       _videosList = [];
+      await  authProvider.getToken();
       var response = await http.get(Uri.parse('${Api.baseUrlApi}videos/'),
-
+        headers: {
+          'Authorization':'Token ${authProvider.token}'
+        },
       );
       print('status code ${response.statusCode}');
       print('response getWatchVideos ${response.body}');
@@ -46,6 +50,7 @@ class VideoProvider extends ChangeNotifier{
 
   postWatchVideos(String videoId,watchTime,BuildContext context)async{
     try{
+
       await  authProvider.getToken();
       authProvider.loading();
       print('watch time $watchTime videoid $videoId');
@@ -64,6 +69,7 @@ class VideoProvider extends ChangeNotifier{
       if(response.statusCode == 200){
         Navigator.of(context).pop();
         Navigator.of(context).pop();
+        getWatchVideos(Values.navigatorKey.currentContext!);
         Provider.of<LevelProvider>(context,listen: false).getCompletedTasks();
         Provider.of<LevelProvider>(context,listen: false).getLevels();
         Provider.of<HomeProvider>(context,listen: false).getHomeData();
