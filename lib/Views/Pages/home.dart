@@ -46,7 +46,9 @@ class _HomeState extends State<Home> {
 
     //ScreenConfig().init(context);
     ScreenUtil.init(context, designSize: const Size(428, 1150));
-    return Scaffold(
+    return
+
+      Scaffold(
       body: SizedBox(
         height: 1150.h,
         width: 428.w,

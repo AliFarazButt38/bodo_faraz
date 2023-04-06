@@ -17,12 +17,16 @@ import 'package:bodoo_flutter/Views/Pages/video_player_examole.dart';
 import 'package:bodoo_flutter/Views/Pages/webview_survey.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'Providers/Google_SignInProvider.dart';
 import 'Providers/download_apps_provider.dart';
 import 'Utils/navigator.dart';
 import 'Views/Pages/SubscriptionPlan.dart';
 import 'Views/Pages/task_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+Future main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(
     MultiProvider(
     providers: [
@@ -47,15 +51,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      navigatorKey: Values.navigatorKey,
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
+    return ChangeNotifierProvider(
+      create: (context)=>GoogleSignInProvider(),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        navigatorKey: Values.navigatorKey,
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
 
-        primarySwatch: Colors.blue,
+          primarySwatch: Colors.blue,
+        ),
+        home:  SplashScreen(),
       ),
-      home:  SplashScreen(),
     );
   }
 }
