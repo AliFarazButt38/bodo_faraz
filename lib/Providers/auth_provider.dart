@@ -303,6 +303,21 @@ class AuthProvider extends ChangeNotifier{
     }
   }
 
+  logout() async {
+
+    await getToken();
+    if(_token != null){
+      final prefs = await SharedPreferences.getInstance();
+      prefs.remove('token');
+      Navigator.of(Values.navigatorKey.currentContext!).pushAndRemoveUntil(PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => const Signin(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return child;
+        },
+      ), (route) => false);
+    }
+  }
+
   String get inviteUrl => _inviteUrl;
   UserModel? get user => _userModel;
   String? get token => _token;

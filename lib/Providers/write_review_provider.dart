@@ -64,6 +64,7 @@ class WriteReviewProvider extends ChangeNotifier{
         Navigator.of(context).pop();
         authProvider.toast('Review has been submitted successfully', Palette.baseElementGreen);
         Provider.of<LevelProvider>(context,listen: false).getCompletedTasks();
+        Provider.of<LevelProvider>(context,listen: false).getLevels();
         Provider.of<HomeProvider>(context,listen: false).getHomeData();
       }else{
         if(parsedJson.containsKey('error')){

@@ -1,5 +1,4 @@
 import 'package:bodoo_flutter/Providers/auth_provider.dart';
-import 'package:bodoo_flutter/Views/Pages/notifications_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -73,7 +72,8 @@ final _formKey = GlobalKey<FormState>();
                         Text("Profile",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
                         InkWell(
                            onTap: (){
-                             Navigator.push(context, MaterialPageRoute(builder: (context)=>Notifications()));
+                             Provider.of<AuthProvider>(context,listen: false).logout();
+                             //Navigator.push(context, MaterialPageRoute(builder: (context)=>Notifications()));
                            },
                             child:
                             ImageIcon

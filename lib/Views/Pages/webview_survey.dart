@@ -57,8 +57,9 @@ class _WebviewSurveyState extends State<WebviewSurvey> {
 
             if(url.contains('formResponse')){
               debugPrint('Page finished navigator');
+              Provider.of<SurveyProvider>(context,listen: false).postSurvey(widget.surveyModel.googleFormId);
               Navigator.of(context).pop();
-              Provider.of<SurveyProvider>(context,listen: false).postSurvey(widget.surveyModel.googleFormId,context);
+
             }
           },
           onWebResourceError: (WebResourceError error) {

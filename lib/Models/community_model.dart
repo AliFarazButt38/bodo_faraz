@@ -1,21 +1,42 @@
 import 'package:bodoo_flutter/Models/user_model.dart';
 
 class CommunityModel {
-  UserModel user;
-  List<UserModel> referralsList;
+  int id;
+  String name,email;
+  List<Community> cReferralsList;
+
+
 
   CommunityModel({
-    required this.user,
-    required this.referralsList
+    required this.id,
+    required this.email,
+    required this.name,
+    required this.cReferralsList
 });
 
 
   factory CommunityModel.fromJson(Map<String, dynamic> data){
 
-    UserModel user = UserModel.fromJson(data['user']);
-    var dataList = data['referred_users'] as List;
-    List<UserModel> userList = dataList.map((e) => UserModel.fromJson(e)).toList();
 
-    return CommunityModel(user: user, referralsList: userList);
+    var dataList = data['invited_user'] as List;
+    List<Community> userList = dataList.map((e) => Community.fromJson(e)).toList();
+
+    return CommunityModel(id: data['id'], name: data['first_name'], email: data['email'], cReferralsList: userList);
+  }
+}
+
+
+class Community{
+  int id;
+  String name,email;
+
+  Community({
+   required this.id,
+   required this.name,
+   required this.email
+});
+
+  factory Community.fromJson(Map<String,dynamic> data){
+    return Community(id: data['id'], name: data['first_name'], email: data['email']);
   }
 }

@@ -93,7 +93,7 @@ class _TaskState extends State<Task> {
                                         Text("Level ${levelProvider.taskLevel!.level}",style: TextStyle(color: Colors.black,fontSize: 25,fontWeight: FontWeight.w600),),
                                         SizedBox(height: 10),
                                         Text("Complete 50 more task to",style: TextStyle(color: Colors.grey,fontSize: 15),),
-                                        Text("reach level 2",style: TextStyle(color: Colors.grey,fontSize: 15),),
+                                        Text("reach level ${levelProvider.taskLevel!.level+1}",style: TextStyle(color: Colors.grey,fontSize: 15),),
                                       ],
                                     ),
                                   ),

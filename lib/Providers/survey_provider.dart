@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 import '../Services/api.dart';
+import '../Utils/navigator.dart';
 
 
 class SurveyProvider extends ChangeNotifier{
@@ -66,7 +67,7 @@ class SurveyProvider extends ChangeNotifier{
   }
 
 
-  postSurvey(String id,BuildContext context)async{
+  postSurvey(String id)async{
     try{
       await  authProvider.getToken();
       _postSurveyList = [];
@@ -85,8 +86,10 @@ class SurveyProvider extends ChangeNotifier{
         var data = parsedJson['status'] as List;
         _postSurveyList = data.map((e) => PostSurveyModel.fromJson(e)).toList();
         print('idssssssss ${_postSurveyList.length} value  ${_postSurveyList[0].surveyId}');
-        Provider.of<LevelProvider>(context,listen: false).getCompletedTasks();
-        Provider.of<HomeProvider>(context,listen: false).getHomeData();
+        Provider.of<LevelProvider>(Values.navigatorKey.currentContext!,listen: false).getCompletedTasks();
+        //Provider.of<HomeProvider>(context,listen: false).getHomeData();
+        Provider.of<LevelProvider>(Values.navigatorKey.currentContext!,listen: false).getLevels();
+
       }else{
       }
     }catch(error, st){

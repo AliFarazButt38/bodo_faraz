@@ -157,8 +157,8 @@ class _WatchVideoState extends State<WatchVideo> {
                                              children: [
                                                ClipRRect(
                                                  borderRadius: BorderRadius.only(topRight: Radius.circular(20.0),topLeft: Radius.circular(20.0)),
-                                                 child: Image.asset(
-                                                   "assets/images/camera2.png",
+                                                 child: Image.network(
+                                                   videoProvider.videosList[index].thumbnail,
                                                    height: 250,
                                                    width: MediaQuery.of(context).size.width,
                                                    fit: BoxFit.cover,
@@ -182,7 +182,7 @@ class _WatchVideoState extends State<WatchVideo> {
                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                children:[
                                                  Text(
-                                                   'Title',
+                                                   videoProvider.videosList[index].title,
                                                    maxLines: 2,
                                                    overflow: TextOverflow.ellipsis,
                                                    style: TextStyle(

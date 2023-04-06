@@ -320,7 +320,7 @@ class _HomeState extends State<Home> {
                               Consumer<CommunityProvider>(
                                 builder: (context, communityProvider,child) {
                                   return ListView.builder(
-                                    itemCount: 4,
+                                    itemCount: communityProvider.communityList.length,
                                       shrinkWrap: true,
                                       physics: NeverScrollableScrollPhysics(),
                                       itemBuilder: (context,index){
@@ -361,14 +361,14 @@ class _HomeState extends State<Home> {
                                                         mainAxisAlignment: MainAxisAlignment.start,
                                                         crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: <Widget>[
-                                                          Text('John Doe', style: TextStyle(color: Palette.black,fontSize: 16,fontWeight: FontWeight.bold),),
+                                                          Text(communityProvider.communityList[index].name, style: TextStyle(color: Palette.black,fontSize: 16,fontWeight: FontWeight.bold),),
                                                           Text('Level 1 - Grade 1', style: TextStyle(color: Palette.grey74,fontSize: 14,),),
                                                         ],
                                                       ),
                                                       SizedBox(width: 20,),
                                                       ImageStack(
                                                         imageList: images,
-                                                        totalCount: images.length, // If larger than images.length, will show extra empty circle
+                                                        totalCount: communityProvider.communityList[index].cReferralsList.length, // If larger than images.length, will show extra empty circle
                                                         imageRadius: 32, // Radius of each images
                                                         imageCount: 3, // Maximum number of images to be shown in stack
                                                         imageBorderWidth: 3, // Border width around the images

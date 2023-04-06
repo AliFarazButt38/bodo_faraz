@@ -11,12 +11,15 @@ import 'auth_provider.dart';
 class CommunityProvider extends ChangeNotifier{
 
   AuthProvider authProvider = AuthProvider();
-  CommunityModel? _communityModel;
+  List<CommunityModel> _communityModelList = [];
+  bool _communityLoading = false;
 
   getUserCommunity(BuildContext context)async{
     try{
-
+      _communityModelList = [];
+      _communityLoading = true;
       await authProvider.getToken();
+      print('user id ${Provider.of<AuthProvider>(context,listen: false).user!.id}');
       var response = await http.get(Uri.parse('${Api.baseUrlAccount}community/${Provider.of<AuthProvider>(context,listen: false).user!.id}/'),
         headers: {
           'Authorization':'Token ${authProvider.token}'
@@ -26,7 +29,8 @@ class CommunityProvider extends ChangeNotifier{
       print('response getUserCommunity ${response.body}');
       var parsedJson = json.decode(response.body);
       if(response.statusCode == 200){
-        _communityModel = CommunityModel.fromJson(parsedJson);
+        var data = parsedJson['referred_users'] as List;
+        _communityModelList = data.map((e) => CommunityModel.fromJson(e)).toList();
       }else{
       }
 
@@ -34,10 +38,11 @@ class CommunityProvider extends ChangeNotifier{
       //Navigator.of(context).pop();
       print('catch error in CommunityProvider getUserCommunity $error $st');
     }finally{
-
+      _communityLoading =  false;
       notifyListeners();
     }
   }
 
-  CommunityModel? get community => _communityModel;
+  List<CommunityModel> get communityList => _communityModelList;
+  bool get communityLoading => _communityLoading;
 }

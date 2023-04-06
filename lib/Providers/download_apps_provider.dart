@@ -4,16 +4,16 @@ import 'package:bodoo_flutter/Models/download_app_model.dart';
 import 'package:bodoo_flutter/Providers/auth_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 import '../Services/api.dart';
+import '../Theme/palette.dart';
 import 'home_provider.dart';
 import 'level_provider.dart';
 
 class DownloadAppsProvider extends ChangeNotifier{
   AuthProvider authProvider = AuthProvider();
   List<DownloadAppModel> _downloadAppList = [];
-  LevelProvider levelProvider = LevelProvider();
-  HomeProvider homeProvider = HomeProvider();
   bool _downloadAppLoading = false;
 
   getDownloadAppUrls()async{
@@ -54,7 +54,7 @@ class DownloadAppsProvider extends ChangeNotifier{
 
   postDownloadApp(String url,BuildContext context)async{
     try{
-      //  authProvider.loading();
+        authProvider.loading();
       await authProvider.getToken();
 
 
@@ -70,11 +70,15 @@ class DownloadAppsProvider extends ChangeNotifier{
       print('response postDownloadApp ${response.body}');
       var parsedJson = json.decode(response.body);
       if(response.statusCode == 201){
-        levelProvider.getCompletedTasks();
-        homeProvider.getHomeData();
         Navigator.of(context).pop();
         Navigator.of(context).pop();
+        Provider.of<LevelProvider>(context,listen: false).getCompletedTasks();
+        Provider.of<LevelProvider>(context,listen: false).getLevels();
+        Provider.of<HomeProvider>(context,listen: false).getHomeData();
       }else{
+        Navigator.of(context).pop();
+        Navigator.of(context).pop();
+        authProvider.toast('The app is already installed', Palette.baseElementGreen);
       }
     }catch(error, st){
       //Navigator.of(context).pop();

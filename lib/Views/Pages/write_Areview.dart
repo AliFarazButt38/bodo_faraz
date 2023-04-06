@@ -149,9 +149,9 @@ class _WriteReviewState extends State<WriteReview> {
                               itemBuilder: (BuildContext context, int index) {
                                 return InkWell(
                                   onTap: (){
-                                   // Navigator.push(context, MaterialPageRoute(builder: (context) => ReviewDetails(reviewModel: reviewProvider.reviewsList[index])));
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => ReviewDetails(reviewModel: reviewProvider.reviewsList[index])));
 
-                                     Navigator.push(context, MaterialPageRoute(builder: (context) => WebviewReview(reviewModel: reviewProvider.reviewsList[index])));
+                                    // Navigator.push(context, MaterialPageRoute(builder: (context) => WebviewReview(reviewModel: reviewProvider.reviewsList[index])));
 
                                   },
                                   child: Container(
