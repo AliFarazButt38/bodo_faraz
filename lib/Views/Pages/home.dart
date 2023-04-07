@@ -27,13 +27,14 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  final int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 60 * 60 * 24 * 10;
+   //int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 60 * 60 * 24 * 10;
   List<String> images = ["https://img.freepik.com/free-photo/full-shot-travel-concept-with-landmarks_23-2149153258.jpg?3&w=1800&t=st=1678861722~exp=1678862322~hmac=64db2cad4d20ee07362021ab8c800a48daafd8ccaf741206c82d8c8a01566620", 'https://img.freepik.com/free-photo/full-shot-travel-concept-with-landmarks_23-2149153258.jpg?3&w=1800&t=st=1678861722~exp=1678862322~hmac=64db2cad4d20ee07362021ab8c800a48daafd8ccaf741206c82d8c8a01566620','https://img.freepik.com/free-photo/full-shot-travel-concept-with-landmarks_23-2149153258.jpg?3&w=1800&t=st=1678861722~exp=1678862322~hmac=64db2cad4d20ee07362021ab8c800a48daafd8ccaf741206c82d8c8a01566620',"https://img.freepik.com/free-photo/full-shot-travel-concept-with-landmarks_23-2149153258.jpg?3&w=1800&t=st=1678861722~exp=1678862322~hmac=64db2cad4d20ee07362021ab8c800a48daafd8ccaf741206c82d8c8a01566620", 'https://img.freepik.com/free-photo/full-shot-travel-concept-with-landmarks_23-2149153258.jpg?3&w=1800&t=st=1678861722~exp=1678862322~hmac=64db2cad4d20ee07362021ab8c800a48daafd8ccaf741206c82d8c8a01566620','https://img.freepik.com/free-photo/full-shot-travel-concept-with-landmarks_23-2149153258.jpg?3&w=1800&t=st=1678861722~exp=1678862322~hmac=64db2cad4d20ee07362021ab8c800a48daafd8ccaf741206c82d8c8a01566620'];
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    // endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 60 * 60 * 24 * 10;
     Provider.of<HomeProvider>(context,listen: false).getHomeData();
     Provider.of<LevelProvider>(context,listen: false).getLevels();
     Provider.of<AuthProvider>(context,listen: false).userProfile(context);
@@ -370,88 +371,93 @@ class _HomeState extends State<Home> {
                                fontSize: 16,
                                fontWeight: FontWeight.w600,
                              ),),
-                             Column(
-                               mainAxisAlignment: MainAxisAlignment.center,
-                               children: [
-                                 CountdownTimer(
-                                   endTime: endTime,
-                                   widgetBuilder: (_, CurrentRemainingTime? time) {
-                                     if(time==null){
-                                       return Text("time has ended");
-                                     }
-                                     return Row(
+                             Consumer<AuthProvider>(
 
+                               builder: (context, snapshot,child) {
+                                 return Column(
+                                   mainAxisAlignment: MainAxisAlignment.center,
+                                   children: [
+                                     CountdownTimer(
+                                       endTime:snapshot.user != null ? snapshot.user!.joinedDate.millisecondsSinceEpoch + 1000 * 60 * 60 * 24 * 10 : DateTime.now().millisecondsSinceEpoch + 1000 * 60 * 60 * 24 * 10,
+                                       widgetBuilder: (_, CurrentRemainingTime? time) {
+                                         if(time==null){
+                                           return Text("time has ended");
+                                         }
+                                         return Row(
+
+                                           children: [
+                                             Padding(
+                                               padding: const EdgeInsets.only(right: 25),
+                                               child: Text("${time.days ?? 0}",style: TextStyle(
+                                                 color: Colors.white,
+                                                 fontWeight: FontWeight.bold,
+                                                 fontSize: 22,
+                                               ),),
+                                             ),
+                                             Padding(
+                                               padding: const EdgeInsets.only(right: 25),
+                                               child: Text("${time.hours ?? 0}",style:TextStyle(
+                                                 color: Colors.white,
+                                                 fontWeight: FontWeight.bold,
+                                                 fontSize: 22,
+                                               ),),
+                                             ),
+                                             Padding(
+                                               padding: const EdgeInsets.only(right: 15),
+                                               child: Text("${time.min ?? 0}",style: TextStyle(
+                                                 color: Colors.white,
+                                                 fontWeight: FontWeight.bold,
+                                                 fontSize: 22,
+                                               ),),
+                                             ),
+                                             Text("${time.sec ?? 0}",style: TextStyle(
+                                               color: Colors.white,
+                                               fontWeight: FontWeight.bold,
+                                               fontSize: 22,
+                                             ),),
+                                           ],
+                                         );
+                                       },
+                                     ),
+                                     Row(
                                        children: [
                                          Padding(
-                                           padding: const EdgeInsets.only(right: 25),
-                                           child: Text("${time.days ?? 0}",style: TextStyle(
+                                           padding: const EdgeInsets.only(right: 0),
+                                           child: Text("day(s)",style: TextStyle(
                                              color: Colors.white,
-                                             fontWeight: FontWeight.bold,
-                                             fontSize: 22,
+                                             fontWeight: FontWeight.w600,
+                                             fontSize:12,
                                            ),),
                                          ),
                                          Padding(
-                                           padding: const EdgeInsets.only(right: 25),
-                                           child: Text("${time.hours ?? 0}",style:TextStyle(
+                                           padding: const EdgeInsets.only(left: 20,right: 10),
+                                           child: Text("hour",style: TextStyle(
                                              color: Colors.white,
-                                             fontWeight: FontWeight.bold,
-                                             fontSize: 22,
+                                             fontWeight: FontWeight.w600,
+                                             fontSize:12,
                                            ),),
                                          ),
                                          Padding(
-                                           padding: const EdgeInsets.only(right: 15),
-                                           child: Text("${time.min ?? 0}",style: TextStyle(
+                                           padding: const EdgeInsets.only(left: 10),
+                                           child: Text("minute",style: TextStyle(
                                              color: Colors.white,
-                                             fontWeight: FontWeight.bold,
-                                             fontSize: 22,
+                                             fontWeight: FontWeight.w600,
+                                             fontSize:12,
                                            ),),
                                          ),
-                                         Text("${time.sec ?? 0}",style: TextStyle(
-                                           color: Colors.white,
-                                           fontWeight: FontWeight.bold,
-                                           fontSize: 22,
-                                         ),),
+                                         Padding(
+                                           padding: const EdgeInsets.only(left: 10),
+                                           child: Text("second",style: TextStyle(
+                                             color: Colors.white,
+                                             fontWeight: FontWeight.w600,
+                                             fontSize:12,
+                                           ),),
+                                         ),
                                        ],
-                                     );
-                                   },
-                                 ),
-                                 Row(
-                                   children: [
-                                     Padding(
-                                       padding: const EdgeInsets.only(right: 0),
-                                       child: Text("day(s)",style: TextStyle(
-                                         color: Colors.white,
-                                         fontWeight: FontWeight.w600,
-                                         fontSize:12,
-                                       ),),
-                                     ),
-                                     Padding(
-                                       padding: const EdgeInsets.only(left: 20,right: 10),
-                                       child: Text("hour",style: TextStyle(
-                                         color: Colors.white,
-                                         fontWeight: FontWeight.w600,
-                                         fontSize:12,
-                                       ),),
-                                     ),
-                                     Padding(
-                                       padding: const EdgeInsets.only(left: 10),
-                                       child: Text("minute",style: TextStyle(
-                                         color: Colors.white,
-                                         fontWeight: FontWeight.w600,
-                                         fontSize:12,
-                                       ),),
-                                     ),
-                                     Padding(
-                                       padding: const EdgeInsets.only(left: 10),
-                                       child: Text("second",style: TextStyle(
-                                         color: Colors.white,
-                                         fontWeight: FontWeight.w600,
-                                         fontSize:12,
-                                       ),),
                                      ),
                                    ],
-                                 ),
-                               ],
+                                 );
+                               }
                              ),
                            ],
                          ),
