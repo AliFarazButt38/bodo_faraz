@@ -64,12 +64,12 @@ class AuthProvider extends ChangeNotifier{
         }
 
       }else{
-        Navigator.of(context).pop();
-        if(parsedJson.containsKey('email')){
-          toast(parsedJson['email'].toString(),Colors.red);
-        }else{
+         Navigator.of(context).pop();
+        // if(parsedJson.containsKey('email')){
+        //   toast(parsedJson['email'].toString(),Colors.red);
+        // }else{
           toast(parsedJson.toString(),Colors.red);
-        }
+       // }
       }
     }catch(error, st){
      // Navigator.of(context).pop();

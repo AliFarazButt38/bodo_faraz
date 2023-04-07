@@ -224,40 +224,42 @@ class _PlayVideoState extends State<PlayVideo> {
                         height: 20,
                       ),
                       roundedWatchedTime > 5 ?
-                      Padding(
-                        padding: const EdgeInsets.only(left: 55),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Provider.of<VideoProvider>(context, listen: false)
-                                .postWatchVideos(
-                                    widget.videoModel.id.toString(),
-                                    roundedWatchedTime.toString(),
-                                    context);
-                          },
-                          style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.zero,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20))),
-                          child: Ink(
-                            decoration: BoxDecoration(
-                                gradient: const LinearGradient(colors: [
-                                  Colors.blueAccent,
-                                  Colors.greenAccent
-                                ]),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Container(
-                              width: 250,
-                              height: 47,
-                              alignment: Alignment.center,
-                              child: const Text(
-                                'Mark as complete',
-                                style: const TextStyle(
-                                  fontSize: 18,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              Provider.of<VideoProvider>(context, listen: false)
+                                  .postWatchVideos(
+                                      widget.videoModel.id.toString(),
+                                      roundedWatchedTime.toString(),
+                                      context);
+                            },
+                            style: ElevatedButton.styleFrom(
+                                padding: EdgeInsets.zero,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20))),
+                            child: Ink(
+                              decoration: BoxDecoration(
+                                  gradient: const LinearGradient(colors: [
+                                    Colors.blueAccent,
+                                    Colors.greenAccent
+                                  ]),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Container(
+                                width: 250,
+                                height: 47,
+                                alignment: Alignment.center,
+                                child: const Text(
+                                  'Mark as complete',
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
+                        ],
                       )
                           : SizedBox()
                     ],

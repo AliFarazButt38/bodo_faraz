@@ -19,8 +19,9 @@ class CommunityProvider extends ChangeNotifier{
       _communityModelList = [];
       _communityLoading = true;
       await authProvider.getToken();
-      print('user id ${Provider.of<AuthProvider>(context,listen: false).user!.id}');
-      var response = await http.get(Uri.parse('${Api.baseUrlAccount}community/${Provider.of<AuthProvider>(context,listen: false).user!.id}/'),
+      var id = await Provider.of<AuthProvider>(context,listen: false).user!.id;
+      print('user id $id');
+      var response = await http.get(Uri.parse('${Api.baseUrlAccount}community/$id/'),
         headers: {
           'Authorization':'Token ${authProvider.token}'
         },

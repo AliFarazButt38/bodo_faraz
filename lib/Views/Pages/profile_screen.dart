@@ -1,6 +1,7 @@
 import 'package:bodoo_flutter/Providers/auth_provider.dart';
 import 'package:bodoo_flutter/Theme/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
@@ -52,6 +53,7 @@ final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, designSize: const Size(428, 926));
     return Scaffold(
       body: SafeArea(child:
       Stack(
@@ -59,7 +61,7 @@ final _formKey = GlobalKey<FormState>();
           Column(
             children: [
               Container(
-                height: 300,
+                height: 250.h,
                 width:MediaQuery.of(context).size.width,
                 decoration: const BoxDecoration(
                   // color: Colors.blueAccent,
@@ -68,7 +70,7 @@ final _formKey = GlobalKey<FormState>();
                 child: Padding(
                   padding: const EdgeInsets.only(left: 20.0,right: 20.0),
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 50),
+                    padding:  EdgeInsets.only(top: 50.h),
                     child: Row(
                       mainAxisAlignment:  MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,9 +96,9 @@ final _formKey = GlobalKey<FormState>();
           ),
 
           Positioned(
-            top: 150,
+            top: 150.h,
             child: Container(
-              height: MediaQuery.of(context).size.height,
+              height: 736.h,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(topRight: Radius.circular(20.0),topLeft: Radius.circular(20.0)),
@@ -111,13 +113,13 @@ final _formKey = GlobalKey<FormState>();
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top: 70),
+                        padding:  EdgeInsets.only(top: 70),
                         child: Column(
                           children: [
                             Text(authProvider.user != null ? authProvider.user!.name : '',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 22),),
-                            Text("Level 2 - Grade 3",style: TextStyle(fontSize: 16),),
+                            Text(authProvider.user != null ? 'Level ${authProvider.user!.userLevel}' :"",style: TextStyle(fontSize: 16),),
                             Padding(
-                              padding: const EdgeInsets.only(left: 15,right: 15,top: 20),
+                              padding:  EdgeInsets.only(left: 15,right: 15,top: 20.h),
                               child: Column(
                                 children: [
                                   TextFormField(
@@ -163,7 +165,7 @@ final _formKey = GlobalKey<FormState>();
                       //     )
                       // ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 20,top: 30),
+                        padding:  EdgeInsets.only(left: 20,top: 20.h),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -173,7 +175,7 @@ final _formKey = GlobalKey<FormState>();
                               (
                               key: _formKey,
                               child: Padding(
-                                padding: const EdgeInsets.only(top: 20,right: 10),
+                                padding:  EdgeInsets.only(top: 20.h,right: 10),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
@@ -246,7 +248,7 @@ final _formKey = GlobalKey<FormState>();
                                       return null;
                                     },
                                   ),
-                                  SizedBox(height: 10,),
+                                  SizedBox(height: 20.h,),
                                   TextFormField(
                                     controller: emailController,
                                     readOnly: true,
@@ -311,7 +313,7 @@ final _formKey = GlobalKey<FormState>();
                                     ),
                                     validator: validateEmail,
                                   ),
-                                  SizedBox(height: 10,),
+                                  SizedBox(height: 20.h,),
                                   TextFormField(
                                     readOnly: true,
                                     controller: contactController,
@@ -379,6 +381,7 @@ final _formKey = GlobalKey<FormState>();
                             ),
                               ),
                             ),
+
                           ],
                         ),
                       ),
@@ -393,8 +396,8 @@ final _formKey = GlobalKey<FormState>();
           ),
 
           Positioned(
-              top: 100,
-              left: 140,
+              top: 100.h,
+              left: 160.w,
               child:
               Image(image:
               AssetImage("assets/images/Profile1.png"),height: 100,width: 100,)
@@ -402,7 +405,7 @@ final _formKey = GlobalKey<FormState>();
           ),
 
           Positioned(
-            bottom: 20,
+            bottom: 20.h,
             left: 163,
            // right: 163,
 
