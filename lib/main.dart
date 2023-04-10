@@ -12,6 +12,7 @@ import 'package:bodoo_flutter/Views/Pages/SubscriptionScreen.dart';
 import 'package:bodoo_flutter/Views/Pages/app_detail.dart';
 import 'package:bodoo_flutter/Views/Pages/download_appScreen.dart';
 import 'package:bodoo_flutter/Views/Pages/forgot_password.dart';
+import 'package:bodoo_flutter/Views/Pages/rate_MyApp.dart';
 import 'package:bodoo_flutter/Views/Pages/splash_screen.dart';
 import 'package:bodoo_flutter/Views/Pages/video_player_examole.dart';
 import 'package:bodoo_flutter/Views/Pages/webview_survey.dart';
@@ -21,8 +22,11 @@ import 'Providers/Google_SignInProvider.dart';
 import 'Providers/download_apps_provider.dart';
 import 'Utils/navigator.dart';
 import 'Views/Pages/SubscriptionPlan.dart';
+import 'Views/Pages/home.dart';
 import 'Views/Pages/task_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+
+import 'Views/Pages/write_Areview.dart';
 
 Future main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,6 +43,7 @@ Future main() async{
       ChangeNotifierProvider(create: (_) => WalletProvider()),
       ChangeNotifierProvider(create: (_) => HomeProvider()),
       ChangeNotifierProvider(create: (_) => CommunityProvider()),
+      ChangeNotifierProvider(create: (_) => GoogleSignInProvider()),
 
     ],
     child: const MyApp(),
@@ -51,18 +56,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context)=>GoogleSignInProvider(),
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        navigatorKey: Values.navigatorKey,
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
+    return MaterialApp(
+      title: 'Flutter Demo',
+      navigatorKey: Values.navigatorKey,
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
 
-          primarySwatch: Colors.blue,
-        ),
-        home:  SplashScreen(),
+        primarySwatch: Colors.blue,
       ),
+      home:  SplashScreen(),
     );
   }
 }

@@ -300,7 +300,7 @@ class _SigninState extends State<Signin> {
                               provider.googleLogin();
                             },
                           ),
-                          SizedBox(width: 10.h), // add some spacing between the containers
+                          SizedBox(width: 10.h),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: GestureDetector(
@@ -330,17 +330,7 @@ class _SigninState extends State<Signin> {
                                   ],
                                 ),
                               ),
-                              onTap: () async{
-                                final LoginResult result = await FacebookAuth.instance.login(); // by default we request the email and the public profile
-// or FacebookAuth.i.login()
-                                if (result.status == LoginStatus.success) {
-                                  // you are logged
-                                  final AccessToken accessToken = result.accessToken!;
-                                } else {
-                                  print(result.status);
-                                  print(result.message);
-                                }
-                              },
+                              onTap: () {},
                             ),
                           ),
                         ],
