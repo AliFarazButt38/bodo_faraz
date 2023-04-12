@@ -8,8 +8,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
+import '../../Providers/Google_SignInProvider.dart';
 import '../../Theme/palette.dart';
 import '../../Utils/screen_config.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class Signin extends StatefulWidget {
   const Signin({Key? key}) : super(key: key);
@@ -261,6 +263,77 @@ class _SigninState extends State<Signin> {
                             ),
                           ),
                         ),
+                      ),
+                      SizedBox(height: 10.h,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            child: Container(
+                              width: 110.w,
+                              height: 50.h,
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    spreadRadius: 0,
+                                    blurRadius: 9,
+                                    offset: Offset(1, 3),
+                                  ),
+                                ],
+                                borderRadius: BorderRadius.circular(15),
+                                color: Colors.white,
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Image.asset("assets/icons/google.png",height: 25.h,width: 25.w,),
+                                  Text("Google",style: TextStyle(
+                                    fontSize: 15.sp,
+                                  ),),
+                                ],
+                              ),
+
+                            ),
+                            onTap: (){
+                              final provider =Provider.of<GoogleSignInProvider>(context,listen: false);
+                              provider.googleLogin();
+                            },
+                          ),
+                          SizedBox(width: 10.h),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: GestureDetector(
+                              child: Container(
+                                width: 110.w,
+                                height: 50.h,
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      spreadRadius: 0,
+                                      blurRadius: 9,
+                                      offset: Offset(1, 3),
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: Colors.white,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Image.asset("assets/icons/facebooklogo.png",height: 25.h,width: 25.w,),
+                                    Text("Facebook",style: TextStyle(
+                                      fontSize: 15.sp,
+                                    ),),
+
+                                  ],
+                                ),
+                              ),
+                              onTap: () {},
+                            ),
+                          ),
+                        ],
                       ),
                        SizedBox(height: 10.h,),
                       Row(

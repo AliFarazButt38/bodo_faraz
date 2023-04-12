@@ -12,17 +12,25 @@ import 'package:bodoo_flutter/Views/Pages/SubscriptionScreen.dart';
 import 'package:bodoo_flutter/Views/Pages/app_detail.dart';
 import 'package:bodoo_flutter/Views/Pages/download_appScreen.dart';
 import 'package:bodoo_flutter/Views/Pages/forgot_password.dart';
+import 'package:bodoo_flutter/Views/Pages/rate_MyApp.dart';
 import 'package:bodoo_flutter/Views/Pages/splash_screen.dart';
 import 'package:bodoo_flutter/Views/Pages/video_player_examole.dart';
 import 'package:bodoo_flutter/Views/Pages/webview_survey.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'Providers/Google_SignInProvider.dart';
 import 'Providers/download_apps_provider.dart';
 import 'Utils/navigator.dart';
 import 'Views/Pages/SubscriptionPlan.dart';
+import 'Views/Pages/home.dart';
 import 'Views/Pages/task_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+import 'Views/Pages/write_Areview.dart';
+
+Future main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(
     MultiProvider(
     providers: [
@@ -35,6 +43,7 @@ void main() {
       ChangeNotifierProvider(create: (_) => WalletProvider()),
       ChangeNotifierProvider(create: (_) => HomeProvider()),
       ChangeNotifierProvider(create: (_) => CommunityProvider()),
+      ChangeNotifierProvider(create: (_) => GoogleSignInProvider()),
 
     ],
     child: const MyApp(),

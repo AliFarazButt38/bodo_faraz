@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "950717005178",
+    "project_id": "bodoo-43202",
+    "storage_bucket": "bodoo-43202.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:950717005178:android:6ebb197f8e887f739e6ac3",
+        "android_client_info": {
+          "package_name": "com.example.bodoo_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "950717005178-hvjsfh60f0lls4meogad2t6h1g3bon8e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEdMMIzaGjEpzG0NZT7YqU0Oxp-i3-_cc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "950717005178-hvjsfh60f0lls4meogad2t6h1g3bon8e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
