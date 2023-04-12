@@ -1,5 +1,6 @@
 import 'package:intl/intl.dart';
 
+//model
 class UserModel{
 int id,userLevel;
 String email,name,number,referralLink;
