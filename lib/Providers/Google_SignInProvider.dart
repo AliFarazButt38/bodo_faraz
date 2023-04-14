@@ -11,6 +11,7 @@ import '../Services/api.dart';
 class GoogleSignInProvider extends ChangeNotifier {
   final googleSignIn = GoogleSignIn();
   GoogleSignInAccount? _user;
+
   GoogleSignInAccount get user => _user!;
 
   Future googleLogin(BuildContext context) async {
@@ -26,16 +27,18 @@ class GoogleSignInProvider extends ChangeNotifier {
           (UserCredential userCredential) async {
         var userEmail = await checkEmail(userCredential.user!.email!);
         if (userEmail == true) {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => Dashboard()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Dashboard()));
         } else {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => UserDetailsForm()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => UserDetailsForm()));
         }
         notifyListeners();
       },
     );
   }
 
-   checkEmail(String email) async {
+  checkEmail(String email) async {
     String apiUrl = '${Api.baseUrlAccount}check_email/';
 
 
@@ -43,7 +46,7 @@ class GoogleSignInProvider extends ChangeNotifier {
 
 
     http.Response response = await http.post(Uri.parse(apiUrl), body: body);
-        print("response for email ${response.body}");
+    print("response for email ${response.body}");
     if (response.statusCode == 200) {
       Map<String, dynamic> data = jsonDecode(response.body);
       return data['user_exists'];

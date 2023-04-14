@@ -40,7 +40,7 @@ class AuthProvider extends ChangeNotifier{
   }
 
 
-  signup(String name,email,password,referal_code,phone,BuildContext context)async{
+  signup(String name,email,password,referal_code,phone,dob,country,city,facebook_url,instagram_username,BuildContext context)async{
     try{
       loading();
       print('phone $phone');
@@ -50,7 +50,13 @@ class AuthProvider extends ChangeNotifier{
         'email':email,
         'password':password,
         'referral_code':referal_code,
-        'contact_no':phone
+        'contact_no':phone,
+        'dob':dob,
+        'country':country,
+        'city':city,
+        'facebook_profile_url':facebook_url,
+        'instagram_username':instagram_username,
+
       }
       );
       print('status code ${response.statusCode}');
