@@ -16,6 +16,8 @@ import '../../Theme/palette.dart';
 import '../../Utils/screen_config.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 
+import 'SubscriptionPlan.dart';
+
 
 
 class Home extends StatefulWidget {
@@ -379,11 +381,61 @@ class _HomeState extends State<Home> {
                                  return Column(
                                    mainAxisAlignment: MainAxisAlignment.center,
                                    children: [
+                                     // CountdownTimer(
+                                     //    endTime:snapshot.user != null ? snapshot.user!.joinedDate.millisecondsSinceEpoch + 1000 * 60 * 60 * 24 * 10 : DateTime.now().millisecondsSinceEpoch + 1000 * 60 * 60 * 24 * 10,
+                                     //   widgetBuilder: (_, CurrentRemainingTime? time) {
+                                     //     if(time==null){
+                                     //       return Text("time has ended");
+                                     //     }
+                                     //     return Row(
+                                     //
+                                     //       children: [
+                                     //         Padding(
+                                     //           padding: const EdgeInsets.only(right: 25),
+                                     //           child: Text("${time.days ?? 0}",style: TextStyle(
+                                     //             color: Colors.white,
+                                     //             fontWeight: FontWeight.bold,
+                                     //             fontSize: 22,
+                                     //           ),),
+                                     //         ),
+                                     //         Padding(
+                                     //           padding: const EdgeInsets.only(right: 25),
+                                     //           child: Text("${time.hours ?? 0}",style:TextStyle(
+                                     //             color: Colors.white,
+                                     //             fontWeight: FontWeight.bold,
+                                     //             fontSize: 22,
+                                     //           ),),
+                                     //         ),
+                                     //         Padding(
+                                     //           padding: const EdgeInsets.only(right: 15),
+                                     //           child: Text("${time.min ?? 0}",style: TextStyle(
+                                     //             color: Colors.white,
+                                     //             fontWeight: FontWeight.bold,
+                                     //             fontSize: 22,
+                                     //           ),),
+                                     //         ),
+                                     //         Text("${time.sec ?? 0}",style: TextStyle(
+                                     //           color: Colors.white,
+                                     //           fontWeight: FontWeight.bold,
+                                     //           fontSize: 22,
+                                     //         ),),
+                                     //       ],
+                                     //     );
+                                     //   },
+                                     // ),
+
                                      CountdownTimer(
                                        endTime:snapshot.user != null ? snapshot.user!.joinedDate.millisecondsSinceEpoch + 1000 * 60 * 60 * 24 * 10 : DateTime.now().millisecondsSinceEpoch + 1000 * 60 * 60 * 24 * 10,
                                        widgetBuilder: (_, CurrentRemainingTime? time) {
-                                         if(time==null){
-                                           return Text("time has ended");
+                                         if (time == null) {
+
+                                           Future.delayed(Duration.zero, () {
+                                             Navigator.pushReplacement(
+                                               context,
+                                               MaterialPageRoute(builder: (context) => SubscriptionPlan()),
+                                             );
+                                           });
+                                           return Container();
                                          }
                                          return Row(
 
