@@ -16,6 +16,8 @@ import '../../Theme/palette.dart';
 import '../../Utils/screen_config.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 
+import 'SubscriptionPlan.dart';
+
 
 
 class Home extends StatefulWidget {
@@ -378,8 +380,15 @@ class _HomeState extends State<Home> {
                                  CountdownTimer(
                                    endTime: endTime,
                                    widgetBuilder: (_, CurrentRemainingTime? time) {
-                                     if(time==null){
-                                       return Text("time has ended");
+                                     if (time == null) {
+
+                                       Future.delayed(Duration.zero, () {
+                                         Navigator.pushReplacement(
+                                           context,
+                                           MaterialPageRoute(builder: (context) => SubscriptionPlan()),
+                                         );
+                                       });
+                                       return Container();
                                      }
                                      return Row(
 
