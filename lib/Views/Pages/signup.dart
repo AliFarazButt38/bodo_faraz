@@ -1,5 +1,6 @@
 import 'package:bodoo_flutter/Providers/auth_provider.dart';
 import 'package:bodoo_flutter/Views/Pages/signin.dart';
+import 'package:bodoo_flutter/Views/Pages/userdetails_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -597,9 +598,9 @@ class _SignupState extends State<Signup> {
                       ),
 
                     ),
-                    onTap: () {
+                    onTap: (){
                       final provider =Provider.of<GoogleSignInProvider>(context,listen: false);
-                      provider.googleLogin();
+                      provider.googleLogin(context);
                     },
                   ),
                   SizedBox(width: 10.h), // add some spacing between the containers

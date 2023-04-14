@@ -3,6 +3,7 @@ import 'package:bodoo_flutter/Theme/style.dart';
 import 'package:bodoo_flutter/Views/Pages/dashboard.dart';
 import 'package:bodoo_flutter/Views/Pages/forgot_password.dart';
 import 'package:bodoo_flutter/Views/Pages/signup.dart';
+import 'package:bodoo_flutter/Views/Pages/userdetails_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -297,8 +298,9 @@ class _SigninState extends State<Signin> {
                             ),
                             onTap: (){
                               final provider =Provider.of<GoogleSignInProvider>(context,listen: false);
-                              provider.googleLogin();
+                              provider.googleLogin(context);
                             },
+
                           ),
                           SizedBox(width: 10.h),
                           Padding(

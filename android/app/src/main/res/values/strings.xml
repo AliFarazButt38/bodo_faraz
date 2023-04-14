@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="facebook_app_id">616129620025763</string>
-    <string name="facebook_client_token">c76e5dc077da13e03fa4ed54fa140ad8</string>
+    <string name="app_name">bodo project</string>
+    <string name="facebook_app_id">3484072015159461</string>
+    <string name="fb_login_protocol_scheme">fb3484072015159461</string>
+    <string name="facebook_client_token">81f6d4ead0d5769ceda2ab46a79f1ef8</string>
 </resources>
