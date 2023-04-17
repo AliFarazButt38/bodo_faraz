@@ -85,6 +85,51 @@ class AuthProvider extends ChangeNotifier{
     }
   }
 
+
+  userdtails(String name,email,referal_code,phone,dob,country,city,facebook_url,instagram_username,BuildContext context)async{
+    try{
+      loading();
+      print('phone $phone');
+      var response = await http.post(Uri.parse('${Api.baseUrlAccount}register/google/'),
+          body: {
+            'first_name':name,
+            'email':email,
+            'referral_code':referal_code,
+            'contact_no':phone,
+            'dob':dob,
+            'country':country,
+            'city':city,
+            'facebook_profile_url':facebook_url,
+            'instagram_username':instagram_username,
+
+          }
+      );
+      print('status code ${response.statusCode}');
+      print('response signup ${response.body}');
+      var parsedJson = json.decode(response.body);
+      if(response.statusCode == 200){
+        Navigator.of(context).pop();
+        if(parsedJson.containsKey('message')){
+          //toast(parsedJson['message'],Palette.baseElementGreen);
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => EmailVerification()));
+        }
+
+      }else{
+        Navigator.of(context).pop();
+        // if(parsedJson.containsKey('email')){
+        //   toast(parsedJson['email'].toString(),Colors.red);
+        // }else{
+        toast(parsedJson.toString(),Colors.red);
+        // }
+      }
+    }catch(error, st){
+      // Navigator.of(context).pop();
+      print('catch error in authprovider signup $error $st');
+    }finally{
+      notifyListeners();
+    }
+  }
+
   signin(String email,password,BuildContext context)async{
     try{
       loading();

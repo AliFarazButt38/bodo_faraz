@@ -41,7 +41,6 @@ class GoogleSignInProvider extends ChangeNotifier {
   checkEmail(String email) async {
     String apiUrl = '${Api.baseUrlAccount}check_email/';
 
-
     Map<String, String> body = {'email': email};
 
 

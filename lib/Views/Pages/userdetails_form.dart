@@ -31,7 +31,7 @@ class _UserDetailsFormState extends State<UserDetailsForm> {
   TextEditingController instagramController = TextEditingController();
 
   DateTime? _selectedDate;
-  final DateFormat _dateFormat = DateFormat('dd/MM/yyyy');
+  final DateFormat _dateFormat = DateFormat('yyyy/MM/dd');
 
   String? validateEmail(String? value) {
     String pattern =
@@ -742,8 +742,8 @@ class _UserDetailsFormState extends State<UserDetailsForm> {
                   child: ElevatedButton(
                     onPressed: () {
                       if(_formKey.currentState!.validate()){
-                        Provider.of<AuthProvider>(context,listen: false).signup(nameController.text, emailController.text, "", referalController.text,phoneController.text,_dateFormat.format(_selectedDate!),countryController.text,cityController.text,facebookController.text,instagramController.text,context);
-
+                        // Provider.of<AuthProvider>(context,listen: false).signup(nameController.text, emailController.text, "", referalController.text,phoneController.text,'${_selectedDate!.year}-${_selectedDate!.month}-${_selectedDate!.day}',countryController.text,cityController.text,facebookController.text,instagramController.text,context);
+                     Provider.of<AuthProvider>(context,listen: false).userdtails(nameController.text, emailController.text, referalController.text, phoneController.text,'${_selectedDate!.year}-${_selectedDate!.month}-${_selectedDate!.day}', countryController.text, cityController.text, facebookController.text, instagramController.text, context);
                       }
                     },
                     style: ElevatedButton.styleFrom(
