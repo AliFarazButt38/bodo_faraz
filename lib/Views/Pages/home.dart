@@ -430,10 +430,10 @@ class _HomeState extends State<Home> {
                                          if (time == null) {
 
                                            Future.delayed(Duration.zero, () {
-                                             Navigator.pushReplacement(
-                                               context,
-                                               MaterialPageRoute(builder: (context) => SubscriptionPlan()),
-                                             );
+                                             // Navigator.pushReplacement(
+                                             //   context,
+                                             //   MaterialPageRoute(builder: (context) => SubscriptionPlan()),
+                                             // );
                                            });
                                            return Container();
                                          }
