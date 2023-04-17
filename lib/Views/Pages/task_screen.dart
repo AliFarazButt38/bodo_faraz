@@ -90,10 +90,10 @@ class _TaskState extends State<Task> {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children:  [
-                                        Text("Level ${levelProvider.taskLevel!.level}",style: TextStyle(color: Colors.black,fontSize: 25,fontWeight: FontWeight.w600),),
+                                        Text("${levelProvider.taskLevel!.subscription}",style: TextStyle(color: Colors.black,fontSize: 25,fontWeight: FontWeight.w600),),
                                         SizedBox(height: 10),
                                         Text("Complete ${levelProvider.taskLevel!.remainingTasks} more task to",style: TextStyle(color: Colors.grey,fontSize: 15),),
-                                        Text("reach level ${levelProvider.taskLevel!.level+1}",style: TextStyle(color: Colors.grey,fontSize: 15),),
+                                        Text("reach  ${levelProvider.taskLevel!.subscription}",style: TextStyle(color: Colors.grey,fontSize: 15),),
                                       ],
                                     ),
                                   ),
