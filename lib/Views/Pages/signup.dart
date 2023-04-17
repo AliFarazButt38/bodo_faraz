@@ -10,6 +10,7 @@ import '../../Providers/Google_SignInProvider.dart';
 import '../../Theme/palette.dart';
 import '../../Theme/style.dart';
 import '../../Utils/screen_config.dart';
+import 'package:intl/intl.dart';
 
 class Signup extends StatefulWidget {
   const Signup({Key? key}) : super(key: key);
@@ -27,7 +28,13 @@ class _SignupState extends State<Signup> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
+  TextEditingController countryController = TextEditingController();
+  TextEditingController cityController = TextEditingController();
+  TextEditingController facebookController = TextEditingController();
+  TextEditingController instagramController = TextEditingController();
 
+  DateTime? _selectedDate;
+  final DateFormat _dateFormat = DateFormat('yyyy/MM/dd');
 
   String? validateEmail(String? value) {
     String pattern =
@@ -229,6 +236,45 @@ class _SignupState extends State<Signup> {
                         validator: validateEmail,
                       ),
                      // SizedBox(height: 30,),
+                      SizedBox(height: 15.h,),
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Palette.grey,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.transparent,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start, // aligns children to start
+                          children: [
+                            IconButton(
+                              icon: Icon(Icons.calendar_month,color: Palette.grey,),
+                              onPressed: () async {
+                                final DateTime? selectedDate = await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(1900),
+                                  lastDate: DateTime(3000),
+                                );
+                                if (selectedDate != null) {
+                                  setState(() {
+                                    _selectedDate = selectedDate;
+                                  });
+                                }
+                              },
+                            ),
+                            Text(
+                              _selectedDate == null ? 'Date of birth' : _dateFormat.format(_selectedDate!),
+                              style: TextStyle(
+                                fontSize: 16.0.sp,
+                                color: Palette.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                       SizedBox(height: 15.h,),
                       TextFormField(
                         controller: passwordController,
@@ -458,6 +504,314 @@ class _SignupState extends State<Signup> {
                       ),
                       SizedBox(height: 10,),
                       TextFormField(
+                        controller: countryController,
+                        style: TextStyle(
+                          color: Palette.grey,
+                          fontSize: 14,
+                        ),
+                        // onChanged: (value) {
+                        //   setState(() {
+                        //     emailController.text = value.toString();
+                        //   });
+                        // },
+                        decoration: InputDecoration(
+                          focusColor: Colors.white,
+                          //add prefix icon
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: SvgPicture.asset(
+                              'assets/icons/File.svg',
+                              semanticsLabel: 'A red up arrow',
+                            ),
+                          ),
+
+                          // errorText: _errorMsg,
+                          //  disabledBorder: OutlineInputBorder(
+                          //    borderSide: const BorderSide(color: Palette.grey),
+                          //    borderRadius: BorderRadius.circular(10),
+                          //  ),
+                          border:  OutlineInputBorder(
+                            borderSide: const BorderSide(color: Palette.black),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Palette.grey),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Palette.grey),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.red),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.red),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          fillColor: Palette.grey,
+
+                          hintText: "Country",
+
+                          //make hint text
+                          hintStyle: TextStyle(
+                            color: Palette.grey,
+                            fontSize: 14.sp,
+                          ),
+
+                          //create lable
+                          labelText: 'Country',
+                          //lable style
+                          labelStyle: TextStyle(
+                            color: Palette.grey,
+                            fontSize: 14.sp,
+                          ),
+                        ),
+                        validator: (text) {
+                          if(text!.isEmpty){
+                            return 'Enter country';
+                          }
+                          // else if (passwordController.length < 8) {
+                          //   return 'password should be 8 digits';
+                          // }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 10,),
+                      TextFormField(
+                        controller: cityController,
+                        style: TextStyle(
+                          color: Palette.grey,
+                          fontSize: 14,
+                        ),
+                        // onChanged: (value) {
+                        //   setState(() {
+                        //     emailController.text = value.toString();
+                        //   });
+                        // },
+                        decoration: InputDecoration(
+                          focusColor: Colors.white,
+                          //add prefix icon
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: SvgPicture.asset(
+                              'assets/icons/File.svg',
+                              semanticsLabel: 'A red up arrow',
+                            ),
+                          ),
+
+                          // errorText: _errorMsg,
+                          //  disabledBorder: OutlineInputBorder(
+                          //    borderSide: const BorderSide(color: Palette.grey),
+                          //    borderRadius: BorderRadius.circular(10),
+                          //  ),
+                          border:  OutlineInputBorder(
+                            borderSide: const BorderSide(color: Palette.black),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Palette.grey),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Palette.grey),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.red),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.red),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          fillColor: Palette.grey,
+
+                          hintText: "City",
+
+                          //make hint text
+                          hintStyle: TextStyle(
+                            color: Palette.grey,
+                            fontSize: 14.sp,
+                          ),
+
+                          //create lable
+                          labelText: 'City',
+                          //lable style
+                          labelStyle: TextStyle(
+                            color: Palette.grey,
+                            fontSize: 14.sp,
+                          ),
+                        ),
+                        validator: (text) {
+                          if(text!.isEmpty){
+                            return 'Enter City';
+                          }
+                          // else if (passwordController.length < 8) {
+                          //   return 'password should be 8 digits';
+                          // }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 10,),
+                      TextFormField(
+                        controller: facebookController,
+                        style: TextStyle(
+                          color: Palette.grey,
+                          fontSize: 14,
+                        ),
+                        // onChanged: (value) {
+                        //   setState(() {
+                        //     emailController.text = value.toString();
+                        //   });
+                        // },
+                        decoration: InputDecoration(
+                          focusColor: Colors.white,
+                          //add prefix icon
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: SvgPicture.asset(
+                              'assets/icons/File.svg',
+                              semanticsLabel: 'A red up arrow',
+                            ),
+                          ),
+
+                          // errorText: _errorMsg,
+                          //  disabledBorder: OutlineInputBorder(
+                          //    borderSide: const BorderSide(color: Palette.grey),
+                          //    borderRadius: BorderRadius.circular(10),
+                          //  ),
+                          border:  OutlineInputBorder(
+                            borderSide: const BorderSide(color: Palette.black),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Palette.grey),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Palette.grey),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.red),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.red),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          fillColor: Palette.grey,
+
+                          hintText: "facebook_profile_url",
+
+                          //make hint text
+                          hintStyle: TextStyle(
+                            color: Palette.grey,
+                            fontSize: 14.sp,
+                          ),
+
+                          //create lable
+                          labelText: 'facebook_profile_url',
+                          //lable style
+                          labelStyle: TextStyle(
+                            color: Palette.grey,
+                            fontSize: 14.sp,
+                          ),
+                        ),
+                        validator: (text) {
+                          if(text!.isEmpty){
+                            return 'Enter facebook profile url';
+                          }
+                          // else if (passwordController.length < 8) {
+                          //   return 'password should be 8 digits';
+                          // }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 10,),
+                      TextFormField(
+                        controller: instagramController,
+                        style: TextStyle(
+                          color: Palette.grey,
+                          fontSize: 14,
+                        ),
+                        // onChanged: (value) {
+                        //   setState(() {
+                        //     emailController.text = value.toString();
+                        //   });
+                        // },
+                        decoration: InputDecoration(
+                          focusColor: Colors.white,
+                          //add prefix icon
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: SvgPicture.asset(
+                              'assets/icons/File.svg',
+                              semanticsLabel: 'A red up arrow',
+                            ),
+                          ),
+
+                          // errorText: _errorMsg,
+                          //  disabledBorder: OutlineInputBorder(
+                          //    borderSide: const BorderSide(color: Palette.grey),
+                          //    borderRadius: BorderRadius.circular(10),
+                          //  ),
+                          border:  OutlineInputBorder(
+                            borderSide: const BorderSide(color: Palette.black),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Palette.grey),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Palette.grey),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.red),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.red),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          fillColor: Palette.grey,
+
+                          hintText: "instagram_username",
+
+                          //make hint text
+                          hintStyle: TextStyle(
+                            color: Palette.grey,
+                            fontSize: 14.sp,
+                          ),
+
+                          //create lable
+                          labelText: 'instagram_username',
+                          //lable style
+                          labelStyle: TextStyle(
+                            color: Palette.grey,
+                            fontSize: 14.sp,
+                          ),
+                        ),
+                        validator: (text) {
+                          if(text!.isEmpty){
+                            return 'Enter instagram username';
+                          }
+                          // else if (passwordController.length < 8) {
+                          //   return 'password should be 8 digits';
+                          // }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 10,),
+                      TextFormField(
                         controller: referalController,
                         style: TextStyle(
                           color: Palette.grey,
@@ -542,7 +896,7 @@ class _SignupState extends State<Signup> {
                 child: ElevatedButton(
                   onPressed: () {
                     if(_formKey.currentState!.validate()){
-                      Provider.of<AuthProvider>(context,listen: false).signup(nameController.text, emailController.text, passwordController.text, referalController.text,phoneController.text,context);
+                      Provider.of<AuthProvider>(context,listen: false).signup(nameController.text, emailController.text, passwordController.text, referalController.text,phoneController.text,'${_selectedDate!.year}-${_selectedDate!.month}-${_selectedDate!.day}',countryController.text,cityController.text,facebookController.text,instagramController.text,context);
                     }
                   },
                   style: ElevatedButton.styleFrom(

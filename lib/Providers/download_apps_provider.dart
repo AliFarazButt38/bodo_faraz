@@ -19,9 +19,11 @@ class DownloadAppsProvider extends ChangeNotifier{
   getDownloadAppUrls()async{
     try{
       _downloadAppLoading = true;
-     // authProvider.loading();
+      await authProvider.getToken();
       var response = await http.get(Uri.parse('${Api.baseUrlApi}add_playstore_link/'),
-
+        headers: {
+          'Authorization':'Token ${authProvider.token}'
+        },
       );
       print('status code ${response.statusCode}');
       print('response getDownloadAppUrls ${response.body}');

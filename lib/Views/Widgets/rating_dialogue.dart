@@ -13,7 +13,7 @@ class _RatingDialogState extends State<RatingDialog> {
   double _rating = 0.0;
 
   Future<void> _launchURL() async {
-    const url = 'https://play.google.com/store/apps/details?id=com.whatsapp';
+    String url = 'https://play.google.com/store/apps/details?id=com.whatsapp';
     if (await canLaunchUrl(Uri.parse(url))) {
       await launchUrl(Uri.parse(url));
     } else {
