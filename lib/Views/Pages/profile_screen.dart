@@ -109,7 +109,6 @@ final _formKey = GlobalKey<FormState>();
 
                 builder: (context, authProvider, child) {
                   return Column(
-
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
