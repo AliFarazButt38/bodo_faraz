@@ -8,6 +8,7 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../Widgets/rating_dialogue.dart';
 import 'notifications_Screen.dart';
 
 
@@ -133,7 +134,8 @@ class _ReviewDetailsState extends State<ReviewDetails> {
                             ElevatedButton(
                               onPressed: () {
                                 _launchUrl(Uri.parse(widget.reviewModel.appLink));
-                              },
+                                // await RatingDialog.show(context);
+                                },
                               style: ElevatedButton.styleFrom(
                                   padding: EdgeInsets.zero,
                                   shape: RoundedRectangleBorder(

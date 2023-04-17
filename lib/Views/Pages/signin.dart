@@ -1,9 +1,11 @@
 import 'package:bodoo_flutter/Providers/auth_provider.dart';
 import 'package:bodoo_flutter/Theme/style.dart';
 import 'package:bodoo_flutter/Views/Pages/dashboard.dart';
+import 'package:bodoo_flutter/Views/Pages/facebook_auth.dart';
 import 'package:bodoo_flutter/Views/Pages/forgot_password.dart';
 import 'package:bodoo_flutter/Views/Pages/signup.dart';
 import 'package:bodoo_flutter/Views/Pages/userdetails_form.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -332,7 +334,9 @@ class _SigninState extends State<Signin> {
                                   ],
                                 ),
                               ),
-                              onTap: () {},
+                              onTap: () {
+
+                              },
                             ),
                           ),
                         ],

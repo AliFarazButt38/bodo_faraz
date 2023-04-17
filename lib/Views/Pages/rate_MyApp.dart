@@ -13,16 +13,13 @@ class _RateMyAppState extends State<RateMyApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: Center(
-        child: ElevatedButton(onPressed: (){
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return const RatingDialog();
-            },
-          );
-        }, child: Text("Rate My App")),
-      )),
+      body:Center(
+        child: ElevatedButton(onPressed: ()
+        async{
+          await RatingDialog.show(context);
+
+        }, child: Text("rate app")),
+      ),
     );
   }
 }

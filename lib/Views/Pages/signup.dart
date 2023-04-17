@@ -1,4 +1,5 @@
 import 'package:bodoo_flutter/Providers/auth_provider.dart';
+import 'package:bodoo_flutter/Views/Pages/facebook_auth.dart';
 import 'package:bodoo_flutter/Views/Pages/signin.dart';
 import 'package:bodoo_flutter/Views/Pages/userdetails_form.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import '../../Theme/palette.dart';
 import '../../Theme/style.dart';
 import '../../Utils/screen_config.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Signup extends StatefulWidget {
   const Signup({Key? key}) : super(key: key);
@@ -81,7 +83,7 @@ class _SignupState extends State<Signup> {
                   children: [
                     Text('Sign Up',style: TextStyle(fontSize: 25.sp,fontWeight: FontWeight.bold),),
                     SizedBox(height: 10.h,),
-                    Text('Create your Bodo App now',style: TextStyle(color: Palette.grey,fontSize: 16.sp),),
+                    Text('Create your bodo app now',style: TextStyle(color: Palette.grey,fontSize: 16.sp),),
                   ],
                 ),
               ),
@@ -960,31 +962,35 @@ class _SignupState extends State<Signup> {
                   SizedBox(width: 10.h), // add some spacing between the containers
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      width: 110.w,
-                      height: 50.h,
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            spreadRadius: 0,
-                            blurRadius: 9,
-                            offset: Offset(1, 3),
-                          ),
-                        ],
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.white,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Image.asset("assets/icons/facebooklogo.png",height: 25.h,width: 25.w,),
-                          Text("Facebook",style: TextStyle(
-                            fontSize: 15.sp,
-                          ),),
+                    child: GestureDetector(
+                      child: Container(
+                        width: 110.w,
+                        height: 50.h,
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              spreadRadius: 0,
+                              blurRadius: 9,
+                              offset: Offset(1, 3),
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(15),
+                          color: Colors.white,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Image.asset("assets/icons/facebooklogo.png",height: 25.h,width: 25.w,),
+                            Text("Facebook",style: TextStyle(
+                              fontSize: 15.sp,
+                            ),),
 
-                        ],
+                          ],
+                        ),
                       ),
+                      onTap: () async {
+                        },
                     ),
                   ),
                 ],
