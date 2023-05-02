@@ -239,42 +239,57 @@ class _SignupState extends State<Signup> {
                       ),
                      // SizedBox(height: 30,),
                       SizedBox(height: 15.h,),
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Palette.grey,
-                            width: 1.0,
+                      InkWell(
+                        onTap: ()async{
+                          final DateTime? selectedDate = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(1900),
+                            lastDate: DateTime(3000),
+                          );
+                          if (selectedDate != null) {
+                            setState(() {
+                              _selectedDate = selectedDate;
+                            });
+                          }
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Palette.grey,
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.transparent,
                           ),
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.transparent,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start, // aligns children to start
-                          children: [
-                            IconButton(
-                              icon: Icon(Icons.calendar_month,color: Palette.grey,),
-                              onPressed: () async {
-                                final DateTime? selectedDate = await showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(1900),
-                                  lastDate: DateTime(3000),
-                                );
-                                if (selectedDate != null) {
-                                  setState(() {
-                                    _selectedDate = selectedDate;
-                                  });
-                                }
-                              },
-                            ),
-                            Text(
-                              _selectedDate == null ? 'Date of birth' : _dateFormat.format(_selectedDate!),
-                              style: TextStyle(
-                                fontSize: 16.0.sp,
-                                color: Palette.grey,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start, // aligns children to start
+                            children: [
+                              IconButton(
+                                icon: Icon(Icons.calendar_month,color: Palette.grey,),
+                                onPressed: () async {
+                                  // final DateTime? selectedDate = await showDatePicker(
+                                  //   context: context,
+                                  //   initialDate: DateTime.now(),
+                                  //   firstDate: DateTime(1900),
+                                  //   lastDate: DateTime(3000),
+                                  // );
+                                  // if (selectedDate != null) {
+                                  //   setState(() {
+                                  //     _selectedDate = selectedDate;
+                                  //   });
+                                  // }
+                                 },
                               ),
-                            ),
-                          ],
+                              Text(
+                                _selectedDate == null ? 'Date of birth' : _dateFormat.format(_selectedDate!),
+                                style: TextStyle(
+                                  fontSize: 16.0.sp,
+                                  color: Palette.grey,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(height: 15.h,),

@@ -11,6 +11,6 @@ class WriteReviewModel {
 });
 
   factory WriteReviewModel.fromJson(Map<String,dynamic> data){
-    return WriteReviewModel(id: data['id'], appComment: data['app_comment'], appIcon: data['app_icon'], appLink: data['app_link'], appTitle: data['app_title']);
+    return WriteReviewModel(id: data['id'], appComment: data['app_comment'], appIcon: data['app_icon'] ?? 'http://164.90.234.251/media/profiles/images/test_R3JjObp.jpeg', appLink: data['app_link'], appTitle: data['app_title']);
   }
 }

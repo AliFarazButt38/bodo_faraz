@@ -74,6 +74,7 @@ class DownloadAppsProvider extends ChangeNotifier{
       if(response.statusCode == 201){
         Navigator.of(context).pop();
         Navigator.of(context).pop();
+        getDownloadAppUrls();
         Provider.of<LevelProvider>(context,listen: false).getCompletedTasks();
         Provider.of<LevelProvider>(context,listen: false).getLevels();
         Provider.of<HomeProvider>(context,listen: false).getHomeData();

@@ -17,7 +17,7 @@ class TaskLevelModel{
   factory TaskLevelModel.fromJson(Map<String, dynamic> data)
   {
    // UserModel user = UserModel.fromJson(data['user']);
-    return TaskLevelModel( subscription: data['subscription_name'],remainingTasks: data['remaining_tasks'],level: data['level'], totalReward: double.parse(data['total_reward'].toString()));
+    return TaskLevelModel( subscription: data['subscription_name']??'',remainingTasks: data['remaining_tasks'],level: data['level'], totalReward: double.parse(data['total_reward'].toString()));
   }
 
 }

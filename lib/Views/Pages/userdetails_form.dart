@@ -72,7 +72,7 @@ class _UserDetailsFormState extends State<UserDetailsForm> {
                 // ),
                 //SizedBox(height: 18,),
                 Padding(
-                  padding:  EdgeInsets.only(left: 20.0.w,bottom: 20.h),
+                  padding:  EdgeInsets.only(left: 20.0.w,bottom: 20.h,top: 30.h),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -163,112 +163,59 @@ class _UserDetailsFormState extends State<UserDetailsForm> {
                             return null;
                           },
                         ),
+
                         SizedBox(height: 15.h,),
-                        TextFormField(
-                          controller: emailController,
-                          style: TextStyle(
-                            color: Palette.grey,
-                            fontSize: 14.sp,
-                          ),
-                          // onChanged: (value) {
-                          //   setState(() {
-                          //     emailController.text = value.toString();
-                          //   });
-                          // },
-                          decoration: InputDecoration(
-                            focusColor: Colors.white,
-                            //add prefix icon
-                            prefixIcon: Padding(
-                              padding:  EdgeInsets.all(10.0),
-                              child: SvgPicture.asset(
-                                'assets/icons/email.svg',
-                                semanticsLabel: 'A red up arrow',
+                        InkWell(
+                          onTap: () async {
+                            final DateTime? selectedDate = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(1900),
+                              lastDate: DateTime(3000),
+                            );
+                            if (selectedDate != null) {
+                              setState(() {
+                                _selectedDate = selectedDate;
+                              });
+                            }
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Palette.grey,
+                                width: 1.0,
                               ),
-                            ),
-
-                            // errorText: _errorMsg,
-                            //  disabledBorder: OutlineInputBorder(
-                            //    borderSide: const BorderSide(color: Palette.grey),
-                            //    borderRadius: BorderRadius.circular(10),
-                            //  ),
-                            border:  OutlineInputBorder(
-                              borderSide: const BorderSide(color: Palette.black),
                               borderRadius: BorderRadius.circular(10),
+                              color: Colors.transparent,
                             ),
-
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Palette.grey),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Palette.grey),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.red),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.red),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            fillColor: Palette.grey,
-
-                            hintText: "Email",
-
-                            //make hint text
-                            hintStyle: TextStyle(
-                              color: Palette.grey,
-                              fontSize: 14.sp,
-                            ),
-
-                            //create lable
-                            labelText: 'Email',
-                            //lable style
-                            labelStyle: TextStyle(
-                              color: Palette.grey,
-                              fontSize: 14.sp,
-                            ),
-                          ),
-                          validator: validateEmail,
-                        ),
-                        SizedBox(height: 15.h,),
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Palette.grey,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.transparent,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start, // aligns children to start
-                            children: [
-                              IconButton(
-                                icon: Icon(Icons.calendar_month,color: Palette.grey,),
-                                onPressed: () async {
-                                  final DateTime? selectedDate = await showDatePicker(
-                                    context: context,
-                                    initialDate: DateTime.now(),
-                                    firstDate: DateTime(1900),
-                                    lastDate: DateTime(3000),
-                                  );
-                                  if (selectedDate != null) {
-                                    setState(() {
-                                      _selectedDate = selectedDate;
-                                    });
-                                  }
-                                },
-                              ),
-                              Text(
-                                _selectedDate == null ? 'Date of birth' : _dateFormat.format(_selectedDate!),
-                                style: TextStyle(
-                                  fontSize: 16.0.sp,
-                                  color: Palette.grey,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start, // aligns children to start
+                              children: [
+                                IconButton(
+                                  icon: Icon(Icons.calendar_month,color: Palette.grey,),
+                                  onPressed: () async {
+                                  //   final DateTime? selectedDate = await showDatePicker(
+                                  //     context: context,
+                                  //     initialDate: DateTime.now(),
+                                  //     firstDate: DateTime(1900),
+                                  //     lastDate: DateTime(3000),
+                                  //   );
+                                  //   if (selectedDate != null) {
+                                  //     setState(() {
+                                  //       _selectedDate = selectedDate;
+                                  //     });
+                                  //   }
+                                   },
                                 ),
-                              ),
-                            ],
+                                Text(
+                                  _selectedDate == null ? 'Date of birth' : _dateFormat.format(_selectedDate!),
+                                  style: TextStyle(
+                                    fontSize: 16.0.sp,
+                                    color: Palette.grey,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         SizedBox(height: 15.h,),
@@ -743,7 +690,7 @@ class _UserDetailsFormState extends State<UserDetailsForm> {
                     onPressed: () {
                       if(_formKey.currentState!.validate()){
                         // Provider.of<AuthProvider>(context,listen: false).signup(nameController.text, emailController.text, "", referalController.text,phoneController.text,'${_selectedDate!.year}-${_selectedDate!.month}-${_selectedDate!.day}',countryController.text,cityController.text,facebookController.text,instagramController.text,context);
-                     Provider.of<AuthProvider>(context,listen: false).userdtails(nameController.text, emailController.text, referalController.text, phoneController.text,'${_selectedDate!.year}-${_selectedDate!.month}-${_selectedDate!.day}', countryController.text, cityController.text, facebookController.text, instagramController.text, context);
+                     Provider.of<AuthProvider>(context,listen: false).userdtails(nameController.text,  referalController.text, phoneController.text,'${_selectedDate!.year}-${_selectedDate!.month}-${_selectedDate!.day}', countryController.text, cityController.text, facebookController.text, instagramController.text, context);
                       }
                     },
                     style: ElevatedButton.styleFrom(

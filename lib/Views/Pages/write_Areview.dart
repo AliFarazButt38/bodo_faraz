@@ -158,7 +158,7 @@ class _WriteReviewState extends State<WriteReview> {
                                   child: Container(
                                     margin: EdgeInsets.all(10),
                                     height: 100,
-                                    width: 388,
+                                    width: 380.w,
                                     decoration: BoxDecoration(
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(10),
@@ -180,7 +180,7 @@ class _WriteReviewState extends State<WriteReview> {
                                           child: Image.network(
                                             reviewProvider.reviewsList[index].appIcon,
                                             height: 80,
-                                            width: 80,
+                                            width: 80.w,
                                           ),
                                         ),
                                         Padding(
@@ -193,12 +193,15 @@ class _WriteReviewState extends State<WriteReview> {
                                                 style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),
                                               ),
                                               SizedBox(height: 5,),
-                                              Text(
-                                                reviewProvider.reviewsList[index].appComment,
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(fontSize: 12,),
-
+                                              SizedBox(
+                                                width: 300.w,
+                                                child: Text(
+                                                  reviewProvider.reviewsList[index].appComment,
+                                                  maxLines: 2,
+                                                  //overflow: TextOverflow.ellipsis,
+                                                  style: TextStyle(fontSize: 12,),
+                                                  overflow: TextOverflow.ellipsis,
+                                                ),
                                               ),
 
                                               SizedBox(height: 5,),

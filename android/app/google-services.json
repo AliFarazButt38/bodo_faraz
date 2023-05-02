@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "950717005178-n6iglv1bheo7nra6n3107ovd95b4hmdr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bodoo_flutter",
+            "certificate_hash": "3ed70ef9334d238a4005c74c7f9da667a470c3b1"
+          }
+        },
+        {
+          "client_id": "950717005178-rb997qr7bq7ls96cjb04bb9f34mdm0ng.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bodoo_flutter",
+            "certificate_hash": "cd27fc90795e7ba59b2874fd2aa852c409dc6ac3"
+          }
+        },
+        {
           "client_id": "950717005178-hvjsfh60f0lls4meogad2t6h1g3bon8e.apps.googleusercontent.com",
           "client_type": 3
         }

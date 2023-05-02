@@ -19,6 +19,16 @@ class AuthProvider extends ChangeNotifier{
   String? _token;
   String _inviteUrl = '';
   UserModel? _userModel;
+  String _accessToken = '';
+  String _email = '';
+
+
+  setAccessToken( String token){
+    _accessToken = token;
+  }
+  setEmail( String email){
+    _email = email;
+  }
 
   loading(){
     showDialog(
@@ -86,19 +96,21 @@ class AuthProvider extends ChangeNotifier{
   }
 
 
-  userdtails(String name,email,referal_code,phone,dob,country,city,facebook_url,instagram_username,BuildContext context)async{
+  userdtails(String name,referal_code,phone,dob,country,city,facebook_url,instagram_username,BuildContext context)async{
     try{
+      print('access token $_accessToken  email $_email');
       loading();
       print('phone $phone');
       var response = await http.post(Uri.parse('${Api.baseUrlAccount}register/google/'),
           body: {
             'first_name':name,
-            'email':email,
+            'email':_email,
             'referral_code':referal_code,
             'contact_no':phone,
             'dob':dob,
             'country':country,
             'city':city,
+            'access_token':_accessToken,
             'facebook_profile_url':facebook_url,
             'instagram_username':instagram_username,
 
@@ -111,7 +123,7 @@ class AuthProvider extends ChangeNotifier{
         Navigator.of(context).pop();
         if(parsedJson.containsKey('message')){
           //toast(parsedJson['message'],Palette.baseElementGreen);
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => EmailVerification()));
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Signin()));
         }
 
       }else{
@@ -161,6 +173,46 @@ class AuthProvider extends ChangeNotifier{
     }catch(error, st){
       //Navigator.of(context).pop();
       print('catch error in authprovider signup $error $st');
+    }finally{
+      notifyListeners();
+    }
+  }
+
+  googleSignin(String email,accessToke,BuildContext context)async{
+    try{
+      print('access token $accessToke  email $email');
+      loading();
+      var response = await http.post(Uri.parse('${Api.baseUrlAccount}google/login/'),
+          body: {
+
+            'email':email,
+            // 'access_token':accessToke,
+            'password':''
+
+          }
+      );
+      print('status code ${response.statusCode}');
+      print('response googleSignin ${response.body}');
+      var parsedJson = json.decode(response.body);
+      if(response.statusCode == 200){
+        Navigator.of(context).pop();
+        if(parsedJson['message'] == 'sucessfull'){
+          //toast(parsedJson['message'],Palette.baseElementGreen);
+          setToken(parsedJson['token']);
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Dashboard()), (route) => false);
+        }
+
+      }else{
+        Navigator.of(context).pop();
+        if(parsedJson.containsKey('email')){
+          toast(parsedJson['email'].toString(),Colors.red);
+        }else if(parsedJson.containsKey('error')){
+          toast(parsedJson['error'].toString(),Colors.red);
+        }
+      }
+    }catch(error, st){
+      //Navigator.of(context).pop();
+      print('catch error in authprovider googleSignin $error $st');
     }finally{
       notifyListeners();
     }

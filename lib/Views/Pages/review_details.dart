@@ -132,9 +132,10 @@ class _ReviewDetailsState extends State<ReviewDetails> {
                             ),
 
                             ElevatedButton(
-                              onPressed: () {
-                                _launchUrl(Uri.parse(widget.reviewModel.appLink));
-                                // await RatingDialog.show(context);
+                              onPressed: () async {
+                                await RatingDialog.show(context,widget.reviewModel.appLink);
+                               // _launchUrl(Uri.parse(widget.reviewModel.appLink));
+                                 //await RatingDialog.show(context);
                                 },
                               style: ElevatedButton.styleFrom(
                                   padding: EdgeInsets.zero,

@@ -1,5 +1,7 @@
 class HomeModel{
-  int userLevel,videos,surveys,invites,apps,others,totalTasks,completedTasks;
+  int videos,surveys,invites,apps,others,totalTasks,completedTasks;
+
+  String userLevel;
 
   double totalPoint;
   HomeModel({

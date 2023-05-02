@@ -5,6 +5,7 @@ import 'package:bodoo_flutter/Models/survey_model.dart';
 import 'package:bodoo_flutter/Providers/auth_provider.dart';
 import 'package:bodoo_flutter/Providers/home_provider.dart';
 import 'package:bodoo_flutter/Providers/level_provider.dart';
+import 'package:bodoo_flutter/Theme/palette.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -87,13 +88,18 @@ class SurveyProvider extends ChangeNotifier{
       print('response postSurvey ${response.body}');
       var parsedJson = json.decode(response.body);
       if(response.statusCode == 200){
-        var data = parsedJson['status'] as List;
-        _postSurveyList = data.map((e) => PostSurveyModel.fromJson(e)).toList();
-        print('idssssssss ${_postSurveyList.length} value  ${_postSurveyList[0].surveyId}');
-        getSurveys(Values.navigatorKey.currentContext!);
-        Provider.of<LevelProvider>(Values.navigatorKey.currentContext!,listen: false).getCompletedTasks();
-        //Provider.of<HomeProvider>(context,listen: false).getHomeData();
-        Provider.of<LevelProvider>(Values.navigatorKey.currentContext!,listen: false).getLevels();
+        if(parsedJson.containsKey('message')){
+          authProvider.toast(parsedJson['message'], Palette.baseElementGreen);
+        }else{
+          var data = parsedJson['status'] as List;
+          _postSurveyList = data.map((e) => PostSurveyModel.fromJson(e)).toList();
+          print('idssssssss ${_postSurveyList.length} value  ${_postSurveyList[0].surveyId}');
+          getSurveys(Values.navigatorKey.currentContext!);
+          Provider.of<LevelProvider>(Values.navigatorKey.currentContext!,listen: false).getCompletedTasks();
+          Provider.of<HomeProvider>(Values.navigatorKey.currentContext!,listen: false).getHomeData();
+          Provider.of<LevelProvider>(Values.navigatorKey.currentContext!,listen: false).getLevels();
+
+        }
 
       }else{
       }
