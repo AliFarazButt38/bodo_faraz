@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:bodoo_flutter/AdMob/ad_mob.dart';
 import 'package:bodoo_flutter/Paymob_integ/payment_provider.dart';
 import 'package:bodoo_flutter/Paymob_integ/toogle_screen.dart';
 import 'package:bodoo_flutter/Paymob_integ/visa_webview.dart';
@@ -16,6 +17,7 @@ import 'package:bodoo_flutter/Views/Pages/app_detail.dart';
 import 'package:bodoo_flutter/Views/Pages/download_appScreen.dart';
 import 'package:bodoo_flutter/Views/Pages/facebook_auth.dart';
 import 'package:bodoo_flutter/Views/Pages/forgot_password.dart';
+import 'package:bodoo_flutter/Views/Pages/others_taskScreen.dart';
 import 'package:bodoo_flutter/Views/Pages/rate_MyApp.dart';
 import 'package:bodoo_flutter/Views/Pages/splash_screen.dart';
 import 'package:bodoo_flutter/Views/Pages/userdetails_form.dart';
@@ -24,6 +26,7 @@ import 'package:bodoo_flutter/Views/Pages/webview_survey.dart';
 import 'package:bodoo_flutter/Views/Pages/withdraw_screen.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'Paymob_integ/checkout_detail_screen.dart';
 import 'Providers/Google_SignInProvider.dart';
@@ -47,6 +50,7 @@ Future main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await FirebaseMessaging.instance.getInitialMessage();
+
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true, // Required to display a heads up notification

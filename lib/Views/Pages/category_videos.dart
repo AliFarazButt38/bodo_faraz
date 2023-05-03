@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
+import '../../AdMob/ad_mob.dart';
 import 'download_appScreen.dart';
 import 'notifications_Screen.dart';
 
@@ -220,7 +221,8 @@ class _CategoryVideosState extends State<CategoryVideos> {
                                       ),
                                     ),
                                     onTap: () {
-                                      //Navigator.push(context, MaterialPageRoute(builder: (context)=>WatchVideo()));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>RewardedAdExample()));
+
                                     },
                                   ),
                                 ),

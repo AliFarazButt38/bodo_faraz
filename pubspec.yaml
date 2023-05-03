@@ -63,6 +63,11 @@ dependencies:
   webview_flutter: ^4.2.0
   firebase_messaging: ^14.4.1
   flutter_local_notifications: ^13.0.0
+  country_picker: ^2.0.20
+  csc_picker: ^0.2.7
+  google_mobile_ads: ^3.0.0
+
+
 #  rate_my_app: ^1.1.4
 
 
