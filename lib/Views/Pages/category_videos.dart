@@ -1,5 +1,6 @@
 
 import 'package:bodoo_flutter/Providers/level_provider.dart';
+import 'package:bodoo_flutter/Views/Pages/ad_mob.dart';
 import 'package:bodoo_flutter/Views/Pages/watch_videoScreen.dart';
 import 'package:bodoo_flutter/Views/Pages/write_Areview.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +8,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
-import '../../AdMob/ad_mob.dart';
-import 'download_appScreen.dart';
 import 'notifications_Screen.dart';
 
 class CategoryVideos extends StatefulWidget {

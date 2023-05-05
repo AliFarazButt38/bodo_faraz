@@ -116,7 +116,7 @@ final _formKey = GlobalKey<FormState>();
                         child: Column(
                           children: [
                             Text(authProvider.user != null ? authProvider.user!.name : '',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 22),),
-                            Text(authProvider.user != null ? 'Level ${authProvider.user!.userLevel}' :"",style: TextStyle(fontSize: 16),),
+                            Text(authProvider.user != null ? ' ${authProvider.user!.userLevel}' :"",style: TextStyle(fontSize: 16),),
                             Padding(
                               padding:  EdgeInsets.only(left: 15,right: 15,top: 20.h),
                               child: Column(

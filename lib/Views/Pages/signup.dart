@@ -7,6 +7,7 @@ import 'package:csc_picker/csc_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 
 import '../../Providers/Google_SignInProvider.dart';
@@ -43,7 +44,12 @@ class _SignupState extends State<Signup> {
 
   DateTime? _selectedDate;
   final DateFormat _dateFormat = DateFormat('yyyy/MM/dd');
- Country? _selectedCountry;
+ Country _selectedCountry=Country
+   (phoneCode: '+20', countryCode: 'EG',
+     e164Sc: 20 , level: 2,
+     name: 'Egypt', example:'+201234567890',
+     displayName: 'egypt', displayNameNoCountryCode: 'Egypt(+20)',
+     e164Key: '20', geographic: false);
   String? validateEmail(String? value) {
     String pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
@@ -255,6 +261,7 @@ class _SignupState extends State<Signup> {
                             lastDate: DateTime(3000),
                           );
                           if (selectedDate != null) {
+
                             setState(() {
                               _selectedDate = selectedDate;
                             });
@@ -527,83 +534,6 @@ class _SignupState extends State<Signup> {
                         },
                       ),
                       SizedBox(height: 10,),
-                      // TextFormField(
-                      //   controller: countryController,
-                      //   style: TextStyle(
-                      //     color: Palette.grey,
-                      //     fontSize: 14,
-                      //   ),
-                      //   // onChanged: (value) {
-                      //   //   setState(() {
-                      //   //     emailController.text = value.toString();
-                      //   //   });
-                      //   // },
-                      //   decoration: InputDecoration(
-                      //     focusColor: Colors.white,
-                      //     //add prefix icon
-                      //     prefixIcon: Padding(
-                      //       padding: const EdgeInsets.all(10.0),
-                      //       child: SvgPicture.asset(
-                      //         'assets/icons/File.svg',
-                      //         semanticsLabel: 'A red up arrow',
-                      //       ),
-                      //     ),
-                      //
-                      //     // errorText: _errorMsg,
-                      //     //  disabledBorder: OutlineInputBorder(
-                      //     //    borderSide: const BorderSide(color: Palette.grey),
-                      //     //    borderRadius: BorderRadius.circular(10),
-                      //     //  ),
-                      //     border:  OutlineInputBorder(
-                      //       borderSide: const BorderSide(color: Palette.black),
-                      //       borderRadius: BorderRadius.circular(10),
-                      //     ),
-                      //
-                      //     focusedBorder: OutlineInputBorder(
-                      //       borderSide: const BorderSide(color: Palette.grey),
-                      //       borderRadius: BorderRadius.circular(10),
-                      //     ),
-                      //     enabledBorder: OutlineInputBorder(
-                      //       borderSide: const BorderSide(color: Palette.grey),
-                      //       borderRadius: BorderRadius.circular(10),
-                      //     ),
-                      //     errorBorder: OutlineInputBorder(
-                      //       borderSide: const BorderSide(color: Colors.red),
-                      //       borderRadius: BorderRadius.circular(10),
-                      //     ),
-                      //     focusedErrorBorder: OutlineInputBorder(
-                      //       borderSide: const BorderSide(color: Colors.red),
-                      //       borderRadius: BorderRadius.circular(10),
-                      //     ),
-                      //     fillColor: Palette.grey,
-                      //
-                      //     hintText: "Country",
-                      //
-                      //     //make hint text
-                      //     hintStyle: TextStyle(
-                      //       color: Palette.grey,
-                      //       fontSize: 14.sp,
-                      //     ),
-                      //
-                      //     //create lable
-                      //     labelText: 'Country',
-                      //     //lable style
-                      //     labelStyle: TextStyle(
-                      //       color: Palette.grey,
-                      //       fontSize: 14.sp,
-                      //     ),
-                      //   ),
-                      //   validator: (text) {
-                      //     if(text!.isEmpty){
-                      //       return 'Enter country';
-                      //     }
-                      //     // else if (passwordController.length < 8) {
-                      //     //   return 'password should be 8 digits';
-                      //     // }
-                      //     return null;
-                      //   },
-                      // ),
-
                       TextFormField(
                         decoration: InputDecoration(
                           labelText: 'Country',
@@ -638,7 +568,7 @@ class _SignupState extends State<Signup> {
                           ),
                         ),
                         controller: TextEditingController(
-                          text: _selectedCountry == null ? '' : _selectedCountry!.name,
+                          text: _selectedCountry == null ? '' : _selectedCountry.name,
                         ),
                         onTap: () {
                           showCountryPicker(

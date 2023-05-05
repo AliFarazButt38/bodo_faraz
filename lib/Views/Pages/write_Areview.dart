@@ -199,7 +199,7 @@ class _WriteReviewState extends State<WriteReview> {
                                                   reviewProvider.reviewsList[index].appComment,
                                                   maxLines: 2,
                                                   //overflow: TextOverflow.ellipsis,
-                                                  style: TextStyle(fontSize: 12,),
+                                                  style: TextStyle(fontSize: 12.sp,),
                                                   overflow: TextOverflow.ellipsis,
                                                 ),
                                               ),

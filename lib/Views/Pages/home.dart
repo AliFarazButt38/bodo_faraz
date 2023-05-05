@@ -121,7 +121,7 @@ class _HomeState extends State<Home> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(homeProvider.homeModel != null ? "Level ${  homeProvider.homeModel!.userLevel}" : '',style: TextStyle(color: Colors.white),),
+                                      Text(homeProvider.homeModel != null ? " ${  homeProvider.homeModel!.userLevel}" : '',style: TextStyle(color: Colors.white),),
                                       //Text("Level 2",style: TextStyle(color: Colors.white),),
                                     ],
                                   ),
@@ -212,7 +212,7 @@ class _HomeState extends State<Home> {
                                   initialAngleInDegree: 0,
                                   chartType: ChartType.ring,
                                   ringStrokeWidth: 20,
-                                  centerText: homeProvider.homeModel != null ? "Level ${  homeProvider.homeModel!.userLevel}" : '',
+                                  centerText: homeProvider.homeModel != null ? " ${  homeProvider.homeModel!.userLevel}" : '',
                                   legendOptions: LegendOptions(
                                     showLegendsInRow: false,
                                     legendPosition: LegendPosition.right,
@@ -372,7 +372,7 @@ class _HomeState extends State<Home> {
                            children: [
                              Text("Your free trial will\n end in:",style: TextStyle(
                                color: Colors.white,
-                               fontSize: 16,
+                               fontSize: 16.sp,
                                fontWeight: FontWeight.w600,
                              ),),
                              Consumer<AuthProvider>(
@@ -445,7 +445,7 @@ class _HomeState extends State<Home> {
                                                child: Text("${time.days ?? 0}",style: TextStyle(
                                                  color: Colors.white,
                                                  fontWeight: FontWeight.bold,
-                                                 fontSize: 22,
+                                                 fontSize: 22.sp,
                                                ),),
                                              ),
                                              Padding(
@@ -453,7 +453,7 @@ class _HomeState extends State<Home> {
                                                child: Text("${time.hours ?? 0}",style:TextStyle(
                                                  color: Colors.white,
                                                  fontWeight: FontWeight.bold,
-                                                 fontSize: 22,
+                                                 fontSize: 22.sp,
                                                ),),
                                              ),
                                              Padding(
@@ -461,13 +461,13 @@ class _HomeState extends State<Home> {
                                                child: Text("${time.min ?? 0}",style: TextStyle(
                                                  color: Colors.white,
                                                  fontWeight: FontWeight.bold,
-                                                 fontSize: 22,
+                                                 fontSize: 22.sp,
                                                ),),
                                              ),
                                              Text("${time.sec ?? 0}",style: TextStyle(
                                                color: Colors.white,
                                                fontWeight: FontWeight.bold,
-                                               fontSize: 22,
+                                               fontSize: 22.sp,
                                              ),),
                                            ],
                                          );
@@ -480,7 +480,7 @@ class _HomeState extends State<Home> {
                                            child: Text("day(s)",style: TextStyle(
                                              color: Colors.white,
                                              fontWeight: FontWeight.w600,
-                                             fontSize:12,
+                                             fontSize:12.sp,
                                            ),),
                                          ),
                                          Padding(
@@ -488,7 +488,7 @@ class _HomeState extends State<Home> {
                                            child: Text("hour",style: TextStyle(
                                              color: Colors.white,
                                              fontWeight: FontWeight.w600,
-                                             fontSize:12,
+                                             fontSize:12.sp,
                                            ),),
                                          ),
                                          Padding(
@@ -496,7 +496,7 @@ class _HomeState extends State<Home> {
                                            child: Text("minute",style: TextStyle(
                                              color: Colors.white,
                                              fontWeight: FontWeight.w600,
-                                             fontSize:12,
+                                             fontSize:12.sp,
                                            ),),
                                          ),
                                          Padding(
@@ -504,7 +504,7 @@ class _HomeState extends State<Home> {
                                            child: Text("second",style: TextStyle(
                                              color: Colors.white,
                                              fontWeight: FontWeight.w600,
-                                             fontSize:12,
+                                             fontSize:12.sp,
                                            ),),
                                          ),
                                        ],

@@ -4,6 +4,7 @@ import 'package:bodoo_flutter/Views/Pages/social_mediaScreen.dart';
 import 'package:bodoo_flutter/Views/Pages/surveys_screen.dart';
 import 'package:bodoo_flutter/Views/Pages/watch_videoScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import '../Widgets/line_chart.dart';
@@ -103,8 +104,7 @@ class _Wallet extends State<Wallet> {
                         Consumer<WalletProvider>(
 
                           builder: (context, walletProvider,child) {
-                            return Padding(
-                              padding: const EdgeInsets.only(left: 23),
+                            return Center(
                               child: Container(
                                 width: 350,
                                  height: 200,
@@ -306,9 +306,8 @@ class _Wallet extends State<Wallet> {
                             ],
                           ),
                         ),
-
-                        Padding(
-                          padding: const EdgeInsets.only(left: 25,top: 20),
+                        SizedBox(height: 10,),
+                        Center(
                           child: Container(
                             width: 350,
                             height: 200,
@@ -487,8 +486,8 @@ class _Wallet extends State<Wallet> {
                                           padding: const EdgeInsets.only(bottom: 13),
                                           child: Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: const [
-                                              Text("Social Media Reacts",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
+                                            children:  [
+                                              Text("Social Media Reacts",style: TextStyle(color: Colors.black,fontSize: 16.sp,fontWeight: FontWeight.w600),),
                                               Text("41/60"),
                                             ],
                                           ),

@@ -26,7 +26,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-check();
+    Provider.of<AuthProvider>(context,listen: false).setPlatform();
+     check();
     requestPermission();
     getToken();
     check();
@@ -74,8 +75,8 @@ check();
     await FirebaseMessaging.instance.getToken().then((token){
       print('fcm token $token');
       setState(() {
-        //mToken = token!;
-        //Provider.of<AuthProvider>(context,listen: false).setFcmToken(token);
+        // mToken = token!;
+        Provider.of<AuthProvider>(context,listen: false).setFcmToken(token!);
       });
     });
   }

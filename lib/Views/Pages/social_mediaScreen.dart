@@ -1,8 +1,12 @@
 
+import 'package:bodoo_flutter/Providers/socialMedia_provider.dart';
+import 'package:bodoo_flutter/Theme/palette.dart';
 import 'package:bodoo_flutter/Views/Pages/startTask.dart';
+import 'package:bodoo_flutter/Views/Pages/webview_socialMedia.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:provider/provider.dart';
 
 import 'notifications_Screen.dart';
 
@@ -42,7 +46,13 @@ class SocialMedia extends StatefulWidget {
   State<SocialMedia> createState() => _SocialMediaState();
 }
 
+
 class _SocialMediaState extends State<SocialMedia> {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<SocialMediaProvider>(context,listen: false).getInstagramPost(context);
+  }
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context, designSize: const Size(428, 926));
@@ -102,112 +112,124 @@ class _SocialMediaState extends State<SocialMedia> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        ListView.separated(
-                          physics: BouncingScrollPhysics(),
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: items.length,
-                          separatorBuilder: (BuildContext context,int index){
-                            return SizedBox(height: 20.h,);
-                          },// Replace itemCount with the actual number of list items you want to display
-                          itemBuilder: (context, index) {
-                            final item = items[index];
-                            return InkWell(
-                              onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (contex)=>StartTask()));
-                              },
-                              child: Container(
-                                height: 353.h,
-                                width: 388.w,
-                                padding: EdgeInsets.only(top: 5.h,left: 8.w,right: 8,bottom: 8.h),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(15),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.1),
-                                      spreadRadius: 2,
-                                      blurRadius: 1,
-                                      offset: Offset(0, 1),
-                                    ),
-                                  ],
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.only(topRight: Radius.circular(20.0),topLeft: Radius.circular(20.0)),
-                                      child: Image.asset(
-                                        item.image,
-                                        height: 164.h,
-                                        width:388.23.w,
-                                        fit: BoxFit.cover,
+                        Consumer<SocialMediaProvider>(
 
+                          builder: (context, socialMediaProvider, child) {
+                            if(socialMediaProvider.taskLoading){
+                              return Center(child: CircularProgressIndicator(color: Palette.baseElementGreen,));
+                            }else if(socialMediaProvider.socialTasksList.isNotEmpty){
+                              return ListView.separated(
+                                physics: BouncingScrollPhysics(),
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemCount: socialMediaProvider.socialTasksList.length,
+                                separatorBuilder: (BuildContext context,int index){
+                                  return SizedBox(height: 20.h,);
+                                },// Replace itemCount with the actual number of list items you want to display
+                                itemBuilder: (context, index) {
+                                  final item = items[index];
+                                  return InkWell(
+                                    onTap: (){
+                                      Navigator.push(context, MaterialPageRoute(builder: (contex)=>StartTask()));
+                                    },
+                                    child: Container(
+                                      height: 353.h,
+                                      width: 388.w,
+                                      padding: EdgeInsets.only(top: 5.h,left: 8.w,right: 8,bottom: 8.h),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(15),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.1),
+                                            spreadRadius: 2,
+                                            blurRadius: 1,
+                                            offset: Offset(0, 1),
+                                          ),
+                                        ],
                                       ),
-                                    ),
-
-                                    SizedBox(height: 10.h),
-                                    Padding(
-                                      padding:  EdgeInsets.only(left: 15.w),
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
-                                        children:[
-                                          Text(
-                                            item.title,
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              fontSize: 14.31.sp,
-                                              fontWeight: FontWeight.w600,
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius: BorderRadius.only(topRight: Radius.circular(20.0),topLeft: Radius.circular(20.0)),
+                                            child: Image.asset(
+                                              item.image,
+                                              height: 164.h,
+                                              width:388.23.w,
+                                              fit: BoxFit.cover,
+
+                                            ),
+                                          ),
+
+                                          SizedBox(height: 10.h),
+                                          Padding(
+                                            padding:  EdgeInsets.only(left: 15.w),
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children:[
+                                                Text(
+                                                 socialMediaProvider.socialTasksList[index].action,
+                                                  maxLines: 2,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                    fontSize: 14.31.sp,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                                SizedBox(height: 10.h),
+                                                Text(
+                                                  item.description,
+                                                  maxLines: 3,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                    fontSize: 12.sp,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                           SizedBox(height: 10.h),
-                                          Text(
-                                            item.description,
-                                            maxLines: 3,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              fontSize: 12.sp,
-                                              color: Colors.black,
+                                          Padding(
+                                            padding:  EdgeInsets.only(left: 55.w),
+                                            child: ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => WebViewSocialMedia(socialMediaModel: socialMediaProvider.socialTasksList[index])));
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                  padding: EdgeInsets.zero,
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius: BorderRadius.circular(10))),
+                                              child: Ink(
+                                                decoration: BoxDecoration(
+                                                    gradient:
+                                                    const LinearGradient(colors: [Colors.blueAccent, Colors.greenAccent]),
+                                                    borderRadius: BorderRadius.circular(10)),
+                                                child: Container(
+                                                  width: 274.w,
+                                                  height: 42.h,
+                                                  alignment: Alignment.center,
+                                                  child:  Text(
+                                                    'Start Task',
+                                                    style:
+                                                    TextStyle(fontSize: 16.sp, ),
+                                                  ),
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         ],
                                       ),
                                     ),
-                                    SizedBox(height: 10.h),
-                                    Padding(
-                                      padding:  EdgeInsets.only(left: 55.w),
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.push(context, MaterialPageRoute(builder: (contex)=>StartTask()));
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                            padding: EdgeInsets.zero,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(10))),
-                                        child: Ink(
-                                          decoration: BoxDecoration(
-                                              gradient:
-                                              const LinearGradient(colors: [Colors.blueAccent, Colors.greenAccent]),
-                                              borderRadius: BorderRadius.circular(10)),
-                                          child: Container(
-                                            width: 274.w,
-                                            height: 42.h,
-                                            alignment: Alignment.center,
-                                            child:  Text(
-                                              'Start Task',
-                                              style:
-                                               TextStyle(fontSize: 16.sp, ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
+                                  );
+                                },
+                              );
+                            }else{
+                              return SizedBox();
+                            }
+
+                          }
                         ),
 
                       ],

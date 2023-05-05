@@ -23,7 +23,11 @@ backgroundColor: Colors.transparent,
               children: [
                 Padding(
                   padding:  EdgeInsets.only(left: 300.w),
-                  child: Image.asset("assets/icons/Full Cross.png",height: 30.h,width: 30.w,),
+                  child: InkWell(
+                      onTap: (){
+                        Navigator.pop(context);
+                      },
+                      child: Image.asset("assets/icons/Full Cross.png",height: 30.h,width: 30.w,)),
                 ),
                 SizedBox(height: 10.h,),
                 Image.asset("assets/images/SocialMedia2.png",height: 261.h,width: 388.w,fit: BoxFit.cover,),

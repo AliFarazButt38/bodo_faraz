@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:bodoo_flutter/AdMob/ad_mob.dart';
+
 import 'package:bodoo_flutter/Paymob_integ/payment_provider.dart';
 import 'package:bodoo_flutter/Paymob_integ/toogle_screen.dart';
 import 'package:bodoo_flutter/Paymob_integ/visa_webview.dart';
@@ -8,6 +8,7 @@ import 'package:bodoo_flutter/Providers/auth_provider.dart';
 import 'package:bodoo_flutter/Providers/community_provider.dart';
 import 'package:bodoo_flutter/Providers/home_provider.dart';
 import 'package:bodoo_flutter/Providers/level_provider.dart';
+import 'package:bodoo_flutter/Providers/socialMedia_provider.dart';
 import 'package:bodoo_flutter/Providers/survey_provider.dart';
 import 'package:bodoo_flutter/Providers/video_provider.dart';
 import 'package:bodoo_flutter/Providers/wallet_provider.dart';
@@ -27,6 +28,7 @@ import 'package:bodoo_flutter/Views/Pages/withdraw_screen.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+
 import 'package:provider/provider.dart';
 import 'Paymob_integ/checkout_detail_screen.dart';
 import 'Providers/Google_SignInProvider.dart';
@@ -48,8 +50,10 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 Future main() async{
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp();
   await FirebaseMessaging.instance.getInitialMessage();
+  await MobileAds.instance.initialize();
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
@@ -57,6 +61,7 @@ Future main() async{
     badge: true,
     sound: true,
   );
+
   runApp(
     MultiProvider(
     providers: [
@@ -71,6 +76,8 @@ Future main() async{
       ChangeNotifierProvider(create: (_) => CommunityProvider()),
       ChangeNotifierProvider(create: (_) => GoogleSignInProvider()),
       ChangeNotifierProvider(create: (_) => PaymentProvider()),
+      ChangeNotifierProvider(create: (_) => SocialMediaProvider()),
+
 
     ],
     child: const MyApp(),

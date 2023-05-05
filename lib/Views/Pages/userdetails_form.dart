@@ -1,3 +1,4 @@
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:bodoo_flutter/Providers/auth_provider.dart';
 import 'package:bodoo_flutter/Views/Pages/signin.dart';
@@ -32,6 +33,12 @@ class _UserDetailsFormState extends State<UserDetailsForm> {
 
   DateTime? _selectedDate;
   final DateFormat _dateFormat = DateFormat('yyyy/MM/dd');
+  Country _selectedCountry=Country
+    (phoneCode: '+20', countryCode: 'EG',
+      e164Sc: 20 , level: 2,
+      name: 'Egypt', example:'+201234567890',
+      displayName: 'egypt', displayNameNoCountryCode: 'Egypt(+20)',
+      e164Key: '20', geographic: false);
 
   String? validateEmail(String? value) {
     String pattern =
@@ -296,82 +303,134 @@ class _UserDetailsFormState extends State<UserDetailsForm> {
                           },
                         ),
                         SizedBox(height: 15.h,),
+                        // TextFormField(
+                        //   controller: countryController,
+                        //   style: TextStyle(
+                        //     color: Palette.grey,
+                        //     fontSize: 14,
+                        //   ),
+                        //   // onChanged: (value) {
+                        //   //   setState(() {
+                        //   //     emailController.text = value.toString();
+                        //   //   });
+                        //   // },
+                        //   decoration: InputDecoration(
+                        //     focusColor: Colors.white,
+                        //     //add prefix icon
+                        //     prefixIcon: Padding(
+                        //       padding: const EdgeInsets.all(10.0),
+                        //       child: SvgPicture.asset(
+                        //         'assets/icons/File.svg',
+                        //         semanticsLabel: 'A red up arrow',
+                        //       ),
+                        //     ),
+                        //
+                        //     // errorText: _errorMsg,
+                        //     //  disabledBorder: OutlineInputBorder(
+                        //     //    borderSide: const BorderSide(color: Palette.grey),
+                        //     //    borderRadius: BorderRadius.circular(10),
+                        //     //  ),
+                        //     border:  OutlineInputBorder(
+                        //       borderSide: const BorderSide(color: Palette.black),
+                        //       borderRadius: BorderRadius.circular(10),
+                        //     ),
+                        //
+                        //     focusedBorder: OutlineInputBorder(
+                        //       borderSide: const BorderSide(color: Palette.grey),
+                        //       borderRadius: BorderRadius.circular(10),
+                        //     ),
+                        //     enabledBorder: OutlineInputBorder(
+                        //       borderSide: const BorderSide(color: Palette.grey),
+                        //       borderRadius: BorderRadius.circular(10),
+                        //     ),
+                        //     errorBorder: OutlineInputBorder(
+                        //       borderSide: const BorderSide(color: Colors.red),
+                        //       borderRadius: BorderRadius.circular(10),
+                        //     ),
+                        //     focusedErrorBorder: OutlineInputBorder(
+                        //       borderSide: const BorderSide(color: Colors.red),
+                        //       borderRadius: BorderRadius.circular(10),
+                        //     ),
+                        //     fillColor: Palette.grey,
+                        //
+                        //     hintText: "Country",
+                        //
+                        //     //make hint text
+                        //     hintStyle: TextStyle(
+                        //       color: Palette.grey,
+                        //       fontSize: 14.sp,
+                        //     ),
+                        //
+                        //     //create lable
+                        //     labelText: 'Country',
+                        //     //lable style
+                        //     labelStyle: TextStyle(
+                        //       color: Palette.grey,
+                        //       fontSize: 14.sp,
+                        //     ),
+                        //   ),
+                        //   validator: (text) {
+                        //     if(text!.isEmpty){
+                        //       return 'Enter country';
+                        //     }
+                        //     // else if (passwordController.length < 8) {
+                        //     //   return 'password should be 8 digits';
+                        //     // }
+                        //     return null;
+                        //   },
+                        // ),
+
                         TextFormField(
-                          controller: countryController,
-                          style: TextStyle(
-                            color: Palette.grey,
-                            fontSize: 14,
-                          ),
-                          // onChanged: (value) {
-                          //   setState(() {
-                          //     emailController.text = value.toString();
-                          //   });
-                          // },
                           decoration: InputDecoration(
-                            focusColor: Colors.white,
-                            //add prefix icon
-                            prefixIcon: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: SvgPicture.asset(
-                                'assets/icons/File.svg',
-                                semanticsLabel: 'A red up arrow',
-                              ),
-                            ),
+                            labelText: 'Country',
+                            labelStyle: TextStyle(
+                              color: Palette.grey,
+                              fontSize: 16.0,
 
-                            // errorText: _errorMsg,
-                            //  disabledBorder: OutlineInputBorder(
-                            //    borderSide: const BorderSide(color: Palette.grey),
-                            //    borderRadius: BorderRadius.circular(10),
-                            //  ),
-                            border:  OutlineInputBorder(
-                              borderSide: const BorderSide(color: Palette.black),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Palette.grey),
-                              borderRadius: BorderRadius.circular(10),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderSide: const BorderSide(color: Palette.grey),
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(10.0),
                             ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.red),
-                              borderRadius: BorderRadius.circular(10),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Palette.grey),
+                              borderRadius: BorderRadius.circular(10.0),
                             ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.red),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            fillColor: Palette.grey,
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                showCountryPicker(
+                                  context: context,
+                                  showPhoneCode: false,
 
-                            hintText: "Country",
-
-                            //make hint text
-                            hintStyle: TextStyle(
-                              color: Palette.grey,
-                              fontSize: 14.sp,
-                            ),
-
-                            //create lable
-                            labelText: 'Country',
-                            //lable style
-                            labelStyle: TextStyle(
-                              color: Palette.grey,
-                              fontSize: 14.sp,
+                                  onSelect: (Country country) {
+                                    setState(() {
+                                      _selectedCountry = country;
+                                    });
+                                  },
+                                );
+                              },
+                              icon: Icon(Icons.arrow_drop_down),
+                              color: Colors.grey,
                             ),
                           ),
-                          validator: (text) {
-                            if(text!.isEmpty){
-                              return 'Enter country';
-                            }
-                            // else if (passwordController.length < 8) {
-                            //   return 'password should be 8 digits';
-                            // }
-                            return null;
+                          controller: TextEditingController(
+                            text: _selectedCountry == null ? '' : _selectedCountry.name,
+                          ),
+                          onTap: () {
+                            showCountryPicker(
+                              context: context,
+                              showPhoneCode: false,
+                              onSelect: (Country country) {
+                                setState(() {
+                                  _selectedCountry = country;
+                                });
+                              },
+                            );
                           },
+                          readOnly: true,
                         ),
+
+
                         SizedBox(height: 15.h,),
                         TextFormField(
                           controller: cityController,

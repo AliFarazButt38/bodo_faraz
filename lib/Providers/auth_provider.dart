@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:bodoo_flutter/Models/user_model.dart';
 import 'package:bodoo_flutter/Services/api.dart';
@@ -21,6 +22,8 @@ class AuthProvider extends ChangeNotifier{
   UserModel? _userModel;
   String _accessToken = '';
   String _email = '';
+  String _fcmToken = '';
+  String _platform = '';
 
 
   setAccessToken( String token){
@@ -48,55 +51,73 @@ class AuthProvider extends ChangeNotifier{
         fontSize: 16.0
     );
   }
+  setFcmToken(String token){
+    _fcmToken = token;
+  }
+  setPlatform(){
+    if (Platform.isAndroid) {
+      // Android-specific code
+      _platform = 'android';
 
+    } else if (Platform.isIOS) {
+      // iOS-specific code
+      _platform = 'ios';
 
-  signup(String name,email,password,referal_code,phone,dob,country,city,facebook_url,instagram_username,BuildContext context)async{
-    try{
+    }
+    print('platform $_platform');
+    notifyListeners();
+  }
+
+  signup(String name,email,password,referal_code,phone,dob,country,city,facebook_url,instagram_username,BuildContext context)async {
+    try {
       loading();
       print('phone $phone');
-      var response = await http.post(Uri.parse('${Api.baseUrlAccount}register/'),
-      body: {
-        'first_name':name,
-        'email':email,
-        'password':password,
-        'referral_code':referal_code,
-        'contact_no':phone,
-        'dob':dob,
-        'country':country,
-        'city':city,
-        'facebook_profile_url':facebook_url,
-        'instagram_username':instagram_username,
+      var response = await http.post(
+          Uri.parse('${Api.baseUrlAccount}register/'),
+          body: {
+            'first_name': name,
+            'email': email,
+            'password': password,
+            'referral_code': referal_code,
+            'contact_no': phone,
+            'dob': dob,
+            'country': country,
+            'city': city,
+            'facebook_profile_url': facebook_url,
+            'instagram_username': instagram_username,
+            'registration_id': _fcmToken,
+            'type': _platform,
 
-      }
+          }
       );
       print('status code ${response.statusCode}');
       print('response signup ${response.body}');
       var parsedJson = json.decode(response.body);
-      if(response.statusCode == 200){
+      if (response.statusCode == 200) {
         Navigator.of(context).pop();
-        if(parsedJson.containsKey('message')){
+        if (parsedJson.containsKey('message')) {
           //toast(parsedJson['message'],Palette.baseElementGreen);
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => EmailVerification()));
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => EmailVerification()));
         }
-
-      }else{
-         Navigator.of(context).pop();
+      } else {
+        Navigator.of(context).pop();
         // if(parsedJson.containsKey('email')){
         //   toast(parsedJson['email'].toString(),Colors.red);
         // }else{
-          toast(parsedJson.toString(),Colors.red);
-       // }
+        toast(parsedJson.toString(), Colors.red);
+        // }
       }
-    }catch(error, st){
-     // Navigator.of(context).pop();
+    } catch (error, st) {
+      // Navigator.of(context).pop();
       print('catch error in authprovider signup $error $st');
-    }finally{
+    } finally {
       notifyListeners();
     }
   }
 
 
-  userdtails(String name,referal_code,phone,dob,country,city,facebook_url,instagram_username,BuildContext context)async{
+    userdtails(String name,referal_code,phone,dob,country,city,facebook_url,instagram_username,BuildContext context)async{
     try{
       print('access token $_accessToken  email $_email');
       loading();
@@ -113,6 +134,8 @@ class AuthProvider extends ChangeNotifier{
             'access_token':_accessToken,
             'facebook_profile_url':facebook_url,
             'instagram_username':instagram_username,
+            'registration_id': _fcmToken,
+            'type': _platform,
 
           }
       );
@@ -121,9 +144,10 @@ class AuthProvider extends ChangeNotifier{
       var parsedJson = json.decode(response.body);
       if(response.statusCode == 200){
         Navigator.of(context).pop();
-        if(parsedJson.containsKey('message')){
+        if(parsedJson['message'] == 'sucessfull'){
           //toast(parsedJson['message'],Palette.baseElementGreen);
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Signin()));
+          setToken(parsedJson['token']);
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Dashboard()), (route) => false);
         }
 
       }else{
@@ -144,12 +168,15 @@ class AuthProvider extends ChangeNotifier{
 
   signin(String email,password,BuildContext context)async{
     try{
+      print('device token $_fcmToken  device type $_platform');
       loading();
       var response = await http.post(Uri.parse('${Api.baseUrlAccount}login/'),
           body: {
 
             'email':email,
             'password':password,
+            'device_token':_fcmToken,
+            'device_type':_platform,
 
           }
       );
@@ -187,7 +214,10 @@ class AuthProvider extends ChangeNotifier{
 
             'email':email,
             // 'access_token':accessToke,
-            'password':''
+            'password':'',
+            'device_token':_fcmToken,
+            'device_type':_platform,
+
 
           }
       );
@@ -251,34 +281,58 @@ class AuthProvider extends ChangeNotifier{
     }
   }
 
-  verifyEmail(String token,BuildContext context)async{
+  // verifyEmail(String token,BuildContext context)async{
+  //   try{
+  //     loading();
+  //     var response = await http.get(Uri.parse('${Api.baseUrlAccount}verify-email/$token/'),
+  //
+  //     );
+  //     print('status code ${response.statusCode}');
+  //     print('response verifyEmail ${response.body}');
+  //     //var parsedJson = json.decode(response.body);
+  //     if(response.statusCode == 200){
+  //       Navigator.of(context).pop();
+  //       //  if(parsedJson['message'] == 'sucessfull'){
+  //       //toast(parsedJson['message'],Palette.baseElementGreen);
+  //       // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Dashboard()), (route) => false);
+  //       // }
+  //       toast('Your Email has been verify', Palette.baseElementGreen);
+  //       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Signin()), (route) => false);
+  //
+  //     }else{
+  //       Navigator.of(context).pop();
+  //       // if(parsedJson.containsKey('email')){
+  //       //   toast(parsedJson['email'].toString(),Colors.red);
+  //       // }
+  //     }
+  //   }catch(error, st){
+  //     print('catch error in authprovider verifyEmail $error $st');
+  //   }finally{
+  //     notifyListeners();
+  //   }
+  // }
+  verifyEmail(String token,BuildContext context) async {
     try{
       loading();
-      var response = await http.get(Uri.parse('${Api.baseUrlAccount}verify-email/$token/'),
+      var response = await http.get(Uri.parse('${Api.baseUrlAccount}verify-email/$token/'));
 
-      );
       print('status code ${response.statusCode}');
       print('response verifyEmail ${response.body}');
-      //var parsedJson = json.decode(response.body);
-      if(response.statusCode == 200){
-        Navigator.of(context).pop();
-        //  if(parsedJson['message'] == 'sucessfull'){
-        //toast(parsedJson['message'],Palette.baseElementGreen);
-        // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Dashboard()), (route) => false);
-        // }
-        toast('Your Email has been verify', Palette.baseElementGreen);
-        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Signin()), (route) => false);
 
-      }else{
-         Navigator.of(context).pop();
-        // if(parsedJson.containsKey('email')){
-        //   toast(parsedJson['email'].toString(),Colors.red);
-        // }
+      var parsedJson = json.decode(response.body);
+      if(response.statusCode == 200) {
+        Navigator.of(context).pop();
+        toast('Your Email has been verified', Palette.baseElementGreen);
+
+        // Save the token and navigate to the dashboard
+        setToken(parsedJson['token']);
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Dashboard()), (route) => false);
+      } else {
+        Navigator.of(context).pop();
       }
-    }catch(error, st){
-      //Navigator.of(context).pop();
+    } catch(error, st) {
       print('catch error in authprovider verifyEmail $error $st');
-    }finally{
+    } finally {
       notifyListeners();
     }
   }
