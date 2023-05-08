@@ -213,7 +213,7 @@ class AuthProvider extends ChangeNotifier{
           body: {
 
             'email':email,
-            // 'access_token':accessToke,
+             'access_token':accessToke,
             'password':'',
             'device_token':_fcmToken,
             'device_type':_platform,

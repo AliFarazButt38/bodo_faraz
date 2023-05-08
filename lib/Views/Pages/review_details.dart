@@ -98,7 +98,7 @@ class _ReviewDetailsState extends State<ReviewDetails> {
                         Image.network(
                           widget.reviewModel.appIcon,
                           height: 90,
-                          width: 90,
+                          width: 70,
                           fit: BoxFit.fill,
                         ),
                         SizedBox(height: 8,),
@@ -109,7 +109,9 @@ class _ReviewDetailsState extends State<ReviewDetails> {
                           children: [
                             Text('Task Description',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16),),
                             SizedBox(height: 10,),
-                            Text(widget.reviewModel.appComment,style: TextStyle(fontWeight: FontWeight.w400,fontSize: 13,color: Palette.black25),),
+                            Text(widget.reviewModel.appComment,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(fontWeight: FontWeight.w400,fontSize: 13,color: Palette.black25),),
                           ],
                         ),
                         SizedBox(height: 30,),

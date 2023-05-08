@@ -268,79 +268,79 @@ class _SigninState extends State<Signin> {
                         ),
                       ),
                       SizedBox(height: 10.h,),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.center,
-                      //   children: [
-                      //     GestureDetector(
-                      //       child: Container(
-                      //         width: 110.w,
-                      //         height: 50.h,
-                      //         decoration: BoxDecoration(
-                      //           boxShadow: [
-                      //             BoxShadow(
-                      //               color: Colors.black.withOpacity(0.1),
-                      //               spreadRadius: 0,
-                      //               blurRadius: 9,
-                      //               offset: Offset(1, 3),
-                      //             ),
-                      //           ],
-                      //           borderRadius: BorderRadius.circular(15),
-                      //           color: Colors.white,
-                      //         ),
-                      //         child: Row(
-                      //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      //           children: [
-                      //             Image.asset("assets/icons/google.png",height: 25.h,width: 25.w,),
-                      //             Text("Google",style: TextStyle(
-                      //               fontSize: 15.sp,
-                      //             ),),
-                      //           ],
-                      //         ),
-                      //
-                      //       ),
-                      //       onTap: (){
-                      //         final provider =Provider.of<GoogleSignInProvider>(context,listen: false);
-                      //         provider.googleLogin(context);
-                      //       },
-                      //
-                      //     ),
-                      //     SizedBox(width: 10.h),
-                      //     Padding(
-                      //       padding: const EdgeInsets.all(8.0),
-                      //       child: GestureDetector(
-                      //         child: Container(
-                      //           width: 110.w,
-                      //           height: 50.h,
-                      //           decoration: BoxDecoration(
-                      //             boxShadow: [
-                      //               BoxShadow(
-                      //                 color: Colors.black.withOpacity(0.1),
-                      //                 spreadRadius: 0,
-                      //                 blurRadius: 9,
-                      //                 offset: Offset(1, 3),
-                      //               ),
-                      //             ],
-                      //             borderRadius: BorderRadius.circular(15),
-                      //             color: Colors.white,
-                      //           ),
-                      //           child: Row(
-                      //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      //             children: [
-                      //               Image.asset("assets/icons/facebooklogo.png",height: 25.h,width: 25.w,),
-                      //               Text("Facebook",style: TextStyle(
-                      //                 fontSize: 15.sp,
-                      //               ),),
-                      //
-                      //             ],
-                      //           ),
-                      //         ),
-                      //         onTap: () {
-                      //
-                      //         },
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            child: Container(
+                              width: 110.w,
+                              height: 50.h,
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    spreadRadius: 0,
+                                    blurRadius: 9,
+                                    offset: Offset(1, 3),
+                                  ),
+                                ],
+                                borderRadius: BorderRadius.circular(15),
+                                color: Colors.white,
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Image.asset("assets/icons/google.png",height: 25.h,width: 25.w,),
+                                  Text("Google",style: TextStyle(
+                                    fontSize: 15.sp,
+                                  ),),
+                                ],
+                              ),
+
+                            ),
+                            onTap: (){
+                              final provider =Provider.of<GoogleSignInProvider>(context,listen: false);
+                              provider.googleLogin(context);
+                            },
+
+                          ),
+                          SizedBox(width: 10.h),
+                          // Padding(
+                          //   padding: const EdgeInsets.all(8.0),
+                          //   child: GestureDetector(
+                          //     child: Container(
+                          //       width: 110.w,
+                          //       height: 50.h,
+                          //       decoration: BoxDecoration(
+                          //         boxShadow: [
+                          //           BoxShadow(
+                          //             color: Colors.black.withOpacity(0.1),
+                          //             spreadRadius: 0,
+                          //             blurRadius: 9,
+                          //             offset: Offset(1, 3),
+                          //           ),
+                          //         ],
+                          //         borderRadius: BorderRadius.circular(15),
+                          //         color: Colors.white,
+                          //       ),
+                          //       child: Row(
+                          //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          //         children: [
+                          //           Image.asset("assets/icons/facebooklogo.png",height: 25.h,width: 25.w,),
+                          //           Text("Facebook",style: TextStyle(
+                          //             fontSize: 15.sp,
+                          //           ),),
+                          //
+                          //         ],
+                          //       ),
+                          //     ),
+                          //     onTap: () {
+                          //
+                          //     },
+                          //   ),
+                          // ),
+                        ],
+                      ),
                        SizedBox(height: 10.h,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

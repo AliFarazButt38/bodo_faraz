@@ -180,7 +180,7 @@ class _WriteReviewState extends State<WriteReview> {
                                           child: Image.network(
                                             reviewProvider.reviewsList[index].appIcon,
                                             height: 80,
-                                            width: 80.w,
+                                            width: 70.w,
                                           ),
                                         ),
                                         Padding(
