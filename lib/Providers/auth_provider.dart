@@ -144,12 +144,11 @@ class AuthProvider extends ChangeNotifier{
       var parsedJson = json.decode(response.body);
       if(response.statusCode == 200){
         Navigator.of(context).pop();
-        if(parsedJson['message'] == 'sucessfull'){
+        if(parsedJson['message'] == 'User registered successfully'){
           //toast(parsedJson['message'],Palette.baseElementGreen);
           setToken(parsedJson['token']);
           Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Dashboard()), (route) => false);
         }
-
       }else{
         Navigator.of(context).pop();
         // if(parsedJson.containsKey('email')){
@@ -226,8 +225,9 @@ class AuthProvider extends ChangeNotifier{
       var parsedJson = json.decode(response.body);
       if(response.statusCode == 200){
         Navigator.of(context).pop();
-        if(parsedJson['message'] == 'sucessfull'){
+        if(parsedJson['message'] == 'Successfully'){
           //toast(parsedJson['message'],Palette.baseElementGreen);
+
           setToken(parsedJson['token']);
           Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Dashboard()), (route) => false);
         }
