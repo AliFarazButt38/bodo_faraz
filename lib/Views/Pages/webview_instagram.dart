@@ -9,15 +9,15 @@ import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 
 
 
-class WebViewSocialMedia extends StatefulWidget {
+class WebViewInstagramTask extends StatefulWidget {
   SocialMediaModel socialMediaModel;
-   WebViewSocialMedia({Key? key,required this.socialMediaModel}) : super(key: key);
+   WebViewInstagramTask({Key? key,required this.socialMediaModel}) : super(key: key);
 
   @override
-  State<WebViewSocialMedia> createState() => _WebViewSocialMediaState();
+  State<WebViewInstagramTask> createState() => _WebViewInstagramTaskState();
 }
 
-class _WebViewSocialMediaState extends State<WebViewSocialMedia> {
+class _WebViewInstagramTaskState extends State<WebViewInstagramTask> {
   late final WebViewController _controller;
   @override
   void initState() {

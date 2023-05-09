@@ -1,6 +1,7 @@
 import 'package:bodoo_flutter/Providers/level_provider.dart';
 import 'package:bodoo_flutter/Providers/wallet_provider.dart';
-import 'package:bodoo_flutter/Views/Pages/social_mediaScreen.dart';
+import 'package:bodoo_flutter/Views/Pages/instagramtask_screen.dart';
+import 'package:bodoo_flutter/Views/Pages/socialmediatask_options.dart';
 import 'package:bodoo_flutter/Views/Pages/surveys_screen.dart';
 import 'package:bodoo_flutter/Views/Pages/watch_videoScreen.dart';
 import 'package:flutter/material.dart';
@@ -521,7 +522,7 @@ class _Wallet extends State<Wallet> {
                                           ),
                                         ),
                                         onTap: () {
-                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>SocialMedia()));
+                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>SocialMediaOptions()));
                                         },
                                       ),
                                     ),

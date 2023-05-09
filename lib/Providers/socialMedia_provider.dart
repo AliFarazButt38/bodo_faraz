@@ -12,6 +12,9 @@ class SocialMediaProvider extends ChangeNotifier{
   AuthProvider authProvider = AuthProvider();
   List<SocialMediaModel> _socialMediaList=[];
   bool _taskLoading = false;
+  List<SocialMediaModel> _facebookMediaList=[];
+  bool _facebookTaskLoading = false;
+
 
   getInstagramPost(BuildContext context)async{
     try{
@@ -42,7 +45,6 @@ class SocialMediaProvider extends ChangeNotifier{
     }
   }
 
-
   PostInstagramBot(BuildContext context)async{
     try{
       var response = await http.get(Uri.parse('${Api.baseUrlSocialMedia}instagram_bot/4/')
@@ -56,7 +58,53 @@ class SocialMediaProvider extends ChangeNotifier{
       notifyListeners();
     }
   }
+
+  getFacebookPost(BuildContext context)async{
+    try{
+      _facebookTaskLoading=true;
+      _facebookMediaList=[];
+      await authProvider.getToken();
+      var response = await http.get(Uri.parse('${Api.baseUrlSocialMedia}facebook_post/'),
+        headers: {
+          'Authorization':'Token ${authProvider.token}'
+        },
+      );
+      print('status code ${response.statusCode}');
+      print('status body ${response.body}');
+      var parsedJson = json.decode(response.body);
+
+      if(response.statusCode == 200){
+        var data = parsedJson as List;
+        _facebookMediaList = data.map((e) => SocialMediaModel.fromJson(e)).toList();
+      }else{
+
+      }
+    }
+    catch(error, st){
+      print('catch error $error $st');
+    }finally{
+      _facebookTaskLoading=false;
+      notifyListeners();
+    }
+
+  }
+  PostFacebookBot(BuildContext context)async{
+    try{
+      var response = await http.get(Uri.parse('${Api.baseUrlSocialMedia}facebook_bot/2/')
+      );
+      print('status code ${response.statusCode}');
+    }
+    catch(error,st){
+      print('catch error $error $st');
+    }
+    finally{
+      notifyListeners();
+    }
+  }
+
+
   List<SocialMediaModel> get socialTasksList => _socialMediaList;
   bool get taskLoading => _taskLoading;
-
+  List<SocialMediaModel> get facebookTasksList => _facebookMediaList;
+  bool get facebookTaskLoading => _facebookTaskLoading;
 }

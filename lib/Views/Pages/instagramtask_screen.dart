@@ -2,7 +2,7 @@
 import 'package:bodoo_flutter/Providers/socialMedia_provider.dart';
 import 'package:bodoo_flutter/Theme/palette.dart';
 import 'package:bodoo_flutter/Views/Pages/startTask.dart';
-import 'package:bodoo_flutter/Views/Pages/webview_socialMedia.dart';
+import 'package:bodoo_flutter/Views/Pages/webview_instagram.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -39,15 +39,15 @@ List<ListItem> items = [
 ];
 
 
-class SocialMedia extends StatefulWidget {
-  const SocialMedia({Key? key}) : super(key: key);
+class InstagramTask extends StatefulWidget {
+  const InstagramTask({Key? key}) : super(key: key);
 
   @override
-  State<SocialMedia> createState() => _SocialMediaState();
+  State<InstagramTask> createState() => _InstagramTaskState();
 }
 
 
-class _SocialMediaState extends State<SocialMedia> {
+class _InstagramTaskState extends State<InstagramTask> {
   @override
   void initState() {
     super.initState();
@@ -84,7 +84,7 @@ class _SocialMediaState extends State<SocialMedia> {
                             child:ImageIcon(AssetImage("assets/icons/backward.png",),size: 30,color: Colors.white,),
                           ),
 
-                          Text("Social Media Tasks",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
+                          Text("Instagram Tasks",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
                           InkWell
                             (
                               onTap: (){
@@ -195,7 +195,7 @@ class _SocialMediaState extends State<SocialMedia> {
                                             padding:  EdgeInsets.only(left: 55.w),
                                             child: ElevatedButton(
                                               onPressed: () {
-                                                Navigator.push(context, MaterialPageRoute(builder: (context) => WebViewSocialMedia(socialMediaModel: socialMediaProvider.socialTasksList[index])));
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => WebViewInstagramTask(socialMediaModel: socialMediaProvider.socialTasksList[index])));
                                               },
                                               style: ElevatedButton.styleFrom(
                                                   padding: EdgeInsets.zero,
@@ -270,7 +270,7 @@ class _SocialMediaState extends State<SocialMedia> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: const [
-                              Text("Social Media Reacts",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
+                              Text("Instagram Tasks",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
                               Text("41/60"),
                             ],
                           ),
