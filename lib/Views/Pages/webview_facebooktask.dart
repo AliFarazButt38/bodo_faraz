@@ -1,7 +1,4 @@
-import 'package:bodoo_flutter/Providers/socialMedia_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 import '../../Models/socialmedia_model.dart';
@@ -9,15 +6,15 @@ import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 
 
 
-class WebViewSocialMedia extends StatefulWidget {
+class WebViewFacebookTask extends StatefulWidget {
   SocialMediaModel socialMediaModel;
-   WebViewSocialMedia({Key? key,required this.socialMediaModel}) : super(key: key);
+  WebViewFacebookTask({Key? key,required this.socialMediaModel}) : super(key: key);
 
   @override
-  State<WebViewSocialMedia> createState() => _WebViewSocialMediaState();
+  State<WebViewFacebookTask> createState() => _WebViewFacebookTaskState();
 }
 
-class _WebViewSocialMediaState extends State<WebViewSocialMedia> {
+class _WebViewFacebookTaskState extends State<WebViewFacebookTask> {
   late final WebViewController _controller;
   @override
   void initState() {
@@ -55,7 +52,7 @@ class _WebViewSocialMediaState extends State<WebViewSocialMedia> {
             if(url.contains('formResponse')){
               debugPrint('Page finished navigator');
               //Provider.of<SocialMediaProvider>(context,listen: false).postSurvey(widget.surveyModel.googleFormId);
-             // Navigator.of(context).pop();
+              // Navigator.of(context).pop();
 
             }
           },

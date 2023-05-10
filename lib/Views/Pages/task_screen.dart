@@ -2,7 +2,8 @@
 import 'package:bodoo_flutter/Providers/level_provider.dart';
 import 'package:bodoo_flutter/Providers/survey_provider.dart';
 import 'package:bodoo_flutter/Views/Pages/category_videos.dart';
-import 'package:bodoo_flutter/Views/Pages/social_mediaScreen.dart';
+import 'package:bodoo_flutter/Views/Pages/instagramtask_screen.dart';
+import 'package:bodoo_flutter/Views/Pages/socialmediatask_options.dart';
 import 'package:bodoo_flutter/Views/Pages/surveys_screen.dart';
 import 'package:bodoo_flutter/Views/Pages/watch_videoScreen.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -269,7 +270,7 @@ class _TaskState extends State<Task> {
                                                  ),
                                                ),
                                                onTap: () {
-                                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>SocialMedia()));
+                                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>SocialMediaOptions()));
                                                },
                                              ),
                                            ),

@@ -85,8 +85,8 @@ class AuthProvider extends ChangeNotifier{
             'city': city,
             'facebook_profile_url': facebook_url,
             'instagram_username': instagram_username,
-            'registration_id': _fcmToken,
-            'type': _platform,
+            // 'registration_id': _fcmToken,
+            // 'type': _platform,
 
           }
       );
@@ -134,8 +134,8 @@ class AuthProvider extends ChangeNotifier{
             'access_token':_accessToken,
             'facebook_profile_url':facebook_url,
             'instagram_username':instagram_username,
-            'registration_id': _fcmToken,
-            'type': _platform,
+            // 'registration_id': _fcmToken,
+            // 'type': _platform,
 
           }
       );
@@ -144,12 +144,11 @@ class AuthProvider extends ChangeNotifier{
       var parsedJson = json.decode(response.body);
       if(response.statusCode == 200){
         Navigator.of(context).pop();
-        if(parsedJson['message'] == 'sucessfull'){
+        if(parsedJson['message'] == 'User registered successfully'){
           //toast(parsedJson['message'],Palette.baseElementGreen);
           setToken(parsedJson['token']);
           Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Dashboard()), (route) => false);
         }
-
       }else{
         Navigator.of(context).pop();
         // if(parsedJson.containsKey('email')){
@@ -175,8 +174,8 @@ class AuthProvider extends ChangeNotifier{
 
             'email':email,
             'password':password,
-            'device_token':_fcmToken,
-            'device_type':_platform,
+            // 'device_token':_fcmToken,
+            // 'device_type':_platform,
 
           }
       );
@@ -215,8 +214,8 @@ class AuthProvider extends ChangeNotifier{
             'email':email,
              'access_token':accessToke,
             'password':'',
-            'device_token':_fcmToken,
-            'device_type':_platform,
+            // 'device_token':_fcmToken,
+            // 'device_type':_platform,
 
 
           }
@@ -226,8 +225,9 @@ class AuthProvider extends ChangeNotifier{
       var parsedJson = json.decode(response.body);
       if(response.statusCode == 200){
         Navigator.of(context).pop();
-        if(parsedJson['message'] == 'sucessfull'){
+        if(parsedJson['message'] == 'Successfully'){
           //toast(parsedJson['message'],Palette.baseElementGreen);
+
           setToken(parsedJson['token']);
           Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Dashboard()), (route) => false);
         }

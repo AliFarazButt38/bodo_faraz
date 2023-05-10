@@ -20,6 +20,7 @@ import 'package:bodoo_flutter/Views/Pages/facebook_auth.dart';
 import 'package:bodoo_flutter/Views/Pages/forgot_password.dart';
 import 'package:bodoo_flutter/Views/Pages/others_taskScreen.dart';
 import 'package:bodoo_flutter/Views/Pages/rate_MyApp.dart';
+import 'package:bodoo_flutter/Views/Pages/socialmediatask_options.dart';
 import 'package:bodoo_flutter/Views/Pages/splash_screen.dart';
 import 'package:bodoo_flutter/Views/Pages/userdetails_form.dart';
 import 'package:bodoo_flutter/Views/Pages/video_player_examole.dart';
