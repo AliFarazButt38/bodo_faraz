@@ -1,7 +1,4 @@
-import 'package:bodoo_flutter/Providers/socialMedia_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 import '../../Models/socialmedia_model.dart';
