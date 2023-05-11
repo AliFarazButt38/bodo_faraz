@@ -1,6 +1,7 @@
 
 import 'package:bodoo_flutter/Providers/socialMedia_provider.dart';
 import 'package:bodoo_flutter/Theme/palette.dart';
+import 'package:bodoo_flutter/Views/Pages/social_detail_page.dart';
 import 'package:bodoo_flutter/Views/Pages/startTask.dart';
 import 'package:bodoo_flutter/Views/Pages/webview_instagram.dart';
 import 'package:flutter/material.dart';
@@ -195,7 +196,7 @@ class _InstagramTaskState extends State<InstagramTask> {
                                             padding:  EdgeInsets.only(left: 55.w),
                                             child: ElevatedButton(
                                               onPressed: () {
-                                                Navigator.push(context, MaterialPageRoute(builder: (context) => WebViewInstagramTask(socialMediaModel: socialMediaProvider.socialTasksList[index])));
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => SocialDetailPage(socialMediaModel: socialMediaProvider.socialTasksList[index])));
                                               },
                                               style: ElevatedButton.styleFrom(
                                                   padding: EdgeInsets.zero,

@@ -45,11 +45,13 @@ class SocialMediaProvider extends ChangeNotifier{
     }
   }
 
-  PostInstagramBot(BuildContext context)async{
+  postInstagramBot(BuildContext context, int id)async{
     try{
-      var response = await http.get(Uri.parse('${Api.baseUrlSocialMedia}instagram_bot/4/')
+      print('user');
+      var response = await http.get(Uri.parse('${Api.baseUrlSocialMedia}instagram_bot/1/')
       );
       print('status code ${response.statusCode}');
+      print('response body ${response.body}');
     }
     catch(error,st){
       print('catch error $error $st');

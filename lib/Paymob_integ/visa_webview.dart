@@ -1,11 +1,14 @@
 
 
 import 'dart:async';
+import 'package:bodoo_flutter/Paymob_integ/payment_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
+
+import 'constant.dart';
 
 
 
@@ -95,7 +98,7 @@ Page resource error:
           );
         },
       )
-      ..loadRequest(Uri.parse('https://www.youtube.com/'));
+      ..loadRequest(Uri.parse('https://accept.paymob.com/api/acceptance/iframes/699618?payment_token={${Provider.of<PaymentProvider>(context,listen: false).finalPayToken}}'));
 
     // #docregion platform_features
     if (controller.platform is AndroidWebViewController) {

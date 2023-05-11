@@ -1,3 +1,4 @@
+import 'package:bodoo_flutter/Paymob_integ/payment_provider.dart';
 import 'package:bodoo_flutter/Paymob_integ/toogle_screen.dart';
 import 'package:bodoo_flutter/Providers/auth_provider.dart';
 import 'package:bodoo_flutter/Theme/style.dart';
@@ -33,6 +34,12 @@ class _CheckoutDetailScreenState extends State<CheckoutDetailScreen> {
   TextEditingController lastNameController = TextEditingController();
   TextEditingController priceController = TextEditingController();
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<PaymentProvider>(context,listen: false).getAuthToken();
+  }
 
   String? validateEmail(String? value) {
     String pattern =
@@ -458,7 +465,8 @@ class _CheckoutDetailScreenState extends State<CheckoutDetailScreen> {
                           if(_formKey.currentState!.validate()){
                            // Provider.of<AuthProvider>(context,listen: false).signin(emailController.text, phoneController.text, context);
                             //  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Dashboard()));
-                         Navigator.push(context, MaterialPageRoute(builder: (context) => ToogleScreen()));
+                         //Navigator.push(context, MaterialPageRoute(builder: (context) => ToogleScreen()));
+                            Provider.of<PaymentProvider>(context,listen: false).getPaymentKey(emailController.text,phoneController.text,firstNameController.text,lastNameController.text,priceController.text);
                           }
                         },
                         style: ElevatedButton.styleFrom(

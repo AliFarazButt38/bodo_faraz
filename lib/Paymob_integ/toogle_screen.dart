@@ -1,8 +1,10 @@
+import 'package:bodoo_flutter/Paymob_integ/payment_provider.dart';
 import 'package:bodoo_flutter/Paymob_integ/reference_screen.dart';
 import 'package:bodoo_flutter/Paymob_integ/visa_webview.dart';
 import 'package:bodoo_flutter/Theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class ToogleScreen extends StatefulWidget {
   const ToogleScreen({Key? key}) : super(key: key);
@@ -26,6 +28,7 @@ class _ToogleScreenState extends State<ToogleScreen> {
             children: <Widget>[
               InkWell(
                 onTap: (){
+                  Provider.of<PaymentProvider>(context,listen: false).getRefCode();
                   Navigator.push(context, MaterialPageRoute(builder: (context) => ReferenceScreen()));
                 },
                 child: Padding(

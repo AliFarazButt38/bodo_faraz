@@ -25,6 +25,7 @@ class PaymentProvider extends ChangeNotifier{
       var parsedJson = json.decode(response.body);
       if(response.statusCode == 200){
         _authToken = parsedJson['token'];
+        orderRegisteration();
       }else{
       }
 
@@ -66,28 +67,28 @@ class PaymentProvider extends ChangeNotifier{
     }
   }
 
-  getPaymentKey()async{
+  getPaymentKey(String email,phone,firstName,lastName,price)async{
     try{
 
       var response = await http.post(Uri.parse('${ApiConstant.paymentBaseUrl}${ApiConstant.paymentKey}'),
           body: {
             "auth_token": _authToken,
-            "amount_cents": "100",
+            "amount_cents": price,
             "expiration": 3600,
             "order_id": _orderId,
             "billing_data": {
               "apartment": "NA",
-              "email": "claudette09@exa.com",
+              "email": email,
               "floor": "NA",
-              "first_name": "Clifford",
+              "first_name": firstName,
               "street": "NA",
               "building": "NA",
-              "phone_number": "+86(8)9135210487",
+              "phone_number": phone,
               "shipping_method": "NA",
               "postal_code": "NA",
               "city": "NA",
               "country": "NA",
-              "last_name": "Nicolas",
+              "last_name": lastName,
               "state": "NA"
             },
             "currency": "EGP",
@@ -140,4 +141,6 @@ class PaymentProvider extends ChangeNotifier{
       notifyListeners();
     }
   }
+
+  String get finalPayToken => _finalPaymentToken;
 }
