@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:provider/provider.dart';
+
+import '../../Providers/subscription_provider.dart';
 
 class SubscriptionPlan extends StatefulWidget {
   const SubscriptionPlan({Key? key}) : super(key: key);
@@ -10,77 +13,7 @@ class SubscriptionPlan extends StatefulWidget {
 }
 
 class _SubscriptionPlanState extends State<SubscriptionPlan> {
-  // final List<Widget> _containerList = [
-  //   premier(),
-  //   Container(
-  //     width: 292,
-  //     height: 537,
-  //     decoration: BoxDecoration(
-  //       color: Colors.white,
-  //       borderRadius: BorderRadius.only(
-  //         topRight: Radius.circular(10),
-  //         topLeft: Radius.circular(10),
-  //       ),
-  //       boxShadow: [
-  //         BoxShadow(
-  //           color: Colors.grey.withOpacity(0.3),
-  //           spreadRadius: 3,
-  //           blurRadius: 7,
-  //           offset: Offset(0, 3),
-  //         ),
-  //       ],
-  //     ),
-  //     child: Column(
-  //       children: [
-  //         Container(
-  //           height: 134.6,
-  //           width: 292,
-  //           decoration: BoxDecoration(
-  //             borderRadius: BorderRadius.only(
-  //               topRight: Radius.circular(10),
-  //               topLeft: Radius.circular(10),
-  //             ),
-  //             color: Color(0xffEAB705),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   ),
-  //   Container(
-  //     width: 292,
-  //     height: 537,
-  //     decoration: BoxDecoration(
-  //       color: Colors.white,
-  //       borderRadius: BorderRadius.only(
-  //         topRight: Radius.circular(10),
-  //         topLeft: Radius.circular(10),
-  //       ),
-  //       boxShadow: [
-  //         BoxShadow(
-  //           color: Colors.grey.withOpacity(0.3),
-  //           spreadRadius: 3,
-  //           blurRadius: 7,
-  //           offset: Offset(0, 3),
-  //         ),
-  //       ],
-  //     ),
-  //     child: Column(
-  //       children: [
-  //         Container(
-  //           height: 134.6,
-  //           width: 292,
-  //           decoration: BoxDecoration(
-  //             borderRadius: BorderRadius.only(
-  //               topRight: Radius.circular(10),
-  //               topLeft: Radius.circular(10),
-  //             ),
-  //             color: Color(0xffE10049),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   ),
-  // ];
+
   final List<Widget> _containerList = [
     Container(
       width: 292,
@@ -557,7 +490,11 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
       ),
     ),
   ];
-
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<SubscriptionPlanProvider>(context,listen: false).getSubscriptionPlan(context);
+  }
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context, designSize: const Size(428, 926));
@@ -571,7 +508,16 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text("Subscription Plan",style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.w600),),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(onPressed: (){
+                      Navigator.pop(context);
+
+                    }, icon: Icon(Icons.arrow_back)),
+                    Text("Subscription Plan",style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.w600),),
+                  ],
+                ),
                 SizedBox(height: 50.h,),
                 Text("Choose Your Plan",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 25.sp),),
                 SizedBox(height: 30.h,),

@@ -93,6 +93,14 @@ class _HomeState extends State<Home> {
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text('Home', style: TextStyle(color: Colors.white,fontSize: 25.sp,fontWeight: FontWeight.bold),),
+                                      Padding(
+                                        padding:  EdgeInsets.only(left: 195),
+                                        child: IconButton(onPressed: (){
+                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>SubscriptionPlan()));
+                                        }, icon:  Image.asset(
+                                         "assets/icons/king.png",
+                                        ),),
+                                      ),
 
                                       IconButton(onPressed: (){
                                         Navigator.push(context, MaterialPageRoute(builder: (context)=>Notifications()));
@@ -370,11 +378,38 @@ class _HomeState extends State<Home> {
                          child: Row(
                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                            children: [
-                             Text("Your free trial will\n end in:",style: TextStyle(
-                               color: Colors.white,
-                               fontSize: 16.sp,
-                               fontWeight: FontWeight.w600,
-                             ),),
+                             Column(
+
+                               mainAxisAlignment: MainAxisAlignment.center,
+                               children: [
+                                 Text("Your free trial will\n end in:",style: TextStyle(
+                                   color: Colors.white,
+                                   fontSize: 16.sp,
+                                   fontWeight: FontWeight.w600,
+                                 ),),
+                                 SizedBox(height: 5,),
+                                 Container(
+                                   height: 34,
+                                   width: 119,
+                                   decoration: BoxDecoration(
+                                     color: Colors.white,
+                                     borderRadius: BorderRadius.circular(8),
+                                   ),
+
+                                   child: Center(
+                                     child: Text(
+                                       'Upgrade Plan',
+                                       style: TextStyle(
+                                         color: Colors.black,
+                                         fontSize: 12.sp,
+                                         fontWeight: FontWeight.w600,
+
+                                       ),
+                                     ),
+                                   ),
+                                 ),
+                               ],
+                             ),
                              Consumer<AuthProvider>(
 
                                builder: (context, snapshot,child) {

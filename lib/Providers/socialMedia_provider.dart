@@ -48,7 +48,7 @@ class SocialMediaProvider extends ChangeNotifier{
   postInstagramBot(BuildContext context, int id)async{
     try{
       print('user');
-      var response = await http.get(Uri.parse('${Api.baseUrlSocialMedia}instagram_bot/1/')
+      var response = await http.get(Uri.parse('${Api.baseUrlSocialMedia}instagram_bot/$id/')
       );
       print('status code ${response.statusCode}');
       print('response body ${response.body}');
@@ -110,3 +110,4 @@ class SocialMediaProvider extends ChangeNotifier{
   List<SocialMediaModel> get facebookTasksList => _facebookMediaList;
   bool get facebookTaskLoading => _facebookTaskLoading;
 }
+

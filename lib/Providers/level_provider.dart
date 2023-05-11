@@ -24,6 +24,12 @@ class LevelProvider extends ChangeNotifier{
   int _completedOther = 0;
   int _totalVideos=0;
   int _completedVideos = 0;
+  int _totalSocialTask=0;
+  int _completedSocialTask=0;
+  int _totalInstaPost=0;
+  int _completedInstaPost=0;
+  int _totalFacebookPost=0;
+  int _completedFacebookPost=0;
   String _totalVariables='0';
   String _completedVariables = '0';
 
@@ -83,6 +89,16 @@ class LevelProvider extends ChangeNotifier{
         _completedVideos = parsedJson['completed_videos'];
         _totalVariables = parsedJson['total_variable'].toString();
         _completedVariables = parsedJson['given_variable'].toString();
+
+        _totalSocialTask= parsedJson['total_social_media_task'];
+        _completedSocialTask=parsedJson['completed_social_media_task'];
+
+        _totalInstaPost=parsedJson['total_instagram_post'];
+        _completedInstaPost=parsedJson['completed_instagram_post'];
+
+        _totalFacebookPost=parsedJson['total_facebook_post'];
+        _completedFacebookPost=parsedJson['completed_facebook_post'];
+
       }else{
       }
     }catch(error, st){
@@ -113,4 +129,12 @@ class LevelProvider extends ChangeNotifier{
   String get totalVariables => _totalVariables;
   String get completedVariables => _completedVariables;
 
+  int get totalSocialTask => _totalSocialTask;
+  int get completedSocialTask => _completedSocialTask;
+
+  int get totalInstaPost=> _totalInstaPost;
+  int get completedInstaPost=> _completedInstaPost;
+
+  int get totalFacebookPost=> _totalFacebookPost;
+  int get completedFacebookPost => _completedFacebookPost;
 }

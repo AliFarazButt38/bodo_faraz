@@ -161,7 +161,7 @@ class _SocialDetailPageState extends State<SocialDetailPage> {
                                   height: 42,
                                   alignment: Alignment.center,
                                   child: const Text(
-                                    'Download',
+                                    'Start Task',
                                     style:
                                     const TextStyle(fontSize: 18, ),
                                   ),

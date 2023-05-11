@@ -123,7 +123,7 @@ class _SocialMediaOptionsState extends State<SocialMediaOptions> {
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children:  [
                                             Text("Instagram tasks",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
-                                            Text("${levelProvider.completedVideos}/${levelProvider.totalVideos}"),
+                                            Text("${levelProvider.completedInstaPost}/${levelProvider.totalInstaPost}"),
                                           ],
                                         ),
                                       ),
@@ -131,7 +131,7 @@ class _SocialMediaOptionsState extends State<SocialMediaOptions> {
                                         barRadius: Radius.circular(15.0),
                                         animation: true,
                                         lineHeight: 12,
-                                        percent: levelProvider.totalVideos == 0 ?  levelProvider.completedVideos/1 : levelProvider.completedVideos/levelProvider.totalVideos,
+                                        percent: levelProvider.totalInstaPost == 0 ?  levelProvider.completedInstaPost/1 : levelProvider.completedInstaPost/levelProvider.totalInstaPost,
 
                                         // progressColor: Colors.blueAccent,
                                         linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
@@ -187,9 +187,9 @@ class _SocialMediaOptionsState extends State<SocialMediaOptions> {
                                         padding: const EdgeInsets.only(bottom: 13),
                                         child: Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: const [
+                                          children:  [
                                             Text("Facebook tasks",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
-                                            Text("41/60"),
+                                            Text("${levelProvider.completedFacebookPost}/${levelProvider.totalFacebookPost}"),
                                           ],
                                         ),
                                       ),
@@ -197,7 +197,7 @@ class _SocialMediaOptionsState extends State<SocialMediaOptions> {
                                         barRadius: Radius.circular(15.0),
                                         animation: true,
                                         lineHeight: 12,
-                                        percent: 0.7,
+                                        percent: levelProvider.totalFacebookPost == 0 ?  levelProvider.completedFacebookPost/1 : levelProvider.completedFacebookPost/levelProvider.totalFacebookPost,
                                         // progressColor: Colors.blueAccent,
                                         linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
                                         backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
