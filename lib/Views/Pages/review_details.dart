@@ -4,6 +4,7 @@ import 'package:bodoo_flutter/Providers/download_apps_provider.dart';
 import 'package:bodoo_flutter/Providers/write_review_provider.dart';
 import 'package:bodoo_flutter/Theme/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -123,8 +124,8 @@ class _ReviewDetailsState extends State<ReviewDetails> {
                                 Provider.of<WriteReviewProvider>(context,listen: false).postReviewSubmit(widget.reviewModel.id,context);
                               },
                               child: Container(
-                                height: 42,
-                                width: 153,
+                                height: 42.h,
+                                width: 153.w,
                                 decoration: BoxDecoration(
                                     border: Border.all(color: Palette.baseElementGreen),
                                     borderRadius: BorderRadius.circular(10)
@@ -149,8 +150,8 @@ class _ReviewDetailsState extends State<ReviewDetails> {
                                     const LinearGradient(colors: [Palette.baseElementBlue, Palette.baseElementGreen]),
                                     borderRadius: BorderRadius.circular(10)),
                                 child: Container(
-                                  width: 153,
-                                  height: 42,
+                                  width: 153.w,
+                                  height: 42.h,
                                   alignment: Alignment.center,
                                   child: const Text(
                                     'Start Task',

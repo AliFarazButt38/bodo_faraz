@@ -197,7 +197,7 @@ class _InstagramTaskState extends State<InstagramTask> {
                                             padding:  EdgeInsets.only(left: 55.w),
                                             child: ElevatedButton(
                                               onPressed: () {
-                                                Navigator.push(context, MaterialPageRoute(builder: (context) => SocialDetailPage(socialMediaModel: socialMediaProvider.socialTasksList[index])));
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => SocialDetailPage(socialMediaModel: socialMediaProvider.socialTasksList[index],check: false,)));
                                               },
                                               style: ElevatedButton.styleFrom(
                                                   padding: EdgeInsets.zero,

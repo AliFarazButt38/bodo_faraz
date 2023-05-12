@@ -90,9 +90,9 @@ class SocialMediaProvider extends ChangeNotifier{
     }
 
   }
-  PostFacebookBot(BuildContext context)async{
+  PostFacebookBot(BuildContext context, int id)async{
     try{
-      var response = await http.get(Uri.parse('${Api.baseUrlSocialMedia}facebook_bot/2/')
+      var response = await http.get(Uri.parse('${Api.baseUrlSocialMedia}facebook_bot/$id/')
       );
       print('status code ${response.statusCode}');
     }

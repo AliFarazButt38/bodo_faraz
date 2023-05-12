@@ -94,7 +94,7 @@ class _HomeState extends State<Home> {
                                     children: [
                                       Text('Home', style: TextStyle(color: Colors.white,fontSize: 25.sp,fontWeight: FontWeight.bold),),
                                       Padding(
-                                        padding:  EdgeInsets.only(left: 195),
+                                        padding:  EdgeInsets.only(left: 170),
                                         child: IconButton(onPressed: (){
                                           Navigator.push(context, MaterialPageRoute(builder: (context)=>SubscriptionPlan()));
                                         }, icon:  Image.asset(

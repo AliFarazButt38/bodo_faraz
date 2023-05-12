@@ -5,6 +5,7 @@ import 'package:bodoo_flutter/Providers/socialMedia_provider.dart';
 import 'package:bodoo_flutter/Theme/palette.dart';
 import 'package:bodoo_flutter/Views/Pages/webview_instagram.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +17,8 @@ import 'notifications_Screen.dart';
 
 class SocialDetailPage extends StatefulWidget {
   SocialMediaModel socialMediaModel;
-  SocialDetailPage({required this.socialMediaModel});
+  bool check;
+  SocialDetailPage({required this.socialMediaModel,required this.check});
   @override
   _SocialDetailPageState createState() => _SocialDetailPageState();
 }
@@ -121,12 +123,19 @@ class _SocialDetailPageState extends State<SocialDetailPage> {
                           children: <Widget>[
                             InkWell(
                               onTap: (){
-                                Provider.of<SocialMediaProvider>(context,listen: false).postInstagramBot(context,widget.socialMediaModel.id);
-                               // Provider.of<DownloadAppsProvider>(context,listen: false).postDownloadApp(widget.appModel.id.toString(), context);
+                                if(widget.check == false){
+                                  Provider.of<SocialMediaProvider>(context,listen: false).postInstagramBot(context,widget.socialMediaModel.id);
+
+                                }else{
+                                  Provider.of<SocialMediaProvider>(context,listen: false).PostFacebookBot(context,widget.socialMediaModel.id);
+
+                                }
+
+                                // Provider.of<DownloadAppsProvider>(context,listen: false).postDownloadApp(widget.appModel.id.toString(), context);
                               },
                               child: Container(
-                                height: 42,
-                                width: 153,
+                                height: 42.h,
+                                width: 153.w,
                                 decoration: BoxDecoration(
                                     border: Border.all(color: Palette.baseElementGreen),
                                     borderRadius: BorderRadius.circular(10)
@@ -157,8 +166,8 @@ class _SocialDetailPageState extends State<SocialDetailPage> {
                                     const LinearGradient(colors: [Palette.baseElementBlue, Palette.baseElementGreen]),
                                     borderRadius: BorderRadius.circular(10)),
                                 child: Container(
-                                  width: 153,
-                                  height: 42,
+                                  width: 153.w,
+                                  height: 42.h,
                                   alignment: Alignment.center,
                                   child: const Text(
                                     'Start Task',

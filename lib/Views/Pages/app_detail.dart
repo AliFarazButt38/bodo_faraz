@@ -2,6 +2,7 @@ import 'package:bodoo_flutter/Models/download_app_model.dart';
 import 'package:bodoo_flutter/Providers/download_apps_provider.dart';
 import 'package:bodoo_flutter/Theme/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
@@ -68,7 +69,7 @@ class _AppDetailsState extends State<AppDetails> {
                           ),
 
                           Text("Download App",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
-SizedBox()
+                          SizedBox()
                         ],
                       ),
                     ),
@@ -120,8 +121,8 @@ SizedBox()
                                 Provider.of<DownloadAppsProvider>(context,listen: false).postDownloadApp(widget.appModel.id.toString(), context);
                               },
                               child: Container(
-                                height: 42,
-                                width: 153,
+                                height: 42.h,
+                                width: 153.w,
                                 decoration: BoxDecoration(
                                   border: Border.all(color: Palette.baseElementGreen),
                                   borderRadius: BorderRadius.circular(10)
@@ -150,8 +151,8 @@ SizedBox()
                                     const LinearGradient(colors: [Palette.baseElementBlue, Palette.baseElementGreen]),
                                     borderRadius: BorderRadius.circular(10)),
                                 child: Container(
-                                   width: 153,
-                                  height: 42,
+                                   width: 153.w,
+                                  height: 42.h,
                                   alignment: Alignment.center,
                                   child: const Text(
                                     'Download',
