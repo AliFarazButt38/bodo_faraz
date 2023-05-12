@@ -75,114 +75,116 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                 borderRadius: BorderRadius.only(topRight: Radius.circular(20.0),topLeft: Radius.circular(20.0)),
                 color: Colors.white,
               ),
-              child: Padding(
-                padding:  EdgeInsets.only(left: 20.w,right: 20.w),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 150.h,),
-                    Text("Add value",style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.w600,color: Color(0xff263238)),),
-                    SizedBox(height: 10.h,),
-                    TextField(
-                      controller: _withdrawController,
-                      decoration: InputDecoration(
-                        hintText: 'Minimum 100\$',
-                        hintStyle: TextStyle(color: Colors.grey),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black),
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding:  EdgeInsets.only(left: 20.w,right: 20.w),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 150.h,),
+                      Text("Add value",style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.w600,color: Color(0xff263238)),),
+                      SizedBox(height: 10.h,),
+                      TextField(
+                        controller: _withdrawController,
+                        decoration: InputDecoration(
+                          hintText: 'Minimum 100\$',
+                          hintStyle: TextStyle(color: Colors.grey),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black),
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 30.h,),
-                    Text("Select amount to withdraw",style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.w600,color: Color(0xff263238)),),
-                    SizedBox(height: 20.h,),
-                    GridView.count(
-                      crossAxisCount: 4, // 4 containers per row
-                      mainAxisSpacing: 30, // vertical spacing between rows
-                      crossAxisSpacing: 20, // horizontal spacing between containers
-                      childAspectRatio: 1,
-                      shrinkWrap: true,// width:height ratio for each container is 1:1
-                      children: List.generate(8, (index) {
-                        bool isSelected = index == _selectedIndex;
-                        return GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              _selectedIndex = index;
-                            });
-                          },
-                          child: Container(
-                            height: 150.h,
-                            width: 82.w,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(
-                                color: isSelected ? Colors.greenAccent : Colors.white,
-                                width: 2,
-                              ),
+                      SizedBox(height: 30.h,),
+                      Text("Select amount to withdraw",style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.w600,color: Color(0xff263238)),),
+                      SizedBox(height: 20.h,),
+                      GridView.count(
+                        crossAxisCount: 4, // 4 containers per row
+                        mainAxisSpacing: 30, // vertical spacing between rows
+                        crossAxisSpacing: 20, // horizontal spacing between containers
+                        childAspectRatio: 1,
+                        shrinkWrap: true,// width:height ratio for each container is 1:1
+                        children: List.generate(8, (index) {
+                          bool isSelected = index == _selectedIndex;
+                          return GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                _selectedIndex = index;
+                              });
+                            },
+                            child: Container(
+                              height: 150.h,
+                              width: 82.w,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(
+                                  color: isSelected ? Colors.greenAccent : Colors.white,
+                                  width: 2,
+                                ),
 
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  spreadRadius: 0,
-                                  blurRadius: 5,
-                                  offset: Offset(1, 0),
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  items[index]['image'],
-                                  height: 30.h,
-                                  width: 30.w,
-                                  color: isSelected ? Colors.greenAccent : null,
-                                ),
-                                SizedBox(height: 10.h),
-                                Text(
-                                  items[index]['text'],
-                                  style: TextStyle(
-                                    fontSize: 18.sp,
-                                    fontWeight: FontWeight.w600,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    spreadRadius: 0,
+                                    blurRadius: 5,
+                                    offset: Offset(1, 0),
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    items[index]['image'],
+                                    height: 30.h,
+                                    width: 30.w,
                                     color: isSelected ? Colors.greenAccent : null,
                                   ),
-                                ),
-                              ],
+                                  SizedBox(height: 10.h),
+                                  Text(
+                                    items[index]['text'],
+                                    style: TextStyle(
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.w600,
+                                      color: isSelected ? Colors.greenAccent : null,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        );
-                      }),
-                    ),
-                    SizedBox(height: 30.h,),
-                    Center(
-                      child: ElevatedButton(
-                        onPressed: () {
+                          );
+                        }),
+                      ),
+                      SizedBox(height: 30.h,),
+                      Center(
+                        child: ElevatedButton(
+                          onPressed: () {
 
-                        },
-                        style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.zero,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20))),
-                        child: Ink(
-                          decoration: BoxDecoration(
-                              gradient:
-                              const LinearGradient(colors: [Palette.baseElementBlue, Palette.baseElementGreen]),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Container(
-                            width: 388.w,
-                            height: 56.h,
-                            alignment: Alignment.center,
-                            child:  Text(
-                              'Withdraw \$200',
-                              style:
-                              TextStyle(fontSize: 18.sp,fontWeight: FontWeight.w600 ),
+                          },
+                          style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20))),
+                          child: Ink(
+                            decoration: BoxDecoration(
+                                gradient:
+                                const LinearGradient(colors: [Palette.baseElementBlue, Palette.baseElementGreen]),
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Container(
+                              width: 388.w,
+                              height: 56.h,
+                              alignment: Alignment.center,
+                              child:  Text(
+                                'Withdraw \$200',
+                                style:
+                                TextStyle(fontSize: 18.sp,fontWeight: FontWeight.w600 ),
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
