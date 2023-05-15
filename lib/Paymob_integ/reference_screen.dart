@@ -1,4 +1,6 @@
+import 'package:bodoo_flutter/Paymob_integ/payment_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../Theme/palette.dart';
 
@@ -44,22 +46,27 @@ class ReferenceScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 18.0),
               ),
               const SizedBox(height: 30.0),
-              Container(
-                padding: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: Colors.purple.shade300,
-                ),
-                child: Center(
-                  child: Text(
-                    '🚫',
-                    style: const TextStyle(
-                      fontSize: 40.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+              Consumer<PaymentProvider>(
+
+                builder: (context, snapshot,child) {
+                  return Container(
+                    padding: const EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.purple.shade300,
                     ),
-                  ),
-                ),
+                    child: Center(
+                      child: Text(
+                        snapshot.referenceCode  != null || snapshot.referenceCode != '' ? snapshot.referenceCode:'🚫',
+                        style: const TextStyle(
+                          fontSize: 40.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  );
+                }
               )
             ],
           ),

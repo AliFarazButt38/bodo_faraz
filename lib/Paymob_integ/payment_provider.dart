@@ -14,17 +14,19 @@ class PaymentProvider extends ChangeNotifier{
 
   getAuthToken()async{
     try{
-
+      print('working auth');
       var response = await http.post(Uri.parse('${ApiConstant.paymentBaseUrl}${ApiConstant.authToken}'),
-        body: {
-        'api_key':ApiConstant.apiKey
-        }
+        body:json.encode({
+          'api_key':ApiConstant.apiKey
+        }) ,
+        headers: {"Content-Type": "application/json"},
       );
       print('status code ${response.statusCode}');
-      print('response getAuthToken ${response.body}');
+      //print('response getAuthToken ${response.body}');
       var parsedJson = json.decode(response.body);
-      if(response.statusCode == 200){
+      if(response.statusCode == 201){
         _authToken = parsedJson['token'];
+
         orderRegisteration();
       }else{
       }
@@ -40,21 +42,24 @@ class PaymentProvider extends ChangeNotifier{
 
   orderRegisteration()async{
     try{
-
+      print('auth token $_authToken');
       var response = await http.post(Uri.parse('${ApiConstant.paymentBaseUrl}${ApiConstant.orderReg}'),
-          body: {
+          body:json.encode({
             "auth_token":  _authToken,
             "delivery_needed": "false",
             "amount_cents": "100",
             "currency": "EGP",
             "items": [],
-          }
+          }),
+        headers: {"Content-Type": "application/json"},
       );
       print('status code ${response.statusCode}');
-      print('response orderRegisteration ${response.body}');
+     // print('response orderRegisteration ${response.body}');
       var parsedJson = json.decode(response.body);
-      if(response.statusCode == 200){
+      if(response.statusCode == 201){
         _orderId = parsedJson['id'].toString();
+        print('order id $_orderId');
+      //  getPaymentKey('test@gmail.com','03333333333','test first','test last','10');
       }else{
       }
 
@@ -67,40 +72,44 @@ class PaymentProvider extends ChangeNotifier{
     }
   }
 
-  getPaymentKey(String email,phone,firstName,lastName,price)async{
+  getPaymentKey(String email,phone,firstName,lastName,String price)async{
     try{
+      print('order id $_orderId');
+      var map = {
+        "auth_token": _authToken,
+        "amount_cents": price,
+        "expiration": 3600,
+        "order_id": _orderId,
+        "billing_data": {
+          "apartment": "NA",
+          "email": email,
+          "floor": "NA",
+          "first_name": firstName,
+          "street": "NA",
+          "building": "NA",
+          "phone_number": phone,
+          "shipping_method": "NA",
+          "postal_code": "NA",
+          "city": "NA",
+          "country": "NA",
+          "last_name": lastName,
+          "state": "NA"
+        },
+        "currency": "EGP",
+        "integration_id": 3078429,
 
+      };
+     // "lock_order_when_paid": "false"
       var response = await http.post(Uri.parse('${ApiConstant.paymentBaseUrl}${ApiConstant.paymentKey}'),
-          body: {
-            "auth_token": _authToken,
-            "amount_cents": price,
-            "expiration": 3600,
-            "order_id": _orderId,
-            "billing_data": {
-              "apartment": "NA",
-              "email": email,
-              "floor": "NA",
-              "first_name": firstName,
-              "street": "NA",
-              "building": "NA",
-              "phone_number": phone,
-              "shipping_method": "NA",
-              "postal_code": "NA",
-              "city": "NA",
-              "country": "NA",
-              "last_name": lastName,
-              "state": "NA"
-            },
-            "currency": "EGP",
-            "integration_id": 1,
-            "lock_order_when_paid": "false"
-          }
+          body: json.encode(map),
+        headers: {"Content-Type": "application/json"},
       );
       print('status code ${response.statusCode}');
       print('response getPaymentKey ${response.body}');
       var parsedJson = json.decode(response.body);
-      if(response.statusCode == 200){
+      if(response.statusCode == 201){
         _finalPaymentToken = parsedJson['token'];
+        //getRefCode();
       }else{
       }
 
@@ -115,15 +124,15 @@ class PaymentProvider extends ChangeNotifier{
 
   getRefCode()async{
     try{
-
       var response = await http.post(Uri.parse('${ApiConstant.paymentBaseUrl}${ApiConstant.getRefCode}'),
-          body: {
+          body: json.encode({
             "source": {
               "identifier": "AGGREGATOR",
               "subtype": "AGGREGATOR",
             },
             "payment_token": _finalPaymentToken,
-          },
+          }),
+        headers: {"Content-Type": "application/json"},
       );
       print('status code ${response.statusCode}');
       print('response getRefCode ${response.body}');
@@ -143,4 +152,5 @@ class PaymentProvider extends ChangeNotifier{
   }
 
   String get finalPayToken => _finalPaymentToken;
+  String get referenceCode => _refCode;
 }
