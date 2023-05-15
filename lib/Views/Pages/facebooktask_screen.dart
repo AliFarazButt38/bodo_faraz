@@ -1,6 +1,8 @@
 
+import 'package:bodoo_flutter/Providers/level_provider.dart';
 import 'package:bodoo_flutter/Providers/socialMedia_provider.dart';
 import 'package:bodoo_flutter/Theme/palette.dart';
+import 'package:bodoo_flutter/Views/Pages/social_detail_page.dart';
 import 'package:bodoo_flutter/Views/Pages/startTask.dart';
 import 'package:bodoo_flutter/Views/Pages/webview_facebooktask.dart';
 import 'package:bodoo_flutter/Views/Pages/webview_instagram.dart';
@@ -196,7 +198,7 @@ class _FacebookTaskState extends State<FacebookTask> {
                                               padding:  EdgeInsets.only(left: 55.w),
                                               child: ElevatedButton(
                                                 onPressed: () {
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => WebViewFacebookTask(socialMediaModel: socialMediaProvider.facebookTasksList[index])));
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => SocialDetailPage(socialMediaModel: socialMediaProvider.facebookTasksList[index],check: true,)));
                                                 },
                                                 style: ElevatedButton.styleFrom(
                                                     padding: EdgeInsets.zero,
@@ -245,89 +247,93 @@ class _FacebookTaskState extends State<FacebookTask> {
               top: 100,
               left: 10,
               right: 10,
-              child: Container(
-                width: 388.w,
-                height: 90,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      spreadRadius: 0,
-                      blurRadius: 9,
-                      offset: Offset(1, 3),
+              child: Consumer<LevelProvider>(
+                builder: (context, levelProvider,child) {
+                  return Container(
+                    width: 388.w,
+                    height: 90,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          spreadRadius: 0,
+                          blurRadius: 9,
+                          offset: Offset(1, 3),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                child: Card(
-                  elevation: 2,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: ListTile(
-                    title: Padding(
-                      padding: const EdgeInsets.only(top: 15),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text("Facebook Tasks",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
-                              Text("41/60"),
+                    child: Card(
+                      elevation: 2,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: ListTile(
+                        title: Padding(
+                          padding: const EdgeInsets.only(top: 15),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children:  [
+                                  Text("Facebook Tasks",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
+                                  Text("${levelProvider.completedFacebookPost}/${levelProvider.totalFacebookPost}"),
+                                ],
+                              ),
+
+                              Padding(
+                                padding: const EdgeInsets.only(top: 5),
+                                child: LinearPercentIndicator(
+                                  barRadius: Radius.circular(15.0),
+                                  animation: true,
+                                  lineHeight: 12,
+                                  percent: levelProvider.totalFacebookPost == 0 ?  levelProvider.completedFacebookPost/1 : levelProvider.completedFacebookPost/levelProvider.totalFacebookPost,
+                                  // progressColor: Colors.blueAccent,
+                                  linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
+                                  backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
+                                ),
+                              ),
+                              SizedBox(height: 5,),
+                              Text("Complete task to earn points",style: TextStyle(color: Colors.grey,fontSize: 15)),
                             ],
                           ),
+                        ),
+                        // subtitle: Padding(
+                        //   padding: const EdgeInsets.only(top: 20),
+                        //   child: Column(
+                        //     children: [
+                        //       LinearPercentIndicator(
+                        //         barRadius: Radius.circular(15.0),
+                        //         animation: true,
+                        //         lineHeight: 12,
+                        //         percent: 0.7,
+                        //         // progressColor: Colors.blueAccent,
+                        //         linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
+                        //         backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
+                        //       ),
+                        //       SizedBox(height: 5,),
+                        //       Text("Watch Videos to Earn points",style: TextStyle(color: Colors.grey,fontSize: 15)),
+                        //     ],
+                        //   ),
+                        // ),
 
-                          Padding(
-                            padding: const EdgeInsets.only(top: 5),
-                            child: LinearPercentIndicator(
-                              barRadius: Radius.circular(15.0),
-                              animation: true,
-                              lineHeight: 12,
-                              percent: 0.7,
-                              // progressColor: Colors.blueAccent,
-                              linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
-                              backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
-                            ),
+                        leading: Padding(
+                          padding: const EdgeInsets.only(left: 8.0,top: 12.0),
+                          child: Column(
+                            children: const [
+                              ImageIcon(AssetImage('assets/icons/social.png',),size: 25,color: Colors.black,),
+                            ],
+
                           ),
-                          SizedBox(height: 5,),
-                          Text("Complete task to earn points",style: TextStyle(color: Colors.grey,fontSize: 15)),
-                        ],
-                      ),
-                    ),
-                    // subtitle: Padding(
-                    //   padding: const EdgeInsets.only(top: 20),
-                    //   child: Column(
-                    //     children: [
-                    //       LinearPercentIndicator(
-                    //         barRadius: Radius.circular(15.0),
-                    //         animation: true,
-                    //         lineHeight: 12,
-                    //         percent: 0.7,
-                    //         // progressColor: Colors.blueAccent,
-                    //         linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
-                    //         backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
-                    //       ),
-                    //       SizedBox(height: 5,),
-                    //       Text("Watch Videos to Earn points",style: TextStyle(color: Colors.grey,fontSize: 15)),
-                    //     ],
-                    //   ),
-                    // ),
+                        ),
 
-                    leading: Padding(
-                      padding: const EdgeInsets.only(left: 8.0,top: 12.0),
-                      child: Column(
-                        children: const [
-                          ImageIcon(AssetImage('assets/icons/social.png',),size: 25,color: Colors.black,),
-                        ],
 
+                        onTap: () {
+                        },
                       ),
                     ),
 
-
-                    onTap: () {
-                    },
-                  ),
-                ),
-
+                  );
+                }
               ),
             ),
           ],

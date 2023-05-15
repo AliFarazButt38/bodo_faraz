@@ -9,6 +9,7 @@ import 'package:bodoo_flutter/Providers/community_provider.dart';
 import 'package:bodoo_flutter/Providers/home_provider.dart';
 import 'package:bodoo_flutter/Providers/level_provider.dart';
 import 'package:bodoo_flutter/Providers/socialMedia_provider.dart';
+import 'package:bodoo_flutter/Providers/subscription_provider.dart';
 import 'package:bodoo_flutter/Providers/survey_provider.dart';
 import 'package:bodoo_flutter/Providers/video_provider.dart';
 import 'package:bodoo_flutter/Providers/wallet_provider.dart';
@@ -78,6 +79,7 @@ Future main() async{
       ChangeNotifierProvider(create: (_) => GoogleSignInProvider()),
       ChangeNotifierProvider(create: (_) => PaymentProvider()),
       ChangeNotifierProvider(create: (_) => SocialMediaProvider()),
+      ChangeNotifierProvider(create: (_)=>  SubscriptionPlanProvider(),)
 
 
     ],

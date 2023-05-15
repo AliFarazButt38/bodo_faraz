@@ -235,9 +235,9 @@ class _TaskState extends State<Task> {
                                                  padding: const EdgeInsets.only(bottom: 13),
                                                  child: Row(
                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                   children: const [
+                                                   children:  [
                                                      Text("Social Media Reacts",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
-                                                     Text("41/60"),
+                                                     Text("${levelProvider.completedSocialTask}/${levelProvider.totalSocialTask}"),
                                                    ],
                                                  ),
                                                ),
@@ -245,7 +245,7 @@ class _TaskState extends State<Task> {
                                                  barRadius: Radius.circular(15.0),
                                                  animation: true,
                                                  lineHeight: 12,
-                                                 percent: 0.7,
+                                                 percent: levelProvider.totalSocialTask == 0 ?  levelProvider.completedSocialTask/1 : levelProvider.completedSocialTask/levelProvider.totalSocialTask,
                                                  // progressColor: Colors.blueAccent,
                                                  linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
                                                  backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,

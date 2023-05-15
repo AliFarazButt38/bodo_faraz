@@ -85,8 +85,8 @@ class AuthProvider extends ChangeNotifier{
             'city': city,
             'facebook_profile_url': facebook_url,
             'instagram_username': instagram_username,
-            // 'registration_id': _fcmToken,
-            // 'type': _platform,
+            'registration_id': _fcmToken,
+            'type': _platform,
 
           }
       );
@@ -134,8 +134,8 @@ class AuthProvider extends ChangeNotifier{
             'access_token':_accessToken,
             'facebook_profile_url':facebook_url,
             'instagram_username':instagram_username,
-            // 'registration_id': _fcmToken,
-            // 'type': _platform,
+            'registration_id': _fcmToken,
+            'type': _platform,
 
           }
       );
@@ -174,8 +174,8 @@ class AuthProvider extends ChangeNotifier{
 
             'email':email,
             'password':password,
-            // 'device_token':_fcmToken,
-            // 'device_type':_platform,
+            'device_token':_fcmToken,
+            'device_type':_platform,
 
           }
       );
@@ -214,8 +214,8 @@ class AuthProvider extends ChangeNotifier{
             'email':email,
              'access_token':accessToke,
             'password':'',
-            // 'device_token':_fcmToken,
-            // 'device_type':_platform,
+            'device_token':_fcmToken,
+            'device_type':_platform,
 
 
           }

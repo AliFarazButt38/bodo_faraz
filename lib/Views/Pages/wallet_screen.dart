@@ -489,7 +489,7 @@ class _Wallet extends State<Wallet> {
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children:  [
                                               Text("Social Media Reacts",style: TextStyle(color: Colors.black,fontSize: 16.sp,fontWeight: FontWeight.w600),),
-                                              Text("41/60"),
+                                              Text("${levelProvider.completedSocialTask}/${levelProvider.totalSocialTask}"),
                                             ],
                                           ),
                                         ),
@@ -497,7 +497,7 @@ class _Wallet extends State<Wallet> {
                                           barRadius: Radius.circular(15.0),
                                           animation: true,
                                           lineHeight: 12,
-                                          percent: 0.7,
+                                          percent: levelProvider.totalSocialTask == 0 ?  levelProvider.completedSocialTask/1 : levelProvider.completedSocialTask/levelProvider.totalSocialTask,
                                           // progressColor: Colors.blueAccent,
                                           linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
                                           backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,
