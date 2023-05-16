@@ -33,7 +33,7 @@ class _CategoryVideosState extends State<CategoryVideos> {
     // Initialize the Mobile Ads SDK
     MobileAds.instance.initialize();
 
-    // Load a rewarded ad
+    // Load a rewarded ads
     _loadRewardedAd();
   }
 
