@@ -3,9 +3,12 @@ import 'dart:convert';
 import 'package:bodoo_flutter/Models/socialmedia_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 import '../Services/api.dart';
 import 'auth_provider.dart';
+import 'home_provider.dart';
+import 'level_provider.dart';
 
 class SocialMediaProvider extends ChangeNotifier{
 
@@ -28,6 +31,7 @@ class SocialMediaProvider extends ChangeNotifier{
       );
       print('status code ${response.statusCode}');
       print('status body ${response.body}');
+      print('tokennnnnnnnnnnn ${authProvider.token}');
       var parsedJson = json.decode(response.body);
 
       if(response.statusCode == 200){
@@ -47,11 +51,28 @@ class SocialMediaProvider extends ChangeNotifier{
 
   postInstagramBot(BuildContext context, int id)async{
     try{
+      authProvider.loading();
       print('user');
-      var response = await http.get(Uri.parse('${Api.baseUrlSocialMedia}instagram_bot/$id/')
+      await authProvider.getToken();
+      var response = await http.get(Uri.parse('${Api.baseUrlSocialMedia}instagram_bot/$id/'),
+        headers: {
+        'Authorization':'Token ${authProvider.token}'
+        },
+
       );
+
+
       print('status code ${response.statusCode}');
       print('response body ${response.body}');
+      print('tokennnnnnnnnnnn ${authProvider.token}');
+      if(response.statusCode == 200){
+        Navigator.pop(context);
+        getInstagramPost( context);
+        Provider.of<LevelProvider>(context,listen: false).getCompletedTasks();
+        Provider.of<LevelProvider>(context,listen: false).getLevels();
+        Provider.of<HomeProvider>(context,listen: false).getHomeData();
+      }
+      Navigator.pop(context);
     }
     catch(error,st){
       print('catch error $error $st');
@@ -73,6 +94,7 @@ class SocialMediaProvider extends ChangeNotifier{
       );
       print('status code ${response.statusCode}');
       print('status body ${response.body}');
+      print('tokennnnnnnnnnnn ${authProvider.token}');
       var parsedJson = json.decode(response.body);
 
       if(response.statusCode == 200){
@@ -92,9 +114,23 @@ class SocialMediaProvider extends ChangeNotifier{
   }
   PostFacebookBot(BuildContext context, int id)async{
     try{
-      var response = await http.get(Uri.parse('${Api.baseUrlSocialMedia}facebook_bot/$id/')
+      authProvider.loading();
+      var response = await http.get(Uri.parse('${Api.baseUrlSocialMedia}facebook_bot/$id/'),
+        headers: {
+          'Authorization':'Token ${authProvider.token}'
+        },
       );
       print('status code ${response.statusCode}');
+      print('status body ${response.body}');
+      print('tokennnnnnnnnnnn ${authProvider.token}');
+      if(response.statusCode == 200){
+        Navigator.pop(context);
+        getFacebookPost( context);
+        Provider.of<LevelProvider>(context,listen: false).getCompletedTasks();
+        Provider.of<LevelProvider>(context,listen: false).getLevels();
+        Provider.of<HomeProvider>(context,listen: false).getHomeData();
+      }
+      Navigator.pop(context);
     }
     catch(error,st){
       print('catch error $error $st');

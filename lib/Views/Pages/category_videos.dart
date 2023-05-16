@@ -22,7 +22,7 @@ class _CategoryVideosState extends State<CategoryVideos> {
   late RewardedAd _rewardedAd;
   bool _isAdLoaded = false;
   final adUnitId = "ca-app-pub-3940256099942544/5224354917";
-  bool _isLoadingAd=true;
+  // bool _isLoadingAd=true;
 
 
 
@@ -38,9 +38,9 @@ class _CategoryVideosState extends State<CategoryVideos> {
   }
 
   void _loadRewardedAd() {
-    setState(() {
-      _isLoadingAd=true;
-    });
+    // setState(() {
+    //   _isLoadingAd=true;
+    // });
     RewardedAd.load(
       adUnitId: adUnitId,
       request: const AdRequest(),
@@ -49,7 +49,7 @@ class _CategoryVideosState extends State<CategoryVideos> {
           setState(() {
             _isAdLoaded = true;
             _rewardedAd = ad;
-            _isLoadingAd=false;
+            // _isLoadingAd=false;
           });
 
           _rewardedAd.fullScreenContentCallback = FullScreenContentCallback(
@@ -249,7 +249,7 @@ class _CategoryVideosState extends State<CategoryVideos> {
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children:  [
                                           Text("Watch add",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
-                                          _isLoadingAd ? CircularProgressIndicator(color: Colors.greenAccent,):
+                                          // _isLoadingAd ? CircularProgressIndicator(color: Colors.greenAccent,):
                                           Text("41/60"),
                                         ],
                                       ),
@@ -283,9 +283,9 @@ class _CategoryVideosState extends State<CategoryVideos> {
                                       ),
                                     ),
                                     onTap: () {
-                                      if(_isLoadingAd){
-                                        return;
-                                      }
+                                      // if(_isLoadingAd){
+                                      //   return;
+                                      // }
                                      _showRewardedAd();
 
                                     },
