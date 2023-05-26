@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:provider/provider.dart';
 
+import '../../Paymob_integ/payment_provider.dart';
 import '../../Providers/subscription_provider.dart';
 
 // class Feature {
@@ -526,6 +527,7 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
   void initState() {
     super.initState();
     Provider.of<SubscriptionPlanProvider>(context,listen: false).getSubscriptionPlan(context);
+    Provider.of<PaymentProvider>(context,listen: false).getAuthToken();
   }
   @override
   Widget build(BuildContext context) {
@@ -708,6 +710,8 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
                               ElevatedButton(
                                 onPressed: () {
                                   Navigator.push(context, MaterialPageRoute(builder: (context)=>PaymentScreen()));
+                                  Provider.of<PaymentProvider>(context,listen: false).getPaymentKey();
+
                                 },
                                 style: ElevatedButton.styleFrom(
                                     padding: EdgeInsets.zero,

@@ -466,7 +466,7 @@ class _CheckoutDetailScreenState extends State<CheckoutDetailScreen> {
                            // Provider.of<AuthProvider>(context,listen: false).signin(emailController.text, phoneController.text, context);
                             //  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Dashboard()));
                          Navigator.push(context, MaterialPageRoute(builder: (context) => ToogleScreen()));
-                            Provider.of<PaymentProvider>(context,listen: false).getPaymentKey(emailController.text,phoneController.text,firstNameController.text,lastNameController.text,priceController.text);
+                        //    Provider.of<PaymentProvider>(context,listen: false).getPaymentKey(emailController.text,phoneController.text,firstNameController.text,lastNameController.text,priceController.text);
                           }
                         },
                         style: ElevatedButton.styleFrom(

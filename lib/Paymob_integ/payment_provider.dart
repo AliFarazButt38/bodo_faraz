@@ -1,8 +1,12 @@
 import 'dart:convert';
 import 'package:bodoo_flutter/Paymob_integ/constant.dart';
+import 'package:bodoo_flutter/Providers/auth_provider.dart';
 import 'package:bodoo_flutter/Services/api.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+
+import '../Utils/navigator.dart';
 
 class PaymentProvider extends ChangeNotifier{
 
@@ -68,27 +72,28 @@ class PaymentProvider extends ChangeNotifier{
     }
   }
 
-  getPaymentKey(String email,phone,firstName,lastName,String price)async{
+  getPaymentKey()async{
     try{
+      var auth = Provider.of<AuthProvider>(Values.navigatorKey.currentContext!,listen: false).user;
       print('order id $_orderId');
       var map = {
         "auth_token": _authToken,
-        "amount_cents": price,
+        "amount_cents": '100',
         "expiration": 3600,
         "order_id": _orderId,
         "billing_data": {
           "apartment": "NA",
-          "email": email,
+          "email": auth!.email,
           "floor": "NA",
-          "first_name": firstName,
+          "first_name": auth.name,
           "street": "NA",
           "building": "NA",
-          "phone_number": phone,
+          "phone_number": auth.number,
           "shipping_method": "NA",
           "postal_code": "NA",
           "city": "NA",
           "country": "NA",
-          "last_name": lastName,
+          "last_name": "NA",
           "state": "NA"
         },
         "currency": "EGP",
@@ -160,7 +165,7 @@ class PaymentProvider extends ChangeNotifier{
         headers: {"Content-Type": "application/json"},
       );
       print('status code ${response.statusCode}');
-      debugPrint(' response body  ${response.body}');
+      debugPrint(' response getMobileWalletUrl body  ${response.body}');
       //print('response getMobileWalletUrl ${response.body}');
       var parsedJson = json.decode(response.body);
       if(response.statusCode == 200){
