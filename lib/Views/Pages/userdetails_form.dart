@@ -1,4 +1,5 @@
 import 'package:country_picker/country_picker.dart';
+import 'package:csc_picker/csc_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:bodoo_flutter/Providers/auth_provider.dart';
 import 'package:bodoo_flutter/Views/Pages/signin.dart';
@@ -31,6 +32,11 @@ class _UserDetailsFormState extends State<UserDetailsForm> {
   TextEditingController facebookController = TextEditingController();
   TextEditingController instagramController = TextEditingController();
 
+  String? countryValue;
+  String? stateValue;
+  String? cityValue;
+  String? selectedGender;
+  List<String> genderOptions = ['Male', 'Female',];
   DateTime? _selectedDate;
   final DateFormat _dateFormat = DateFormat('yyyy/MM/dd');
   Country _selectedCountry=Country
@@ -170,7 +176,6 @@ class _UserDetailsFormState extends State<UserDetailsForm> {
                             return null;
                           },
                         ),
-
                         SizedBox(height: 15.h,),
                         InkWell(
                           onTap: () async {
@@ -224,6 +229,73 @@ class _UserDetailsFormState extends State<UserDetailsForm> {
                               ],
                             ),
                           ),
+                        ),
+                        SizedBox(height: 15.h,),
+                        DropdownButtonFormField<String>(
+
+                          value: selectedGender,
+                          onChanged: (value) {
+                            setState(() {
+                              selectedGender = value;
+                            });
+                          },
+                          style: TextStyle(
+                            color: Palette.grey,
+                            fontSize: 14.sp,
+                          ),
+                          decoration: InputDecoration(
+                            prefixIcon: Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: SvgPicture.asset(
+                                'assets/icons/email.svg',
+                                semanticsLabel: 'Gender',
+                              ),
+                            ),
+                            border: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Palette.black),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Palette.grey),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Palette.grey),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.red),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.red),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            fillColor: Palette.grey,
+                            hintText: "Gender",
+                            hintStyle: TextStyle(
+                              color: Palette.grey,
+                              fontSize: 14.sp,
+                            ),
+                            labelText: 'Gender',
+                            labelStyle: TextStyle(
+                              color: Palette.grey,
+                              fontSize: 14.sp,
+                            ),
+                          ),
+                          items: genderOptions.map((String gender) {
+                            return DropdownMenuItem<String>(
+                              value: gender,
+                              child: Text(gender),
+                            );
+                          }).toList(),
+                          validator: (value) {
+
+                            if (value == null || value.isEmpty) {
+                              return 'Please select a gender';
+                            }
+                            return null;
+                          },
                         ),
                         SizedBox(height: 15.h,),
                         TextFormField(
@@ -303,6 +375,28 @@ class _UserDetailsFormState extends State<UserDetailsForm> {
                           },
                         ),
                         SizedBox(height: 15.h,),
+                        CSCPicker(
+
+
+                          defaultCountry: CscCountry.Egypt,
+
+
+                          onCountryChanged: (value) {
+                            setState(() {
+                              countryValue = value;
+                            });
+                          },
+                          onStateChanged:(value) {
+                            setState(() {
+                              stateValue = value;
+                            });
+                          },
+                          onCityChanged:(value) {
+                            setState(() {
+                              cityValue = value;
+                            });
+                          },
+                        ),
                         // TextFormField(
                         //   controller: countryController,
                         //   style: TextStyle(
@@ -380,134 +474,134 @@ class _UserDetailsFormState extends State<UserDetailsForm> {
                         //   },
                         // ),
 
-                        TextFormField(
-                          decoration: InputDecoration(
-                            labelText: 'Country',
-                            labelStyle: TextStyle(
-                              color: Palette.grey,
-                              fontSize: 16.0,
-
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Palette.grey),
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Palette.grey),
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            suffixIcon: IconButton(
-                              onPressed: () {
-                                showCountryPicker(
-                                  context: context,
-                                  showPhoneCode: false,
-
-                                  onSelect: (Country country) {
-                                    setState(() {
-                                      _selectedCountry = country;
-                                    });
-                                  },
-                                );
-                              },
-                              icon: Icon(Icons.arrow_drop_down),
-                              color: Colors.grey,
-                            ),
-                          ),
-                          controller: TextEditingController(
-                            text: _selectedCountry == null ? '' : _selectedCountry.name,
-                          ),
-                          onTap: () {
-                            showCountryPicker(
-                              context: context,
-                              showPhoneCode: false,
-                              onSelect: (Country country) {
-                                setState(() {
-                                  _selectedCountry = country;
-                                });
-                              },
-                            );
-                          },
-                          readOnly: true,
-                        ),
-
-
-                        SizedBox(height: 15.h,),
-                        TextFormField(
-                          controller: cityController,
-                          style: TextStyle(
-                            color: Palette.grey,
-                            fontSize: 14,
-                          ),
-                          // onChanged: (value) {
-                          //   setState(() {
-                          //     emailController.text = value.toString();
-                          //   });
-                          // },
-                          decoration: InputDecoration(
-                            focusColor: Colors.white,
-                            //add prefix icon
-                            prefixIcon: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: SvgPicture.asset(
-                                'assets/icons/File.svg',
-                                semanticsLabel: 'A red up arrow',
-                              ),
-                            ),
-
-                            // errorText: _errorMsg,
-                            //  disabledBorder: OutlineInputBorder(
-                            //    borderSide: const BorderSide(color: Palette.grey),
-                            //    borderRadius: BorderRadius.circular(10),
-                            //  ),
-                            border:  OutlineInputBorder(
-                              borderSide: const BorderSide(color: Palette.black),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Palette.grey),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Palette.grey),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.red),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.red),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            fillColor: Palette.grey,
-
-                            hintText: "City",
-
-                            //make hint text
-                            hintStyle: TextStyle(
-                              color: Palette.grey,
-                              fontSize: 14.sp,
-                            ),
-
-                            //create lable
-                            labelText: 'City',
-                            //lable style
-                            labelStyle: TextStyle(
-                              color: Palette.grey,
-                              fontSize: 14.sp,
-                            ),
-                          ),
-                          validator: (text) {
-                            if(text!.isEmpty){
-                              return 'Enter City';
-                            }
-                            // else if (passwordController.length < 8) {
-                            //   return 'password should be 8 digits';
-                            // }
-                            return null;
-                          },
-                        ),
+                        // TextFormField(
+                        //   decoration: InputDecoration(
+                        //     labelText: 'Country',
+                        //     labelStyle: TextStyle(
+                        //       color: Palette.grey,
+                        //       fontSize: 16.0,
+                        //
+                        //     ),
+                        //     enabledBorder: OutlineInputBorder(
+                        //       borderSide: const BorderSide(color: Palette.grey),
+                        //       borderRadius: BorderRadius.circular(10.0),
+                        //     ),
+                        //     focusedBorder: OutlineInputBorder(
+                        //       borderSide: const BorderSide(color: Palette.grey),
+                        //       borderRadius: BorderRadius.circular(10.0),
+                        //     ),
+                        //     suffixIcon: IconButton(
+                        //       onPressed: () {
+                        //         showCountryPicker(
+                        //           context: context,
+                        //           showPhoneCode: false,
+                        //
+                        //           onSelect: (Country country) {
+                        //             setState(() {
+                        //               _selectedCountry = country;
+                        //             });
+                        //           },
+                        //         );
+                        //       },
+                        //       icon: Icon(Icons.arrow_drop_down),
+                        //       color: Colors.grey,
+                        //     ),
+                        //   ),
+                        //   controller: TextEditingController(
+                        //     text: _selectedCountry == null ? '' : _selectedCountry.name,
+                        //   ),
+                        //   onTap: () {
+                        //     showCountryPicker(
+                        //       context: context,
+                        //       showPhoneCode: false,
+                        //       onSelect: (Country country) {
+                        //         setState(() {
+                        //           _selectedCountry = country;
+                        //         });
+                        //       },
+                        //     );
+                        //   },
+                        //   readOnly: true,
+                        // ),
+                        //
+                        //
+                        // SizedBox(height: 15.h,),
+                        // TextFormField(
+                        //   controller: cityController,
+                        //   style: TextStyle(
+                        //     color: Palette.grey,
+                        //     fontSize: 14,
+                        //   ),
+                        //   // onChanged: (value) {
+                        //   //   setState(() {
+                        //   //     emailController.text = value.toString();
+                        //   //   });
+                        //   // },
+                        //   decoration: InputDecoration(
+                        //     focusColor: Colors.white,
+                        //     //add prefix icon
+                        //     prefixIcon: Padding(
+                        //       padding: const EdgeInsets.all(10.0),
+                        //       child: SvgPicture.asset(
+                        //         'assets/icons/File.svg',
+                        //         semanticsLabel: 'A red up arrow',
+                        //       ),
+                        //     ),
+                        //
+                        //     // errorText: _errorMsg,
+                        //     //  disabledBorder: OutlineInputBorder(
+                        //     //    borderSide: const BorderSide(color: Palette.grey),
+                        //     //    borderRadius: BorderRadius.circular(10),
+                        //     //  ),
+                        //     border:  OutlineInputBorder(
+                        //       borderSide: const BorderSide(color: Palette.black),
+                        //       borderRadius: BorderRadius.circular(10),
+                        //     ),
+                        //
+                        //     focusedBorder: OutlineInputBorder(
+                        //       borderSide: const BorderSide(color: Palette.grey),
+                        //       borderRadius: BorderRadius.circular(10),
+                        //     ),
+                        //     enabledBorder: OutlineInputBorder(
+                        //       borderSide: const BorderSide(color: Palette.grey),
+                        //       borderRadius: BorderRadius.circular(10),
+                        //     ),
+                        //     errorBorder: OutlineInputBorder(
+                        //       borderSide: const BorderSide(color: Colors.red),
+                        //       borderRadius: BorderRadius.circular(10),
+                        //     ),
+                        //     focusedErrorBorder: OutlineInputBorder(
+                        //       borderSide: const BorderSide(color: Colors.red),
+                        //       borderRadius: BorderRadius.circular(10),
+                        //     ),
+                        //     fillColor: Palette.grey,
+                        //
+                        //     hintText: "City",
+                        //
+                        //     //make hint text
+                        //     hintStyle: TextStyle(
+                        //       color: Palette.grey,
+                        //       fontSize: 14.sp,
+                        //     ),
+                        //
+                        //     //create lable
+                        //     labelText: 'City',
+                        //     //lable style
+                        //     labelStyle: TextStyle(
+                        //       color: Palette.grey,
+                        //       fontSize: 14.sp,
+                        //     ),
+                        //   ),
+                        //   validator: (text) {
+                        //     if(text!.isEmpty){
+                        //       return 'Enter City';
+                        //     }
+                        //     // else if (passwordController.length < 8) {
+                        //     //   return 'password should be 8 digits';
+                        //     // }
+                        //     return null;
+                        //   },
+                        // ),
                         SizedBox(height: 15.h,),
                         TextFormField(
                           controller: facebookController,

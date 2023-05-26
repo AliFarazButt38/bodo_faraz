@@ -3,7 +3,6 @@ import 'package:bodoo_flutter/Providers/home_provider.dart';
 import 'package:bodoo_flutter/Providers/wallet_provider.dart';
 import 'package:bodoo_flutter/Views/Pages/notifications_Screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
 import 'package:flutter_countdown_timer/current_remaining_time.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -396,14 +395,20 @@ class _HomeState extends State<Home> {
                                      borderRadius: BorderRadius.circular(8),
                                    ),
 
-                                   child: Center(
-                                     child: Text(
-                                       'Upgrade Plan',
-                                       style: TextStyle(
-                                         color: Colors.black,
-                                         fontSize: 12.sp,
-                                         fontWeight: FontWeight.w600,
+                                   child: InkWell(
+                                     onTap: (){
+                                       Navigator.push(context, MaterialPageRoute(builder: (context)=>SubscriptionPlan()));
 
+                                     },
+                                     child: Center(
+                                       child: Text(
+                                         'Upgrade Plan',
+                                         style: TextStyle(
+                                           color: Colors.black,
+                                           fontSize: 12.sp,
+                                           fontWeight: FontWeight.w600,
+
+                                         ),
                                        ),
                                      ),
                                    ),
