@@ -1,6 +1,8 @@
 class Api{
-  static  var baseUrlApi = "http://164.90.234.251/api/";
-  static  var baseUrlAccount =  "http://164.90.234.251/accounts/";
-  static  var baseUrlSocialMedia =  "http://164.90.234.251/social_media_task/";
-  static var baseUrlPlan="http://164.90.234.251/subscription/";
+  static  var baseUrlApi = "https://bodoo.loca.lt/api/";
+  static  var baseUrlAccount =  "https://bodoo.loca.lt/accounts/";
+  static  var baseUrlSocialMedia =  "https://bodoo.loca.lt/social_media_task/";
+  static var baseUrlPlan="https://bodoo.loca.lt/subscription/";
 }
+
+//http://164.90.234.251/

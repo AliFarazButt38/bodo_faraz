@@ -1,6 +1,5 @@
 import 'package:bodoo_flutter/Providers/level_provider.dart';
 import 'package:bodoo_flutter/Providers/wallet_provider.dart';
-import 'package:bodoo_flutter/Views/Pages/instagramtask_screen.dart';
 import 'package:bodoo_flutter/Views/Pages/socialmediatask_options.dart';
 import 'package:bodoo_flutter/Views/Pages/surveys_screen.dart';
 import 'package:bodoo_flutter/Views/Pages/watch_videoScreen.dart';

@@ -47,7 +47,6 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
   //await Firebase.initializeApp();
-
 }
 
 Future main() async{
@@ -98,10 +97,9 @@ class MyApp extends StatelessWidget {
       navigatorKey: Values.navigatorKey,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-
         primarySwatch: Colors.blue,
       ),
-      home:  CheckoutDetailScreen(),
+      home:  SplashScreen(),
     );
   }
 }

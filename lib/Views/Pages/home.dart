@@ -460,7 +460,7 @@ class _HomeState extends State<Home> {
                                      // ),
 
                                      CountdownTimer(
-                                       endTime:snapshot.user != null ? snapshot.user!.joinedDate.millisecondsSinceEpoch + 1000 * 60 * 60 * 24 * 7 : DateTime.now().millisecondsSinceEpoch + 1000 * 60 * 60 * 24 * 10,
+                                       endTime:snapshot.user != null ? snapshot.user!.joinedDate.millisecondsSinceEpoch + 1000 * 60 * 60 * 24 * 10 : DateTime.now().millisecondsSinceEpoch + 1000 * 60 * 60 * 24 * 10,
                                        widgetBuilder: (_, CurrentRemainingTime? time) {
                                          if (time == null) {
 

@@ -5,6 +5,7 @@ class ApiConstant{
   static var orderReg = '/ecommerce/orders';
   static var paymentKey = '/acceptance/payment_keys';
   static const getRefCode = '/acceptance/payments/pay';
+  static const getMobileWallet = '/acceptance/payments/pay';
 
   static var apiKey = 'ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6VXhNaUo5LmV5SnVZVzFsSWpvaWFXNXBkR2xoYkNJc0ltTnNZWE56SWpvaVRXVnlZMmhoYm5RaUxDSndjbTltYVd4bFgzQnJJam8yTWpJM01UWjkuVFlSR3o3eUtpQU01eG5ILU55Mmp0dHdkUUgyOG51LU1QTDB0LWJBTGxwT0E0eWpoRTRLdE9PWUtaOWlMTlBCazNKWUpNdzFuTnI3RG1iRVNvT3lMa2c=';
 

@@ -34,7 +34,7 @@ class _ToogleScreenState extends State<ToogleScreen> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 20.0, right: 20),
                   child: Container(
-                    height: 400.h,
+                    height: 200.h,
                     width: 428.w,
                     decoration: BoxDecoration(
                       border: Border.all(color: Palette.baseElementGreen),
@@ -55,7 +55,25 @@ class _ToogleScreenState extends State<ToogleScreen> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 20.0, right: 20),
                   child: Container(
-                    height: 400.h,
+                    height: 200.h,
+                    width: 428.w,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Palette.baseElementBlue),
+                        borderRadius: BorderRadius.circular(20)
+                    ),
+                    child:Image.network('https://cdn-icons-png.flaticon.com/128/349/349221.png') ,
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: (){
+                  Provider.of<PaymentProvider>(context,listen: false).getMobileWalletUrl();
+                 // Navigator.push(context, MaterialPageRoute(builder: (context) => VisaWebview()));
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20.0, right: 20),
+                  child: Container(
+                    height: 200.h,
                     width: 428.w,
                     decoration: BoxDecoration(
                         border: Border.all(color: Palette.baseElementBlue),

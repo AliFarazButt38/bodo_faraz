@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:bodoo_flutter/Paymob_integ/constant.dart';
 import 'package:bodoo_flutter/Services/api.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,7 +25,6 @@ class PaymentProvider extends ChangeNotifier{
       var parsedJson = json.decode(response.body);
       if(response.statusCode == 201){
         _authToken = parsedJson['token'];
-
         orderRegisteration();
       }else{
       }
@@ -62,9 +60,7 @@ class PaymentProvider extends ChangeNotifier{
       //  getPaymentKey('test@gmail.com','03333333333','test first','test last','10');
       }else{
       }
-
     }catch(error, st){
-
       print('catch error in PaymentProvider orderRegisteration $error $st');
     }finally{
 
@@ -145,6 +141,37 @@ class PaymentProvider extends ChangeNotifier{
     }catch(error, st){
 
       print('catch error in PaymentProvider getRefCode $error $st');
+    }finally{
+
+      notifyListeners();
+    }
+  }
+
+  getMobileWalletUrl()async{
+    try{
+      var response = await http.post(Uri.parse('${ApiConstant.paymentBaseUrl}${ApiConstant.getMobileWallet}'),
+        body: json.encode({
+          "source": {
+            "identifier": "01010101010",
+            "subtype": "WALLET"
+          },
+          "payment_token": _finalPaymentToken // token obtained in step 3
+        }),
+        headers: {"Content-Type": "application/json"},
+      );
+      print('status code ${response.statusCode}');
+      debugPrint(' response body  ${response.body}');
+      //print('response getMobileWalletUrl ${response.body}');
+      var parsedJson = json.decode(response.body);
+      if(response.statusCode == 200){
+        print('url ${parsedJson['redirect_url']}');
+       // _refCode = parsedJson['id'].toString();
+      }else{
+      }
+
+    }catch(error, st){
+
+      print('catch error in PaymentProvider getMobileWalletUrl $error $st');
     }finally{
 
       notifyListeners();

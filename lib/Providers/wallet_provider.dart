@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:bodoo_flutter/Models/graph_model.dart';
 import 'package:bodoo_flutter/Models/referral_model.dart';
 import 'package:bodoo_flutter/Models/wallet_model.dart';
 import 'package:bodoo_flutter/Providers/auth_provider.dart';
@@ -14,6 +15,7 @@ class WalletProvider extends ChangeNotifier{
   AuthProvider authProvider = AuthProvider();
   WalletModel? _walletModel;
   ReferralModel? _referralModel;
+  GraphModel? _graphModel;
 
   getWallet()async{
     try{
@@ -78,6 +80,7 @@ class WalletProvider extends ChangeNotifier{
       print('response getGraphValues ${response.body}');
       var parsedJson = json.decode(response.body);
       if(response.statusCode == 200){
+        _graphModel = GraphModel.fromJson(parsedJson);
       //  _referralModel = ReferralModel.fromJson(parsedJson);
       }else{
       }
@@ -92,4 +95,5 @@ class WalletProvider extends ChangeNotifier{
 
   WalletModel? get walletModel => _walletModel;
   ReferralModel? get referralModel => _referralModel;
+  GraphModel? get graphModel => _graphModel;
 }
