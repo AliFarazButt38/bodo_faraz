@@ -1,8 +1,11 @@
+import 'package:bodoo_flutter/Models/subscription_model.dart';
 import 'package:bodoo_flutter/Services/api.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 class SubscriptionPlanProvider extends ChangeNotifier{
+
+  SubscriptionModel? _subscriptionModel;
 
   getSubscriptionPlan(BuildContext context)async{
     try{
@@ -18,5 +21,5 @@ class SubscriptionPlanProvider extends ChangeNotifier{
       notifyListeners();
     }
   }
-
+SubscriptionModel? get subscriptionModel=> _subscriptionModel;
 }

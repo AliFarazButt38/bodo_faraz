@@ -33,6 +33,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'package:provider/provider.dart';
 import 'Paymob_integ/checkout_detail_screen.dart';
+import 'Paymob_integ/paywith_wallet.dart';
 import 'Providers/Google_SignInProvider.dart';
 import 'Providers/download_apps_provider.dart';
 import 'Utils/navigator.dart';

@@ -7,32 +7,32 @@ import 'package:provider/provider.dart';
 import '../../Paymob_integ/payment_provider.dart';
 import '../../Providers/subscription_provider.dart';
 
-// class Feature {
-//   final String text;
-//   final String image;
-//
-//
-//   Feature({required this.image, required this.text});
-// }
-//
-// List<Feature> features = [
-//   Feature(
-//     text:"you will get this Feature" ,
-//     image:"assets/icons/true.png",
-//   ),
-//   Feature(
-//     text:"you will get this Feature" ,
-//     image:"assets/icons/true.png",
-//   ),
-//   Feature(
-//     text:"you will get this Feature" ,
-//     image:"assets/icons/true.png",
-//   ),
-//   Feature(
-//     text:"you will get this Feature" ,
-//     image:"assets/icons/true.png",
-//   ),
-// ];
+class Feature {
+  final String title;
+  final String icon;
+
+
+  Feature({required this.icon, required this.title});
+}
+
+List<Feature> features = [
+  Feature(
+    title:"you will get this Feature" ,
+    icon:"assets/icons/true.png",
+  ),
+  Feature(
+    title:"you will get this Feature" ,
+    icon:"assets/icons/true.png",
+  ),
+  Feature(
+    title:"you will get this Feature" ,
+    icon:"assets/icons/true.png",
+  ),
+  Feature(
+    title:"you will get this Feature" ,
+    icon:"assets/icons/true.png",
+  ),
+];
 
 
 
@@ -542,16 +542,7 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(onPressed: (){
-                      Navigator.pop(context);
-
-                    }, icon: Icon(Icons.arrow_back)),
-                    Text("Subscription Plan",style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.w600),),
-                  ],
-                ),
+                Text("Subscription Plan",style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.w600),),
                 SizedBox(height: 50.h,),
                 Text("Choose Your Plan",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 25.sp),),
                 SizedBox(height: 30.h,),
@@ -606,11 +597,21 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
                             padding:  EdgeInsets.only(top: 70),
                             child: Column(
                               children: [
-                                Text("Standard",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.bold),),
+                                Consumer<SubscriptionPlanProvider>(
+
+                                  builder: (context, subscriptionProvider, child) {
+                                    return Text("${subscriptionProvider.subscriptionModel?.planName}",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.bold),);
+                                  }
+                                ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text("\$10",style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
+                                    Consumer<SubscriptionPlanProvider>(
+
+                                      builder: (context, subscriptionProvider,child) {
+                                        return Text("${subscriptionProvider.subscriptionModel?.membershipPrice}",style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold,fontSize: 25),);
+                                      }
+                                    ),
                                     Text("/Month",style: TextStyle(color: Colors.white,fontSize: 18),),
                                   ],
                                 ),
@@ -619,6 +620,7 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
                           ),
                         ),
                       ),
+
                       Positioned(
                         left: 90,
                         child: Stack(
