@@ -1,6 +1,8 @@
+import 'package:bodoo_flutter/Paymob_integ/payment_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 import '../Theme/palette.dart';
 
@@ -68,6 +70,7 @@ class _PayWithWalletState extends State<PayWithWallet> {
                 child: Column(
                   children: [
                     TextFormField(
+                      keyboardType: TextInputType.number,
                       controller: phoneController,
                       style: TextStyle(
                         color: Palette.grey,
@@ -137,16 +140,16 @@ class _PayWithWalletState extends State<PayWithWallet> {
                         if(text!.isEmpty){
                           return 'Enter Referal code';
                         }
-                        else if (text.length != 11) {
-                          return 'number should be 11 digits';
-                        }
+                        // else if (text.length != 11) {
+                        //   return 'number should be 11 digits';
+                        // }
                         return null;
                       },
                     ),
                     SizedBox(height: 20,),
                     ElevatedButton(
                       onPressed: () {
-
+                        Provider.of<PaymentProvider>(context,listen: false).getMobileWalletUrl(phoneController.text);
                       },
                       style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.zero,

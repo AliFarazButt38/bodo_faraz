@@ -1,4 +1,4 @@
-import 'package:bodoo_flutter/Views/Pages/payment_screen.dart';
+import 'package:bodoo_flutter/Paymob_integ/payment_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -600,7 +600,7 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
                                 Consumer<SubscriptionPlanProvider>(
 
                                   builder: (context, subscriptionProvider, child) {
-                                    return Text("${subscriptionProvider.subscriptionModel?.planName}",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.bold),);
+                                    return Text("${subscriptionProvider.subscriptionModel?.name}",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.bold),);
                                   }
                                 ),
                                 Row(
@@ -609,7 +609,7 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
                                     Consumer<SubscriptionPlanProvider>(
 
                                       builder: (context, subscriptionProvider,child) {
-                                        return Text("${subscriptionProvider.subscriptionModel?.membershipPrice}",style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold,fontSize: 25),);
+                                        return Text("${subscriptionProvider.subscriptionModel?.membershipPrice.amount}",style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold,fontSize: 25),);
                                       }
                                     ),
                                     Text("/Month",style: TextStyle(color: Colors.white,fontSize: 18),),

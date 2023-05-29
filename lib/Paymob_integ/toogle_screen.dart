@@ -67,7 +67,7 @@ class _ToogleScreenState extends State<ToogleScreen> {
               ),
               InkWell(
                 onTap: (){
-                  Provider.of<PaymentProvider>(context,listen: false).getMobileWalletUrl();
+                  // Provider.of<PaymentProvider>(context,listen: false).getMobileWalletUrl();
                  // Navigator.push(context, MaterialPageRoute(builder: (context) => VisaWebview()));
                 },
                 child: Padding(

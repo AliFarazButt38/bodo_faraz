@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'package:bodoo_flutter/Paymob_integ/constant.dart';
+import 'package:bodoo_flutter/Paymob_integ/mobile_wallet_webview.dart';
 import 'package:bodoo_flutter/Providers/auth_provider.dart';
 import 'package:bodoo_flutter/Services/api.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
@@ -14,6 +16,8 @@ class PaymentProvider extends ChangeNotifier{
   String _orderId = '';
   String _finalPaymentToken = '';
   String _refCode = '';
+  String _rediUrl = '';
+  AuthProvider _authProvider = AuthProvider();
 
   void printWrapped(String text) {
     final pattern = RegExp('.{1,800}'); // 800 is the size of each chunk
@@ -159,13 +163,15 @@ class PaymentProvider extends ChangeNotifier{
     }
   }
 
-  getMobileWalletUrl()async{
+  getMobileWalletUrl(String number)async{
     try{
+     // 01010101010
+      _authProvider.loading();
       print('final token $_finalPaymentToken');
       var response = await http.post(Uri.parse('${ApiConstant.paymentBaseUrl}${ApiConstant.getMobileWallet}'),
         body: json.encode({
           "source": {
-            "identifier": "01010101010",
+            "identifier": number,
             "subtype": "WALLET"
           },
           "payment_token": _finalPaymentToken // token obtained in step 3
@@ -177,10 +183,14 @@ class PaymentProvider extends ChangeNotifier{
       //print('response getMobileWalletUrl ${response.body}');
       var parsedJson = json.decode(response.body);
       if(response.statusCode == 200){
+
         print('url ${parsedJson['redirection_url']}');
+        _rediUrl = parsedJson['redirection_url'];
+        Navigator.pop(Values.navigatorKey.currentContext!);
+        Navigator.push(Values.navigatorKey.currentContext!, MaterialPageRoute(builder: (context) => MobileWalletWebview()));
        // _refCode = parsedJson['id'].toString();
       }else{
-
+        Navigator.pop(Values.navigatorKey.currentContext!);
       }
 
     }catch(error, st){
@@ -194,4 +204,5 @@ class PaymentProvider extends ChangeNotifier{
 
   String get finalPayToken => _finalPaymentToken;
   String get referenceCode => _refCode;
+  String get redirectionUrl => _rediUrl;
 }

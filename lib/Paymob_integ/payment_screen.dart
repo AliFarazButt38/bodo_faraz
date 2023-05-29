@@ -1,12 +1,13 @@
+import 'package:bodoo_flutter/Paymob_integ/paywith_wallet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-import '../../Paymob_integ/payment_provider.dart';
-import '../../Paymob_integ/reference_screen.dart';
-import '../../Paymob_integ/visa_webview.dart';
-import '../../Providers/write_review_provider.dart';
-import '../../Theme/palette.dart';
+import 'payment_provider.dart';
+import 'reference_screen.dart';
+import 'visa_webview.dart';
+import '../Providers/write_review_provider.dart';
+import '../Theme/palette.dart';
 class ContainerData {
   final String image;
   final String text;
@@ -112,7 +113,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                    }else  if(index == 1){
                                      Navigator.push(context, MaterialPageRoute(builder: (context) => VisaWebview()));
                                    }else if(index == 2){
-                                     Provider.of<PaymentProvider>(context,listen: false).getMobileWalletUrl();
+                                     Navigator.push(context, MaterialPageRoute(builder: (context) => PayWithWallet()));
+
                                    }
                                    // Navigator.push(context, MaterialPageRoute(builder: (context) => ReviewDetails(reviewModel: reviewProvider.reviewsList[index])));
 

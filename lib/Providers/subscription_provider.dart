@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:bodoo_flutter/Models/subscription_model.dart';
 import 'package:bodoo_flutter/Services/api.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,6 +15,13 @@ class SubscriptionPlanProvider extends ChangeNotifier{
       );
       print('status code ${response.statusCode}');
       print('status body ${response.body}');
+      var parsedJson = json.decode(response.body);
+      if(response.statusCode == 200){
+        var data  = parsedJson as List;
+       // List<SubscriptionModel> _list = data.map((e) => SubscriptionModel.fromJson(e)).toList();
+        _subscriptionModel = SubscriptionModel.fromJson(data[0]);
+        print('model  ${_subscriptionModel!.name}');
+      }
     }
     catch(error,st){
       print('catch error $error $st');
