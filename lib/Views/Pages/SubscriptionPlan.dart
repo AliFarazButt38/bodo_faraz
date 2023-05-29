@@ -710,7 +710,7 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
                               ElevatedButton(
                                 onPressed: () {
                                   Navigator.push(context, MaterialPageRoute(builder: (context)=>PaymentScreen()));
-                                  Provider.of<PaymentProvider>(context,listen: false).getPaymentKey();
+                                //  Provider.of<PaymentProvider>(context,listen: false).getPaymentKey();
 
                                 },
                                 style: ElevatedButton.styleFrom(

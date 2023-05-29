@@ -15,6 +15,12 @@ class PaymentProvider extends ChangeNotifier{
   String _finalPaymentToken = '';
   String _refCode = '';
 
+  void printWrapped(String text) {
+    final pattern = RegExp('.{1,800}'); // 800 is the size of each chunk
+    pattern.allMatches(text).forEach((match) => print(match.group(0)));
+  }
+
+
   getAuthToken()async{
     try{
       print('working auth');
@@ -61,6 +67,7 @@ class PaymentProvider extends ChangeNotifier{
       if(response.statusCode == 201){
         _orderId = parsedJson['id'].toString();
         print('order id $_orderId');
+        getPaymentKey();
       //  getPaymentKey('test@gmail.com','03333333333','test first','test last','10');
       }else{
       }
@@ -154,6 +161,7 @@ class PaymentProvider extends ChangeNotifier{
 
   getMobileWalletUrl()async{
     try{
+      print('final token $_finalPaymentToken');
       var response = await http.post(Uri.parse('${ApiConstant.paymentBaseUrl}${ApiConstant.getMobileWallet}'),
         body: json.encode({
           "source": {
@@ -165,13 +173,14 @@ class PaymentProvider extends ChangeNotifier{
         headers: {"Content-Type": "application/json"},
       );
       print('status code ${response.statusCode}');
-      debugPrint(' response getMobileWalletUrl body  ${response.body}');
+      printWrapped(' response getMobileWalletUrl body  ${response.body}');
       //print('response getMobileWalletUrl ${response.body}');
       var parsedJson = json.decode(response.body);
       if(response.statusCode == 200){
-        print('url ${parsedJson['redirect_url']}');
+        print('url ${parsedJson['redirection_url']}');
        // _refCode = parsedJson['id'].toString();
       }else{
+
       }
 
     }catch(error, st){
