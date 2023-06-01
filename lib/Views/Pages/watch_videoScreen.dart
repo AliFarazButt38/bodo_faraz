@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
-
 import 'Play_video.dart';
 import 'notifications_Screen.dart';
 
@@ -36,7 +35,6 @@ List<ListItem> items = [
     description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it",
   ),
 ];
-
 
 class WatchVideo extends StatefulWidget {
   const WatchVideo({Key? key}) : super(key: key);
@@ -162,7 +160,6 @@ class _WatchVideoState extends State<WatchVideo> {
                                                    height: 250,
                                                    width: MediaQuery.of(context).size.width,
                                                    fit: BoxFit.cover,
-
                                                  ),
                                                ),
                                                Positioned

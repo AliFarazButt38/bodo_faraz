@@ -37,7 +37,7 @@ class AuthProvider extends ChangeNotifier{
     showDialog(
         context: Values.navigatorKey.currentContext!,
         barrierDismissible: false,
-        builder: (context) => const Center(child: CircularProgressIndicator(color: Palette.baseElementGreen,)));
+        builder: (context) =>  Center(child: Image.asset('assets/gif/Loading.gif', height: 100,width: 100,)));
   }
 
   toast(String message,Color color){

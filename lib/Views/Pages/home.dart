@@ -11,6 +11,7 @@ import 'package:pie_chart/pie_chart.dart';
 import 'package:provider/provider.dart';
 import '../../Providers/auth_provider.dart';
 import '../../Providers/level_provider.dart';
+import '../../Providers/subscription_provider.dart';
 import '../../Theme/palette.dart';
 import '../../Utils/screen_config.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
@@ -41,6 +42,7 @@ class _HomeState extends State<Home> {
     Provider.of<AuthProvider>(context,listen: false).userProfile(context);
     Provider.of<WalletProvider>(context,listen: false).getWallet();
     Provider.of<CommunityProvider>(context,listen: false).getUserCommunity(context);
+    Provider.of<SubscriptionPlanProvider>(context,listen: false).getSubscriptionPlan(context);
   }
 
   @override

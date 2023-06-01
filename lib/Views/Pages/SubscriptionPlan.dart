@@ -526,7 +526,7 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
   @override
   void initState() {
     super.initState();
-    Provider.of<SubscriptionPlanProvider>(context,listen: false).getSubscriptionPlan(context);
+    // Provider.of<SubscriptionPlanProvider>(context,listen: false).getSubscriptionPlan(context);
     Provider.of<PaymentProvider>(context,listen: false).getAuthToken();
   }
   @override

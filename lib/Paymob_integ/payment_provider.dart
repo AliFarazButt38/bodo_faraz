@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'package:bodoo_flutter/Models/subscription_model.dart';
 import 'package:bodoo_flutter/Paymob_integ/constant.dart';
 import 'package:bodoo_flutter/Paymob_integ/mobile_wallet_webview.dart';
 import 'package:bodoo_flutter/Providers/auth_provider.dart';
+import 'package:bodoo_flutter/Providers/subscription_provider.dart';
 import 'package:bodoo_flutter/Services/api.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -89,7 +91,7 @@ class PaymentProvider extends ChangeNotifier{
       print('order id $_orderId');
       var map = {
         "auth_token": _authToken,
-        "amount_cents": '100',
+        "amount_cents":  Provider.of<SubscriptionPlanProvider>(Values.navigatorKey.currentContext!,listen: false).subscriptionModel?.membershipPrice.amount,
         "expiration": 3600,
         "order_id": _orderId,
         "billing_data": {

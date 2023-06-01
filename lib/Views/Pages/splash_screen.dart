@@ -37,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
   check()async{
     var response = await Provider.of<AuthProvider>(context,listen: false).checkLoggedIn();
     print('reponse $response');
-    Timer(const Duration(seconds: 3),
+    Timer(const Duration(seconds: 6),
             (){
       if(response == true){
         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Signin()), (route) => false);
@@ -118,27 +118,28 @@ class _SplashScreenState extends State<SplashScreen> {
         height: ScreenConfig.screenHeight,
         width: ScreenConfig.screenWidth,
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Palette.baseElementBlue,
-                Palette.baseElementGreen,
-              ],
-            )
+          image: DecorationImage(image: AssetImage('assets/gif/Logo.gif'), fit: BoxFit.fill)
+            // gradient: LinearGradient(
+            //   begin: Alignment.topCenter,
+            //   end: Alignment.bottomCenter,
+            //   colors: [
+            //     Palette.baseElementBlue,
+            //     Palette.baseElementGreen,
+            //   ],
+            // )
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Stack(
-              alignment: AlignmentDirectional.center,
-              children: [
-                Image.asset('assets/images/logo_bg.png',fit: BoxFit.fill,),
-                Image.asset('assets/images/logo.png',),
-              ],
-            )
-          ],
-        ),
+        // child: Column(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   children: [
+        //     Stack(
+        //       alignment: AlignmentDirectional.center,
+        //       children: [
+        //         Image.asset('assets/images/logo_bg.png',fit: BoxFit.fill,),
+        //         Image.asset('assets/images/logo.png',),
+        //       ],
+        //     )
+        //   ],
+        // ),
       ),
     );
   }
