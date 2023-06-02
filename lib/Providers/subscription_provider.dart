@@ -20,7 +20,7 @@ class SubscriptionPlanProvider extends ChangeNotifier{
         var data  = parsedJson as List;
        // List<SubscriptionModel> _list = data.map((e) => SubscriptionModel.fromJson(e)).toList();
         _subscriptionModel = SubscriptionModel.fromJson(data[0]);
-        print('model  ${_subscriptionModel!.name}');
+        print('model ${_subscriptionModel!.name}');
       }
     }
     catch(error,st){

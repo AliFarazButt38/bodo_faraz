@@ -118,10 +118,9 @@ class _InstagramTaskState extends State<InstagramTask> {
 
                           builder: (context, socialMediaProvider, child) {
                             if(socialMediaProvider.taskLoading){
-                              return Center(child: CircularProgressIndicator(color: Palette.baseElementGreen,));
-                            }else if(socialMediaProvider.socialTasksList.isNotEmpty){
+                              return Center(child: Image.asset('assets/gif/Loading.gif', height: 100,width: 100,));                            }else if(socialMediaProvider.socialTasksList.isNotEmpty){
                               return ListView.separated(
-                                physics: BouncingScrollPhysics(),
+                                physics: NeverScrollableScrollPhysics(),
                                 scrollDirection: Axis.vertical,
                                 shrinkWrap: true,
                                 itemCount: socialMediaProvider.socialTasksList.length,
@@ -129,7 +128,8 @@ class _InstagramTaskState extends State<InstagramTask> {
                                   return SizedBox(height: 20.h,);
                                 },// Replace itemCount with the actual number of list items you want to display
                                 itemBuilder: (context, index) {
-                                  final item = items[index];
+                                  // print('index $index');
+                                  // final item = items[index];
                                   return InkWell(
                                     onTap: (){
                                       Navigator.push(context, MaterialPageRoute(builder: (contex)=>StartTask()));
@@ -156,7 +156,7 @@ class _InstagramTaskState extends State<InstagramTask> {
                                           ClipRRect(
                                             borderRadius: BorderRadius.only(topRight: Radius.circular(20.0),topLeft: Radius.circular(20.0)),
                                             child: Image.asset(
-                                              item.image,
+                                              items[0].image,
                                               height: 164.h,
                                               width:388.23.w,
                                               fit: BoxFit.cover,
@@ -181,7 +181,7 @@ class _InstagramTaskState extends State<InstagramTask> {
                                                 ),
                                                 SizedBox(height: 10.h),
                                                 Text(
-                                                  item.description,
+                                                  items[0].description,
                                                   maxLines: 3,
                                                   overflow: TextOverflow.ellipsis,
                                                   style: TextStyle(

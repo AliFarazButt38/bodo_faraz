@@ -130,8 +130,7 @@ class _SurveysState extends State<Surveys> {
 
                                 builder: (context, surveyProvider,child) {
                                   if(surveyProvider.surveyLoading){
-                                    return CircularProgressIndicator(color: Palette.baseElementGreen,);
-                                  }else if(surveyProvider.surveysList.isNotEmpty){
+                                    return Center(child: Image.asset('assets/gif/Loading.gif', height: 100,width: 100,));                                  }else if(surveyProvider.surveysList.isNotEmpty){
                                     return ListView.separated(
                                       physics: BouncingScrollPhysics(),
                                       scrollDirection: Axis.vertical,

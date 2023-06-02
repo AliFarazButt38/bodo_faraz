@@ -119,8 +119,7 @@ class _FacebookTaskState extends State<FacebookTask> {
 
                             builder: (context, socialMediaProvider, child) {
                               if(socialMediaProvider.facebookTaskLoading){
-                                return Center(child: CircularProgressIndicator(color: Palette.baseElementGreen,));
-                              }else if(socialMediaProvider.facebookTasksList.isNotEmpty){
+                                return Center(child: Image.asset('assets/gif/Loading.gif', height: 100,width: 100,));                              }else if(socialMediaProvider.facebookTasksList.isNotEmpty){
                                 return ListView.separated(
                                   physics: BouncingScrollPhysics(),
                                   scrollDirection: Axis.vertical,
@@ -130,7 +129,7 @@ class _FacebookTaskState extends State<FacebookTask> {
                                     return SizedBox(height: 20.h,);
                                   },// Replace itemCount with the actual number of list items you want to display
                                   itemBuilder: (context, index) {
-                                    final item = items[index];
+                                    // final item = items[index];
                                     return InkWell(
                                       onTap: (){
                                         Navigator.push(context, MaterialPageRoute(builder: (contex)=>StartTask()));
@@ -157,7 +156,7 @@ class _FacebookTaskState extends State<FacebookTask> {
                                             ClipRRect(
                                               borderRadius: BorderRadius.only(topRight: Radius.circular(20.0),topLeft: Radius.circular(20.0)),
                                               child: Image.asset(
-                                                item.image,
+                                                items[0].image,
                                                 height: 164.h,
                                                 width:388.23.w,
                                                 fit: BoxFit.cover,
@@ -182,7 +181,7 @@ class _FacebookTaskState extends State<FacebookTask> {
                                                   ),
                                                   SizedBox(height: 10.h),
                                                   Text(
-                                                    item.description,
+                                                    items[0].description,
                                                     maxLines: 3,
                                                     overflow: TextOverflow.ellipsis,
                                                     style: TextStyle(

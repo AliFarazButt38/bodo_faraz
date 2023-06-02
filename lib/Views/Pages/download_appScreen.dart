@@ -140,7 +140,7 @@ class _DownloadAppState extends State<DownloadApp> {
 
                   builder: (context, downloadAppProvider,child) {
                     if(downloadAppProvider.appsLoading){
-                      return Center(child: CircularProgressIndicator(color: Palette.baseElementGreen,));
+                      return Center(child: Image.asset('assets/gif/Loading.gif', height: 100,width: 100,));
                     }else if(downloadAppProvider.appsList.isNotEmpty){
                       return Column(
                         children:[

@@ -432,9 +432,9 @@ class _TaskState extends State<Task> {
                                                  padding: const EdgeInsets.only(bottom: 13),
                                                  child: Row(
                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                   children: const [
+                                                   children:  [
                                                      Text("Others",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
-                                                     // Text("41/60"),
+                                                     Text("${levelProvider.completedOther}/${levelProvider.totalOther}"),
                                                    ],
                                                  ),
                                                ),
@@ -442,7 +442,7 @@ class _TaskState extends State<Task> {
                                                  barRadius: Radius.circular(15.0),
                                                  animation: true,
                                                  lineHeight: 12,
-                                                 percent: 0.7,
+                                                 percent: levelProvider.totalOther == 0 ?  levelProvider.completedOther/1 : levelProvider.completedOther/levelProvider.totalOther,
                                                  // progressColor: Colors.blueAccent,
                                                  linearGradient: LinearGradient(colors: [Colors.blueAccent,Colors.greenAccent]),
                                                  backgroundColor:Color.fromRGBO(220, 220, 220, 1) ,

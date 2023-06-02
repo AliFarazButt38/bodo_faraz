@@ -76,7 +76,7 @@ class _CommunityState extends State<Community> {
 
                   builder: (context, communityProvider,child) {
                     if(communityProvider.communityLoading){
-                      return Center(child: CircularProgressIndicator(color: Palette.baseElementGreen,));
+                      return Center(child: Image.asset('assets/gif/Loading.gif', height: 100,width: 100,));
                     }else if(communityProvider.communityList.isNotEmpty){
                       return   ListView.builder(
                           itemCount: communityProvider.communityList.length,

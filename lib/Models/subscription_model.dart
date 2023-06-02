@@ -10,7 +10,7 @@ class SubscriptionModel{
     required this.membershipPrice,
 });
   factory SubscriptionModel.fromJson(Map<String, dynamic> data){
-return SubscriptionModel(id: data['id'], name: data['name'] ?? '', planName: data['plan_name'] ?? '', membershipPrice: MembershipPrice.fromJson(data['membership_price']),);
+return SubscriptionModel(id: data['id'], name: data['name'] , planName: data['plan_name'] ?? '', membershipPrice: MembershipPrice.fromJson(data['membership_price']),);
   }
   }
 class MembershipPrice {
@@ -24,8 +24,8 @@ class MembershipPrice {
 
   factory MembershipPrice.fromJson(Map<String, dynamic> data) {
     return MembershipPrice(
-      currency: data['currency'] ?? '',
-      amount: data['amount'].toDouble() ?? 0,
+      currency: data['currency'],
+      amount: data['amount'].toDouble() ,
     );
   }
 }

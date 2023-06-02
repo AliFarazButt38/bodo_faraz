@@ -140,8 +140,7 @@ class _WriteReviewState extends State<WriteReview> {
                       Consumer<WriteReviewProvider>(
                         builder: (context, reviewProvider,child) {
                           if(reviewProvider.reviewsLoading){
-                            return Center(child: CircularProgressIndicator(color: Palette.baseElementGreen,));
-                          }else if(reviewProvider.reviewsList.isNotEmpty){
+                            return Center(child: Image.asset('assets/gif/Loading.gif', height: 100,width: 100,));                          }else if(reviewProvider.reviewsList.isNotEmpty){
                             return ListView.builder(
                              // physics: NeverScrollableScrollPhysics(),
                               scrollDirection: Axis.vertical,

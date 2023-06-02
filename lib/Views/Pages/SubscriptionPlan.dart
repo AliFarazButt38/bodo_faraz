@@ -709,29 +709,31 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
                                 ],
                               ),
                               SizedBox(height: 20,),
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>PaymentScreen()));
-                                //  Provider.of<PaymentProvider>(context,listen: false).getPaymentKey();
+                              Center(
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>PaymentScreen()));
+                                  //  Provider.of<PaymentProvider>(context,listen: false).getPaymentKey();
 
-                                },
-                                style: ElevatedButton.styleFrom(
-                                    padding: EdgeInsets.zero,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20))),
-                                child: Ink(
-                                  decoration: BoxDecoration(
-                                      gradient:
-                                      LinearGradient(colors: [Color(0xff407BFF),Color(0xff1737AF)]),
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: Container(
-                                    width: 250,
-                                    height: 44,
-                                    alignment: Alignment.center,
-                                    child:  Text(
-                                      'Get Started',
-                                      style:
-                                      TextStyle(fontSize: 18,fontWeight: FontWeight.w600 ),
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                      padding: EdgeInsets.zero,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(20))),
+                                  child: Ink(
+                                    decoration: BoxDecoration(
+                                        gradient:
+                                        LinearGradient(colors: [Color(0xff407BFF),Color(0xff1737AF)]),
+                                        borderRadius: BorderRadius.circular(10)),
+                                    child: Container(
+                                      width: 250,
+                                      height: 44,
+                                      alignment: Alignment.center,
+                                      child:  Text(
+                                        'Get Started',
+                                        style:
+                                        TextStyle(fontSize: 18,fontWeight: FontWeight.w600 ),
+                                      ),
                                     ),
                                   ),
                                 ),
