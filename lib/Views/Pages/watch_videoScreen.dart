@@ -111,7 +111,7 @@ class _WatchVideoState extends State<WatchVideo> {
 
                builder: (context, videoProvider,child) {
                  if(videoProvider.videoLoading){
-                   return Center(child: CircularProgressIndicator(color: Palette.baseElementBlue,));
+                   return Center(child: Image.asset('assets/gif/Loading.gif', height: 100,width: 100,));
                  }else if(videoProvider.videosList.isNotEmpty){
                    return SingleChildScrollView(
                      child: Column(
