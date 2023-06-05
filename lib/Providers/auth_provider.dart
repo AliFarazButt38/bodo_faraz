@@ -13,6 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import '../Theme/palette.dart';
 import '../Utils/navigator.dart';
+import '../Views/Dialogs/error_dialog.dart';
 import '../Views/Pages/reset_password.dart';
 
 class AuthProvider extends ChangeNotifier{
@@ -51,6 +52,12 @@ class AuthProvider extends ChangeNotifier{
         fontSize: 16.0
     );
   }
+  showError(String message,title,BuildContext context){
+    showDialog(
+      context: context,
+      builder: (ctx) => ErrorDialog(message: message,title: title,),
+    );
+  }
   setFcmToken(String token){
     _fcmToken = token;
   }
@@ -68,7 +75,7 @@ class AuthProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  signup(String name,email,password,referal_code,phone,dob,country,city,facebook_url,instagram_username,BuildContext context)async {
+  signup(String name,email,password,referal_code,phone,dob,country,city,state,gender,facebook_url,instagram_username,BuildContext context)async {
     try {
       loading();
       print('phone $phone');
@@ -83,6 +90,8 @@ class AuthProvider extends ChangeNotifier{
             'dob': dob,
             'country': country,
             'city': city,
+            'state':state,
+            'gender':gender,
             'facebook_profile_url': facebook_url,
             'instagram_username': instagram_username,
             'registration_id': _fcmToken,
@@ -117,7 +126,7 @@ class AuthProvider extends ChangeNotifier{
   }
 
 
-    userdtails(String name,referal_code,phone,dob,country,city,facebook_url,instagram_username,BuildContext context)async{
+    userdtails(String name,referal_code,phone,dob,country,city,state,gender,facebook_url,instagram_username,BuildContext context)async{
     try{
       print('access token $_accessToken  email $_email');
       loading();
@@ -131,6 +140,8 @@ class AuthProvider extends ChangeNotifier{
             'dob':dob,
             'country':country,
             'city':city,
+            'state':state,
+            'gender':gender,
             'access_token':_accessToken,
             'facebook_profile_url':facebook_url,
             'instagram_username':instagram_username,

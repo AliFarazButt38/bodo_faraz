@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 import '../Services/api.dart';
+import '../Utils/navigator.dart';
 import 'auth_provider.dart';
 import 'home_provider.dart';
 import 'level_provider.dart';
@@ -67,12 +68,13 @@ class SocialMediaProvider extends ChangeNotifier{
       print('tokennnnnnnnnnnn ${authProvider.token}');
       if(response.statusCode == 200){
         Navigator.pop(context);
+        Provider.of<AuthProvider>(Values.navigatorKey.currentContext!, listen: false).showError('Your reward will reflect into your wallet  24 hours or less after verification.', 'Alert', Values.navigatorKey.currentContext!);
         getInstagramPost( context);
         Provider.of<LevelProvider>(context,listen: false).getCompletedTasks();
         Provider.of<LevelProvider>(context,listen: false).getLevels();
         Provider.of<HomeProvider>(context,listen: false).getHomeData();
       }
-      Navigator.pop(context);
+     // Navigator.pop(context);
     }
     catch(error,st){
       print('catch error $error $st');
@@ -125,12 +127,13 @@ class SocialMediaProvider extends ChangeNotifier{
       print('tokennnnnnnnnnnn ${authProvider.token}');
       if(response.statusCode == 200){
         Navigator.pop(context);
+        Provider.of<AuthProvider>(Values.navigatorKey.currentContext!, listen: false).showError('Your reward will reflect into your wallet  24 hours or less after verification.', 'Alert', Values.navigatorKey.currentContext!);
         getFacebookPost( context);
         Provider.of<LevelProvider>(context,listen: false).getCompletedTasks();
         Provider.of<LevelProvider>(context,listen: false).getLevels();
         Provider.of<HomeProvider>(context,listen: false).getHomeData();
       }
-      Navigator.pop(context);
+      // Navigator.pop(context);
     }
     catch(error,st){
       print('catch error $error $st');

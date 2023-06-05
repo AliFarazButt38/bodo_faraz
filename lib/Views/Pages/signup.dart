@@ -132,8 +132,9 @@ class _SignupState extends State<Signup> {
                           prefixIcon: Padding(
                             padding:  EdgeInsets.all(10.0),
                             child: SvgPicture.asset(
-                              'assets/icons/email.svg',
+                              'assets/icons/user.svg',
                               semanticsLabel: 'A red up arrow',
+                              color: Palette.grey,
                             ),
                           ),
 
@@ -1083,7 +1084,7 @@ class _SignupState extends State<Signup> {
                 child: ElevatedButton(
                   onPressed: () {
                     if(_formKey.currentState!.validate()){
-                      Provider.of<AuthProvider>(context,listen: false).signup(nameController.text, emailController.text, passwordController.text, referalController.text,phoneController.text,'${_selectedDate!.year}-${_selectedDate!.month}-${_selectedDate!.day}',countryController.text,cityController.text,facebookController.text,instagramController.text,context);
+                      Provider.of<AuthProvider>(context,listen: false).signup(nameController.text, emailController.text, passwordController.text, referalController.text,phoneController.text,'${_selectedDate!.year}-${_selectedDate!.month}-${_selectedDate!.day}',countryValue,cityValue,stateValue,selectedGender,facebookController.text,instagramController.text,context);
                     }
                   },
                   style: ElevatedButton.styleFrom(
