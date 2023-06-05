@@ -203,7 +203,7 @@ class _HomeState extends State<Home> {
                                 PieChart(
                                   dataMap: {
                                     "Watch Videos": homeProvider.homeModel != null ?  homeProvider.homeModel!.videos.toDouble() : 0.0,
-                                    "Social Media": 0,
+                                    "Social Media":homeProvider.homeModel!=null ? homeProvider.homeModel!.completedSocialTask.toDouble() : 0.0,
                                     "Surveys": homeProvider.homeModel != null ?  homeProvider.homeModel!.surveys.toDouble() : 0.0,
                                     "Invite Friends": homeProvider.homeModel != null ?  homeProvider.homeModel!.invites.toDouble() : 0.0,
                                     "Others": homeProvider.homeModel != null ?  homeProvider.homeModel!.others.toDouble() : 0.0,

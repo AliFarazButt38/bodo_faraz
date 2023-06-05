@@ -1190,7 +1190,7 @@ class _SignupState extends State<Signup> {
                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Signin()));
                   }, child: Text('Sign In',style: TextStyle(color: Color(0xff0179A3),fontSize: 16.sp),),)
                 ],
-              )
+              ),
             ],
           ),
         ),
