@@ -323,7 +323,7 @@ class _SignupState extends State<Signup> {
                         validator: (value) {
 
                           if (value == null || value.isEmpty) {
-                            return 'Please select a gender';
+                            return 'Please select a gender you cannot pass without selecting it';
                           }
                           return null;
                         },

@@ -320,6 +320,7 @@ class _InstagramTaskState extends State<InstagramTask> {
                           child: Column(
                             children: const [
                               ImageIcon(AssetImage('assets/icons/social.png',),size: 25,color: Colors.black,),
+                              
                             ],
 
                           ),
@@ -341,3 +342,4 @@ class _InstagramTaskState extends State<InstagramTask> {
     );
   }
 }
+

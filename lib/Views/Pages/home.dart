@@ -15,7 +15,6 @@ import '../../Providers/subscription_provider.dart';
 import '../../Theme/palette.dart';
 import '../../Utils/screen_config.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
-
 import 'SubscriptionPlan.dart';
 
 

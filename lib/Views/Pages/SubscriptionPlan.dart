@@ -45,7 +45,7 @@ class SubscriptionPlan extends StatefulWidget {
 
 
 class _SubscriptionPlanState extends State<SubscriptionPlan> {
-
+String? id;
   // final List<Widget> _containerList = [
   //   // Container(
   //   //   width: 292,
@@ -609,6 +609,7 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
                                     Consumer<SubscriptionPlanProvider>(
 
                                       builder: (context, subscriptionProvider,child) {
+                                        id= subscriptionProvider.subscriptionModel!.id.toString();
                                         return Text("${subscriptionProvider.subscriptionModel?.membershipPrice.amount}",style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold,fontSize: 25),);
                                       }
                                     ),
@@ -712,7 +713,8 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
                               Center(
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>PaymentScreen()));
+                                   // Navigator.push(context, MaterialPageRoute(builder: (context)=>PaymentScreen()));
+                                    Provider.of<SubscriptionPlanProvider>(context,listen: false).getUpgradePlan(id!, context);
                                   //  Provider.of<PaymentProvider>(context,listen: false).getPaymentKey();
 
                                   },
